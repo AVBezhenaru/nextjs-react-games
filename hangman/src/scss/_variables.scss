@@ -1,0 +1,34 @@
+//* colors
+
+$primary-bg-color: #ebeef3;
+$secondary-bg-color: #ffffff;
+$third-bg-color: #1890ff;
+$fourth-bg-color: #52c41a;
+$transparent-bg-color: transparent;
+
+$primary-bg-hover: #f1fcff;
+
+$primary-color: #000000;
+$secondary-color: #1890ff;
+$third-color: rgba(0, 0, 0, 0.5);
+$fourth-color: rgba(0, 0, 0, 0.75);
+$fifth-color: rgba(0, 0, 0, 0.85);
+$sixth-color: #ffffff;
+$seventh-color: #8c8c8c;
+$eight-color: #595959;
+$ninth-color: #bfbfbf;
+$tenth-color: #262626;
+$eleventh-color: #f5222d;
+$twelfth-color: #ff0707;
+$thirteen-color: #52c41a;
+$fourteen-color: #d9d9d9;
+
+$article-shadow: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.15));
+$form-shadow: 0px 22px 106px rgba(0, 0, 0, 0.07), 0px 9.19107px 44.2843px rgba(0, 0, 0, 0.0503198),
+  0px 4.91399px 23.6765px rgba(0, 0, 0, 0.0417275), 0px 2.75474px 13.2728px rgba(0, 0, 0, 0.035),
+  0px 1.46302px 7.04911px rgba(0, 0, 0, 0.0282725),
+  0px 0.608796px 2.93329px rgba(0, 0, 0, 0.0196802);
+
+//* fonts
+
+$font-family-main: 'Caveat', 'Times New Roman', Times, serif;;
