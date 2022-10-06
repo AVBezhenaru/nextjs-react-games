@@ -1,5 +1,6 @@
 html {
   box-sizing: border-box;
+  font-size: 10px;
 }
 
 *,
@@ -11,9 +12,8 @@ html {
 body {
   font-family: $font-family-main;
   font-size: 12px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 18px;
-  background-color: $primary-bg-color;
 }
 
 img {
@@ -40,7 +40,7 @@ button {
   margin: 0;
   border: none;
   cursor: pointer;
-  background-color: $transparent-bg-color;
+  background-color: $transparent-color;
 }
 
 .visually-hidden {
