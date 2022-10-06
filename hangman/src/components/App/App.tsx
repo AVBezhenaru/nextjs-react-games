@@ -1,29 +1,29 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import ButtonChangeTheme from '../ButtonChangeTheme';
 import ButtonPlayPause from '../ButtonPlayPause';
 import GallowsPlace from '../GallowsPlace';
 import GuessWord from '../GuessWord';
+import Header from '../Header';
 import LettersPanel from '../LettersPanel';
+import Main from '../Main';
 
 import styles from './App.module.scss';
 
-const App = () => (
+const App: FC = () => (
   <div className={styles.container}>
-    <div className={styles.header}>
-      <div className={styles.buttonContainer}>
-        <ButtonChangeTheme />
-        <ButtonPlayPause />
-      </div>
-    </div>
+    <Header>
+      <ButtonChangeTheme />
+      <ButtonPlayPause />
+    </Header>
 
-    <div className={styles.main}>
+    <Main>
       <GallowsPlace />
 
       <GuessWord />
 
       <LettersPanel />
-    </div>
+    </Main>
   </div>
 );
 
