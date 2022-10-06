@@ -1,0 +1,13 @@
+.header {
+  display: flex;
+  justify-content: end;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 34rem;
+  padding: 0.8rem 1.5rem;
+  height: 8.8rem;
+}

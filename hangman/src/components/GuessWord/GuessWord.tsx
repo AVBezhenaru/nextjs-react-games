@@ -12,7 +12,7 @@ const RenderLetter: FC<RenderLetterProps> = ({ letter }) => (
   <span className={styles.letter}>{letter}</span>
 );
 
-const GuessWord = () => (
+const GuessWord: FC = () => (
   <div className={styles.container}>
     {word.split('').map((letter, index) => (
       <RenderLetter key={index} letter={letter} />

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import styles from './GallowsPlace.module.scss';
 
-const GallowsPlace = () => (
+const GallowsPlace: FC = () => (
   <div className={styles.container}>
     <div className={styles.gallows} />
     <div className={styles.head} />

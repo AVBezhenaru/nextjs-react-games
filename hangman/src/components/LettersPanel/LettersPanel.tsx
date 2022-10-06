@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import classNames from 'classnames';
 
 import styles from './LettersPanel.module.scss';
@@ -41,7 +41,7 @@ const alphabet = [
 const wrong = ['д', 'р', 'ш', 'к'];
 const success = ['а', 'в', 'у', 'л', 'с', 'ц'];
 
-const LettersPanel = () => (
+const LettersPanel: FC = () => (
   <div className={styles.container}>
     {alphabet.map((letter) => {
       const letterStyle = classNames({
