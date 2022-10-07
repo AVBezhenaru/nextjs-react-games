@@ -39,7 +39,7 @@ const alphabet = [
 ];
 
 const wrong = ['д', 'р', 'ш', 'к'];
-const success = ['а', 'в', 'у', 'л', 'с', 'ц'];
+const success = ['а', 'в', 'л', 'с', 'ц'];
 
 const LettersPanel: FC = () => (
   <div className={styles.container}>
