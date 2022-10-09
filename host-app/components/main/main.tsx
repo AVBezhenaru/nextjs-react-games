@@ -1,4 +1,4 @@
-import style from "../styles/main.module.scss";
+import style from "./main.module.scss";
 import Link from "next/link";
 
 const Main = () => {

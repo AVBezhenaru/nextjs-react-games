@@ -18,7 +18,6 @@ export const fetchRegisterUser = createAsyncThunk('user/fetchRegisterUser', asyn
         }
 
         const data = await response.json();
-        localStorage.setItem('token', data.user.token);
         return data;
     } catch (e) {
         return rejectWithValue(e);
@@ -41,7 +40,6 @@ export const fetchLoginUser = createAsyncThunk('user/fetchLoginUser', async func
         }
 
         const data = await response.json();
-        localStorage.setItem('token', data.user.token);
         return data;
     } catch (e) {
         return rejectWithValue(e);

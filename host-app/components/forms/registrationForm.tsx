@@ -2,9 +2,9 @@ import {FC} from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Image from "next/image";
 import Link from "next/link";
-import styles from "../styles/form.module.scss";
-import {useAppDispatch} from "../store/hooks";
-import {fetchRegisterUser} from "../api/service";
+import styles from "./form.module.scss";
+import {useAppDispatch} from "../../store/hooks";
+import {fetchRegisterUser} from "../../api/service";
 
 type Inputs = {
     username: string,

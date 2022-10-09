@@ -2,7 +2,7 @@ import '@module-federation/nextjs-mf/lib/include-defaults';
 import { Provider } from 'react-redux';
 import { store} from "../store/store";
 import '../styles/globals.scss';
-import Layout from "../components/layout";
+import Layout from "../components/layout/layout";
 
 import dynamic from 'next/dynamic';
 const App = dynamic(
