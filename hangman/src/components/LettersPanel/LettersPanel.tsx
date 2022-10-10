@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { findLetterInGuessWord, getAppState } from '../../store/reducers/AppSlice';
 import { alphabet } from '../../data/data';
 
-import styles from './LettersPanel.module.scss';
+import styles from './index.module.scss';
 
 const LettersPanel: FC = () => {
   const dispatch = useAppDispatch();

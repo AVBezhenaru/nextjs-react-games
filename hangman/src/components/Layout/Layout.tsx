@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import styles from './Layout.module.scss';
+import styles from './index.module.scss';
 
 const Layout: FC = () => (
   <div className={styles.container}>
