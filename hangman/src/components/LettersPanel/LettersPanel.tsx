@@ -1,62 +1,39 @@
 import React, { FC } from 'react';
 import classNames from 'classnames';
 
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { findLetterInGuessWord, getAppState } from '../../store/reducers/AppSlice';
+import { alphabet } from '../../data/data';
+
 import styles from './LettersPanel.module.scss';
 
-const alphabet = [
-  'а',
-  'б',
-  'в',
-  'г',
-  'д',
-  'е',
-  'ж',
-  'з',
-  'и',
-  'й',
-  'к',
-  'л',
-  'м',
-  'н',
-  'о',
-  'п',
-  'р',
-  'с',
-  'т',
-  'у',
-  'ф',
-  'х',
-  'ц',
-  'ч',
-  'ш',
-  'щ',
-  'ъ',
-  'ы',
-  'ь',
-  'э',
-  'ю',
-  'я',
-];
+const LettersPanel: FC = () => {
+  const dispatch = useAppDispatch();
+  const { wrongLetters, successLetters } = useAppSelector(getAppState);
 
-const wrong = ['д', 'р', 'ш', 'к'];
-const success = ['а', 'в', 'л', 'с', 'ц'];
+  return (
+    <div className={styles.container}>
+      {alphabet.map((letter) => {
+        const hasInWrong = wrongLetters.includes(letter);
+        const hasInSuccess = successLetters.includes(letter);
 
-const LettersPanel: FC = () => (
-  <div className={styles.container}>
-    {alphabet.map((letter) => {
-      const letterStyle = classNames({
-        [styles.default]: true,
-        [styles.wrong]: wrong.includes(letter),
-        [styles.success]: success.includes(letter),
-      });
+        const letterStyle = classNames({
+          [styles.default]: true,
+          [styles.wrong]: hasInWrong,
+          [styles.success]: hasInSuccess,
+        });
 
-      return (
-        <span key={letter} className={letterStyle}>
-          {letter}
-        </span>
-      );
-    })}
-  </div>
-);
+        const onClick =
+          hasInWrong || hasInSuccess ? undefined : () => dispatch(findLetterInGuessWord(letter));
+
+        return (
+          <span className={letterStyle} key={letter as string} onClick={onClick}>
+            {letter as string}
+          </span>
+        );
+      })}
+    </div>
+  );
+};
 
 export default LettersPanel;

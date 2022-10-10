@@ -4,7 +4,8 @@
 .button {
   @extend %blueButton;
 
-  position: relative;
+  position: absolute;
+  right: 1.5rem; //* headerContainer padding
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,13 +1,22 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '..';
+import { getRandomWord } from '../../data/data';
 import { AlphabetLetters, IInitialStateApp } from '../../types/AppSlice';
+import { asyncThunkCreator } from '../../utils/asyncThunkCreator';
+
+export const getWord = asyncThunkCreator<string, undefined, typeof getRandomWord>({
+  thunkName: 'app/getWord',
+  callback: getRandomWord,
+});
 
 const initialState: IInitialStateApp = {
-  guessWord: 'виселица',
-  currentWord: 'в сел ца',
-  wrongLetters: ['д', 'р', 'ш', 'к'],
-  successLetters: ['а', 'в', 'л', 'с', 'ц'],
+  status: 'IDLE',
+  error: null,
+  guessWord: [],
+  currentWord: [],
+  wrongLetters: [],
+  successLetters: [],
 };
 
 export const getAppState = (state: RootState) => state.app;
@@ -16,19 +25,51 @@ const app = createSlice({
   name: 'app',
   initialState,
   reducers: {
-    saveGuessWord(state, { payload }: PayloadAction<string>) {
-      state.guessWord = payload;
-    },
+    findLetterInGuessWord(state, { payload }: PayloadAction<AlphabetLetters>) {
+      state.guessWord.forEach((letter, index) => {
+        if (letter === payload) {
+          //* open new letter in GuessWord
+          state.currentWord[index] = payload;
 
-    addWrongLetter(state, { payload }: PayloadAction<AlphabetLetters>) {
-      state.wrongLetters.push(payload);
+          if (!state.successLetters.includes(payload)) {
+            state.successLetters.push(payload);
+          }
+        }
+      });
+
+      if (!state.guessWord.includes(payload) && !state.wrongLetters.includes(payload)) {
+        state.wrongLetters.push(payload);
+      }
     },
-    addSuccessLetter(state, { payload }: PayloadAction<AlphabetLetters>) {
-      state.successLetters.push(payload);
+    resetGame(state) {
+      state.guessWord = [];
+      state.currentWord = [];
+      state.successLetters = [];
+      state.wrongLetters = [];
     },
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(getWord.pending, (state) => {
+        state.status = 'LOADING';
+      })
+      .addCase(getWord.fulfilled, (state, { payload }) => {
+        state.status = 'SUCCESS';
+
+        state.guessWord = payload.split('') as AlphabetLetters[];
+
+        state.currentWord = new Array(payload.split('').length).fill(' ');
+      })
+      .addCase(getWord.rejected, (state, { payload }) => {
+        state.status = 'FAILURE';
+
+        if (payload instanceof Error) {
+          state.error = payload.message;
+        }
+      });
   },
 });
 
-export const { saveGuessWord } = app.actions;
+export const { findLetterInGuessWord, resetGame } = app.actions;
 
 export default app.reducer;
