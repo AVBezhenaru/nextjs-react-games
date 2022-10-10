@@ -1,17 +1,11 @@
 import React, { FC, useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
 import { bodyParts } from '../../data/data';
 import { useAppDispatch, useAppSelector } from '../../hooks';
+import { Game } from '../../pages';
 import { getAppState, resetGame, getWord } from '../../store/reducers/AppSlice';
-import ButtonChangeTheme from '../ButtonChangeTheme';
-import ButtonPlayPause from '../ButtonPlayPause';
-import GallowsPlace from '../GallowsPlace';
-import GuessWord from '../GuessWord';
-import Header from '../Header';
-import LettersPanel from '../LettersPanel';
-import Main from '../Main';
-
-import styles from './App.module.scss';
+import { Layout } from '../Layout/Layout';
 
 const App: FC = () => {
   const dispatch = useAppDispatch();
@@ -39,21 +33,12 @@ const App: FC = () => {
   }, [guessWord, currentWord, wrongLetters]);
 
   return (
-    <div className={styles.container}>
-      <Header>
-        <ButtonChangeTheme theme="страны" />
-        <ButtonPlayPause play />
-      </Header>
-
-      <Main>
-        <GallowsPlace />
-
-        <GuessWord />
-
-        <LettersPanel />
-      </Main>
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route path="/game" element={<Game />} />
+      </Route>
+    </Routes>
   );
 };
 
-export default App;
+export { App };

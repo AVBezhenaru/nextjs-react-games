@@ -17,4 +17,4 @@ const Button: FC<ButtonProps> = ({ play }) => (
   </button>
 );
 
-export default Button;
+export { Button as ButtonPlayPause };

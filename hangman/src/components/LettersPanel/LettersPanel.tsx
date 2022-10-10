@@ -36,4 +36,4 @@ const LettersPanel: FC = () => {
   );
 };
 
-export default LettersPanel;
+export { LettersPanel };

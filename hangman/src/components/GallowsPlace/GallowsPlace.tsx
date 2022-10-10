@@ -20,4 +20,4 @@ const GallowsPlace: FC = () => {
   );
 };
 
-export default GallowsPlace;
+export { GallowsPlace };
