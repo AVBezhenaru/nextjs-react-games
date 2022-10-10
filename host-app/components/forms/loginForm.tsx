@@ -5,9 +5,10 @@ import Link from "next/link";
 import {useAppDispatch} from "../../store/hooks";
 import styles from "./form.module.scss";
 import {fetchLoginUser} from "../../api/service";
+import {object} from "prop-types";
 
 type Inputs = {
-    email: string;
+    email: string; 
     username: string,
     password: string,
 };
@@ -22,7 +23,7 @@ const LoginForm:FC = () => {
             password: date.password,
         };
         clearErrors();
-        dispatch(fetchLoginUser({ user }));
+        dispatch(fetchLoginUser());
     };
 
     return (
@@ -52,6 +53,6 @@ const LoginForm:FC = () => {
             </form>
         </>
     );
-}
+};
 
 export default LoginForm;
