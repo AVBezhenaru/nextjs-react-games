@@ -1,0 +1,15 @@
+.container {
+  position: absolute;
+  display: block;
+  top: 2.5rem;
+  left: 6.5rem;
+  z-index: 2;
+  margin-right: auto;
+  transform: rotate(10deg);
+  cursor: pointer;
+
+
+  &:hover {
+    filter: brightness(0.9);
+  }
+}

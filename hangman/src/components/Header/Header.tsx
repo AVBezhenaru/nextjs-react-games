@@ -1,5 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 
+import { ButtonBack } from '../ButtonBack';
+
 import styles from './index.module.scss';
 
 type HeaderProps = {
@@ -8,7 +10,10 @@ type HeaderProps = {
 
 const Header: FC<HeaderProps> = ({ children }) => (
   <div className={styles.header}>
-    <div className={styles.container}>{children}</div>
+    <div className={styles.container}>
+      <ButtonBack />
+      {children}
+    </div>
   </div>
 );
 
