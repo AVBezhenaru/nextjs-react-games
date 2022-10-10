@@ -1,3 +1,10 @@
+export enum COMMON_STATUS {
+  LOADING = 'loading',
+  SUCCESS = 'success',
+  FAILURE = 'failure',
+  IDLE = 'idle',
+}
+
 export type Alphabet = [
   'а',
   'б',
@@ -36,8 +43,9 @@ export type Alphabet = [
 export type AlphabetLetters = Alphabet[keyof Alphabet];
 
 export interface IInitialStateApp {
-  status: string;
+  status: COMMON_STATUS;
   error: string | null;
+  theme: string | null;
   guessWord: AlphabetLetters[];
   currentWord: (AlphabetLetters | ' ')[];
   wrongLetters: AlphabetLetters[];
