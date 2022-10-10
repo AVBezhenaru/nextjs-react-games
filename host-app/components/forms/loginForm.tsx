@@ -7,6 +7,7 @@ import styles from "./form.module.scss";
 import {fetchLoginUser} from "../../api/service";
 
 type Inputs = {
+    email: string;
     username: string,
     password: string,
 };
@@ -15,7 +16,7 @@ const LoginForm:FC = () => {
     const { register, handleSubmit, formState: { errors }, clearErrors } = useForm<Inputs>();
     const dispatch = useAppDispatch();
 
-    const onSubmit: SubmitHandler<Inputs> = (date) => {
+    const onSubmit: SubmitHandler = (date: Inputs) => {
         const user = {
             email: date.email,
             password: date.password,
