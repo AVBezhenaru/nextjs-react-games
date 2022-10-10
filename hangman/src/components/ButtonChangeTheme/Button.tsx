@@ -3,13 +3,13 @@ import React, { FC } from 'react';
 import styles from './Button.module.scss';
 
 type ButtonProps = {
-  theme: string;
+  text: string;
 };
 
-const Button: FC<ButtonProps> = ({ theme }) => (
+const Button: FC<ButtonProps> = ({ text }) => (
   <button className={styles.button} type="button">
     <span className={styles.text} title="Сменить тему">
-      Тема: {theme}
+      {text}
     </span>
   </button>
 );
