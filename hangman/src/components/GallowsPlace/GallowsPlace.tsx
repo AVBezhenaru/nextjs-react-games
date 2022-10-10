@@ -4,7 +4,7 @@ import { bodyParts } from '../../data/data';
 import { useAppSelector } from '../../hooks';
 import { getAppState } from '../../store/reducers/AppSlice';
 
-import styles from './GallowsPlace.module.scss';
+import styles from './index.module.scss';
 
 const GallowsPlace: FC = () => {
   const { wrongLetters } = useAppSelector(getAppState);
