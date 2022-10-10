@@ -44,7 +44,7 @@
   border: 4px solid $sixth-color;
   border-radius: 20px;
   color: $sixth-color;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: $font-family-second;
   transition: filter 0.2s ease-in-out;
 
   &:hover {
