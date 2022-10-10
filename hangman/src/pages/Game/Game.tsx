@@ -1,4 +1,4 @@
-import React, { useEffect, FC } from 'react';
+import React, { useEffect, FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -8,12 +8,15 @@ import {
   Header,
   LettersPanel,
   Main,
+  StatusGameMessage,
 } from '../../components';
 import { bodyParts } from '../../data/data';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getAppState, getThemeWord, resetGame } from '../../store/reducers/AppSlice';
 
 export const Game: FC = () => {
+  const [statusGame, setStatusGame] = useState<'win' | 'lose' | null>(null);
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { guessWord, wrongLetters, currentWord, theme } = useAppSelector(getAppState);
@@ -30,7 +33,9 @@ export const Game: FC = () => {
     if (wrongLetters.length === bodyParts.length) {
       dispatch(resetGame());
       console.log('loose the game');
-      if (theme) dispatch(getThemeWord(theme));
+      setStatusGame('lose');
+
+      if (theme && statusGame === null) dispatch(getThemeWord(theme));
     }
 
     if (
@@ -40,12 +45,16 @@ export const Game: FC = () => {
     ) {
       dispatch(resetGame());
       console.log('win the game');
-      if (theme) dispatch(getThemeWord(theme));
+      setStatusGame('win');
+
+      if (theme && statusGame === null) dispatch(getThemeWord(theme));
     }
   }, [guessWord, currentWord, wrongLetters]);
 
   return (
     <>
+      <StatusGameMessage status={statusGame} onClose={setStatusGame} />
+
       <Header>
         <ButtonChangeTheme />
       </Header>
