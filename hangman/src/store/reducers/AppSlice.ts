@@ -57,6 +57,11 @@ const app = createSlice({
     },
     setTheme(state, { payload }: PayloadAction<string>) {
       state.theme = payload;
+
+      state.guessWord = [];
+      state.currentWord = [];
+      state.successLetters = [];
+      state.wrongLetters = [];
     },
     resetTheme(state) {
       state.theme = null;
