@@ -16,7 +16,7 @@ const LoginForm:FC = () => {
     const { register, handleSubmit, formState: { errors }, clearErrors } = useForm<Inputs>();
     const dispatch = useAppDispatch();
 
-    const onSubmit: SubmitHandler = (date: Inputs) => {
+    const onSubmit: SubmitHandler<Inputs> = (date: Inputs) => {
         const user = {
             email: date.email,
             password: date.password,
