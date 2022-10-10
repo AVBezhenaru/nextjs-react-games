@@ -16,7 +16,7 @@ const RegistrationForm:FC = () => {
     const { register, handleSubmit, watch, formState: { errors }, clearErrors } = useForm<Inputs>();
     const dispatch = useAppDispatch();
 
-    const onSubmit: SubmitHandler<Inputs>  = (date) => {
+    const onSubmit: SubmitHandler<Inputs>  = (date: Inputs) => {
         const user = {
             username: date.username,
             email: date.email,
