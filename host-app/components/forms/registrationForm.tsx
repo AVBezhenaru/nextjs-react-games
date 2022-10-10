@@ -10,6 +10,7 @@ type Inputs = {
     username: string,
     email: string,
     password: string,
+    password_repeat: string,
 };
 
 const RegistrationForm:FC = () => {
@@ -23,7 +24,7 @@ const RegistrationForm:FC = () => {
             password: date.password,
         };
         clearErrors();
-        dispatch(fetchRegisterUser({ user }));
+        dispatch(fetchRegisterUser());
     };
 
     return (
@@ -76,7 +77,7 @@ const RegistrationForm:FC = () => {
                 {errors.password && <p className={styles.error}>{errors.password.message}</p>}
 
                 <input className={styles.input}
-                    type="password"
+                    type="password_repeat"
                        placeholder="Repeat password"
                     {...register('password_repeat', {
                         validate: (value) => value === watch('password') || 'The passwords do not match',
@@ -90,6 +91,6 @@ const RegistrationForm:FC = () => {
 
         </>
     );
-}
+};
 
 export default RegistrationForm;
