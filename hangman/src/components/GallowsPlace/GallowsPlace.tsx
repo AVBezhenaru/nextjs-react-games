@@ -1,23 +1,23 @@
 import React, { FC } from 'react';
 
+import { bodyParts } from '../../data/data';
+import { useAppSelector } from '../../hooks';
+import { getAppState } from '../../store/reducers/AppSlice';
+
 import styles from './GallowsPlace.module.scss';
 
-const GallowsPlace: FC = () => (
-  <div className={styles.container}>
-    <div className={styles.gallows} />
-    <div className={styles.head} />
-    <div className={styles.body} />
-    <div className={styles.leftHand} />
-    <div className={styles.rightHand} />
-    <div className={styles.leftLeg} />
-    <div className={styles.rightLeg} />
-  </div>
-);
+const GallowsPlace: FC = () => {
+  const { wrongLetters } = useAppSelector(getAppState);
+
+  const { length } = wrongLetters;
+
+  return (
+    <div className={styles.container}>
+      {bodyParts.map((name, index) =>
+        length > index ? <div key={index} className={styles[name]} /> : null,
+      )}
+    </div>
+  );
+};
 
 export default GallowsPlace;
-
-/**
- * считать ошибки
- * в зависимости от номера ошибки рендерить часть тела
- * 7 ошибок
- */

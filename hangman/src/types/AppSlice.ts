@@ -1,4 +1,4 @@
-type Alphabet = [
+export type Alphabet = [
   'а',
   'б',
   'в',
@@ -36,8 +36,10 @@ type Alphabet = [
 export type AlphabetLetters = Alphabet[keyof Alphabet];
 
 export interface IInitialStateApp {
-  guessWord: string;
-  currentWord: string;
+  status: string;
+  error: string | null;
+  guessWord: AlphabetLetters[];
+  currentWord: (AlphabetLetters | ' ')[];
   wrongLetters: AlphabetLetters[];
   successLetters: AlphabetLetters[];
 }
