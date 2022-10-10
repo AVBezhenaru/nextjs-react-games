@@ -12,4 +12,4 @@ const Header: FC<HeaderProps> = ({ children }) => (
   </div>
 );
 
-export default Header;
+export { Header };

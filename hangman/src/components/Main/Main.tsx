@@ -8,4 +8,4 @@ type MainProps = {
 
 const Main: FC<MainProps> = ({ children }) => <div className={styles.main}>{children}</div>;
 
-export default Main;
+export { Main };

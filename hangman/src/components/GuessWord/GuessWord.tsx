@@ -25,4 +25,4 @@ const GuessWord: FC = () => {
   );
 };
 
-export default GuessWord;
+export { GuessWord };

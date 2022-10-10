@@ -14,4 +14,4 @@ const Button: FC<ButtonProps> = ({ theme }) => (
   </button>
 );
 
-export default Button;
+export { Button as ButtonChangeTheme };
