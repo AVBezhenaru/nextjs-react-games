@@ -8,7 +8,7 @@ module.exports = {
         new NextFederationPlugin({
           name: 'host',
           remotes: {
-            remote: 'remote@http://localhost:3001/remote.js',
+            remote: `remote@${process.env.DOMAIN}/remote.js`,
           },
         }),
       );
