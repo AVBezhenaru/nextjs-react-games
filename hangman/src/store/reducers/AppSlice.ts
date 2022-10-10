@@ -1,18 +1,26 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '..';
-import { getRandomWord } from '../../data/data';
-import { AlphabetLetters, IInitialStateApp } from '../../types/AppSlice';
+import { getRandomWord as randomWord, getThemeWord as themeWord } from '../../data/data';
+import { AlphabetLetters, COMMON_STATUS, IInitialStateApp } from '../../types/AppSlice';
 import { asyncThunkCreator } from '../../utils/asyncThunkCreator';
 
-export const getWord = asyncThunkCreator<string, undefined, typeof getRandomWord>({
-  thunkName: 'app/getWord',
-  callback: getRandomWord,
+const { IDLE, LOADING, SUCCESS, FAILURE } = COMMON_STATUS;
+
+export const getRandomWord = asyncThunkCreator<string, undefined, typeof randomWord>({
+  thunkName: 'app/getRandomWord',
+  callback: randomWord,
+});
+
+export const getThemeWord = asyncThunkCreator<string, string, typeof themeWord>({
+  thunkName: 'app/getThemeWord',
+  callback: themeWord,
 });
 
 const initialState: IInitialStateApp = {
-  status: 'IDLE',
+  status: IDLE,
   error: null,
+  theme: null,
   guessWord: [],
   currentWord: [],
   wrongLetters: [],
@@ -47,21 +55,46 @@ const app = createSlice({
       state.successLetters = [];
       state.wrongLetters = [];
     },
+    setTheme(state, { payload }: PayloadAction<string>) {
+      state.theme = payload;
+    },
+    resetTheme(state) {
+      state.theme = null;
+    },
   },
   extraReducers(builder) {
     builder
-      .addCase(getWord.pending, (state) => {
-        state.status = 'LOADING';
+      .addCase(getRandomWord.pending, (state) => {
+        state.status = LOADING;
       })
-      .addCase(getWord.fulfilled, (state, { payload }) => {
-        state.status = 'SUCCESS';
+      .addCase(getRandomWord.fulfilled, (state, { payload }) => {
+        state.status = SUCCESS;
 
         state.guessWord = payload.split('') as AlphabetLetters[];
 
         state.currentWord = new Array(payload.split('').length).fill(' ');
       })
-      .addCase(getWord.rejected, (state, { payload }) => {
-        state.status = 'FAILURE';
+      .addCase(getRandomWord.rejected, (state, { payload }) => {
+        state.status = FAILURE;
+
+        if (payload instanceof Error) {
+          state.error = payload.message;
+        }
+      });
+
+    builder
+      .addCase(getThemeWord.pending, (state) => {
+        state.status = LOADING;
+      })
+      .addCase(getThemeWord.fulfilled, (state, { payload }) => {
+        state.status = SUCCESS;
+
+        state.guessWord = payload.split('') as AlphabetLetters[];
+
+        state.currentWord = new Array(payload.split('').length).fill(' ');
+      })
+      .addCase(getThemeWord.rejected, (state, { payload }) => {
+        state.status = FAILURE;
 
         if (payload instanceof Error) {
           state.error = payload.message;
@@ -70,6 +103,6 @@ const app = createSlice({
   },
 });
 
-export const { findLetterInGuessWord, resetGame } = app.actions;
+export const { findLetterInGuessWord, resetGame, setTheme, resetTheme } = app.actions;
 
 export default app.reducer;
