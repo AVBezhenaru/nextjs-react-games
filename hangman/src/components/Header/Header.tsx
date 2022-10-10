@@ -8,7 +8,7 @@ type HeaderProps = {
 
 const Header: FC<HeaderProps> = ({ children }) => (
   <div className={styles.header}>
-    <div className={styles.buttonContainer}>{children}</div>
+    <div className={styles.container}>{children}</div>
   </div>
 );
 
