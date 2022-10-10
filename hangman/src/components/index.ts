@@ -7,3 +7,4 @@ export { Header } from './Header/Header';
 export { Layout } from './Layout/Layout';
 export { LettersPanel } from './LettersPanel/LettersPanel';
 export { Main } from './Main/Main';
+export { StatusGameMessage } from './StatusGameMessage/StatusGameMessage';
