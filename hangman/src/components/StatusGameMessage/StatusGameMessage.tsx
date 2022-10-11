@@ -43,7 +43,7 @@ const StatusGameMessage: FC<StatusGameMessageProps> = ({ status, setStatusGame }
               <span className={`${styles.span} ${styles.word}`}>{guessWord.join('')}</span>
             </p>
             <p className={styles.statsField}>
-              Правильно угадано букв:{' '}
+              Открыто букв:{' '}
               <span className={`${styles.span} ${styles.success}`}>{successLetters.length}</span>
             </p>
             <p className={styles.statsField}>
