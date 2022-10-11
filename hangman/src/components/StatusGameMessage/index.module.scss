@@ -19,6 +19,7 @@
   border: 5px solid $third-color;
   border-radius: 15px;
   text-align: center;
+  font-family: $font-family-third;
   background-color: $primary-color;
   box-sizing: border-box;
 }
@@ -30,6 +31,32 @@
   line-height: 1.5;
   white-space: nowrap;
   text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.stats {
+  font-size: 3rem;
+  margin-bottom: 3rem;
+}
+
+.statsField {
+  text-align: left;
+}
+
+.span {
+  font-size: 4rem;
+}
+
+.word {
+  color: $fourth-color;
+}
+
+.success {
+  color: $fifth-color;
+}
+
+.wrong {
+  color: $seventh-color;
 }
 
 .image {
