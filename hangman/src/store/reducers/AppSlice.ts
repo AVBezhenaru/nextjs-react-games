@@ -1,20 +1,22 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '..';
-import { getRandomWord as randomWord, getThemeWord as themeWord } from '../../data/data';
+import { appApi } from '../../services/appApi';
 import { AlphabetLetters, COMMON_STATUS, IInitialStateApp } from '../../types/AppSlice';
 import { asyncThunkCreator } from '../../utils/asyncThunkCreator';
 
 const { IDLE, LOADING, SUCCESS, FAILURE } = COMMON_STATUS;
 
-export const getRandomWord = asyncThunkCreator<string, undefined, typeof randomWord>({
+const { getRandomWord: getRandomWordApi, getThemeWord: getThemeWordApi } = appApi;
+
+export const getRandomWord = asyncThunkCreator<string, undefined, typeof getRandomWordApi>({
   thunkName: 'app/getRandomWord',
-  callback: randomWord,
+  callback: getRandomWordApi,
 });
 
-export const getThemeWord = asyncThunkCreator<string, string, typeof themeWord>({
+export const getThemeWord = asyncThunkCreator<string, string, typeof getThemeWordApi>({
   thunkName: 'app/getThemeWord',
-  callback: themeWord,
+  callback: getThemeWordApi,
 });
 
 const initialState: IInitialStateApp = {

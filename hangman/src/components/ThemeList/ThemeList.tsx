@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 
-import { getThemeWord } from '../../data/data';
 import { data } from '../../data/words';
 import { useAppDispatch } from '../../hooks';
 import { setTheme } from '../../store/reducers/AppSlice';
@@ -12,7 +11,6 @@ const ThemeList: FC = () => {
   const dispatch = useAppDispatch();
 
   const onClick = (theme: string) => () => {
-    getThemeWord(theme);
     dispatch(setTheme(theme));
   };
 
