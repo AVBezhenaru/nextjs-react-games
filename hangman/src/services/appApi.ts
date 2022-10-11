@@ -2,7 +2,7 @@ import { data } from '../data/words';
 
 export class AppApi {
   getRandomWord = async () => {
-    const randomGenre = Math.round(Math.random() * (data.themes.length - 1));
+    const randomGenre = Math.round(Math.random() * (data.themes.length - 2));
     const randomWord = Math.round(Math.random() * (data.themes[randomGenre].words.length - 1));
 
     return Promise.resolve({ data: data.themes[randomGenre].words[randomWord].toLowerCase() });
