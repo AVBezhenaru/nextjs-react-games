@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 
-import { ButtonBack } from '../ButtonBack';
+import { ButtonGoHome } from '../ButtonGoHome/ButtonGoHome';
 
 import styles from './index.module.scss';
 
@@ -11,7 +11,7 @@ type HeaderProps = {
 const Header: FC<HeaderProps> = ({ children }) => (
   <div className={styles.header}>
     <div className={styles.container}>
-      <ButtonBack />
+      <ButtonGoHome />
       {children}
     </div>
   </div>
