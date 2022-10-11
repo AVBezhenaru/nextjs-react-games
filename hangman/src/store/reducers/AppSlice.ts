@@ -33,28 +33,6 @@ const app = createSlice({
   name: 'app',
   initialState,
   reducers: {
-    findLetterInGuessWord(state, { payload }: PayloadAction<AlphabetLetters>) {
-      state.guessWord.forEach((letter, index) => {
-        if (letter === payload) {
-          //* open new letter in GuessWord
-          state.currentWord[index] = payload;
-
-          if (!state.successLetters.includes(payload)) {
-            state.successLetters.push(payload);
-          }
-        }
-      });
-
-      if (!state.guessWord.includes(payload) && !state.wrongLetters.includes(payload)) {
-        state.wrongLetters.push(payload);
-      }
-    },
-    resetGame(state) {
-      state.guessWord = [];
-      state.currentWord = [];
-      state.successLetters = [];
-      state.wrongLetters = [];
-    },
     setTheme(state, { payload }: PayloadAction<string>) {
       state.theme = payload;
 
@@ -65,6 +43,24 @@ const app = createSlice({
     },
     resetTheme(state) {
       state.theme = null;
+    },
+    addSuccessLetter(state, { payload }: PayloadAction<AlphabetLetters>) {
+      state.successLetters.push(payload);
+    },
+    addWrongLetter(state, { payload }: PayloadAction<AlphabetLetters>) {
+      state.wrongLetters.push(payload);
+    },
+    addLetterAtCurrentWord(
+      state,
+      { payload: { index, letter } }: PayloadAction<{ index: number; letter: AlphabetLetters }>,
+    ) {
+      state.currentWord[index] = letter;
+    },
+    resetGame(state) {
+      state.guessWord = [];
+      state.currentWord = [];
+      state.successLetters = [];
+      state.wrongLetters = [];
     },
   },
   extraReducers(builder) {
@@ -108,6 +104,13 @@ const app = createSlice({
   },
 });
 
-export const { findLetterInGuessWord, resetGame, setTheme, resetTheme } = app.actions;
+export const {
+  setTheme,
+  resetTheme,
+  addSuccessLetter,
+  addWrongLetter,
+  addLetterAtCurrentWord,
+  resetGame,
+} = app.actions;
 
 export default app.reducer;
