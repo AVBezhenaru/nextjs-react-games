@@ -40,6 +40,8 @@ export type Alphabet = [
   'я',
 ];
 
+export type StatusGame = 'idle' | 'win' | 'lose';
+
 export type AlphabetLetters = Alphabet[keyof Alphabet];
 
 export interface IInitialStateApp {
