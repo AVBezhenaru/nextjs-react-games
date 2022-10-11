@@ -1336,12 +1336,8 @@ export const data = {
       ],
     },
     {
-      name: 'Lorem',
-      words: ['лорем'],
-    },
-    {
-      name: 'Ipsum',
-      words: ['ипсум'],
+      name: 'случайное слово',
+      words: [],
     },
   ],
 };
