@@ -26,7 +26,7 @@ const StatusGameMessage: FC<StatusGameMessageProps> = ({ status, setStatusGame }
     const isOverlay = (target as HTMLDivElement).classList.contains(styles.overlay);
     const isCloseButton = (target as HTMLButtonElement).classList.contains(styles.button);
 
-    if (isOverlay || isCloseButton) setStatusGame('idle');
+    if (isOverlay || isCloseButton) setStatusGame('loading');
   };
 
   const isShowOverlay = status === 'win' || status === 'lose' ? true : null;

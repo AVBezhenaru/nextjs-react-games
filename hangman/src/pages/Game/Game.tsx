@@ -40,10 +40,10 @@ export const Game: FC = () => {
 
     if (isWin) setStatusGame('win');
 
-    if (isWin || isLose) {
+    if ((isWin || isLose) && theme && statusGame === 'loading') {
+      setStatusGame('idle');
       dispatch(resetGame());
-
-      if (theme && statusGame === 'idle') dispatch(getThemeWord(theme));
+      dispatch(getThemeWord(theme));
     }
   }, [guessWord, currentWord, wrongLetters, statusGame]);
 
