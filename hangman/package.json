@@ -26,7 +26,7 @@
   "scripts": {
     "start": "react-scripts start",
     "start1": "webpack-cli serve",
-    "build": "webpack --mode production",
+    "build": "react-scripts build",
     "serve": "serve dist -p 3002",
     "clean": "rm -rf dist",
     "test": "react-scripts test",
