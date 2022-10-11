@@ -1,10 +1,19 @@
 @import '../../scss/variables';
 
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+  background-color: $overlay-color;
+}
+
 .container {
   position: absolute;
   top: 50%;
   left: 50%;
-  z-index: 2;
   transform: translate(-50%, -50%);
   padding: 3rem;
   border: 5px solid $third-color;

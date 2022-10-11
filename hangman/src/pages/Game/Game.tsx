@@ -13,9 +13,10 @@ import {
 import { bodyParts } from '../../data/data';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getAppState, getThemeWord, resetGame } from '../../store/reducers/AppSlice';
+import { StatusGame } from '../../types/AppSlice';
 
 export const Game: FC = () => {
-  const [statusGame, setStatusGame] = useState<'win' | 'lose' | null>(null);
+  const [statusGame, setStatusGame] = useState<StatusGame>('idle');
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -30,30 +31,25 @@ export const Game: FC = () => {
   }, []);
 
   useEffect(() => {
-    if (wrongLetters.length === bodyParts.length) {
+    const isGuessWordEqualCurrentWord = guessWord.join('') === currentWord.join('');
+
+    const isWin = guessWord.length > 0 && currentWord.length > 0 && isGuessWordEqualCurrentWord;
+    const isLose = wrongLetters.length === bodyParts.length;
+
+    if (isLose) setStatusGame('lose');
+
+    if (isWin) setStatusGame('win');
+
+    if (isWin || isLose) {
       dispatch(resetGame());
-      console.log('loose the game');
-      setStatusGame('lose');
 
-      if (theme && statusGame === null) dispatch(getThemeWord(theme));
+      if (theme && statusGame === 'idle') dispatch(getThemeWord(theme));
     }
-
-    if (
-      guessWord.length > 0 &&
-      currentWord.length > 0 &&
-      guessWord.join('') === currentWord.join('')
-    ) {
-      dispatch(resetGame());
-      console.log('win the game');
-      setStatusGame('win');
-
-      if (theme && statusGame === null) dispatch(getThemeWord(theme));
-    }
-  }, [guessWord, currentWord, wrongLetters]);
+  }, [guessWord, currentWord, wrongLetters, statusGame]);
 
   return (
     <>
-      <StatusGameMessage status={statusGame} onClose={setStatusGame} />
+      <StatusGameMessage status={statusGame} setStatusGame={setStatusGame} />
 
       <Header>
         <ButtonChangeTheme />
