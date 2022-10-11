@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 
-import { data, getThemeWord } from '../../data/data';
+import { getThemeWord } from '../../data/data';
+import { data } from '../../data/words';
 import { useAppDispatch } from '../../hooks';
 import { setTheme } from '../../store/reducers/AppSlice';
 
@@ -21,7 +22,7 @@ const ThemeList: FC = () => {
         {data.themes.map(({ name }) => (
           <Link key={name} style={{ textDecoration: 'none', color: '#000000' }} to="/game">
             <li className={styles.item} onClick={onClick(name)}>
-              {name}
+              {`${name[0].toUpperCase()}${name.slice(1)} `}
             </li>
           </Link>
         ))}
