@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 
-import { bodyParts } from '../../data/data';
 import { useAppSelector } from '../../hooks';
 import { getAppState } from '../../store/reducers/AppSlice';
+import { bodyParts } from '../../utils/bodyParts';
 
 import styles from './index.module.scss';
 

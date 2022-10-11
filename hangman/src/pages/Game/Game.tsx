@@ -10,10 +10,10 @@ import {
   Main,
   StatusGameMessage,
 } from '../../components';
-import { bodyParts } from '../../data/data';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getAppState, getThemeWord, resetGame } from '../../store/reducers/AppSlice';
 import { StatusGame } from '../../types/AppSlice';
+import { bodyParts } from '../../utils/bodyParts';
 
 export const Game: FC = () => {
   const [statusGame, setStatusGame] = useState<StatusGame>('idle');

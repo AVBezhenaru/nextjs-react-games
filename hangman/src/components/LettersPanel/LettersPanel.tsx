@@ -8,8 +8,8 @@ import {
   addLetterAtCurrentWord,
   getAppState,
 } from '../../store/reducers/AppSlice';
-import { alphabet } from '../../data/data';
 import { AlphabetLetters } from '../../types/AppSlice';
+import { alphabet } from '../../utils/alphabet';
 
 import styles from './index.module.scss';
 
