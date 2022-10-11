@@ -40,7 +40,7 @@ export type Alphabet = [
   'я',
 ];
 
-export type StatusGame = 'idle' | 'win' | 'lose';
+export type StatusGame = 'idle' | 'win' | 'lose' | 'loading';
 
 export type AlphabetLetters = Alphabet[keyof Alphabet];
 
