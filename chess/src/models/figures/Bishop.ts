@@ -1,10 +1,14 @@
 import { Cell } from "../Cell";
 import { Colors } from "../Colors";
 import { Figure, FigureNames } from "./Figure";
-import blackLogo from "../../public/black-bishop.png";
-import whiteLogo from "../../public/white-bishop.png";
+// import blackLogo from "../../black-bishop.png";
+// import whiteLogo from "../../white-bishop.png";
+
+const blackLogo = require("../../assets/img/black-bishop.png");
+const whiteLogo = require("../../assets/img/white-bishop.png");
 
 export class Bishop extends Figure {
+
     constructor(color: Colors, cell: Cell) {
         super(color, cell);
         this.logo = color === Colors.BLACK ? blackLogo : whiteLogo;

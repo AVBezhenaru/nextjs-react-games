@@ -1,6 +1,8 @@
-import logo from '../../public/black-bishop.png'
+// import logo from "../../assets/img/black-bishop.png";
 import { Colors } from '../Colors';
 import { Cell } from '../Cell';
+
+const logo = require("../../assets/img/black-bishop.png");
 
 export enum FigureNames {
   FIGURE = "Фигура",

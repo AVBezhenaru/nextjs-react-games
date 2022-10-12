@@ -1,14 +1,17 @@
 import { Cell } from "../Cell";
 import { Colors } from "../Colors";
 import { Figure, FigureNames } from "./Figure";
-import blackLogo from "../../public/black-rook.png";
-import whiteLogo from "../../public/white-rook.png";
+// import blackLogo from "../../public/black-queen.png";
+// import whiteLogo from "../../public/white-queen.png";
 
-export class Rook extends Figure {
+const blackLogo = require("../../assets/img/black-queen.png");
+const whiteLogo = require("../../assets/img/white-queen.png");
+
+export class Queen extends Figure {
   constructor(color: Colors, cell: Cell) {
     super(color, cell);
     this.logo = color === Colors.BLACK ? blackLogo : whiteLogo;
-    this.name = FigureNames.ROOK;
+    this.name = FigureNames.QUEEN;
   }
 
   canMove(target: Cell): boolean {
@@ -24,6 +27,10 @@ export class Rook extends Figure {
       return true;
     }
 
+    if (this.cell.isEmptyDiagonal(target)) {
+      return true;
+    } 
+    
     return false;
   }
 }
