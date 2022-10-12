@@ -3,8 +3,8 @@ import {
   Cell as StyledCell,
   FigureLogo,
   StyledAvailableCell,
-} from "../../styles/chess.style";
-import { Cell } from '../../models/Cell'
+} from "../styles/chess.style";
+import { Cell } from '../models/Cell'
 
 interface CellProps {
   cell: Cell;
@@ -31,7 +31,7 @@ const CellComponent: FC<CellProps> = ({ cell, selected, click }) => {
       {cell.available && !cell.figure && (
         <StyledAvailableCell></StyledAvailableCell>
       )}
-      {cell.figure?.logo && <FigureLogo src={cell.figure.logo.src} />}
+      {cell.figure?.logo && <FigureLogo src={cell.figure.logo} />}
     </StyledCell>
   );
 };

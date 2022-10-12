@@ -1,8 +1,11 @@
 import { Cell } from "../Cell";
 import { Colors } from "../Colors";
 import { Figure, FigureNames } from "./Figure";
-import blackLogo from "../../public/black-pawn.png";
-import whiteLogo from "../../public/white-pawn.png";
+// import blackLogo from "../../public/black-pawn.png";
+// import whiteLogo from "../../public/white-pawn.png";
+
+const blackLogo = require("../../assets/img/black-pawn.png");
+const whiteLogo = require("../../assets/img/white-pawn.png");
 
 export class Pawn extends Figure {
   constructor(color: Colors, cell: Cell) {

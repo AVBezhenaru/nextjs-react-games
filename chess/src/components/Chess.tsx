@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { App } from "../../styles/chess.style";
-import BoardComponent from "../../components/Chess/BoardComponent";
-import RulesModal from "../../components/Chess/RulesModal";
-import { Board } from "../../models/Board";
-import { Player } from "../../models/Player";
-import { Colors } from "../../models/Colors";
-import LostFigures from "../../components/Chess/LostFigures";
-import { StyledLostFigures } from "../../styles/chess.style";
+import { App } from "../styles/chess.style";
+import BoardComponent from "./BoardComponent";
+import RulesModal from "./RulesModal";
+import { Board } from "../models/Board";
+import { Player } from "../models/Player";
+import { Colors } from "../models/Colors";
+import LostFigures from "./LostFigures";
+import { StyledLostFigures } from "../styles/chess.style";
 
 const Chess = () => {
   const [board, setBoard] = useState(new Board());
@@ -27,8 +27,10 @@ const Chess = () => {
   };
 
   const changePlayer = () => {
-    setCurrentPlayer(currentPlayer?.color === Colors.WHITE ? blackPlayer : whitePlayer)
-  }
+    setCurrentPlayer(
+      currentPlayer?.color === Colors.WHITE ? blackPlayer : whitePlayer
+    );
+  };
 
   return (
     <App>

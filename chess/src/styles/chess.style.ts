@@ -2,9 +2,9 @@ import Popup from "reactjs-popup";
 import styled from "styled-components";
 
 export const App = styled.div`
-  width: 100vw;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
@@ -90,4 +90,17 @@ export const StyledAvailableCell = styled.span`
 export const ImgFigureMove = styled.img`
   display: block;
   margin: 30px auto 30px auto;
+`;
+
+export const CurrentPlayerText = styled.h3`
+  color: black;
+  font-size: 15px;
+  position: absolute;
+  top: 3%;
+  margin: 0;
+  right: 1%;
+`;
+
+export const StyledLostFigures = styled.div`
+  margin: 50px auto 0px 10px;
 `;

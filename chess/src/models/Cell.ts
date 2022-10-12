@@ -8,8 +8,8 @@ export class Cell {
   readonly color: Colors;
   figure: Figure | null;
   board: Board;
-  available: boolean; // if available move
-  id: number; // for React keys
+  available: boolean;
+  id: number;
 
   constructor(
     board: Board,
@@ -40,16 +40,16 @@ export class Cell {
 
   isEmptyVertical(target: Cell): boolean {
     if (this.x !== target.x) {
-        return false;
+      return false;
     }
 
     const min = Math.min(this.y, target.y);
     const max = Math.max(this.y, target.y);
 
     for (let y = min + 1; y < max; y++) {
-        if (!this.board.getCell(this.x, y).isEmpty()) {
-            return false;
-        }
+      if (!this.board.getCell(this.x, y).isEmpty()) {
+        return false;
+      }
     }
     return true;
   }
@@ -74,10 +74,10 @@ export class Cell {
     const absX = Math.abs(target.x - this.x);
     const absY = Math.abs(target.y - this.y);
     if (absY !== absX) {
-        return false;
+      return false;
     }
 
-    const dy = this.y < target.y ? 1 : -1
+    const dy = this.y < target.y ? 1 : -1;
     const dx = this.x < target.x ? 1 : -1;
 
     for (let i = 1; i < absY; i++) {
@@ -97,6 +97,9 @@ export class Cell {
   moveFigure(target: Cell) {
     if (this.figure && this.figure?.canMove(target)) {
       this.figure.moveFigure(target);
+      if (target.figure) {
+        this.board.addFigureToLost(target.figure);
+      }
       target.setFigure(this.figure);
       this.figure = null;
     }

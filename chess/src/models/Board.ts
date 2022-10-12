@@ -6,18 +6,29 @@ import { Bishop } from "./figures/Bishop";
 import { King } from "./figures/King";
 import { Knight } from "./figures/Knight";
 import { Rook } from "./figures/Rook";
+import { Figure } from "./figures/Figure";
 
 export class Board {
   cells: Cell[][] = [];
+  lostWhiteFigures: Figure[] = [];
+  lostBlackFigures: Figure[] = [];
+
+  public addFigureToLost(figure: Figure) {
+    if (figure.color === Colors.WHITE) {
+      this.lostWhiteFigures.push(figure);
+    } else {
+      this.lostBlackFigures.push(figure);
+    }
+  }
 
   public initCells() {
     for (let i = 0; i < 8; i++) {
       const row: Cell[] = [];
       for (let j = 0; j < 8; j++) {
         if ((i + j) % 2 !== 0) {
-          row.push(new Cell(this, j, i, Colors.BLACK, null)); // dark cells
+          row.push(new Cell(this, j, i, Colors.BLACK, null));
         } else {
-          row.push(new Cell(this, j, i, Colors.WHITE, null)); // light cells
+          row.push(new Cell(this, j, i, Colors.WHITE, null));
         }
       }
       this.cells.push(row);
@@ -26,7 +37,9 @@ export class Board {
 
   public getCopyBoard(): Board {
     const newBoard = new Board();
-    newBoard.cells = this.cells; 
+    newBoard.cells = this.cells;
+    newBoard.lostWhiteFigures = this.lostWhiteFigures;
+    newBoard.lostBlackFigures = this.lostBlackFigures;
     return newBoard;
   }
 

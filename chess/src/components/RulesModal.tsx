@@ -5,7 +5,26 @@ import {
   StyledPopupFigureCard,
   StyledPopupFigureCardsBlock,
   ImgFigureMove,
-} from "../../styles/chess.style";
+} from "../styles/chess.style";
+
+const whiteKing = require("../assets/img/white-king.png");
+const blackKing = require("../assets/img/black-king.png");
+const whiteQueen = require("../assets/img/white-queen.png");
+const blackQueen = require("../assets/img/black-queen.png");
+const whiteRook = require("../assets/img/white-rook.png");
+const blackRook = require("../assets/img/black-rook.png");
+const whiteBishop = require("../assets/img/white-bishop.png");
+const blackBishop = require("../assets/img/black-bishop.png");
+const whiteKnight = require("../assets/img/white-knight.png");
+const blackKnight = require("../assets/img/black-knight.png");
+const whitePawn = require("../assets/img/white-pawn.png");
+const blackPawn = require("../assets/img/black-pawn.png");
+const bishopMove = require("../assets/img/bishop-move.gif");
+const rookMove = require("../assets/img/rook-move.gif");
+const queenMove = require("../assets/img/queen-move.gif");
+const knightMove = require("../assets/img/knight-move.gif");
+const pawnMove = require("../assets/img/pawn-move.gif");
+const cellExample = require("../assets/img/cell-example.gif");
 
 const RulesModal = () => {
   return (
@@ -50,51 +69,51 @@ const RulesModal = () => {
         <StyledPopupFigureCardsBlock>
           <StyledPopupFigureCard>
             <StyledPopupSpan>Белый король</StyledPopupSpan>
-            <img src="white-king.png" alt="white king image" />
+            <img src={whiteKing} alt="white king" />
           </StyledPopupFigureCard>
           <StyledPopupFigureCard>
             <StyledPopupSpan>Черный король</StyledPopupSpan>
-            <img src="black-king.png" alt="black king image" />
+            <img src={blackKing} alt="black king" />
           </StyledPopupFigureCard>
           <StyledPopupFigureCard>
             <StyledPopupSpan>Белый ферзь</StyledPopupSpan>
-            <img src="white-queen.png" alt="white queen image" />
+            <img src={whiteQueen} alt="white queen" />
           </StyledPopupFigureCard>
           <StyledPopupFigureCard>
             <StyledPopupSpan>Черный ферзь</StyledPopupSpan>
-            <img src="black-queen.png" alt="black queen image" />
+            <img src={blackQueen} alt="black queen" />
           </StyledPopupFigureCard>
           <StyledPopupFigureCard>
             <StyledPopupSpan>Две белые ладьи</StyledPopupSpan>
-            <img src="white-rook.png" alt="white rook image" />
+            <img src={whiteRook} alt="white rook" />
           </StyledPopupFigureCard>
           <StyledPopupFigureCard>
             <StyledPopupSpan>Две черные ладьи</StyledPopupSpan>
-            <img src="black-rook.png" alt="black rook image" />
+            <img src={blackRook} alt="black rook" />
           </StyledPopupFigureCard>
           <StyledPopupFigureCard>
             <StyledPopupSpan>Два белых слона</StyledPopupSpan>
-            <img src="white-bishop.png" alt="white bishop image" />
+            <img src={whiteBishop} alt="white bishop" />
           </StyledPopupFigureCard>
           <StyledPopupFigureCard>
             <StyledPopupSpan>Два черных слона</StyledPopupSpan>
-            <img src="black-bishop.png" alt="black bishop image" />
+            <img src={blackBishop} alt="black bishop" />
           </StyledPopupFigureCard>
           <StyledPopupFigureCard>
             <StyledPopupSpan>Два белых коня</StyledPopupSpan>
-            <img src="white-knight.png" alt="white knight image" />
+            <img src={whiteKnight} alt="white knight" />
           </StyledPopupFigureCard>
           <StyledPopupFigureCard>
             <StyledPopupSpan>Два черных коня</StyledPopupSpan>
-            <img src="black-knight.png" alt="black knight image" />
+            <img src={blackKnight} alt="black knight" />
           </StyledPopupFigureCard>
           <StyledPopupFigureCard>
             <StyledPopupSpan>Восемь белых пешек</StyledPopupSpan>
-            <img src="white-pawn.png" alt="white pawn image" />
+            <img src={whitePawn} alt="white pawn" />
           </StyledPopupFigureCard>
           <StyledPopupFigureCard>
             <StyledPopupSpan>Восемь черных пешек </StyledPopupSpan>
-            <img src="black-pawn.png" alt="black pawn image" />
+            <img src={blackPawn} alt="black pawn" />
           </StyledPopupFigureCard>
         </StyledPopupFigureCardsBlock>
         <li>
@@ -115,17 +134,17 @@ const RulesModal = () => {
         </li>
         <li>
           Слон может пойти на любое поле по диагонали, на которой он стоит.
-          <ImgFigureMove src="bishop-move.gif" alt=""></ImgFigureMove>
+          <ImgFigureMove src={bishopMove} alt="bishop-move"></ImgFigureMove>
         </li>
         <li>
           Ладья может пойти на любое поле по вертикали или горизонтали, на
           которых она стоит.
-          <ImgFigureMove src="rook-move.gif" alt=""></ImgFigureMove>
+          <ImgFigureMove src={rookMove} alt="rook-move"></ImgFigureMove>
         </li>
         <li>
           Ферзь может пойти на любое поле по вертикали, горизонтали или
           диагонали, на которых он стоит.
-          <ImgFigureMove src="queen-move.gif" alt=""></ImgFigureMove>
+          <ImgFigureMove src={queenMove} alt="queen-move"></ImgFigureMove>
         </li>
         <li>
           При выполнении этих ходов слон, ладья или ферзь не могут передвигаться
@@ -134,7 +153,7 @@ const RulesModal = () => {
         <li>
           Конь может пойти на одно из полей, ближайших к тому, на котором он
           стоит, но не на той же самой горизонтали, вертикали или диагонали.
-          <ImgFigureMove src="knight-move.gif" alt=""></ImgFigureMove>
+          <ImgFigureMove src={knightMove} alt="knight-move"></ImgFigureMove>
         </li>
         <li>
           <ol type="a">
@@ -152,7 +171,7 @@ const RulesModal = () => {
               находится по диагонали перед ней на соседней вертикали, при этом
               пешка берет эту фигуру.
             </li>
-            <ImgFigureMove src="pawn-move.gif" alt=""></ImgFigureMove>
+            <ImgFigureMove src={pawnMove} alt="pawn-move"></ImgFigureMove>
             <li>
               пешка, атакующая поле, пересеченное пешкой партнера, которая одним
               ходом продвинулась со своей начальной позиции на два поля, может
@@ -178,7 +197,10 @@ const RulesModal = () => {
               передвижения на любое соседнее поле, которое не атаковано одной
               или несколькими фигурами партнера;
             </li>
-            <ImgFigureMove src="cell-example.gif" alt=""></ImgFigureMove>
+            <ImgFigureMove
+              src={cellExample}
+              alt="cell-example"
+            ></ImgFigureMove>
             Считается, что фигуры партнера атакуют поле, даже если такие фигуры
             сами не могут ходить.
             <li>
