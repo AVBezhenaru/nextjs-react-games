@@ -1,34 +1,34 @@
-# Module Federation with NextJS and Client Side React.
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-Module federation in NextJS depends on [@module-federation/nextjs-mf](https://www.npmjs.com/package/@module-federation/nextjs-mf).
+## Getting Started
 
-## Context
+First, run the development server:
 
-There are 2 applications:
+```bash
+npm run dev
+# or
+yarn dev
+```
 
-- `host-app`: Next.js app
-- `remote-app`: flavor of `React + Webpack 5`
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### The `remote-app`
+You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-- Within this application, we are exposing a `Button` component that utilizes a CSS-in-JS design solution.
-- If you'll notice the `shared` config, you can see that the version of `react` and `react-dom` have been set to `0`.
-- When consuming the remote app within a Next.js environment, we need to make sure that webpack always selects the host's copy of these modules.
-- By combining the `version: '0'` syntax with `singleton: true` we can guarantee that this will be the case.
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
-> NOTE: If `version: '0'` is omitted, you'll encounter an issue where a copy of react will be downloaded from the remoteEntry.
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-> NOTE: Another issue you may run into is an invalid hook call if you are federating a component that uses react hooks. This is directly related to multiple copies of react running at the same time. The above resolves this.
+## Learn More
 
-### The `host-app`
+To learn more about Next.js, take a look at the following resources:
 
-Within this application, we've configured the `remotes` object inside of the `NextFederationPlugin`.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-## Setup
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-- run `yarn` - Install all the dependencies to run the apps in parallel.
-- run `npm run install:apps` - Install all the required dependencies on both `host-app` and `remote-app`
-- run `npm run start` - Start both `host-app` and `remote-app`
-- `host-app` on `localhost:3000`
-- `remote-app` on `localhost:3001`
-- Navigate to `localhost:3000` - Two Button Component should be visible, one from remote and another from host app.
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
