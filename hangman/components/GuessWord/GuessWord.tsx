@@ -2,8 +2,7 @@ import { FC } from 'react';
 
 import { useAppSelector } from '../../hooks';
 import { getAppState } from '../../store/reducers/AppSlice';
-
-import styles from '/styles/GuessWord.module.scss';
+import styles from '../../styles/GuessWord.module.scss';
 
 type RenderLetterProps = {
   letter: string;

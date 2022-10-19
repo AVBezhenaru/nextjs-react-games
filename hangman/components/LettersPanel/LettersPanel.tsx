@@ -9,8 +9,7 @@ import {
   getAppState,
 } from '../../store/reducers/AppSlice';
 import { alphabet } from '../../utils';
-
-import styles from '/styles/LettersPanel.module.scss';
+import styles from '../../styles/LettersPanel.module.scss';
 
 const LettersPanel: FC = () => {
   const dispatch = useAppDispatch();

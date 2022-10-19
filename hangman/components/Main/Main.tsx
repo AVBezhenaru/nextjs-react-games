@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 
-import styles from '/styles/Main.module.scss';
+import styles from '../../styles/Main.module.scss';
 
 type MainProps = {
   children: ReactNode;

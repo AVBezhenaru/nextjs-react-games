@@ -1,9 +1,9 @@
 import { FC } from 'react';
 
+import styles from '../../styles/ButtonPlayPause.module.scss';
+
 import PlayImg from './play.svg';
 import PauseImg from './pause.svg';
-
-import styles from '/styles/ButtonPlayPause.module.scss';
 
 const Pause: FC = () => <img className={styles.pause} src={PauseImg} alt="пауза" />;
 const Play: FC = () => <img className={styles.play} src={PlayImg} alt="играть" />;

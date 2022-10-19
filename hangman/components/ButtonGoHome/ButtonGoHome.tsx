@@ -2,9 +2,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
 
-import logo from './home.png';
+import styles from '../../styles/ButtonGoHome.module.scss';
 
-import styles from '/styles/ButtonGoHome.module.scss';
+import logo from './home.png';
 
 const ButtonGoHome: FC = () => (
   <Link href="/">
