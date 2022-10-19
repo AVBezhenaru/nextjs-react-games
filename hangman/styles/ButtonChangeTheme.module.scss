@@ -1,0 +1,19 @@
+@import './variables.scss';
+@import './placeholders';
+
+.button {
+  @extend %blueButton;
+
+  min-width: 16rem;
+  height: 4rem;
+  border-radius: 10px;
+  padding: 0 3rem;
+}
+
+.text {
+  display: inline-block;
+  font-size: 3.2rem;
+  line-height: 3.2rem;
+  text-transform: capitalize;
+  color: $primary-color;
+}

@@ -1,0 +1,9 @@
+%blueButton {
+  background-color: $third-color;
+  box-shadow: $shadow;
+  transition: background-color 0.34s ease-in-out;
+
+  &:hover {
+    background-color: $eight-color;
+  }
+}

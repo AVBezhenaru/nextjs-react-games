@@ -1,0 +1,35 @@
+@import './variables.scss';
+
+.container {
+  position: relative;
+  max-width: 102.4rem;
+  height: 75rem;
+  width: 100%;
+  margin: 0 auto;
+  background-image: url('/background.jpg');
+  user-select: none;
+}
+
+.container::before {
+  position: absolute;
+  top: 8.8rem;
+  left: 0;
+  right: 0;
+  height: 0.3rem;
+  display: block;
+  background-color: $seventh-color;
+  content: '';
+}
+
+.container::after {
+  position: absolute;
+  top: -0.2rem;
+  left: 0;
+  width: 19rem;
+  height: 11rem;
+  filter: opacity(0.8);
+  background-image: url('/splat.png');
+  content: '';
+}
+
+
