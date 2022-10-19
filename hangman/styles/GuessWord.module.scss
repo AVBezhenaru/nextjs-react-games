@@ -1,19 +1,19 @@
 @import './variables.scss';
 
 .container {
-  padding: 2rem 0 5rem;
+  padding: 2px 0 5px;
   display: flex;
-  gap: 0.2rem;
-  height: 12.5rem;
+  gap: 2px;
+  height: 125px;
 }
 
 .letter {
   position: relative;
   display: inline-block;
-  font-size: 3.8rem;
-  line-height: 5rem;
-  width: 6.7rem;
-  height: 5.5rem;
+  font-size: 38px;
+  line-height: 50px;
+  width: 67px;
+  height: 55px;
   color: $fourth-color;
   text-transform: uppercase;
   text-shadow: $shadow;
@@ -25,11 +25,11 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 7rem;
-    height: 1rem;
-    background-image: url('/line.svg');
+    width: 70px;
+    height: 10px;
+    background-image: url('/hangman/line.svg');
     background-position: center;
     background-repeat: no-repeat;
-    background-size: 5.2rem;
+    background-size: 52px;
   }
 }
