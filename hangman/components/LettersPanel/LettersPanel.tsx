@@ -8,7 +8,6 @@ import {
   addLetterAtCurrentWord,
   getAppState,
 } from '../../store/reducers/AppSlice';
-import { AlphabetLetters } from '../../types/AppSlice';
 import { alphabet } from '../../utils/alphabet';
 
 import styles from '../../styles/LettersPanel.module.scss';
@@ -43,11 +42,10 @@ const LettersPanel: FC = () => {
             }
           });
 
-          if (
-            !guessWord.includes(selectLetter as AlphabetLetters) &&
-            !wrongLetters.includes(selectLetter as AlphabetLetters)
-          ) {
-            dispatch(addWrongLetter(selectLetter as AlphabetLetters));
+          if (selectLetter) {
+            if (!guessWord.includes(selectLetter) && !wrongLetters.includes(selectLetter)) {
+              dispatch(addWrongLetter(selectLetter));
+            }
           }
         };
 
@@ -55,8 +53,8 @@ const LettersPanel: FC = () => {
         const onClick = hasInWrong || hasInSuccess ? undefined : handleFindLetter;
 
         return (
-          <span className={letterStyle} key={letterAlphabet as string} onClick={onClick}>
-            {letterAlphabet as string}
+          <span className={letterStyle} key={letterAlphabet} onClick={onClick}>
+            {letterAlphabet}
           </span>
         );
       })}
