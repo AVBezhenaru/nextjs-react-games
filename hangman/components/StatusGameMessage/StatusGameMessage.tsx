@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent } from 'react';
+import { FC, MouseEvent } from 'react';
 
 import { StatusGame } from '../../types/AppSlice';
 import { useAppSelector } from '../../hooks';
@@ -8,7 +8,7 @@ import WinGif from './win.gif';
 import LoseGif from './lose.gif';
 import Image from 'next/image';
 
-import styles from '../../styles/StatusGameMessage.module.scss';
+import styles from '/styles/StatusGameMessage.module.scss';
 
 interface StatusGameMessageProps {
   status: StatusGame;

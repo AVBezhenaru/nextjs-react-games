@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent } from 'react';
+import { FC, MouseEvent } from 'react';
 import classNames from 'classnames';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -8,9 +8,9 @@ import {
   addLetterAtCurrentWord,
   getAppState,
 } from '../../store/reducers/AppSlice';
-import { alphabet } from '../../utils/alphabet';
+import { alphabet } from '../../utils';
 
-import styles from '../../styles/LettersPanel.module.scss';
+import styles from '/styles/LettersPanel.module.scss';
 
 const LettersPanel: FC = () => {
   const dispatch = useAppDispatch();

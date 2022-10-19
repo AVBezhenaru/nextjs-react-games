@@ -1,6 +1,6 @@
-import React, { FC, ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
 
-import styles from '../../styles/Layout.module.scss';
+import styles from '/styles/Layout.module.scss';
 
 interface ILayoutProps {
   children: ReactNode;

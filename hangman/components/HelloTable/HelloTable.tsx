@@ -1,8 +1,6 @@
-import React from 'react';
-
 import { ButtonChangeTheme } from '../ButtonChangeTheme/ButtonChangeTheme';
 
-import styles from '../../styles/HelloTable.module.scss';
+import styles from '/styles/HelloTable.module.scss';
 
 const HelloTable = () => {
   return (
