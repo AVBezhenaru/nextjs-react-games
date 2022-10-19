@@ -1,12 +1,12 @@
-import React, { FC, ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
 
 import { ButtonGoHome } from '../ButtonGoHome/ButtonGoHome';
 
-import styles from '../../styles/Header.module.scss';
+import styles from '/styles/Header.module.scss';
 
-type HeaderProps = {
+interface HeaderProps {
   children: ReactNode;
-};
+}
 
 const Header: FC<HeaderProps> = ({ children }) => (
   <div className={styles.header}>
