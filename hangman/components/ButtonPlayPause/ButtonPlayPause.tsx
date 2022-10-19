@@ -1,12 +1,13 @@
 import { FC } from 'react';
+import Image from 'next/image';
 
 import styles from '../../styles/ButtonPlayPause.module.scss';
 
 import PlayImg from './play.svg';
 import PauseImg from './pause.svg';
 
-const Pause: FC = () => <img className={styles.pause} src={PauseImg} alt="пауза" />;
-const Play: FC = () => <img className={styles.play} src={PlayImg} alt="играть" />;
+const Pause: FC = () => <Image className={styles.pause} src={PauseImg} alt="пауза" />;
+const Play: FC = () => <Image className={styles.play} src={PlayImg} alt="играть" />;
 
 type ButtonProps = {
   play: boolean;
