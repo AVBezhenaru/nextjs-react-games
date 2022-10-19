@@ -2,20 +2,20 @@
 
 .container {
   position: relative;
-  max-width: 102.4rem;
-  height: 75rem;
+  max-width: 1024px;
+  height: 75px;
   width: 100%;
   margin: 0 auto;
-  background-image: url('/background.jpg');
+  background-image: url('/hangman/background.jpg');
   user-select: none;
 }
 
 .container::before {
   position: absolute;
-  top: 8.8rem;
+  top: 88px;
   left: 0;
   right: 0;
-  height: 0.3rem;
+  height: 3px;
   display: block;
   background-color: $seventh-color;
   content: '';
@@ -23,12 +23,12 @@
 
 .container::after {
   position: absolute;
-  top: -0.2rem;
+  top: -2px;
   left: 0;
-  width: 19rem;
-  height: 11rem;
+  width: 190px;
+  height: 110px;
   filter: opacity(0.8);
-  background-image: url('/splat.png');
+  background-image: url('/hangman/splat.png');
   content: '';
 }
 

@@ -4,13 +4,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
-  padding: 2rem;
+  gap: 20px;
+  padding: 20px;
   border: 4px solid $third-color;
-  border-radius: 2rem;
+  border-radius: 20px;
   background-color: $primary-color;
 }
 
 .title {
-  font-size: 5rem;
+  font-size: 50px;
 }
