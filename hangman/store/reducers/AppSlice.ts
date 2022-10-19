@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '..';
 import { appApi } from '../../services/appApi';
-import { AlphabetLetters, COMMON_STATUS, IInitialStateApp } from '../../types/AppSlice';
+import { COMMON_STATUS, IInitialStateApp } from '../../types/AppSlice';
 
 const { IDLE, LOADING, SUCCESS, FAILURE } = COMMON_STATUS;
 
@@ -53,15 +53,15 @@ const app = createSlice({
     resetTheme(state) {
       state.theme = null;
     },
-    addSuccessLetter(state, { payload }: PayloadAction<AlphabetLetters>) {
+    addSuccessLetter(state, { payload }: PayloadAction<string>) {
       state.successLetters.push(payload);
     },
-    addWrongLetter(state, { payload }: PayloadAction<AlphabetLetters>) {
+    addWrongLetter(state, { payload }: PayloadAction<string>) {
       state.wrongLetters.push(payload);
     },
     addLetterAtCurrentWord(
       state,
-      { payload: { index, letter } }: PayloadAction<{ index: number; letter: AlphabetLetters }>,
+      { payload: { index, letter } }: PayloadAction<{ index: number; letter: string }>,
     ) {
       state.currentWord[index] = letter;
     },
@@ -80,7 +80,7 @@ const app = createSlice({
       .addCase(getThemeWord.fulfilled, (state, { payload }) => {
         state.status = SUCCESS;
 
-        state.guessWord = payload?.split('') as AlphabetLetters[];
+        state.guessWord = payload?.split('') as string[];
 
         state.currentWord = new Array(payload?.split('').length).fill(' ');
       })
