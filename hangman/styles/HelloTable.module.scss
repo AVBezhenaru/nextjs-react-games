@@ -1,0 +1,16 @@
+@import './variables';
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  border: 4px solid $third-color;
+  border-radius: 2rem;
+  background-color: $primary-color;
+}
+
+.title {
+  font-size: 5rem;
+}
