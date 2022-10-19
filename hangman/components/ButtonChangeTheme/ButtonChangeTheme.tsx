@@ -3,8 +3,7 @@ import { FC } from 'react';
 
 import { useAppSelector } from '../../hooks';
 import { getAppState, resetTheme } from '../../store/reducers/AppSlice';
-
-import styles from '/styles/ButtonChangeTheme.module.scss';
+import styles from '../../styles/ButtonChangeTheme.module.scss';
 
 type ButtonProps = {
   text?: string;

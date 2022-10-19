@@ -1,14 +1,13 @@
-import { FC, MouseEvent } from 'react';
+import React, { FC, MouseEvent } from 'react';
+import Image from 'next/image';
 
 import { StatusGame } from '../../types/AppSlice';
 import { useAppSelector } from '../../hooks';
 import { getAppState } from '../../store/reducers/AppSlice';
+import styles from '../../styles/StatusGameMessage.module.scss';
 
 import WinGif from './win.gif';
 import LoseGif from './lose.gif';
-import Image from 'next/image';
-
-import styles from '/styles/StatusGameMessage.module.scss';
 
 interface StatusGameMessageProps {
   status: StatusGame;

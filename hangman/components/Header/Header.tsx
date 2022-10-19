@@ -1,8 +1,7 @@
 import { FC, ReactNode } from 'react';
 
 import { ButtonGoHome } from '../ButtonGoHome/ButtonGoHome';
-
-import styles from '/styles/Header.module.scss';
+import styles from '../../styles/Header.module.scss';
 
 interface HeaderProps {
   children: ReactNode;

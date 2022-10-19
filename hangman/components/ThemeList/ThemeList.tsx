@@ -4,8 +4,7 @@ import { FC, useCallback } from 'react';
 import { data } from '../../data/words';
 import { useAppDispatch } from '../../hooks';
 import { setTheme } from '../../store/reducers/AppSlice';
-
-import styles from '/styles/ThemeList.module.scss';
+import styles from '../../styles/ThemeList.module.scss';
 
 const ThemeList: FC = () => {
   const dispatch = useAppDispatch();

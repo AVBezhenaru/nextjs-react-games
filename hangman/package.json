@@ -2,6 +2,12 @@
   "name": "hangman",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
     "@stitches/react": "^1.2.8",
@@ -22,38 +28,6 @@
     "sass-loader": "^13.0.2",
     "typescript": "^4.8.4",
     "web-vitals": "^2.1.4"
-  },
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "serve": "serve dist -p 3002",
-    "clean": "rm -rf dist",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "react-scripts build",
-    "deploy": "gh-pages -d build",
-    "lint": "eslint src/*",
-    "lint:fix": "eslint src/* --fix",
-    "format": "eslint --format"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
