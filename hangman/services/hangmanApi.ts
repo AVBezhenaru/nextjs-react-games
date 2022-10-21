@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export class AppApi {
-  private BASE_URL = 'http://localhost:3000/api/hangman';
+  private BASE_URL = '/api/hangman';
 
   public getRandomWord = async () => axios.get(`${this.BASE_URL}/words`);
 
