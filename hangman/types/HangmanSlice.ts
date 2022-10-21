@@ -7,11 +7,13 @@ export enum COMMON_STATUS {
 
 export type StatusGame = 'idle' | 'win' | 'lose' | 'loading';
 
+export type Theme = { name: string; label: string };
+
 export interface IInitialStateApp {
   status: COMMON_STATUS;
   error: string | null;
-  theme: string | null;
-  themesList: string[] | null;
+  theme: Theme | null;
+  themesList: Theme[] | null;
   guessWord: string[];
   currentWord: (string | ' ')[];
   wrongLetters: string[];

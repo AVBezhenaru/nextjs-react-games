@@ -25,7 +25,7 @@ const Game: NextPage = () => {
   const { guessWord, wrongLetters, currentWord, theme } = useAppSelector(getAppState);
 
   useEffect(() => {
-    if (theme) dispatch(getWord(theme));
+    if (theme) dispatch(getWord(theme.name));
 
     if (!theme) {
       router.push('/hangman/theme');
@@ -45,7 +45,7 @@ const Game: NextPage = () => {
     if ((isWin || isLose) && theme && statusGame === 'loading') {
       setStatusGame('idle');
       dispatch(resetGame());
-      dispatch(getWord(theme));
+      dispatch(getWord(theme.name));
     }
   }, [guessWord, currentWord, wrongLetters, statusGame]);
 
