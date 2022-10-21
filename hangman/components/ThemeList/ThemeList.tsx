@@ -1,15 +1,19 @@
 import Link from 'next/link';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { NextPage } from 'next';
 
-import { useAppDispatch } from '../../../hooks';
-import { setTheme } from '../../store/HangmanSlice';
-import { data } from '../../data/words';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { getAppState, getThemes, setTheme } from '../../store/HangmanSlice';
 
 import styles from './index.module.scss';
 
 const ThemeList: NextPage = () => {
   const dispatch = useAppDispatch();
+  const { themesList } = useAppSelector(getAppState);
+
+  useEffect(() => {
+    dispatch(getThemes());
+  }, []);
 
   const onClick = useCallback(
     (theme: string) => () => {
@@ -19,17 +23,19 @@ const ThemeList: NextPage = () => {
   );
 
   return (
-    <div className={styles.container}>
-      <ul className={styles.list}>
-        {data.themes.map(({ name }) => (
-          <Link key={name} href="/hangman/game">
-            <a onClick={onClick(name)}>
-              <li className={styles.item}>{`${name[0].toUpperCase()}${name.slice(1)} `}</li>
-            </a>
-          </Link>
-        ))}
-      </ul>
-    </div>
+    themesList && (
+      <div className={styles.container}>
+        <ul className={styles.list}>
+          {themesList.map((theme) => (
+            <Link key={theme} href="/hangman/game">
+              <a onClick={onClick(theme)}>
+                <li className={styles.item}>{`${theme[0].toUpperCase()}${theme.slice(1)} `}</li>
+              </a>
+            </Link>
+          ))}
+        </ul>
+      </div>
+    )
   );
 };
 

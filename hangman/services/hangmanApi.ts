@@ -1,24 +1,13 @@
-import { data } from '../data/words';
+import axios from 'axios';
 
 export class AppApi {
-  getRandomWord = async () => {
-    const randomGenre = Math.round(Math.random() * (data.themes.length - 2));
-    const randomWord = Math.round(Math.random() * (data.themes[randomGenre].words.length - 1));
+  private BASE_URL = 'http://localhost:3000/api/hangman';
 
-    return Promise.resolve({ data: data.themes[randomGenre].words[randomWord].toLowerCase() });
-  };
+  public getRandomWord = async () => axios.get(`${this.BASE_URL}/words`);
 
-  getThemeWord = async (theme: string) => {
-    const themeObj = data.themes.find((element) => element.name === theme);
+  public getThemeWord = async (theme: string) => axios.get(`${this.BASE_URL}/words/${theme}`);
 
-    if (themeObj) {
-      const random = Math.round(Math.random() * (themeObj.words.length - 1));
-
-      return Promise.resolve({ data: themeObj.words[random]?.toLowerCase() });
-    }
-
-    return Promise.reject(new Error('тема не найдена'));
-  };
+  public getThemes = () => axios.get(`${this.BASE_URL}/themes`);
 }
 
 export const appApi = new AppApi();

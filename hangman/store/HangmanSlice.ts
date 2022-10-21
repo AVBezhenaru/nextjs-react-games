@@ -6,7 +6,11 @@ import { COMMON_STATUS, IInitialStateApp } from '../types';
 
 const { IDLE, LOADING, SUCCESS, FAILURE } = COMMON_STATUS;
 
-const { getRandomWord: getRandomWordApi, getThemeWord: getThemeWordApi } = appApi;
+const {
+  getRandomWord: getRandomWordApi,
+  getThemeWord: getThemeWordApi,
+  getThemes: getThemesApi,
+} = appApi;
 
 export const getWord = createAsyncThunk(
   'hangman/getWord',
@@ -26,10 +30,21 @@ export const getWord = createAsyncThunk(
   },
 );
 
+export const getThemes = createAsyncThunk('hangman/getThemes', async (_, { rejectWithValue }) => {
+  try {
+    const res = await getThemesApi();
+
+    return res.data;
+  } catch (error) {
+    if (error instanceof Error) return rejectWithValue(error);
+  }
+});
+
 const initialState: IInitialStateApp = {
   status: IDLE,
   error: null,
   theme: null,
+  themesList: null,
   guessWord: [],
   currentWord: [],
   wrongLetters: [],
@@ -73,6 +88,7 @@ const hangman = createSlice({
     },
   },
   extraReducers(builder) {
+    //* getWord
     builder
       .addCase(getWord.pending, (state) => {
         state.status = LOADING;
@@ -85,6 +101,24 @@ const hangman = createSlice({
         state.currentWord = new Array(payload?.split('').length).fill(' ');
       })
       .addCase(getWord.rejected, (state, { payload }) => {
+        state.status = FAILURE;
+
+        if (payload instanceof Error) {
+          state.error = payload.message;
+        }
+      });
+
+    //* getThemes
+    builder
+      .addCase(getThemes.pending, (state) => {
+        state.status = LOADING;
+      })
+      .addCase(getThemes.fulfilled, (state, { payload }) => {
+        state.status = SUCCESS;
+
+        state.themesList = payload;
+      })
+      .addCase(getThemes.rejected, (state, { payload }) => {
         state.status = FAILURE;
 
         if (payload instanceof Error) {
