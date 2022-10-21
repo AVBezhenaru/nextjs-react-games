@@ -3,7 +3,7 @@ import Link from 'next/link';
 import style from './main.module.scss';
 
 const Main = () => (
-  <>
+  <div className={style.container}>
     <h1 className={style.title}>Welcome</h1>
     <p className={style.text}>
       Go to{' '}
@@ -15,7 +15,7 @@ const Main = () => (
         <a className={style.link}>registration</a>
       </Link>
     </p>
-  </>
+  </div>
 );
 
 export default Main;

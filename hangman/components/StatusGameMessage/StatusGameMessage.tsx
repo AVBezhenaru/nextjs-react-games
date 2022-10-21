@@ -1,20 +1,21 @@
-import React, { FC, MouseEvent } from 'react';
+import { Dispatch, MouseEvent, SetStateAction } from 'react';
 import Image from 'next/image';
+import { NextPage } from 'next';
 
-import { StatusGame } from '../../types/AppSlice';
-import { useAppSelector } from '../../hooks';
-import { getAppState } from '../../store/reducers/AppSlice';
-import styles from '../../styles/StatusGameMessage.module.scss';
+import { StatusGame } from '../../types/HangmanSlice';
+import { useAppSelector } from '../../../hooks';
+import { getAppState } from '../../store/HangmanSlice';
+import WinGif from '../../assets/image/win.gif';
+import LoseGif from '../../assets/image/lose.gif';
 
-import WinGif from './win.gif';
-import LoseGif from './lose.gif';
+import styles from './index.module.scss';
 
 interface StatusGameMessageProps {
   status: StatusGame;
-  setStatusGame: React.Dispatch<React.SetStateAction<StatusGame>>;
+  setStatusGame: Dispatch<SetStateAction<StatusGame>>;
 }
 
-const StatusGameMessage: FC<StatusGameMessageProps> = ({ status, setStatusGame }) => {
+const StatusGameMessage: NextPage<StatusGameMessageProps> = ({ status, setStatusGame }) => {
   const { guessWord, successLetters, wrongLetters } = useAppSelector(getAppState);
 
   const winMessage = 'урааа победа!!!🎉🎉🎉';

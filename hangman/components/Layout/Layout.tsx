@@ -1,13 +1,20 @@
-import { FC, ReactNode } from 'react';
+import { NextPage } from 'next';
+import { ReactNode } from 'react';
 
-import styles from '../../styles/Layout.module.scss';
+import { HangmanHead } from '..';
+
+import styles from './index.module.scss';
 
 interface ILayoutProps {
   children: ReactNode;
 }
 
-const Layout: FC<ILayoutProps> = ({ children }) => (
-  <div className={styles.container}>{children}</div>
+const Layout: NextPage<ILayoutProps> = ({ children }) => (
+  <>
+    <HangmanHead />
+
+    <div className={styles.container}>{children}</div>
+  </>
 );
 
 export { Layout };

@@ -1,17 +1,19 @@
-import { FC, MouseEvent } from 'react';
+import { MouseEvent } from 'react';
 import classNames from 'classnames';
+import { NextPage } from 'next';
 
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { alphabet } from '../../utils';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
 import {
+  addLetterAtCurrentWord,
   addSuccessLetter,
   addWrongLetter,
-  addLetterAtCurrentWord,
   getAppState,
-} from '../../store/reducers/AppSlice';
-import { alphabet } from '../../utils';
-import styles from '../../styles/LettersPanel.module.scss';
+} from '../../store/HangmanSlice';
 
-const LettersPanel: FC = () => {
+import styles from './index.module.scss';
+
+const LettersPanel: NextPage = () => {
   const dispatch = useAppDispatch();
   const { wrongLetters, successLetters, guessWord } = useAppSelector(getAppState);
 

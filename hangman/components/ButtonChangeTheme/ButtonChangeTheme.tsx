@@ -1,21 +1,22 @@
 import Link from 'next/link';
-import { FC } from 'react';
+import { NextPage } from 'next';
 
-import { useAppSelector } from '../../hooks';
-import { getAppState, resetTheme } from '../../store/reducers/AppSlice';
-import styles from '../../styles/ButtonChangeTheme.module.scss';
+import { useAppSelector } from '../../../hooks';
+import { getAppState, resetTheme } from '../../store/HangmanSlice';
+
+import styles from './index.module.scss';
 
 type ButtonProps = {
   text?: string;
 };
 
-const Button: FC<ButtonProps> = ({ text }) => {
+const ButtonChangeTheme: NextPage<ButtonProps> = ({ text }) => {
   const { theme } = useAppSelector(getAppState);
 
   const onClick = () => resetTheme();
 
   return (
-    <Link href="/theme">
+    <Link href="/hangman/theme">
       <a onClick={onClick}>
         <button className={styles.button} type="button">
           <span className={styles.text} title={text ? undefined : 'Сменить тему'}>
@@ -27,4 +28,4 @@ const Button: FC<ButtonProps> = ({ text }) => {
   );
 };
 
-export { Button as ButtonChangeTheme };
+export { ButtonChangeTheme };

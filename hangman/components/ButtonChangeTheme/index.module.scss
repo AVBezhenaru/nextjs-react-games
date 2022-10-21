@@ -1,5 +1,5 @@
-@import './variables.scss';
-@import './placeholders';
+@import '../../styles/variables.scss';
+@import '../../styles/placeholders';
 
 .button {
   @extend %blueButton;

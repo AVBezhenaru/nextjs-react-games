@@ -1,11 +1,12 @@
-import { FC } from 'react';
+import { NextPage } from 'next';
 
-import { useAppSelector } from '../../hooks';
-import { getAppState } from '../../store/reducers/AppSlice';
 import { bodyParts } from '../../utils';
-import styles from '../../styles/GallowsPlace.module.scss';
+import { useAppSelector } from '../../../hooks';
+import { getAppState } from '../../store/HangmanSlice';
 
-const GallowsPlace: FC = () => {
+import styles from './index.module.scss';
+
+const GallowsPlace: NextPage = () => {
   const { wrongLetters } = useAppSelector(getAppState);
 
   const { length } = wrongLetters;

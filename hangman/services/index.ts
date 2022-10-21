@@ -1,0 +1,1 @@
+export { appApi } from './hangmanApi';

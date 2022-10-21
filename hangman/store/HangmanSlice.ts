@@ -1,15 +1,15 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { RootState } from '..';
-import { appApi } from '../../services/appApi';
-import { COMMON_STATUS, IInitialStateApp } from '../../types/AppSlice';
+import { RootState } from '../../store';
+import { appApi } from '../services';
+import { COMMON_STATUS, IInitialStateApp } from '../types';
 
 const { IDLE, LOADING, SUCCESS, FAILURE } = COMMON_STATUS;
 
 const { getRandomWord: getRandomWordApi, getThemeWord: getThemeWordApi } = appApi;
 
-export const getThemeWord = createAsyncThunk(
-  'app/getRandom',
+export const getWord = createAsyncThunk(
+  'hangman/getWord',
   async (theme: string, { rejectWithValue }) => {
     let res;
     try {
@@ -36,10 +36,10 @@ const initialState: IInitialStateApp = {
   successLetters: [],
 };
 
-export const getAppState = (state: RootState) => state.app;
+export const getAppState = (state: RootState) => state.hangman;
 
-const app = createSlice({
-  name: 'app',
+const hangman = createSlice({
+  name: 'hangman',
   initialState,
   reducers: {
     setTheme(state, { payload }: PayloadAction<string>) {
@@ -74,17 +74,17 @@ const app = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(getThemeWord.pending, (state) => {
+      .addCase(getWord.pending, (state) => {
         state.status = LOADING;
       })
-      .addCase(getThemeWord.fulfilled, (state, { payload }) => {
+      .addCase(getWord.fulfilled, (state, { payload }) => {
         state.status = SUCCESS;
 
         state.guessWord = payload?.split('') as string[];
 
         state.currentWord = new Array(payload?.split('').length).fill(' ');
       })
-      .addCase(getThemeWord.rejected, (state, { payload }) => {
+      .addCase(getWord.rejected, (state, { payload }) => {
         state.status = FAILURE;
 
         if (payload instanceof Error) {
@@ -101,6 +101,6 @@ export const {
   addWrongLetter,
   addLetterAtCurrentWord,
   resetGame,
-} = app.actions;
+} = hangman.actions;
 
-export default app.reducer;
+export default hangman.reducer;

@@ -1,21 +1,23 @@
 import { useRouter } from 'next/router';
-import React, { useEffect, FC, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { NextPage } from 'next';
 
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getAppState, getWord, resetGame } from '../../hangman/store/HangmanSlice';
+import { StatusGame } from '../../hangman/types/HangmanSlice';
+import { bodyParts } from '../../hangman/utils/bodyParts';
 import {
   ButtonChangeTheme,
   GallowsPlace,
   GuessWord,
   Header,
+  Layout,
   LettersPanel,
   Main,
   StatusGameMessage,
-} from '../components';
-import { useAppDispatch, useAppSelector } from '../hooks';
-import { getAppState, getThemeWord, resetGame } from '../store/reducers/AppSlice';
-import { StatusGame } from '../types/AppSlice';
-import { bodyParts } from '../utils/bodyParts';
+} from '../../hangman/components';
 
-const game: FC = () => {
+const Game: NextPage = () => {
   const [statusGame, setStatusGame] = useState<StatusGame>('idle');
 
   const dispatch = useAppDispatch();
@@ -23,10 +25,10 @@ const game: FC = () => {
   const { guessWord, wrongLetters, currentWord, theme } = useAppSelector(getAppState);
 
   useEffect(() => {
-    if (theme) dispatch(getThemeWord(theme));
+    if (theme) dispatch(getWord(theme));
 
     if (!theme) {
-      router.push('/theme');
+      router.push('/hangman/theme');
     }
   }, []);
 
@@ -43,12 +45,12 @@ const game: FC = () => {
     if ((isWin || isLose) && theme && statusGame === 'loading') {
       setStatusGame('idle');
       dispatch(resetGame());
-      dispatch(getThemeWord(theme));
+      dispatch(getWord(theme));
     }
   }, [guessWord, currentWord, wrongLetters, statusGame]);
 
   return (
-    <>
+    <Layout>
       <StatusGameMessage status={statusGame} setStatusGame={setStatusGame} />
 
       <Header>
@@ -62,8 +64,8 @@ const game: FC = () => {
 
         <LettersPanel />
       </Main>
-    </>
+    </Layout>
   );
 };
 
-export default game;
+export default Game;
