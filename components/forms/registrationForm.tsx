@@ -3,8 +3,8 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { useAppDispatch } from '../../store/hooks';
 import { fetchRegisterUser } from '../../api/service';
+import { useAppDispatch } from '../../hooks';
 
 import styles from './form.module.scss';
 
@@ -38,7 +38,7 @@ const RegistrationForm: FC = () => {
   };
 
   return (
-    <>
+    <div className={styles.container}>
       <h1 className={styles.title}>
         <Image src="/logo.png" width={120} height={120} />
         Gaming Registration Form
@@ -110,7 +110,7 @@ const RegistrationForm: FC = () => {
           </Link>
         </p>
       </form>
-    </>
+    </div>
   );
 };
 

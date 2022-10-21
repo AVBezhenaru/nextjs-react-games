@@ -1,18 +1,19 @@
-import { FC } from 'react';
+import { NextPage } from 'next';
 
-import { useAppSelector } from '../../hooks';
-import { getAppState } from '../../store/reducers/AppSlice';
-import styles from '../../styles/GuessWord.module.scss';
+import { useAppSelector } from '../../../hooks';
+import { getAppState } from '../../store/HangmanSlice';
 
-type RenderLetterProps = {
+import styles from './index.module.scss';
+
+interface RenderLetterProps {
   letter: string;
-};
+}
 
-const RenderLetter: FC<RenderLetterProps> = ({ letter }) => (
+const RenderLetter: NextPage<RenderLetterProps> = ({ letter }) => (
   <span className={styles.letter}>{letter}</span>
 );
 
-const GuessWord: FC = () => {
+const GuessWord: NextPage = () => {
   const { currentWord } = useAppSelector(getAppState);
 
   return (

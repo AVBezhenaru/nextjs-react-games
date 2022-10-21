@@ -1,11 +1,12 @@
-import { ButtonChangeTheme } from '../ButtonChangeTheme/ButtonChangeTheme';
-import styles from '../../styles/HelloTable.module.scss';
+import { NextPage } from 'next';
 
-const HelloTable = () => (
+import { ButtonChangeTheme } from '..';
+
+import styles from './index.module.scss';
+
+const HelloTable: NextPage = () => (
   <div className={styles.main}>
-    <h2 className={styles.title} style={{ fontSize: '5rem' }}>
-      Приветственный экран
-    </h2>
+    <h2 className={styles.title}>Приветственный экран</h2>
 
     <ButtonChangeTheme text="играть" />
   </div>

@@ -1,11 +1,12 @@
-import { FC, ReactNode } from 'react';
+import { NextPage } from 'next';
+import { ReactNode } from 'react';
 
-import styles from '../../styles/Main.module.scss';
+import styles from './index.module.scss';
 
 type MainProps = {
   children: ReactNode;
 };
 
-const Main: FC<MainProps> = ({ children }) => <div className={styles.main}>{children}</div>;
+const Main: NextPage<MainProps> = ({ children }) => <div className={styles.main}>{children}</div>;
 
 export { Main };

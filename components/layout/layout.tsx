@@ -6,10 +6,6 @@ type LayoutProps = {
   children: ReactNode;
 };
 
-const Layout: FC<LayoutProps> = ({ children }) => (
-  <div className={style.wrapper}>
-    <div className={style.container}>{children}</div>
-  </div>
-);
+const Layout: FC<LayoutProps> = ({ children }) => <div className={style.wrapper}>{children}</div>;
 
 export default Layout;

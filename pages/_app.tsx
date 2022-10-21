@@ -4,14 +4,15 @@ import { Provider } from 'react-redux';
 
 import Layout from '../components/layout/layout';
 import { store } from '../store';
-import '../styles/globals.scss';
+
+import '../styles/index.scss';
 
 const MyApp: NextPage<AppProps> = ({ Component, pageProps }) => (
-  <Provider store={store}>
-    <Layout>
+  <Layout>
+    <Provider store={store}>
       <Component {...pageProps} />
-    </Layout>
-  </Provider>
+    </Provider>
+  </Layout>
 );
 
 export default MyApp;

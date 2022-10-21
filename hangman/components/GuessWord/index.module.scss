@@ -1,4 +1,4 @@
-@import './variables.scss';
+@import '../../styles/variables.scss';
 
 .container {
   padding: 2px 0 5px;
@@ -27,7 +27,7 @@
     left: 0;
     width: 70px;
     height: 10px;
-    background-image: url('/hangman/line.svg');
+    background-image: url('../../assets/image/line.svg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: 52px;
