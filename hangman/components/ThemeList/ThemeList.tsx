@@ -4,6 +4,7 @@ import { NextPage } from 'next';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { getAppState, getThemes, setTheme } from '../../store/HangmanSlice';
+import { Theme } from '../../types/HangmanSlice';
 
 import styles from './index.module.scss';
 
@@ -16,7 +17,7 @@ const ThemeList: NextPage = () => {
   }, []);
 
   const onClick = useCallback(
-    (theme: string) => () => {
+    (theme: Theme) => () => {
       dispatch(setTheme(theme));
     },
     [],
@@ -27,9 +28,11 @@ const ThemeList: NextPage = () => {
       <div className={styles.container}>
         <ul className={styles.list}>
           {themesList.map((theme) => (
-            <Link key={theme} href="/hangman/game">
+            <Link key={theme.name} href="/hangman/game">
               <a onClick={onClick(theme)}>
-                <li className={styles.item}>{`${theme[0].toUpperCase()}${theme.slice(1)} `}</li>
+                <li className={styles.item}>{`${theme.label[0].toUpperCase()}${theme.label.slice(
+                  1,
+                )} `}</li>
               </a>
             </Link>
           ))}

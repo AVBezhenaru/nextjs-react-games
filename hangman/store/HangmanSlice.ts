@@ -3,25 +3,17 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
 import { appApi } from '../services';
 import { COMMON_STATUS, IInitialStateApp } from '../types';
+import { Theme } from '../types/HangmanSlice';
 
 const { IDLE, LOADING, SUCCESS, FAILURE } = COMMON_STATUS;
 
-const {
-  getRandomWord: getRandomWordApi,
-  getThemeWord: getThemeWordApi,
-  getThemes: getThemesApi,
-} = appApi;
+const { getThemeWord: getThemeWordApi, getThemes: getThemesApi } = appApi;
 
 export const getWord = createAsyncThunk(
   'hangman/getWord',
   async (theme: string, { rejectWithValue }) => {
-    let res;
     try {
-      if (theme === 'случайное слово') {
-        res = await getRandomWordApi();
-      } else {
-        res = await getThemeWordApi(theme);
-      }
+      const res = await getThemeWordApi(theme);
 
       return res.data;
     } catch (error) {
@@ -57,7 +49,7 @@ const hangman = createSlice({
   name: 'hangman',
   initialState,
   reducers: {
-    setTheme(state, { payload }: PayloadAction<string>) {
+    setTheme(state, { payload }: PayloadAction<Theme>) {
       state.theme = payload;
 
       state.guessWord = [];

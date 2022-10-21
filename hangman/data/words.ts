@@ -2,6 +2,7 @@ export const data = {
   themes: [
     {
       name: 'countries',
+      label: 'страны',
       words: [
         'Аргентина',
         'Австралия',
@@ -49,7 +50,8 @@ export const data = {
       ],
     },
     {
-      name: 'животные',
+      name: 'animals',
+      label: 'животные',
       words: [
         'абботин',
         'абелизавр',
@@ -1113,7 +1115,8 @@ export const data = {
       ],
     },
     {
-      name: 'фрукты',
+      name: 'fruits',
+      label: 'фрукты',
       words: [
         'Абрикос',
         'Авокадо',
@@ -1251,7 +1254,8 @@ export const data = {
       ],
     },
     {
-      name: '80 сложных слов',
+      name: 'complex',
+      label: '80 сложных слов',
       words: [
         'кант',
         'хроника',
@@ -1336,7 +1340,8 @@ export const data = {
       ],
     },
     {
-      name: 'случайное слово',
+      name: 'random',
+      label: 'случайное слово',
       words: [],
     },
   ],
