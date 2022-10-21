@@ -6,7 +6,7 @@ const getThemeWordRes = (req: NextApiRequest, res: NextApiResponse) => {
   const { query, method } = req;
 
   if (method === 'GET') {
-    const themeObj = data.themes.find((element) => element.name === query.res);
+    const themeObj = data.themes.find((element) => element.name === decodeURI(query.res as string));
 
     if (themeObj) {
       const random = Math.round(Math.random() * (themeObj.words.length - 1));
