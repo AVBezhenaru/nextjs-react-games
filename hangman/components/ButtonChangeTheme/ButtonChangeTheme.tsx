@@ -20,7 +20,7 @@ const ButtonChangeTheme: NextPage<ButtonProps> = ({ text }) => {
       <a onClick={onClick}>
         <button className={styles.button} type="button">
           <span className={styles.text} title={text ? undefined : 'Сменить тему'}>
-            {text || `Тема: ${theme}`}
+            {text || (theme && `Тема: ${theme}`) || 'Loading...'}
           </span>
         </button>
       </a>
