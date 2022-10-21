@@ -11,6 +11,7 @@ export interface IInitialStateApp {
   status: COMMON_STATUS;
   error: string | null;
   theme: string | null;
+  themesList: string[] | null;
   guessWord: string[];
   currentWord: (string | ' ')[];
   wrongLetters: string[];
