@@ -1,7 +1,7 @@
 export const data = {
   themes: [
     {
-      name: 'Страны',
+      name: 'страны',
       words: [
         'Аргентина',
         'Австралия',
@@ -49,7 +49,7 @@ export const data = {
       ],
     },
     {
-      name: 'Животные',
+      name: 'животные',
       words: [
         'абботин',
         'абелизавр',
