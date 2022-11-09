@@ -1,6 +1,7 @@
 import { Colors } from "./Colors";
-import { Figure } from "./figures/Figure";
+import { Figure, FigureNames } from "./figures/Figure";
 import { Board } from "./Board";
+import { King } from "./figures/King";
 
 export class Cell {
   readonly x: number;
@@ -8,7 +9,8 @@ export class Cell {
   readonly color: Colors;
   figure: Figure | null;
   board: Board;
-  available: boolean;
+  available: boolean;   // highlight cell if there is figure and this figure is our
+  underAttack: boolean;
   id: number;
 
   constructor(
@@ -23,7 +25,8 @@ export class Cell {
     this.color = color;
     this.figure = figure;
     this.board = board;
-    this.available = false;
+    this.available = false; // свойство у ячейки будет true если выбранная фигура может походить на эту ячейку, false - не может
+    this.underAttack = false
     this.id = Math.random();
   }
 
@@ -42,10 +45,8 @@ export class Cell {
     if (this.x !== target.x) {
       return false;
     }
-
     const min = Math.min(this.y, target.y);
     const max = Math.max(this.y, target.y);
-
     for (let y = min + 1; y < max; y++) {
       if (!this.board.getCell(this.x, y).isEmpty()) {
         return false;
@@ -58,10 +59,8 @@ export class Cell {
     if (this.y !== target.y) {
       return false;
     }
-
     const min = Math.min(this.x, target.x);
     const max = Math.max(this.x, target.x);
-
     for (let x = min + 1; x < max; x++) {
       if (!this.board.getCell(x, this.y).isEmpty()) {
         return false;
@@ -76,7 +75,6 @@ export class Cell {
     if (absY !== absX) {
       return false;
     }
-
     const dy = this.y < target.y ? 1 : -1;
     const dx = this.x < target.x ? 1 : -1;
 
@@ -85,9 +83,36 @@ export class Cell {
         return false;
       }
     }
-
     return true;
   }
+
+  isLastCell(figure: Figure) {
+    if (figure.name === FigureNames.PAWN && (figure.cell.y === 0 || figure.cell.y === 7)) {
+      console.log('Пешка дошла до конца!!!!!!!')
+      console.log(this.board.transformData)
+      this.board.transformData.shouldTransform = true
+      this.board.transformData.figure = figure
+      console.log('after', this.board)
+    }
+  }
+
+
+  setHistoryMove(startCell: Cell, endCell: Cell, eatFigure: Figure | null) {
+    const figure = endCell.figure
+    const startX = startCell.x
+    const startY = startCell.y
+    const endX = endCell.x
+    const endY = endCell.y
+    const column = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+    const row = ['0', '1', '2', '3', '4', '5', '6', '7']
+    const step = `${column[startX]}${Math.abs(Number(row[startY]) - 8)} - ${column[endX]}${Math.abs(Number(row[endY]) - 8)}`
+    const check = this.board.whiteKing?.underAttackKing || this.board.blackKing?.underAttackKing ? true : false
+    console.log('moveData', step)
+    console.log('startCell', startCell, 'endCell', endCell)
+    this.board.historyMove.push({ figureData: figure, moveData: step, eatFigureData: eatFigure?.logo, check })
+  }
+
+
 
   setFigure(figure: Figure) {
     this.figure = figure;
@@ -95,13 +120,31 @@ export class Cell {
   }
 
   moveFigure(target: Cell) {
-    if (this.figure && this.figure?.canMove(target)) {
-      this.figure.moveFigure(target);
+    let eatFigureFlag = false
+    let eatFigure = null
+    let figure = this.figure // фигура внутри ячейки
+    if (figure && figure?.canMove(target)) {
+      figure.moveFigure(target);
       if (target.figure) {
         this.board.addFigureToLost(target.figure);
+        eatFigureFlag = true
+        eatFigure = target.figure
       }
-      target.setFigure(this.figure);
+      target.setFigure(figure);
       this.figure = null;
+
+      if (eatFigureFlag) this.board.checkForStalemate() //проверка патовой ситуации
+
+      this.isLastCell(figure)
+
+      this.board.canAttackKing(Colors.BLACK)
+      this.board.canAttackKing(Colors.WHITE)
+      this.setHistoryMove(this, target, eatFigure)
+      const opponentKing = figure.color === Colors.WHITE ? this.board.blackKing : this.board.whiteKing
+      if (opponentKing?.underAttackKing) {
+        opponentKing.chekAndMateFlag = !!this.board.checkForCheckMate(opponentKing) //проверка на шах и мат
+      }
+
     }
   }
 }

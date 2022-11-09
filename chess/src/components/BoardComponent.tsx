@@ -1,18 +1,21 @@
-import React, { FC, useState, useEffect } from "react";
-import {
-  Board as StyledBoard,
-  CurrentPlayerText,
-} from "../styles/chess.style";
+import React, { FC, useEffect } from "react";
+import { Board as StyledBoard } from "../styles/chess.style";
 import CellComponent from "../components/CellComponent";
 import { Board } from '../models/Board'
 import { Cell } from "../models/Cell";
 import { Player } from "../models/Player";
+
+import TransformFigure from "./TransformFigure"
+import "../styles/board.scss"
 
 interface BoardProps {
   board: Board;
   setBoard: (board: Board) => void;
   currentPlayer: Player | null;
   changePlayer: () => void;
+  restart: () => void;
+  selectedCell: Cell | null;
+  setSelectedCell: (cell: Cell | null) => void
 }
 
 const BoardComponent: FC<BoardProps> = ({
@@ -20,10 +23,12 @@ const BoardComponent: FC<BoardProps> = ({
   setBoard,
   currentPlayer,
   changePlayer,
+  restart,
+  selectedCell,
+  setSelectedCell
 }) => {
-  const [selectedCell, setSelectedCell] = useState<Cell | null>(null);
 
-  function click(cell: Cell) {
+  function click(cell: Cell, checkMate = false, winKing = null) {
     if (
       selectedCell &&
       selectedCell !== cell &&
@@ -53,18 +58,41 @@ const BoardComponent: FC<BoardProps> = ({
     setBoard(board.getCopyBoard());
   }
 
+  const transformFigureComponent = <TransformFigure
+    transformData={board.transformData}
+    board={board}
+    updateBoard={updateBoard}
+  />
+
+  const endGame = board.whiteKing?.chekAndMateFlag || board.blackKing?.chekAndMateFlag || board.stalemate ? () => { } : click
+
+  const selectFigureBox = board.transformData.shouldTransform ? transformFigureComponent : null
+
+  const columnName = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+  const rowName = ['8', '7', '6', '5', '4', '3', '2', '1']
+  const columnNameElement = columnName.map((item, i) => {
+    return (
+      <div className="board__item-column" key={i}>{item}</div>
+    )
+  })
+  let rowNameElements = rowName.map((item, i) => {
+    return (
+      <div className="board__item-row" key={i}>{item}</div>
+    )
+  })
+
   return (
-    <>
-      <CurrentPlayerText>
-        Текущий ход делают{" "}
-        {currentPlayer?.color === "white" ? "белые" : "чёрные"} фигуры
-      </CurrentPlayerText>
+    <div className="board">
+      {selectFigureBox}
+      <div className="board__items board__items-row">
+        {rowNameElements}
+      </div>
       <StyledBoard>
         {board.cells.map((row, index) => (
           <React.Fragment key={index}>
             {row.map((cell) => (
               <CellComponent
-                click={click}
+                click={endGame}
                 cell={cell}
                 key={cell.id}
                 selected={
@@ -75,7 +103,10 @@ const BoardComponent: FC<BoardProps> = ({
           </React.Fragment>
         ))}
       </StyledBoard>
-    </>
+      <div className="board__items board__items-column">
+        {columnNameElement}
+      </div>
+    </div>
   );
 };
 

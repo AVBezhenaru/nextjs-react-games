@@ -26,6 +26,10 @@ const knightMove = require("../assets/img/knight-move.gif");
 const pawnMove = require("../assets/img/pawn-move.gif");
 const cellExample = require("../assets/img/cell-example.gif");
 
+
+
+
+
 const RulesModal = () => {
   return (
     <StyledPopup
