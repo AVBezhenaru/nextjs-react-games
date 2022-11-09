@@ -88,11 +88,8 @@ export class Cell {
 
   isLastCell(figure: Figure) {
     if (figure.name === FigureNames.PAWN && (figure.cell.y === 0 || figure.cell.y === 7)) {
-      console.log('Пешка дошла до конца!!!!!!!')
-      console.log(this.board.transformData)
       this.board.transformData.shouldTransform = true
       this.board.transformData.figure = figure
-      console.log('after', this.board)
     }
   }
 
@@ -107,8 +104,6 @@ export class Cell {
     const row = ['0', '1', '2', '3', '4', '5', '6', '7']
     const step = `${column[startX]}${Math.abs(Number(row[startY]) - 8)} - ${column[endX]}${Math.abs(Number(row[endY]) - 8)}`
     const check = this.board.whiteKing?.underAttackKing || this.board.blackKing?.underAttackKing ? true : false
-    console.log('moveData', step)
-    console.log('startCell', startCell, 'endCell', endCell)
     this.board.historyMove.push({ figureData: figure, moveData: step, eatFigureData: eatFigure?.logo, check })
   }
 
