@@ -67,7 +67,6 @@ const GameSettings: FC<GameSettingsProps> = ({ setGainTime, setGameTime, setting
     } else {
       newTime = `${time} : 00`
     }
-    console.log('value', newTime)
     setGameTime(newTime)
   }
 

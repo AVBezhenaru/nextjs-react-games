@@ -129,7 +129,6 @@ export class Board {
   }
 
   checkForStalemate() { // проверка на пат
-    console.log('Проверка пата')
     let counter = 0
     for (let i = 0; i < this.cells.length; i++) {
       const row = this.cells[i]
@@ -137,7 +136,6 @@ export class Board {
         const target = this.getCell(j, i)
         if (target.figure) {
           counter++
-          console.log(target.figure)
           if (counter > 2) {
             return false
           }
