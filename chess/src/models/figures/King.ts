@@ -1,21 +1,23 @@
 import { Cell } from "../Cell";
 import { Colors } from "../Colors";
 import { Figure, FigureNames } from "./Figure";
-// import blackLogo from "../../public/black-king.png";
-// import whiteLogo from "../../public/white-king.png";
 
 const blackLogo = require("../../assets/img/black-king.png");
 const whiteLogo = require("../../assets/img/white-king.png");
 
 export class King extends Figure {
+  underAttackKing: boolean
+  chekAndMateFlag: boolean
   constructor(color: Colors, cell: Cell) {
     super(color, cell);
     this.logo = color === Colors.BLACK ? blackLogo : whiteLogo;
     this.name = FigureNames.KING;
+    this.underAttackKing = false
+    this.chekAndMateFlag = false
   }
 
-  canMove(target: Cell): boolean {
-    if (!super.canMove(target)) {
+  validMove(target: Cell, checkKing: boolean = false): boolean {
+    if (!super.validMove(target, checkKing)) {
       return false;
     }
 

@@ -1,8 +1,6 @@
 import { Cell } from "../Cell";
 import { Colors } from "../Colors";
 import { Figure, FigureNames } from "./Figure";
-// import blackLogo from "../../public/black-queen.png";
-// import whiteLogo from "../../public/white-queen.png";
 
 const blackLogo = require("../../assets/img/black-queen.png");
 const whiteLogo = require("../../assets/img/white-queen.png");
@@ -14,8 +12,8 @@ export class Queen extends Figure {
     this.name = FigureNames.QUEEN;
   }
 
-  canMove(target: Cell): boolean {
-    if (!super.canMove(target)) {
+  validMove(target: Cell, checkKing: boolean = false): boolean {
+    if (!super.validMove(target, checkKing)) {
       return false;
     }
 
@@ -29,8 +27,8 @@ export class Queen extends Figure {
 
     if (this.cell.isEmptyDiagonal(target)) {
       return true;
-    } 
-    
+    }
+
     return false;
   }
 }

@@ -5,6 +5,7 @@ import {
   StyledAvailableCell,
 } from "../styles/chess.style";
 import { Cell } from '../models/Cell'
+import { King } from '../models/figures/King'
 
 interface CellProps {
   cell: Cell;
@@ -15,18 +16,18 @@ interface CellProps {
 const CellComponent: FC<CellProps> = ({ cell, selected, click }) => {
 
   function getCellColor(isSelected: boolean) {
-    return selected
-      ? "#58514d"
-      : cell.color === "white"
-      ? "#f1dad0"
-      : "#ad9b93";
+    return selected ? "#58514d" : cell.color === "white" ? "#f1dad0" : "#ad9b93";
   }
 
   return (
     <StyledCell
       color={getCellColor(selected)}
       onClick={() => click(cell)}
-      style={{ background: cell.available && cell.figure ? "" : ""}}
+      style={{
+        background: cell.available && cell.figure ? "green" : ""
+          || (cell.figure as King)?.chekAndMateFlag ? "#ed482c" : ''
+            || (cell.figure as King)?.underAttackKing ? "#f1c8c8" : "",
+      }}
     >
       {cell.available && !cell.figure && (
         <StyledAvailableCell></StyledAvailableCell>
