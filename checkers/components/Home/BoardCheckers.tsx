@@ -6,7 +6,7 @@ import { Colors } from "../../model/Colors";
 import { Player } from "../../model/Player"
 import { Figure } from "../../model/figures/Figure";
 import Modal from '../Modal/Modal';
-import Link from "next/link";
+import Link from 'next/link';
 
 interface BoardProps {
   board: Board;
