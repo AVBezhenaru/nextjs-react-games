@@ -12,6 +12,7 @@ export enum FigureNames {
 
 export class Figure {
   [x: string]: any;
+
   color: Colors;
 
   image: typeof image | null;
