@@ -10,9 +10,9 @@ import Link from 'next/link';
 
 interface BoardProps {
   board: any;
-  setBoard: (board: Board) => void;
-  currentPlayer: Player | null;
-  currentFigure: Figure | null;
+  setBoard: (board: any) => void;
+  currentPlayer: any;
+  currentFigure: any;
   swapPlayer: (num: string) => void;
   swapFigure: (figure: any) => void;
   restart: () => void;
