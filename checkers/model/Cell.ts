@@ -27,7 +27,7 @@ export class Cell {
     return this.figure === null;
   }
 
-  isFigure(): Figure {
+  isFigure(): Figure | null {
     return this.figure;
   }
 
