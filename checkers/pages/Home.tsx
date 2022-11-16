@@ -13,7 +13,7 @@ export default function Home() {
   const [whitePlayer, setWhitePlayer] = useState(new Player(Colors.WHITE));
   const [blackPlayer, setBlackPlayer] = useState(new Player(Colors.BLACK));
   const [currentPlayer, setCurrentPlayer] = useState<Player | null>(null);
-  const [currentFigure, setCurrentFigure ] = useState<Figure>(null);
+  const [currentFigure, setCurrentFigure ] = useState<Figure | null>(null);
 
   useEffect(() => {
     restart();
@@ -42,7 +42,7 @@ export default function Home() {
       setCurrentPlayer(null);
     }     
   }
-  function swapFigure(figure: Figure) {    
+  function swapFigure(figure: Figure | null) {    
    if(figure){
     setCurrentFigure(figure);
     setCurrentPlayer(null);

@@ -9,6 +9,7 @@ export class CheckerQueen extends Figure{
 
   constructor(color: Colors, cell: Cell) {
     super(color, cell);
+    this.cell = cell;
     this.image = color === Colors.BLACK ? blackUp : whiteUp;
     this.name = color !== "black" ? FigureNames.QueenWhite : FigureNames.QueenBlack;
   }
