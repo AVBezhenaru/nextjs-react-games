@@ -14,7 +14,7 @@ interface BoardProps {
   currentPlayer: Player | null;
   currentFigure: Figure | null;
   swapPlayer: (num: string) => void;
-  swapFigure: (figure: Figure) => void;
+  swapFigure: (figure: Figure | null) => void;
   restart: () => void;
   show: boolean;
   setShow: (show: boolean) => void;
