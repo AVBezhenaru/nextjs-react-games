@@ -9,7 +9,7 @@ import Modal from '../Modal/Modal';
 import Link from 'next/link';
 
 interface BoardProps {
-  board: Board;
+  board: any;
   setBoard: (board: Board) => void;
   currentPlayer: Player | null;
   currentFigure: Figure | null;
