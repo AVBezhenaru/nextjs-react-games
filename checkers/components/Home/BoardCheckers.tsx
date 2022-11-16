@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Board } from "../../model/Board";
 import CellComponent from "./CellComponent";
 import { Cell } from "../../model/Cell"
@@ -20,7 +20,7 @@ interface BoardProps {
   setShow: (show: boolean) => void;
 }
 
-const BoardCheckers: FC<BoardProps> = ({ board, setBoard, currentPlayer, currentFigure, swapPlayer, swapFigure, restart, show, setShow }) => {
+const BoardCheckers = ({ board, setBoard, currentPlayer, currentFigure, swapPlayer, swapFigure, restart, show, setShow }) => {
   const [selectedCell, setSelectedCell] = useState<Cell | null>(null);
   const [showFirst, setShowFirst] = useState(true);
   const [prevBlack, setPrevBlack] = useState(board.lostBlackFigure?.length);
