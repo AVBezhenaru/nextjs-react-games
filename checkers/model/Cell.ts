@@ -27,17 +27,15 @@ export class Cell {
     return this.figure === null;
   }
 
-  isFigure(): Figure | null {
-    return this.figure;
-  }
+
 
   //? движение королевы
-  isEmptyDiagonal(target: Cell, figureElement: Figure): boolean {
+  isEmptyDiagonal(target: Cell, figureElement: Figure | null): boolean {
     const absX = Math.abs(target.x - this.x);
     const absY = Math.abs(target.y - this.y);
     if(absY !== absX) return false;
 
-    if(figureElement.color === 'white'){ 
+    if(figureElement?.color === 'white'){ 
       if(target.x === this.x - absX && target.y === this.y + absY ){  
         const absX2 = Math.abs(target.x - this.x);
         const absY2 = Math.abs(target.y - this.y);
@@ -46,10 +44,10 @@ export class Cell {
         const dy2 = this.y < target.y ? 1 : -1;
         const dx2 = this.x < target.x ? 1 : -1;
         for(let i = 1; i < absY2; i++){ 
-          if(!this.board.getCell(this.x + dx2 * i, this.y + dy2 * i)?.isEmpty() && this.board.getCell(this.x + dx2 * i, this.y + dy2 * i)?.isFigure().color === 'black') {
+          if(!this.board.getCell(this.x + dx2 * i, this.y + dy2 * i)?.isEmpty() && this.board.getCell(this.x + dx2 * i, this.y + dy2 * i)?.isFigure()?.color === 'black') {
             
             if((target.x  === (this.x + dx2 * i) - 1 && target.y === (this.y + dy2 * i) + 1 && this.board.getCell((this.x + dx2 * i) - 1, (this.y + dy2 * i) + 1)?.isEmpty() && (((this.x + dx2 * i) - 2 <=7 && (this.y + dy2 * i) + 2 <=7 ) ? (!this?.board?.getCell((this.x + dx2 * i) - 2, (this.y + dy2 * i) + 2)?.isEmpty()) : false))){
-              this.board.getCell(this.x + dx2 * i, this.y + dy2 * i).isFigure().cell.figureDeleteColor = true;  
+              this.board.getCell(this.x + dx2 * i, this.y + dy2 * i).isFigure()!.cell.figureDeleteColor = true;  
               return true;
             } else 
             if(((this.x + dx2 * i) - 2 <=7 && (this.y + dy2 * i) + 2 <=7 ) ? !this.board.getCell((this.x + dx2 * i) - 2, (this.y + dy2 * i) + 2)?.isEmpty() && this.board.getCell((this.x + dx2 * i) - 1, (this.y + dy2 * i) + 1)?.isEmpty() : false){
@@ -59,10 +57,10 @@ export class Cell {
               return false;
             }      
 
-            this.board.getCell(this.x + dx2 * i, this.y + dy2 * i).isFigure().cell.figureDeleteColor = true; 
+            this.board.getCell(this.x + dx2 * i, this.y + dy2 * i).isFigure()!.cell.figureDeleteColor = true; 
             return true;
           }   
-          if(!this.board.getCell(this.x + dx2 * i, this.y + dy2 * i)?.isEmpty() && this.board.getCell(this.x + dx2 * i, this.y + dy2 * i)?.isFigure().color === 'white') {
+          if(!this.board.getCell(this.x + dx2 * i, this.y + dy2 * i)?.isEmpty() && this.board.getCell(this.x + dx2 * i, this.y + dy2 * i)?.isFigure()?.color === 'white') {
             return false;
           }
         }      
@@ -77,9 +75,9 @@ export class Cell {
         const dx3 = this.x < target.x ? 1 : -1;
         for(let i = 1; i < absY3; i++){ 
 
-          if(!this.board.getCell(this.x + dx3  * i, this.y + dy3  * i)?.isEmpty() && this.board.getCell(this.x + dx3  * i, this.y + dy3  * i)?.isFigure().color === 'black') {
+          if(!this.board.getCell(this.x + dx3  * i, this.y + dy3  * i)?.isEmpty() && this.board.getCell(this.x + dx3  * i, this.y + dy3  * i)?.isFigure()?.color === 'black') {
             if((target.x  === (this.x + dx3 * i) + 1 && target.y === (this.y + dy3 * i) + 1 && this.board.getCell((this.x + dx3 * i) + 1, (this.y + dy3 * i) + 1)?.isEmpty() && (((this.x + dx3 * i) + 2 <=7 && (this.y + dy3 * i) + 2 <=7 ) ? !this?.board?.getCell((this.x + dx3 * i) + 2, (this.y + dy3 * i) + 2)?.isEmpty() : false))){
-              this.board.getCell(this.x + dx3 * i, this.y + dy3 * i).isFigure().cell.figureDeleteColor = true;  
+              this.board.getCell(this.x + dx3 * i, this.y + dy3 * i).isFigure()!.cell.figureDeleteColor = true;  
               return true;
             } else 
             if(((this.x + dx3 * i) + 2 <= 7 && (this.y + dy3 * i) + 2 <= 7 ) ? !this.board.getCell((this.x + dx3 * i) + 2, (this.y + dy3 * i) + 2)?.isEmpty() && this.board.getCell((this.x + dx3 * i) + 1, (this.y + dy3 * i) + 1)?.isEmpty() : false){
@@ -88,10 +86,10 @@ export class Cell {
             if(!this.board.getCell((this.x + dx3 * i) + 1, (this.y + dy3 * i) + 1)?.isEmpty()){
               return false;
             }
-            this.board.getCell(this.x + dx3  * i, this.y + dy3  * i).isFigure().cell.figureDeleteColor = true; 
+            this.board.getCell(this.x + dx3  * i, this.y + dy3  * i).isFigure()!.cell.figureDeleteColor = true; 
             return true;
           }
-          if(!this.board.getCell(this.x + dx3 * i, this.y + dy3 * i)?.isEmpty() && this.board.getCell(this.x + dx3 * i, this.y + dy3 * i)?.isFigure().color === 'white') {
+          if(!this.board.getCell(this.x + dx3 * i, this.y + dy3 * i)?.isEmpty() && this.board.getCell(this.x + dx3 * i, this.y + dy3 * i)?.isFigure()?.color === 'white') {
             return false;
           }
         }
@@ -105,10 +103,10 @@ export class Cell {
         const dy4 = this.y < target.y ? 1 : -1;
         const dx4 = this.x < target.x ? 1 : -1;
         for(let i = 1; i < absY4; i++){ 
-          if(!this.board.getCell(this.x + dx4 * i, this.y + dy4 * i)?.isEmpty() && this.board.getCell(this.x + dx4  * i, this.y + dy4  * i)?.isFigure().color === 'black') {
+          if(!this.board.getCell(this.x + dx4 * i, this.y + dy4 * i)?.isEmpty() && this.board.getCell(this.x + dx4  * i, this.y + dy4  * i)?.isFigure()?.color === 'black') {
             
             if((target.x  === (this.x + dx4* i) - 1 && target.y === (this.y + dy4 * i) - 1 && this.board.getCell((this.x + dx4 * i) - 1, (this.y + dy4 * i) - 1)?.isEmpty() && (((this.x + dx4 * i) - 2 >= 0 && (this.y + dy4 * i) - 2 >= 0) ? (!this?.board?.getCell((this.x + dx4 * i) - 2, (this.y + dy4 * i) - 2)?.isEmpty()) : false))){
-              this.board.getCell(this.x + dx4* i, this.y + dy4* i).isFigure().cell.figureDeleteColor = true;  
+              this.board.getCell(this.x + dx4* i, this.y + dy4* i).isFigure()!.cell.figureDeleteColor = true;  
               return true;
             } else 
             if(((this.x + dx4 * i) - 2 >= 0 && (this.y + dy4 * i) - 2 >= 0 ) ? !this.board.getCell((this.x + dx4 * i) - 2, (this.y + dy4 * i) - 2)?.isEmpty() && this.board.getCell((this.x + dx4 * i) - 1, (this.y + dy4 * i) - 1)?.isEmpty() : false){
@@ -120,10 +118,10 @@ export class Cell {
               return false;
             }
             
-            this.board.getCell(this.x + dx4 * i, this.y + dy4 * i).isFigure().cell.figureDeleteColor = true; 
+            this.board.getCell(this.x + dx4 * i, this.y + dy4 * i).isFigure()!.cell.figureDeleteColor = true; 
             return true;
           }  
-          if(!this.board.getCell(this.x + dx4 * i, this.y + dy4 * i)?.isEmpty() && this.board.getCell(this.x + dx4 * i, this.y + dy4 * i)?.isFigure().color === 'white') {
+          if(!this.board.getCell(this.x + dx4 * i, this.y + dy4 * i)?.isEmpty() && this.board.getCell(this.x + dx4 * i, this.y + dy4 * i)?.isFigure()?.color === 'white') {
             return false;
           }
         }
@@ -137,10 +135,10 @@ export class Cell {
         const dy5 = this.y < target.y ? 1 : -1;
         const dx5 = this.x < target.x ? 1 : -1;
         for(let i = 1; i < absY5; i++){ 
-          if(!this.board.getCell(this.x + dx5 * i, this.y + dy5 * i)?.isEmpty() && this.board.getCell(this.x + dx5 * i, this.y + dy5 * i)?.isFigure().color === 'black') {
+          if(!this.board.getCell(this.x + dx5 * i, this.y + dy5 * i)?.isEmpty() && this.board.getCell(this.x + dx5 * i, this.y + dy5 * i)?.isFigure()?.color === 'black') {
               
             if(target.x  === (this.x + dx5 * i) + 1 && target.y === (this.y + dy5 * i) - 1 && this.board.getCell((this.x + dx5 * i) + 1, (this.y + dy5 * i) - 1)?.isEmpty() && (((this.x + dx5 * i) + 2 >= 0 && (this.y + dy5 * i) - 2 >= 0) ? (!this?.board?.getCell((this.x + dx5 * i) + 2, (this.y + dy5 * i) - 2)?.isEmpty()) : false)){
-              this.board.getCell(this.x + dx5 * i, this.y + dy5 * i).isFigure().cell.figureDeleteColor = true;  
+              this.board.getCell(this.x + dx5 * i, this.y + dy5 * i).isFigure()!.cell.figureDeleteColor = true;  
               return true;
             } else 
             if(((this.x + dx5 * i) + 2 >= 0 && (this.y + dy5 * i) - 2 >= 0 ) ? !this.board.getCell((this.x + dx5 * i) + 2, (this.y + dy5 * i) - 2)?.isEmpty() && this.board.getCell((this.x + dx5 * i) + 1, (this.y + dy5 * i) - 1)?.isEmpty() : false){
@@ -150,17 +148,17 @@ export class Cell {
               return false;
             }      
             
-            this.board.getCell(this.x + dx5 * i, this.y + dy5 * i).isFigure().cell.figureDeleteColor = true; 
+            this.board.getCell(this.x + dx5 * i, this.y + dy5 * i).isFigure()!.cell.figureDeleteColor = true; 
             return true;
           }
-          if(!this.board.getCell(this.x + dx5 * i, this.y + dy5 * i)?.isEmpty() && this.board.getCell(this.x + dx5 * i, this.y + dy5 * i)?.isFigure().color === 'white') {
+          if(!this.board.getCell(this.x + dx5 * i, this.y + dy5 * i)?.isEmpty() && this.board.getCell(this.x + dx5 * i, this.y + dy5 * i)?.isFigure()?.color === 'white') {
             return false;
           }
         }
         return true;
       }
     }
-    if(figureElement.color === 'black'){ 
+    if(figureElement?.color === 'black'){ 
       if(target.x === this.x - absX && target.y === this.y + absY ){  
         const absX2 = Math.abs(target.x - this.x);
         const absY2 = Math.abs(target.y - this.y);
@@ -169,10 +167,10 @@ export class Cell {
         const dy2 = this.y < target.y ? 1 : -1;
         const dx2 = this.x < target.x ? 1 : -1;
         for(let i = 1; i < absY2; i++){ 
-          if(!this.board.getCell(this.x + dx2 * i, this.y + dy2 * i)?.isEmpty() && this.board.getCell(this.x + dx2 * i, this.y + dy2 * i)?.isFigure().color === 'white') {
+          if(!this.board.getCell(this.x + dx2 * i, this.y + dy2 * i)?.isEmpty() && this.board.getCell(this.x + dx2 * i, this.y + dy2 * i)?.isFigure()?.color === 'white') {
             
             if((target.x  === (this.x + dx2 * i) - 1 && target.y === (this.y + dy2 * i) + 1 && this.board.getCell((this.x + dx2 * i) - 1, (this.y + dy2 * i) + 1)?.isEmpty() && (((this.x + dx2 * i) - 2 <=7 && (this.y + dy2 * i) + 2 <=7 ) ? (!this?.board?.getCell((this.x + dx2 * i) - 2, (this.y + dy2 * i) + 2)?.isEmpty()) : false))){
-              this.board.getCell(this.x + dx2 * i, this.y + dy2 * i).isFigure().cell.figureDeleteColor = true;  
+              this.board.getCell(this.x + dx2 * i, this.y + dy2 * i).isFigure()!.cell.figureDeleteColor = true;  
               return true;
             } else 
             if(((this.x + dx2 * i) - 2 <=7 && (this.y + dy2 * i) + 2 <=7 ) ? !this.board.getCell((this.x + dx2 * i) - 2, (this.y + dy2 * i) + 2)?.isEmpty() && this.board.getCell((this.x + dx2 * i) - 1, (this.y + dy2 * i) + 1)?.isEmpty() : false){
@@ -182,10 +180,10 @@ export class Cell {
               return false;
             }      
 
-            this.board.getCell(this.x + dx2 * i, this.y + dy2 * i).isFigure().cell.figureDeleteColor = true; 
+            this.board.getCell(this.x + dx2 * i, this.y + dy2 * i).isFigure()!.cell.figureDeleteColor = true; 
             return true;
           }   
-          if(!this.board.getCell(this.x + dx2 * i, this.y + dy2 * i)?.isEmpty() && this.board.getCell(this.x + dx2 * i, this.y + dy2 * i)?.isFigure().color === 'black') {
+          if(!this.board.getCell(this.x + dx2 * i, this.y + dy2 * i)?.isEmpty() && this.board.getCell(this.x + dx2 * i, this.y + dy2 * i)?.isFigure()?.color === 'black') {
             return false;
           }
         }      
@@ -200,9 +198,9 @@ export class Cell {
         const dx3 = this.x < target.x ? 1 : -1;
         for(let i = 1; i < absY3; i++){ 
 
-          if(!this.board.getCell(this.x + dx3  * i, this.y + dy3  * i)?.isEmpty() && this.board.getCell(this.x + dx3  * i, this.y + dy3  * i)?.isFigure().color === 'white') {
+          if(!this.board.getCell(this.x + dx3  * i, this.y + dy3  * i)?.isEmpty() && this.board.getCell(this.x + dx3  * i, this.y + dy3  * i)?.isFigure()?.color === 'white') {
             if((target.x  === (this.x + dx3 * i) + 1 && target.y === (this.y + dy3 * i) + 1 && this.board.getCell((this.x + dx3 * i) + 1, (this.y + dy3 * i) + 1)?.isEmpty() && (((this.x + dx3 * i) + 2 <=7 && (this.y + dy3 * i) + 2 <=7 ) ? !this?.board?.getCell((this.x + dx3 * i) + 2, (this.y + dy3 * i) + 2)?.isEmpty() : false))){
-              this.board.getCell(this.x + dx3 * i, this.y + dy3 * i).isFigure().cell.figureDeleteColor = true;  
+              this.board.getCell(this.x + dx3 * i, this.y + dy3 * i).isFigure()!.cell.figureDeleteColor = true;  
               return true;
             } else 
             if(((this.x + dx3 * i) + 2 <= 7 && (this.y + dy3 * i) + 2 <= 7 ) ? !this.board.getCell((this.x + dx3 * i) + 2, (this.y + dy3 * i) + 2)?.isEmpty() && this.board.getCell((this.x + dx3 * i) + 1, (this.y + dy3 * i) + 1)?.isEmpty() : false){
@@ -213,10 +211,10 @@ export class Cell {
               console.log('h22')
               return false;
             }
-            this.board.getCell(this.x + dx3  * i, this.y + dy3  * i).isFigure().cell.figureDeleteColor = true; 
+            this.board.getCell(this.x + dx3  * i, this.y + dy3  * i).isFigure()!.cell.figureDeleteColor = true; 
             return true;
           }
-          if(!this.board.getCell(this.x + dx3 * i, this.y + dy3 * i)?.isEmpty() && this.board.getCell(this.x + dx3 * i, this.y + dy3 * i)?.isFigure().color === 'black') {
+          if(!this.board.getCell(this.x + dx3 * i, this.y + dy3 * i)?.isEmpty() && this.board.getCell(this.x + dx3 * i, this.y + dy3 * i)?.isFigure()?.color === 'black') {
             return false;
           }
         }
@@ -230,10 +228,10 @@ export class Cell {
         const dy4 = this.y < target.y ? 1 : -1;
         const dx4 = this.x < target.x ? 1 : -1;
         for(let i = 1; i < absY4; i++){ 
-          if(!this.board.getCell(this.x + dx4 * i, this.y + dy4 * i)?.isEmpty() && this.board.getCell(this.x + dx4  * i, this.y + dy4  * i)?.isFigure().color === 'white') {
+          if(!this.board.getCell(this.x + dx4 * i, this.y + dy4 * i)?.isEmpty() && this.board.getCell(this.x + dx4  * i, this.y + dy4  * i)?.isFigure()?.color === 'white') {
             
             if((target.x  === (this.x + dx4* i) - 1 && target.y === (this.y + dy4 * i) - 1 && this.board.getCell((this.x + dx4 * i) - 1, (this.y + dy4 * i) - 1)?.isEmpty() && (((this.x + dx4 * i) - 2 >= 0 && (this.y + dy4 * i) - 2 >= 0) ? (!this?.board?.getCell((this.x + dx4 * i) - 2, (this.y + dy4 * i) - 2)?.isEmpty()) : false))){
-              this.board.getCell(this.x + dx4* i, this.y + dy4* i).isFigure().cell.figureDeleteColor = true;  
+              this.board.getCell(this.x + dx4* i, this.y + dy4* i).isFigure()!.cell.figureDeleteColor = true;  
               return true;
             } else 
             if(((this.x + dx4 * i) - 2 >= 0 && (this.y + dy4 * i) - 2 >= 0 ) ? !this.board.getCell((this.x + dx4 * i) - 2, (this.y + dy4 * i) - 2)?.isEmpty() && this.board.getCell((this.x + dx4 * i) - 1, (this.y + dy4 * i) - 1)?.isEmpty() : false){
@@ -245,10 +243,10 @@ export class Cell {
               return false;
             }
             
-            this.board.getCell(this.x + dx4 * i, this.y + dy4 * i).isFigure().cell.figureDeleteColor = true; 
+            this.board.getCell(this.x + dx4 * i, this.y + dy4 * i).isFigure()!.cell.figureDeleteColor = true; 
             return true;
           }  
-          if(!this.board.getCell(this.x + dx4 * i, this.y + dy4 * i)?.isEmpty() && this.board.getCell(this.x + dx4 * i, this.y + dy4 * i)?.isFigure().color === 'black') {
+          if(!this.board.getCell(this.x + dx4 * i, this.y + dy4 * i)?.isEmpty() && this.board.getCell(this.x + dx4 * i, this.y + dy4 * i)?.isFigure()?.color === 'black') {
             return false;
           }
         }
@@ -262,10 +260,10 @@ export class Cell {
         const dy5 = this.y < target.y ? 1 : -1;
         const dx5 = this.x < target.x ? 1 : -1;
         for(let i = 1; i < absY5; i++){ 
-          if(!this.board.getCell(this.x + dx5 * i, this.y + dy5 * i)?.isEmpty() && this.board.getCell(this.x + dx5 * i, this.y + dy5 * i)?.isFigure().color === 'white') {
+          if(!this.board.getCell(this.x + dx5 * i, this.y + dy5 * i)?.isEmpty() && this.board.getCell(this.x + dx5 * i, this.y + dy5 * i)?.isFigure()?.color === 'white') {
               
             if(target.x  === (this.x + dx5 * i) + 1 && target.y === (this.y + dy5 * i) - 1 && this.board.getCell((this.x + dx5 * i) + 1, (this.y + dy5 * i) - 1)?.isEmpty() && (((this.x + dx5 * i) + 2 >= 0 && (this.y + dy5 * i) - 2 >= 0) ? (!this?.board?.getCell((this.x + dx5 * i) + 2, (this.y + dy5 * i) - 2)?.isEmpty()) : false)){
-              this.board.getCell(this.x + dx5 * i, this.y + dy5 * i).isFigure().cell.figureDeleteColor = true;  
+              this.board.getCell(this.x + dx5 * i, this.y + dy5 * i).isFigure()!.cell.figureDeleteColor = true;  
               return true;
             } else 
             if(((this.x + dx5 * i) + 2 >= 0 && (this.y + dy5 * i) - 2 >= 0 ) ? !this.board.getCell((this.x + dx5 * i) + 2, (this.y + dy5 * i) - 2)?.isEmpty() && this.board.getCell((this.x + dx5 * i) + 1, (this.y + dy5 * i) - 1)?.isEmpty() : false){
@@ -275,10 +273,10 @@ export class Cell {
               return false;
             }      
             
-            this.board.getCell(this.x + dx5 * i, this.y + dy5 * i).isFigure().cell.figureDeleteColor = true; 
+            this.board.getCell(this.x + dx5 * i, this.y + dy5 * i).isFigure()!.cell.figureDeleteColor = true; 
             return true;
           }
-          if(!this.board.getCell(this.x + dx5 * i, this.y + dy5 * i)?.isEmpty() && this.board.getCell(this.x + dx5 * i, this.y + dy5 * i)?.isFigure().color === 'black') {
+          if(!this.board.getCell(this.x + dx5 * i, this.y + dy5 * i)?.isEmpty() && this.board.getCell(this.x + dx5 * i, this.y + dy5 * i)?.isFigure()?.color === 'black') {
             return false;
           }
         }
@@ -289,6 +287,9 @@ export class Cell {
     return false;
   }
 
+  isFigure(): Figure | null {
+    return this.figure;
+  }
 
   nullFigure() {
     this.addLostFigure(this.figure);
@@ -308,7 +309,7 @@ export class Cell {
   }
 
   //? добавление удаленных фигур в массив
-  addLostFigure(figure: Figure){
+  addLostFigure(figure: Figure | null){
     if(figure){
       figure?.color === Colors.BLACK ? this.board.lostBlackFigure.push(figure) : this.board.lostWhiteFigure.push(figure);
     }  

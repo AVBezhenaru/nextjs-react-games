@@ -223,17 +223,17 @@ const BoardCheckers: FC<BoardProps> = ({ board, setBoard, currentPlayer, current
 
       //? реализация передачи хода между игроками
       if (
-        ((board?.lostBlackFigure?.length > prevBlack && banOnHitting && (((cell.y + 2) <= 7 ? cell.board.getCell(cell.x + 2, cell.y + 2)?.isEmpty() : false) && !cell.board.getCell(cell.x + 1, cell.y + 1)?.isEmpty() && cell.board.getCell(cell.x + 1, cell.y + 1)?.isFigure().color === 'black'))
-          || (board.lostWhiteFigure?.length > prevWhite && banOnHitting && (((cell.y + 2) <= 7 ? cell.board.getCell(cell.x + 2, cell.y + 2)?.isEmpty() : false) && !cell.board.getCell(cell.x + 1, cell.y + 1)?.isEmpty() && cell.board.getCell(cell.x + 1, cell.y + 1)?.isFigure().color === 'white')))
+        ((board?.lostBlackFigure?.length > prevBlack && banOnHitting && (((cell.y + 2) <= 7 ? cell.board.getCell(cell.x + 2, cell.y + 2)?.isEmpty() : false) && !cell.board.getCell(cell.x + 1, cell.y + 1)?.isEmpty() && cell.board.getCell(cell.x + 1, cell.y + 1)?.isFigure()?.color === 'black'))
+          || (board.lostWhiteFigure?.length > prevWhite && banOnHitting && (((cell.y + 2) <= 7 ? cell.board.getCell(cell.x + 2, cell.y + 2)?.isEmpty() : false) && !cell.board.getCell(cell.x + 1, cell.y + 1)?.isEmpty() && cell.board.getCell(cell.x + 1, cell.y + 1)?.isFigure()?.color === 'white')))
         ||
-        ((board.lostBlackFigure?.length > prevBlack && banOnHitting && (((cell.y - 2) >= 0 ? cell.board.getCell(cell.x + 2, cell.y - 2)?.isEmpty() : false) && !cell.board.getCell(cell.x + 1, cell.y - 1)?.isEmpty() && cell.board.getCell(cell.x + 1, cell.y - 1)?.isFigure().color === 'black'))
-          || (board.lostWhiteFigure?.length > prevWhite && banOnHitting && (((cell.y - 2) >= 0 ? cell.board.getCell(cell.x + 2, cell.y - 2)?.isEmpty() : false) && !cell.board.getCell(cell.x + 1, cell.y - 1)?.isEmpty() && cell.board.getCell(cell.x + 1, cell.y - 1)?.isFigure().color === 'white')))
+        ((board.lostBlackFigure?.length > prevBlack && banOnHitting && (((cell.y - 2) >= 0 ? cell.board.getCell(cell.x + 2, cell.y - 2)?.isEmpty() : false) && !cell.board.getCell(cell.x + 1, cell.y - 1)?.isEmpty() && cell.board.getCell(cell.x + 1, cell.y - 1)?.isFigure()?.color === 'black'))
+          || (board.lostWhiteFigure?.length > prevWhite && banOnHitting && (((cell.y - 2) >= 0 ? cell.board.getCell(cell.x + 2, cell.y - 2)?.isEmpty() : false) && !cell.board.getCell(cell.x + 1, cell.y - 1)?.isEmpty() && cell.board.getCell(cell.x + 1, cell.y - 1)?.isFigure()?.color === 'white')))
         ||
-        ((board.lostBlackFigure?.length > prevBlack && banOnHitting && (((cell.y - 2) >= 0 ? cell.board.getCell(cell.x - 2, cell.y - 2)?.isEmpty() : false) && !cell.board.getCell(cell.x - 1, cell.y - 1)?.isEmpty() && cell.board.getCell(cell.x - 1, cell.y - 1)?.isFigure().color === 'black'))
-          || (board.lostWhiteFigure?.length > prevWhite && banOnHitting && (((cell.y - 2) >= 0 ? cell.board.getCell(cell.x - 2, cell.y - 2)?.isEmpty() : false) && !cell.board.getCell(cell.x - 1, cell.y - 1)?.isEmpty() && cell.board.getCell(cell.x - 1, cell.y - 1)?.isFigure().color === 'white')))
+        ((board.lostBlackFigure?.length > prevBlack && banOnHitting && (((cell.y - 2) >= 0 ? cell.board.getCell(cell.x - 2, cell.y - 2)?.isEmpty() : false) && !cell.board.getCell(cell.x - 1, cell.y - 1)?.isEmpty() && cell.board.getCell(cell.x - 1, cell.y - 1)?.isFigure()?.color === 'black'))
+          || (board.lostWhiteFigure?.length > prevWhite && banOnHitting && (((cell.y - 2) >= 0 ? cell.board.getCell(cell.x - 2, cell.y - 2)?.isEmpty() : false) && !cell.board.getCell(cell.x - 1, cell.y - 1)?.isEmpty() && cell.board.getCell(cell.x - 1, cell.y - 1)?.isFigure()?.color === 'white')))
         ||
-        ((board.lostBlackFigure?.length > prevBlack && banOnHitting && (((cell.y + 2) <= 7 ? cell.board.getCell(cell.x - 2, cell.y + 2)?.isEmpty() : false) && !cell.board.getCell(cell.x - 1, cell.y + 1)?.isEmpty() && cell.board.getCell(cell.x - 1, cell.y + 1)?.isFigure().color === 'black'))
-          || (board.lostWhiteFigure?.length > prevWhite && banOnHitting && (((cell.y + 2) <= 7 ? cell.board.getCell(cell.x - 2, cell.y + 2)?.isEmpty() : false) && !cell.board.getCell(cell.x - 1, cell.y + 1)?.isEmpty() && cell.board.getCell(cell.x - 1, cell.y + 1)?.isFigure().color === 'white')))
+        ((board.lostBlackFigure?.length > prevBlack && banOnHitting && (((cell.y + 2) <= 7 ? cell.board.getCell(cell.x - 2, cell.y + 2)?.isEmpty() : false) && !cell.board.getCell(cell.x - 1, cell.y + 1)?.isEmpty() && cell.board.getCell(cell.x - 1, cell.y + 1)?.isFigure()?.color === 'black'))
+          || (board.lostWhiteFigure?.length > prevWhite && banOnHitting && (((cell.y + 2) <= 7 ? cell.board.getCell(cell.x - 2, cell.y + 2)?.isEmpty() : false) && !cell.board.getCell(cell.x - 1, cell.y + 1)?.isEmpty() && cell.board.getCell(cell.x - 1, cell.y + 1)?.isFigure()?.color === 'white')))
       ) {
         swapPlayer('four');
         swapFigure(cell?.figure);
