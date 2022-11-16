@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { useState } from "react";
 import { Cell } from "../../model/Cell";
 import Image from 'next/image';
 
@@ -8,7 +8,7 @@ interface CellProps {
   click: (cell: Cell) => void;
 }
 
-const CellComponent: FC<CellProps> = ({cell, selected, click}) => {
+const CellComponent = ({cell, selected, click}) => {
   const [trueColor, setTrueColor] = useState(false);
 
   return ( 
