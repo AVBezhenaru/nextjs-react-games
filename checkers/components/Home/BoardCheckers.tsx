@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Board } from "../../model/Board";
 import CellComponent from "./CellComponent";
 import { Cell } from "../../model/Cell"
@@ -9,18 +9,18 @@ import Modal from '../Modal/Modal';
 import Link from 'next/link';
 
 interface BoardProps {
-  board: any;
-  setBoard: (board: any) => void;
-  currentPlayer: any;
-  currentFigure: any;
+  board: Board;
+  setBoard: (board: Board) => void;
+  currentPlayer: Player | null;
+  currentFigure: Figure | null;
   swapPlayer: (num: string) => void;
-  swapFigure: (figure: any) => void;
+  swapFigure: (figure: Figure) => void;
   restart: () => void;
   show: boolean;
   setShow: (show: boolean) => void;
 }
 
-const BoardCheckers = ({ board, setBoard, currentPlayer, currentFigure, swapPlayer, swapFigure, restart, show, setShow }) => {
+const BoardCheckers: FC<BoardProps> = ({ board, setBoard, currentPlayer, currentFigure, swapPlayer, swapFigure, restart, show, setShow }) => {
   const [selectedCell, setSelectedCell] = useState<Cell | null>(null);
   const [showFirst, setShowFirst] = useState(true);
   const [prevBlack, setPrevBlack] = useState(board.lostBlackFigure?.length);
