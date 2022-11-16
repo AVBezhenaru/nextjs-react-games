@@ -141,7 +141,6 @@ const BoardCheckers: FC<BoardProps> = ({ board, setBoard, currentPlayer, current
           ok = 0;   
         } else 
         if(((selectedCell.y - cell.y) < -2 && (selectedCell.x - cell.x) > 2 && cell?.figure?.color === 'white')) {
-          console.log('k2')
           for (let i = cell.x + 1; i < selectedCell.x; i++) {
             if((cell.y - 1) >= 0 ? cell.board.getCell(cell.x + 1, cell.y - 1)?.isFigure()?.color === 'black' : false){
               banOnHitting = true;
