@@ -28,6 +28,7 @@ const LoginForm: FC = () => {
       email: date.email,
       password: date.password,
     };
+    console.log('user :', user);
 
     clearErrors();
     dispatch(fetchLoginUser());
