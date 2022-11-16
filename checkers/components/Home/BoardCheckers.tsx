@@ -40,7 +40,7 @@ const BoardCheckers: FC<BoardProps> = ({
   let directionEmpty = selectedCell?.figure?.color === Colors.BLACK ? -1 : 1;
   let directionEmptyTwo = selectedCell?.figure?.color === Colors.BLACK ? 1 : -1;
 
-  function click(cell: Cell) {
+  const click = (cell: Cell) => {
     let banOnHitting = true;
     let ok = 0;
     let ok_two = 0;
@@ -415,7 +415,7 @@ const BoardCheckers: FC<BoardProps> = ({
         swapPlayer('two');
       }
     }
-  }
+  };
   function updateBoard() {
     const newBoard = board.getCopyBoard();
     setBoard(newBoard);
