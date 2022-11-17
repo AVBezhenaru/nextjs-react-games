@@ -13,7 +13,6 @@ import Image from 'next/image'
 
 import styles from "./chess.module.scss"
 
-// const ws = new WebSocet()
 
 
 interface GameSettings { // не сделано
@@ -83,7 +82,6 @@ const Chess = () => {
 
   const historyCounterElements = historyCounter().map((count, i) => {
     return (
-      // <div className="chess__history-count" key={i + 100}>{count} </div>
       <div className={styles["chess__history-count"]} key={i + 100}>{count} </div>
     )
   })
@@ -91,20 +89,16 @@ const Chess = () => {
 
   const historyElements = board.historyMove.map((step, i) => {
     return (
-      // <div className="chess__history-item" key={i}>
       <div className={styles['chess__history-item']} key={i}>
 
-        {/* <img className="chess__history-figure-img" src={step.figureData?.logo} alt="figure" /> */}
         <div className={styles['chess__hisstory-image']}>
           <Image width='25' height='25' className={styles['chess__history-figure-img']} src={step.figureData?.logo} alt="figure" />
         </div>
 
 
-        {/* <div className="chess__history-move"> */}
         <div className={styles['chess__history-move']}>
           {step.moveData}
 
-          {/* {step.eatFigureData && <div className="chess__history-eat-figure">{'x '}<img className="chess__history-figure-img" src={step.eatFigureData} alt='figureLogo' /></div>} */}
           {step.eatFigureData && <div className={styles['chess__history-eat-figure']}>{'x '}<Image className={styles['chess__history-figure-img']} width='25' height='25' src={step.eatFigureData} alt='figure' /></div>}
 
           {step.check && ' +'}
@@ -122,9 +116,7 @@ const Chess = () => {
 
   const stalemateInfo = board.stalemate ? "ничья" : null
 
-  // const endGameMessage =
-  //   winPlayer ? <div className="chess__win-message">Игра окончена, {winPlayer} победили</div> : null
-  //     || stalemateInfo ? <div className="chess__win-message">Игра окончена, {stalemateInfo}</div> : null
+
   const endGameMessage =
     winPlayer ? <div className={styles['chess__win-message']}>Игра окончена, {winPlayer} победили</div> : null
       || stalemateInfo ? <div className={styles['chess__win-message']}>Игра окончена, {stalemateInfo}</div> : null
@@ -133,40 +125,28 @@ const Chess = () => {
     <MainChess>
       <Header restart={restart} setGameTime={setGameTime} setGainTime={setGainTime} settingsGame={settingsGame.current} />
       <Container>
-        {/* <section className="chess"> */}
         <section className={styles.chess}>
-          {/* <div className="chess__data"> */}
           <div className={styles.chess__data}>
-            {/* <div className="chess__data-title"> */}
             <div className={styles['chess__data-title']}>
               Матч
             </div>
-            {/* <div className="chess__data-wrapper"> */}
             <div className={styles['chess__data-wrapper']}>
-              {/* <div className="chess__data-suptitle"> */}
               <div className={styles['chess__data-suptitle']}>
                 Режим игры:
               </div>
-              {/* <div className="chess__mode"> */}
               <div className={styles.chess__mode}>
                 {gameStartSettings.gameMode}
               </div>
             </div>
-            {/* <div className="chess__data-suptitle"> */}
             <div className={styles['chess__data-suptitle']}>
               История ходов:
             </div>
-            {/* <div className="chess__history"> */}
             <div className={styles.chess__history}>
-              {/* <div className="chess__history-inner" ref={scroll}> */}
               <div className={styles['chess__history-inner']} ref={scroll}>
-                {/* <div className="chess__history-wrapper"> */}
                 <div className={styles['chess__history-wrapper']}>
-                  {/* <div className="chess__history-items"> */}
                   <div className={styles['chess__history-items']}>
                     {historyCounterElements}
                   </div>
-                  {/* <div className="chess__history-items"> */}
                   <div className={styles['chess__history-items']}>
                     {historyElements}
                   </div>
@@ -184,12 +164,10 @@ const Chess = () => {
             selectedCell={selectedCell}
             setSelectedCell={setSelectedCell}
           />
-          {/* <div className="chess__info"> */}
           <div className={styles.chess__info}>
             <LostFigures
               figures={board.lostWhiteFigures}
             ></LostFigures>
-            {/* <div className="chess__info-wrapper"> */}
             <div className={styles['chess__info-wrapper']}>
               <PlayerData
                 currentPlayer={currentPlayer}

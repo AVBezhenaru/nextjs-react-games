@@ -143,9 +143,10 @@ export const StyledAvailableCell = styled.span`
   border-radius: 50%;
 `;
 
-export const ImgFigureMove = styled.img`
+export const ImgFigureMove = styled.div`
   display: block;
   margin: 30px auto 30px auto;
+  text-align: center;
 `;
 
 export const CurrentPlayerText = styled.div`

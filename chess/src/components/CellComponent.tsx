@@ -34,8 +34,6 @@ const CellComponent: FC<CellProps> = ({ cell, selected, click }) => {
         <StyledAvailableCell></StyledAvailableCell>
       )}
       {cell.figure?.logo &&
-        // <FigureLogo src={cell.figure.logo} 
-        // />
         <Image width='65' height='65' src={cell.figure.logo} alt='figure' />
       }
     </StyledCell>

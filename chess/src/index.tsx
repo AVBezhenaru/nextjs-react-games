@@ -1,22 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-// import App from "./components/App";
-// import './styles/globals.scss'
-// import App from "../../pages/chess";
-// import './styles/globals.scss'
-// import "./styles/board.scss"
-// import "./styles/chess.scss"
-// import "./styles/settings.scss"
-// import './styles/header.scss'
-// import "./styles/globals.scss"
+
 import Chess from "./components/chess/Chess";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+import './styles/globals.scss'
 
 root.render(
-
   <Chess />
-
 );

@@ -77,20 +77,14 @@ const GameSettings: FC<GameSettingsProps> = ({ setGainTime, setGameTime, setting
       modal
       closeOnDocumentClick
     >
-      {/* <div className="settings__logo"> */}
+
       <div className={styles.settings__logo}>
-        {/* <img className="settings__logo-img" src={headerLogo} alt="" /> */}
         <Image className={styles['settings__logo-img']} src={headerLogo} alt="logo" width='100' height='100' />
       </div>
-      {/* <h2 className="settings__header">Выберите настройки</h2> */}
       <h2 className={styles.setting__header}>Выберите настройки</h2>
-      {/* <form action="" className="settings__form"> */}
       <form action="" className={styles.settings__form}>
-        {/* <div className="settings__inner"> */}
         <div className={styles.settings__inner}>
-          {/* <div className="settings__item"> */}
           <div className={styles.settings__item}>
-            {/* <label className="settings__form-title">Цвет</label> */}
             <label className={styles['settings__form-title']}>Цвет</label>
             <Select options={color} defaultValue={color[0]} />
 
@@ -110,7 +104,6 @@ const GameSettings: FC<GameSettingsProps> = ({ setGainTime, setGameTime, setting
           </div>
         </div>
       </form>
-      {/* <button className="settings__btn" type="submit">Начать игру</button> */}
       <button className={styles.settings__btn} type="submit">Начать игру</button>
     </Settings>
   )

@@ -1,6 +1,5 @@
 import { FC } from "react"
 import { Container, HeaderLogo } from "../../styles/chess.style";
-// import { Link } from "react-router-dom";
 import Image from 'next/image'
 import RulesModal from "../RulesModal";
 import GameSettings from "../gameSettings/GameSettings";
@@ -9,7 +8,6 @@ import { Colors } from "../../models/Colors";
 import styles from "./header.module.scss"
 
 const headerLogo = require("../../assets/img/header-logo.png")
-// import headerLogo from '../../assets/img/header-logo.png'
 
 interface HeaderProps {
   restart: () => void,
