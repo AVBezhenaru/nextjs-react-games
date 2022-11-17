@@ -1,0 +1,23 @@
+.notification {
+    position: absolute;
+    top: 25%;
+    right: 30%;
+    left: 30%;
+    font-size: 40px;
+    padding: 20px;
+    color: red;
+    border: 3px solid red;
+    border-radius: 20px;
+    background-color: white;
+    text-align: center;
+}
+
+.notification_background {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  background-color: antiquewhite;
+  opacity: .4;
+}
