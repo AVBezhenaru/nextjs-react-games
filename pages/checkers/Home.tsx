@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 
-import BoardCheckers from '../components/Home/BoardCheckers';
-import { Board } from '../model/Board';
+import BoardCheckers from '../../checkers/components/Home/BoardCheckers';
+import { Board } from '../../checkers/model/Board';
 // import styles from '../styles/Home.module.css';
-import { Player } from '../model/Player';
-import { Colors } from '../model/Colors';
-import { Figure } from '../model/figures/Figure';
+import { Player } from '../../checkers/model/Player';
+import { Colors } from '../../checkers/model/Colors';
+import { Figure } from '../../checkers/model/figures/Figure';
 
 export default function Home() {
   const [board, setBoard] = useState(new Board());
