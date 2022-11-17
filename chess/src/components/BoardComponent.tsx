@@ -6,7 +6,7 @@ import { Cell } from "../models/Cell";
 import { Player } from "../models/Player";
 
 import TransformFigure from "./TransformFigure"
-import "../styles/board.scss"
+// import "../styles/board.scss"
 
 interface BoardProps {
   board: Board;

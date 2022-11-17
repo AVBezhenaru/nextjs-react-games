@@ -3,7 +3,7 @@ import { Settings, StyledPopupButton } from "../styles/chess.style"
 import Select from 'react-select'
 import { Colors } from "../models/Colors"
 
-import "../styles/settings.scss"
+// import "../styles/settings.scss"
 const headerLogo = require("../assets/img/header-logo.png")
 
 interface SelectOption {
