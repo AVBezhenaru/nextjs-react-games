@@ -7,7 +7,7 @@ export default function index() {
       <h1 className="head__page-title__head">
         Ш<span>а</span>ш<span>к</span>и
       </h1>
-      <Link href="/Home">
+      <Link href="/checkers/Home">
         <span className="head__page-play">Играть</span>
       </Link>
     </div>
