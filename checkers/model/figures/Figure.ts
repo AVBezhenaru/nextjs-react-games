@@ -11,11 +11,9 @@ export enum FigureNames {
 }
 
 export class Figure {
-  [x: string]: any;
-
   color: Colors;
 
-  image: typeof image | null;
+  image?: typeof image | null;
 
   cell: Cell;
 
@@ -40,5 +38,5 @@ export class Figure {
     return true;
   }
 
-  // moveFigure(target: Cell) {}
+  moveFigure(target: Cell) {}
 }
