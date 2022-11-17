@@ -1,6 +1,7 @@
 import Popup from "reactjs-popup";
 import styled from "styled-components";
-import './globals.scss'
+import Image from "next/image";
+// import './globals.scss'
 
 export const App = styled.div`
   // height: 100vh;
@@ -14,6 +15,7 @@ export const App = styled.div`
 `;
 
 export const Container = styled.div`
+background-color: #fff;
   max-width: 1680px;
   padding: 0 15px;
   margin: 0 auto;

@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import { FC } from "react"
 import { TransformFigure as TransformBox, TransformFigureOverlay, TransformFigureImg } from "../styles/chess.style";
 import { Colors } from "../models/Colors";
 import { Figure } from "../models/figures/Figure";

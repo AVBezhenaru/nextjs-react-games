@@ -5,11 +5,14 @@ import { Board } from "../models/Board";
 import { Player } from "../models/Player";
 import { Colors } from "../models/Colors";
 import LostFigures from "./LostFigures";
-import Header from "./Header";
+import Header from "./header/Header";
 import PlayerData from "./PlayerData"
 import { Cell } from "../models/Cell";
 import { GameMode } from "../models/Settings";
-import "../styles/chess.scss"
+// import "../styles/chess.scss"
+
+// const ws = new WebSocet()
+
 
 interface GameSettings { // не сделано
   gameTime: string | null,
@@ -38,6 +41,7 @@ const Chess = () => {
 
   const [selectedCell, setSelectedCell] = useState<Cell | null>(null);
 
+  const scroll: any = useRef<HTMLInputElement>()
   useEffect(() => {
     restart();
     setCurrentPlayer(whitePlayer);
@@ -95,6 +99,9 @@ const Chess = () => {
       </div>
     )
   })
+  useEffect(() => {
+    scroll.current.scrollTop = scroll.current.scrollHeight;
+  })
 
   const winPlayer = board.blackKing?.chekAndMateFlag ? "белые" : null
     || board.whiteKing?.chekAndMateFlag ? "черные" : null
@@ -126,14 +133,17 @@ const Chess = () => {
               История ходов:
             </div>
             <div className="chess__history">
-              <div className="chess__history-wrapper">
-                <div className="chess__history-items">
-                  {historyCounterElements}
-                </div>
-                <div className="chess__history-items">
-                  {historyElements}
+              <div className="chess__history-inner" ref={scroll}>
+                <div className="chess__history-wrapper">
+                  <div className="chess__history-items">
+                    {historyCounterElements}
+                  </div>
+                  <div className="chess__history-items">
+                    {historyElements}
+                  </div>
                 </div>
               </div>
+
             </div>
           </div>
           <BoardComponent
