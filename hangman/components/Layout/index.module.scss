@@ -1,0 +1,37 @@
+@import '../../styles/variables.scss';
+
+.container {
+  position: relative;
+  max-width: 1024px;
+  height: 710px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 100px;
+  font-family: $font-family-main;
+  border-radius: 30px;
+  border: 1px solid $third-color;
+  background-image: url('../../assets/image/background.jpg');
+  user-select: none;
+}
+
+.container::before {
+  position: absolute;
+  top: 88px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  display: block;
+  background-color: $seventh-color;
+  content: '';
+}
+
+.container::after {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 190px;
+  height: 110px;
+  filter: opacity(0.8);
+  background-image: url('../../assets/image/splat.png');
+  content: '';
+}

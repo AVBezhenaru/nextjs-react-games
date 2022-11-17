@@ -1,0 +1,40 @@
+@import '../../styles/variables';
+
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 500px;
+  max-height: 550px;
+  height: min-content;
+  overflow: auto;
+  padding: 2rem 2rem;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1.5;
+  border: 4px solid $third-color;
+  border-radius: 20px;
+  box-shadow: $shadow;
+  background-color: $primary-color;
+}
+
+.item {
+  white-space: nowrap;
+  text-align: center;
+  border: 1px solid $third-color;
+  border-radius: 10px;
+  color: $secondary-color;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: $third-color;
+    color: $secondary-color;
+  }
+}

@@ -1,0 +1,80 @@
+@import '../../styles/variables.scss';
+
+.container {
+  position: relative;
+  max-width: 250px;
+  height: 300px;
+  width: 100%;
+}
+
+.gallows {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  width: 230px;
+  height: 230px;
+  background-image: url('../../assets/image/gallowsAndMan/gallows.svg');
+  background-repeat: no-repeat;
+}
+
+.head {
+  position: absolute;
+  top: 90px;
+  left: 108px;
+  width: 50px;
+  height: 50px;
+  background-image: url('../../assets/image/gallowsAndMan/head.svg');
+  background-repeat: no-repeat;
+  background-size: 50px;
+}
+
+.body {
+  position: absolute;
+  top: 132px;
+  left: 135px;
+  width: 9px;
+  height: 81px;
+  background-image: url('../../assets/image/gallowsAndMan/body.svg');
+  background-repeat: no-repeat;
+  background-size: 9px;
+}
+
+.leftHand {
+  position: absolute;
+  top: 147px;
+  left: 105px;
+  width: 36px;
+  height: 25px;
+  background-image: url('../../assets/image/gallowsAndMan/leftHand.svg');
+  background-repeat: no-repeat;
+}
+
+.rightHand {
+  position: absolute;
+  top: 147px;
+  left: 138px;
+  width: 35px;
+  height: 17px;
+  background-image: url('../../assets/image/gallowsAndMan/rightHand.svg');
+  background-repeat: no-repeat;
+}
+
+.leftLeg {
+  position: absolute;
+  top: 210px;
+  left: 107px;
+  width: 35px;
+  height: 27px;
+  background-image: url('../../assets/image/gallowsAndMan/leftLeg.svg');
+  background-repeat: no-repeat;
+}
+
+.rightLeg {
+  position: absolute;
+  top: 210px;
+  left: 140px;
+  width: 39px;
+  height: 28px;
+  background-image: url('../../assets/image/gallowsAndMan/rightLeg.svg');
+  background-repeat: no-repeat;
+}
