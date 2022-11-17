@@ -1,10 +1,5 @@
-// import { Routes, Route } from "react-router-dom";
-import Chess from "./Chess";
-// import '../styles/globals.scss'
-// import "../styles/board.scss"
-// import "../styles/chess.scss"
-// import "../styles/settings.scss"
-// import '../styles/header.scss'
+
+import Chess from "./chess/Chess";
 
 const App = () => {
   return (

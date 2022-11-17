@@ -3,12 +3,12 @@ import { Container, HeaderLogo } from "../../styles/chess.style";
 // import { Link } from "react-router-dom";
 import Image from 'next/image'
 import RulesModal from "../RulesModal";
-import GameSettings from "../GameSettings";
+import GameSettings from "../gameSettings/GameSettings";
 import { Colors } from "../../models/Colors";
 
 import styles from "./header.module.scss"
 
-// const headerLogo = require("../../assets/img/header-logo.png")
+const headerLogo = require("../../assets/img/header-logo.png")
 // import headerLogo from '../../assets/img/header-logo.png'
 
 interface HeaderProps {
@@ -30,20 +30,17 @@ const Header: FC<HeaderProps> = ({ restart, setGameTime, setGainTime, settingsGa
       <Container>
         <div className={styles['header__inner']}>
           <a href='#' className={styles['header__title']}>
-            {/* <HeaderLogo src={headerLogo} alt="Chess-logo" /> */}
-            {/* <Image src={headerLogo} className={styles['header__logo']} alt='logo' /> */}
+            <Image src={headerLogo} width='50' height='50' className={styles['header__logo']} alt='logo' />
             <span className={styles['header__title-text']}>Chess-game</span>
           </a>
           <nav className={styles.menu}>
             <ul className={styles['menu__list']}>
               <li className={styles['menu__item']}>
-                {/* <button onClick={restart} className="menu__list-btn"> */}
                 <button onClick={restart} className={styles['menu__list-btn']}>
                   Начать заново
                 </button>
               </li>
 
-              {/* <li className="menu__item"> */}
               <li className={styles['menu__item']}>
                 <GameSettings
                   setGainTime={setGainTime}
@@ -52,13 +49,13 @@ const Header: FC<HeaderProps> = ({ restart, setGameTime, setGainTime, settingsGa
                 />
               </li>
 
-              <li className="menu__item">
+              <li className={styles['menu__item']}>
                 <RulesModal />
               </li>
 
             </ul>
           </nav>
-          <a href="#" className="login-btn">Войти</a>
+          <a href="#" className={styles['login-btn']}>Войти</a>
         </div>
       </Container>
 
