@@ -6,6 +6,7 @@ import {
 } from "../styles/chess.style";
 import { Cell } from '../models/Cell'
 import { King } from '../models/figures/King'
+import Image from 'next/image'
 
 interface CellProps {
   cell: Cell;
@@ -32,7 +33,11 @@ const CellComponent: FC<CellProps> = ({ cell, selected, click }) => {
       {cell.available && !cell.figure && (
         <StyledAvailableCell></StyledAvailableCell>
       )}
-      {cell.figure?.logo && <FigureLogo src={cell.figure.logo} />}
+      {cell.figure?.logo &&
+        // <FigureLogo src={cell.figure.logo} 
+        // />
+        <Image width='65' height='65' src={cell.figure.logo} alt='figure' />
+      }
     </StyledCell>
   );
 };

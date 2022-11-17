@@ -7,6 +7,8 @@ import {
   ImgFigureMove,
 } from "../styles/chess.style";
 
+import Image from "next/image";
+
 const whiteKing = require("../assets/img/white-king.png");
 const blackKing = require("../assets/img/black-king.png");
 const whiteQueen = require("../assets/img/white-queen.png");
@@ -70,51 +72,63 @@ const RulesModal = () => {
         <StyledPopupFigureCardsBlock>
           <StyledPopupFigureCard>
             <StyledPopupSpan>Белый король</StyledPopupSpan>
-            <img src={whiteKing} alt="white king" />
+            {/* <img src={whiteKing} alt="white king" /> */}
+            <Image src={whiteKing} alt="white king" />
           </StyledPopupFigureCard>
           <StyledPopupFigureCard>
             <StyledPopupSpan>Черный король</StyledPopupSpan>
-            <img src={blackKing} alt="black king" />
+            {/* <img src={blackKing} alt="black king" /> */}
+            <Image src={blackKing} alt="black king" />
           </StyledPopupFigureCard>
           <StyledPopupFigureCard>
             <StyledPopupSpan>Белый ферзь</StyledPopupSpan>
-            <img src={whiteQueen} alt="white queen" />
+            {/* <img src={whiteQueen} alt="white queen" /> */}
+            <Image src={whiteQueen} alt="white queen" />
           </StyledPopupFigureCard>
           <StyledPopupFigureCard>
             <StyledPopupSpan>Черный ферзь</StyledPopupSpan>
-            <img src={blackQueen} alt="black queen" />
+            {/* <img src={blackQueen} alt="black queen" /> */}
+            <Image src={blackQueen} alt="black queen" />
           </StyledPopupFigureCard>
           <StyledPopupFigureCard>
             <StyledPopupSpan>Две белые ладьи</StyledPopupSpan>
-            <img src={whiteRook} alt="white rook" />
+            {/* <img src={whiteRook} alt="white rook" /> */}
+            <Image src={whiteRook} alt="white rook" />
           </StyledPopupFigureCard>
           <StyledPopupFigureCard>
             <StyledPopupSpan>Две черные ладьи</StyledPopupSpan>
-            <img src={blackRook} alt="black rook" />
+            {/* <img src={blackRook} alt="black rook" /> */}
+            <Image src={blackRook} alt="black rook" />
           </StyledPopupFigureCard>
           <StyledPopupFigureCard>
             <StyledPopupSpan>Два белых слона</StyledPopupSpan>
-            <img src={whiteBishop} alt="white bishop" />
+            {/* <img src={whiteBishop} alt="white bishop" /> */}
+            <Image src={whiteBishop} alt="white bishop" />
           </StyledPopupFigureCard>
           <StyledPopupFigureCard>
             <StyledPopupSpan>Два черных слона</StyledPopupSpan>
-            <img src={blackBishop} alt="black bishop" />
+            {/* <img src={blackBishop} alt="black bishop" /> */}
+            <Image src={blackBishop} alt="black bishop" />
           </StyledPopupFigureCard>
           <StyledPopupFigureCard>
             <StyledPopupSpan>Два белых коня</StyledPopupSpan>
-            <img src={whiteKnight} alt="white knight" />
+            {/* <img src={whiteKnight} alt="white knight" /> */}
+            <Image src={whiteKnight} alt="white knight" />
           </StyledPopupFigureCard>
           <StyledPopupFigureCard>
             <StyledPopupSpan>Два черных коня</StyledPopupSpan>
-            <img src={blackKnight} alt="black knight" />
+            {/* <img src={blackKnight} alt="black knight" /> */}
+            <Image src={blackKnight} alt="black knight" />
           </StyledPopupFigureCard>
           <StyledPopupFigureCard>
             <StyledPopupSpan>Восемь белых пешек</StyledPopupSpan>
-            <img src={whitePawn} alt="white pawn" />
+            {/* <img src={whitePawn} alt="white pawn" /> */}
+            <Image src={whitePawn} alt="white pawn" />
           </StyledPopupFigureCard>
           <StyledPopupFigureCard>
             <StyledPopupSpan>Восемь черных пешек </StyledPopupSpan>
-            <img src={blackPawn} alt="black pawn" />
+            {/* <img src={blackPawn} alt="black pawn" /> */}
+            <Image src={blackPawn} alt="black pawn" />
           </StyledPopupFigureCard>
         </StyledPopupFigureCardsBlock>
         <li>

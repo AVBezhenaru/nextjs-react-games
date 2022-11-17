@@ -1,10 +1,11 @@
 import { FC, useState } from "react"
-import { Settings, StyledPopupButton } from "../styles/chess.style"
+import { Settings, StyledPopupButton } from "../../styles/chess.style"
+import Image from "next/image"
 import Select from 'react-select'
-import { Colors } from "../models/Colors"
+import { Colors } from "../../models/Colors"
 
-// import "../styles/settings.scss"
-const headerLogo = require("../assets/img/header-logo.png")
+import styles from "./gameSettings.module.scss"
+const headerLogo = require("../../assets/img/header-logo.png")
 
 interface SelectOption {
   value: string,
@@ -76,33 +77,41 @@ const GameSettings: FC<GameSettingsProps> = ({ setGainTime, setGameTime, setting
       modal
       closeOnDocumentClick
     >
-      <div className="settings__logo">
-        <img className="settings__logo-img" src={headerLogo} alt="" />
+      {/* <div className="settings__logo"> */}
+      <div className={styles.settings__logo}>
+        {/* <img className="settings__logo-img" src={headerLogo} alt="" /> */}
+        <Image className={styles['settings__logo-img']} src={headerLogo} alt="logo" width='100' height='100' />
       </div>
-      <h2 className="settings__header">Выберите настройки</h2>
-      <form action="" className="settings__form">
-        <div className="settings__inner">
-          <div className="settings__item">
-            <label className="settings__form-title">Цвет</label>
+      {/* <h2 className="settings__header">Выберите настройки</h2> */}
+      <h2 className={styles.setting__header}>Выберите настройки</h2>
+      {/* <form action="" className="settings__form"> */}
+      <form action="" className={styles.settings__form}>
+        {/* <div className="settings__inner"> */}
+        <div className={styles.settings__inner}>
+          {/* <div className="settings__item"> */}
+          <div className={styles.settings__item}>
+            {/* <label className="settings__form-title">Цвет</label> */}
+            <label className={styles['settings__form-title']}>Цвет</label>
             <Select options={color} defaultValue={color[0]} />
 
           </div>
-          <div className="settings__item">
-            <label className="settings__form-title">Режим игры</label>
+          <div className={styles.settings__item}>
+            <label className={styles['settings__form-title']}>Режим игры</label>
             <Select options={gameMode} defaultValue={gameMode[0]} />
 
           </div>
-          <div className="settings__item">
-            <label className="settings__form-title">Время на игру</label>
+          <div className={styles.settings__item}>
+            <label className={styles['settings__form-title']}>Время на игру</label>
             <Select onChange={setTimeGame} options={timeGame} defaultValue={timeGame[0]} />
           </div>
-          <div className="settings__item">
-            <label className="settings__form-title">Прибавка на ход</label>
+          <div className={styles.settings__item}>
+            <label className={styles['settings__form-title']}>Прибавка на ход</label>
             <Select options={timeGain} defaultValue={timeGain[0]} />
           </div>
         </div>
       </form>
-      <button className="settings__btn" type="submit">Начать игру</button>
+      {/* <button className="settings__btn" type="submit">Начать игру</button> */}
+      <button className={styles.settings__btn} type="submit">Начать игру</button>
     </Settings>
   )
 }

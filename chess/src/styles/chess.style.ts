@@ -1,7 +1,5 @@
 import Popup from "reactjs-popup";
 import styled from "styled-components";
-import Image from "next/image";
-// import './globals.scss'
 
 export const App = styled.div`
   // height: 100vh;
@@ -11,12 +9,17 @@ export const App = styled.div`
   // align-items: center;
   // margin: 0;
   // top: 0;
+  width: 100%;
+  margin: 0 auto;
+  background-color: #fff;
 
 `;
 
 export const Container = styled.div`
-background-color: #fff;
+// background-color: #fff;
+
   max-width: 1680px;
+  width: 100%;
   padding: 0 15px;
   margin: 0 auto;
 `;
