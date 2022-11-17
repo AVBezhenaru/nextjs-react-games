@@ -25,6 +25,8 @@ import Button from '../button/button';
 
 import styles from './tetris-play.module.scss';
 
+var a = 10;
+
 function TetrisPlay() {
   const dispatch = useAppDispatch();
   const isGameOver = useAppSelector((state) => state.tetris.isGameOver);
