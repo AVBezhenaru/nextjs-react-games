@@ -6,9 +6,7 @@ import { Cell } from "../../models/Cell";
 import { Player } from "../../models/Player";
 
 import TransformFigure from "../TransformFigure"
-// import "../styles/board.scss"
 import styles from "./BoardComponent.module.scss"
-import styled from "styled-components";
 
 interface BoardProps {
   board: Board;
@@ -75,21 +73,17 @@ const BoardComponent: FC<BoardProps> = ({
   const columnNameElement = columnName.map((item, i) => {
     return (
       <div className={styles['board__item-column']} key={i}>{item}</div>
-      // <div className="board__item-column" key={i}>{item}</div>
     )
   })
   let rowNameElements = rowName.map((item, i) => {
     return (
-      // <div className="board__item-row" key={i}>{item}</div>
       <div className={styles['board__item-row']} key={i}>{item}</div>
     )
   })
 
   return (
-    // <div className="board">
     <div className={styles.board}>
       {selectFigureBox}
-      {/* <div className="board__items board__items-row"> */}
       <div className={`${styles['board__items']} ${styles['board__items-row']}`}>
         {rowNameElements}
       </div>
@@ -109,7 +103,6 @@ const BoardComponent: FC<BoardProps> = ({
           </React.Fragment>
         ))}
       </StyledBoard>
-      {/* <div className="board__items board__items-column"> */}
       <div className={`${styles['board__items']} ${styles['board__items-column']}`}>
         {columnNameElement}
       </div>
