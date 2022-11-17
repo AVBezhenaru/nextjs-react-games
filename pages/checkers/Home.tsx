@@ -3,7 +3,6 @@ import Head from 'next/head';
 
 import BoardCheckers from '../../checkers/components/Home/BoardCheckers';
 import { Board } from '../../checkers/model/Board';
-// import styles from '../styles/Home.module.css';
 import { Player } from '../../checkers/model/Player';
 import { Colors } from '../../checkers/model/Colors';
 import { Figure } from '../../checkers/model/figures/Figure';
@@ -57,7 +56,6 @@ export default function Home() {
   };
 
   return (
-    // <div className={styles.container}>
     <div>
       <Head>
         <title>Create Next App</title>
