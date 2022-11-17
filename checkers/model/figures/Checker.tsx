@@ -45,6 +45,7 @@ export class Checker extends Figure {
       this.cell.board.getCell(target.x - 1, target.y + directionEmpty).figureDeleteColor = true;
       return true;
     }
+    // похоже код дублируется с тем что сверху
     if (
       target.y === this.cell.y + twoStepDirectionEmpty &&
       target.x === this.cell.x + 2 &&
@@ -65,6 +66,7 @@ export class Checker extends Figure {
       this.cell.board.getCell(target.x + 1, target.y + directionEmpty).figureDeleteColor = true;
       return true;
     }
+    // и этот тоже походу дублируется
     if (
       target.y === this.cell.y + twoStepDirectionEmpty &&
       target.x === this.cell.x - 2 &&

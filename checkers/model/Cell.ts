@@ -433,11 +433,13 @@ export class Cell {
   }
 
   // ? добавление удаленных фигур в массив
+  // ПОСМОТРЕТЬ РАБОТАЕТ ЛИ
   addLostFigure(figure: Figure | null) {
     if (figure) {
-      figure?.color === Colors.BLACK
-        ? this.board.lostBlackFigure.push(figure)
-        : this.board.lostWhiteFigure.push(figure);
+      if (figure?.color === Colors.BLACK) this.board.lostBlackFigure.push(figure);
+      else {
+        this.board.lostWhiteFigure.push(figure);
+      }
     }
   }
 
