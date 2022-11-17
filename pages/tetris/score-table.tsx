@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-import Button from '../../tetris/components/button/button';
-import GameScoreAll from '../../tetris/components/game-score-all/game-score-all';
+import Button from '../../tetris2/components/button/button';
+import GameScoreAll from '../../tetris2/components/game-score-all/game-score-all';
 
 function ScoreTable() {
   return (

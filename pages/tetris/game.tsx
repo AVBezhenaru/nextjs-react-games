@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-import Button from '../../tetris/components/button/button';
-import TetrisPlay from '../../tetris/components/tetris-play/TetrisPlay';
+import Button from '../../tetris2/components/button/button';
+import TetrisPlay from '../../tetris2/components/tetris-play/TetrisPlay';
 
 function TetrisGame() {
   return (

@@ -25,8 +25,6 @@ import Button from '../button/button';
 
 import styles from './tetris-play.module.scss';
 
-var a = 10;
-
 function TetrisPlay() {
   const dispatch = useAppDispatch();
   const isGameOver = useAppSelector((state) => state.tetris.isGameOver);
@@ -44,20 +42,7 @@ function TetrisPlay() {
     dispatch(updateDetailPostion());
   }, []);
 
-  // const handleMoveDown = () => {
-  //   dispatch(checkDownCollision());
-  //   if (!isGameOver) {
-  //     console.log('in handleMoveDown timer')
-  //     // dispatch(checkDownCollision());
-  //     const id = setInterval(() => handleMoveDown(), dropTime);
-  //     return () => clearInterval(id);
-  //   }
-  // };
   useEffect(() => {
-    // console.log('useEffect - y', y);
-    // console.log('collided detail', detailCollided);
-    // console.log('stage detail', collided);
-
     if (!isGameOver) {
       const id = setInterval(() => handleMoveDown(), dropTime);
       return () => clearInterval(id);
