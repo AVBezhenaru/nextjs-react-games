@@ -1,0 +1,17 @@
+.table {
+  border-collapse: collapse;
+  border: 3px solid #D65B88;
+  position: fixed;
+  top: 20%;
+  left: 20%;
+  width: 50vw;
+  height: 50vh;
+
+  thead {
+    border-bottom: 1px solid darkgray;
+  }
+
+  th, td {
+    padding: 20px;
+  }
+}
