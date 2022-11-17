@@ -61,7 +61,6 @@ const BoardCheckers: FC<BoardProps> = ({
         (cell.x - selectedCell.x > 1 && cell.y - selectedCell.y > 1 && cell?.figure?.color === 'black')
       ) {
         if (selectedCell.y - cell.y > 2 && selectedCell.x - cell.x < -2 && cell?.figure?.color === 'white') {
-          console.log('h1');
           for (let i = cell.x - 1; i > selectedCell.x; i -= 1) {
             if (cell.y + 1 <= 7 ? cell.board.getCell(cell.x - 1, cell.y + 1)?.isFigure() : false) {
               banOnHitting = true;
@@ -120,7 +119,6 @@ const BoardCheckers: FC<BoardProps> = ({
         (selectedCell.y - cell.y < -1 && selectedCell.x - cell.x > 1 && cell?.figure?.color === 'black')
       ) {
         if (selectedCell.x - cell.x > 2 && selectedCell.y - cell.y > 2 && cell?.figure?.color === 'white') {
-          console.log('g1');
           for (let i = cell.x + 1; i < selectedCell.x; i += 1) {
             if (cell.y + 1 <= 7 ? cell.board.getCell(cell.x + 1, cell.y + 1)?.isFigure() : false) {
               banOnHitting = true;
@@ -374,18 +372,8 @@ const BoardCheckers: FC<BoardProps> = ({
       !selectedCell?.figure?.canMove(cell)
     ) {
       if (
-        (!(cell.y + 1 <= 7)
-          ? false
-          : (cell.board.getCell(cell.x + 1, cell.y + 1)?.isFigure()?.color === 'white') === false
-          ? true
-          : cell.board.getCell(cell.x + 1, cell.y + 1)?.isFigure()?.color === 'white') &&
         (cell.y + 1 <= 7 ? !cell.board.getCell(cell.x + 1, cell.y + 1)?.isEmpty() : null) &&
         !(cell.y + 2 <= 7 ? cell.board.getCell(cell.x + 2, cell.y + 2)?.isEmpty() : null) &&
-        (!(cell.y + 1 <= 7)
-          ? false
-          : (cell.board.getCell(cell.x - 1, cell.y + 1)?.isFigure()?.color === 'white') === false
-          ? true
-          : cell.board.getCell(cell.x - 1, cell.y + 1)?.isFigure()?.color === 'white') &&
         (cell.y + 1 <= 7 ? !cell.board.getCell(cell.x - 1, cell.y + 1)?.isEmpty() : null) &&
         !(cell.y + 2 <= 7 ? cell.board.getCell(cell.x - 2, cell.y + 2)?.isEmpty() : null) &&
         cell.board.getCell(cell.x + 1, cell.y - 1)?.isFigure()?.color !== 'white' &&
@@ -394,18 +382,8 @@ const BoardCheckers: FC<BoardProps> = ({
       ) {
         swapPlayer('three');
       } else if (
-        (!(cell.y - 1 >= 0)
-          ? false
-          : (cell.board.getCell(cell.x + 1, cell.y - 1)?.isFigure()?.color === 'black') === false
-          ? true
-          : cell.board.getCell(cell.x + 1, cell.y - 1)?.isFigure()?.color === 'black') &&
         (cell.y - 1 >= 0 ? !cell.board.getCell(cell.x + 1, cell.y - 1)?.isEmpty() : null) &&
         !(cell.y - 2 >= 0 ? cell.board.getCell(cell.x + 2, cell.y - 2)?.isEmpty() : null) &&
-        (!(cell.y - 1 >= 0)
-          ? false
-          : (cell.board.getCell(cell.x - 1, cell.y - 1)?.isFigure()?.color === 'black') === false
-          ? true
-          : cell.board.getCell(cell.x - 1, cell.y - 1)?.isFigure()?.color === 'black') &&
         (cell.y - 1 >= 0 ? !cell.board.getCell(cell.x - 1, cell.y - 1)?.isEmpty() : null) &&
         !(cell.y - 2 >= 0 ? cell.board.getCell(cell.x - 2, cell.y - 2)?.isEmpty() : null) &&
         cell.board.getCell(cell.x + 1, cell.y + 1)?.isFigure()?.color !== 'black' &&
@@ -435,12 +413,8 @@ const BoardCheckers: FC<BoardProps> = ({
         <div className="checkers__win">
           <h2 className="checkers__win-title">
             Поздравляем{' '}
-            {board.lostWhiteFigure?.length === 12 ? (
-              <span className="win-title__black">Черного</span>
-            ) : (
-              <span>Белого</span>
-            )}{' '}
-            игрока с победой!!!
+            {board.lostWhiteFigure?.length ? <span className="win-title__black">Черного</span> : <span>Белого</span>}{' '}
+            игрока с победой!!! игрока с победой!!!
           </h2>
           <div className="wrap">
             <div className="firework">
