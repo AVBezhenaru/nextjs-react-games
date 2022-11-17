@@ -29,7 +29,8 @@
     "async-pages/_app.jsx",
     "store/userSlice.js",
     "store/userSlice.js",
-    "./declaration.d.ts"
+    "./declaration.d.ts",
+    "../pages/chess/App.tsx"
   ],
   "exclude": [
     "node_modules",
