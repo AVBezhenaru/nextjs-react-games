@@ -7,9 +7,14 @@ export default function index() {
       <h1 className="head__page-title__head">
         Ш<span>а</span>ш<span>к</span>и
       </h1>
-      <Link href="/checkers/Home">
-        <span className="head__page-play">Играть</span>
-      </Link>
+      <div className="container___head__page">
+        <Link href="/checkers/СhoosePlayer">
+          <span className="head__page-play">Выбор сoперника</span>
+        </Link>
+        <Link href="/checkers/Home">
+          <span className="head__page-play">Играть</span>
+        </Link>
+      </div>
     </div>
   );
 }

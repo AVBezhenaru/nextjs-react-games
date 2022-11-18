@@ -43,7 +43,18 @@ a {
     background: black;
   }
 }
+.closePlayer__page{
+  width: 100vw;
+  height: 100vh;
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  background-image: url("../images/depositphotos_567117172-stock-illustration-abstract-video-game-for-game.jpg");
+  background-size: cover;
+}
 .head__page {
   width: 100vw;
   height: 100vh;
@@ -57,23 +68,25 @@ a {
   background-size: cover;
 }
 .head__page-play {
+  text-align: center;
+
+  width: 289px;
+  height: 75px;
   position: relative;
-  top: -40px;
-
+  
   font-family: "Yahfie Heavy";
-  font-size: 40px;
-
-  padding: 20px 40px;
+  font-size: 39px;
 
   border: 3px dotted black;
   outline: 3px dotted white;
   border-radius: 13px;
-
   color: white;
-
+  -webkit-backdrop-filter: blur(9px);
   backdrop-filter: blur(9px);
-
   cursor: pointer;
+}
+.head__page-play:last-child{
+  padding-top: 18px;
 }
 .head__page-play:hover {
   border: 3px dotted white;
@@ -84,6 +97,10 @@ a {
   transition: all 0.5s ease 0s;
 
   cursor: pointer;
+}
+.container___head__page{
+  display: flex;
+  gap: 15px;
 }
 .head__page-title {
   position: relative;
