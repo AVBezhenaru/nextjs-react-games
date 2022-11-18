@@ -6,6 +6,7 @@ import Layout from '../components/layout/layout';
 import { store } from '../store';
 
 import '../styles/index.scss';
+import '../checkers/styles/globals.css';
 
 const MyApp: NextPage<AppProps> = ({ Component, pageProps }) => (
   <Layout>
