@@ -1,0 +1,19 @@
+.lost-figure {
+  line-height: 0;
+  max-width: 280px;
+  width: 100%;
+  min-height: 30px;
+
+  &__wrapper {
+    display: inline-block;
+    font-size: 0;
+    line-height: 0;
+    margin-left: -7px;
+    &+& {
+      margin-left: -12px;
+    }
+  }
+  &__img{
+    max-width: 30px;
+  }
+}

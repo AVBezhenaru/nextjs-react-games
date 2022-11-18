@@ -6,6 +6,9 @@ p {
   padding: 0;
   margin: 0;
   font-family: 'Audiowide', cursive;
+  font-size: 18px;
+  font-weight: 600;
+  color: #646464;
 }
 
 a {
@@ -15,4 +18,16 @@ a {
 
 * {
   box-sizing: border-box;
+}
+button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+li,
+ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }

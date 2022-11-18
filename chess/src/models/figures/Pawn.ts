@@ -1,8 +1,6 @@
 import { Cell } from "../Cell";
 import { Colors } from "../Colors";
 import { Figure, FigureNames } from "./Figure";
-// import blackLogo from "../../public/black-pawn.png";
-// import whiteLogo from "../../public/white-pawn.png";
 
 const blackLogo = require("../../assets/img/black-pawn.png");
 const whiteLogo = require("../../assets/img/white-pawn.png");
@@ -16,8 +14,8 @@ export class Pawn extends Figure {
 
   isFirstStep: boolean = true;
 
-  canMove(target: Cell): boolean {
-    if (!super.canMove(target)) {
+  validMove(target: Cell, checkKing: boolean = false): boolean {
+    if (!super.validMove(target, checkKing)) {
       return false;
     }
 
@@ -25,15 +23,15 @@ export class Pawn extends Figure {
     const firstStepDirection =
       this.cell.figure?.color === Colors.BLACK ? 2 : -2;
 
-    if ((target.y === this.cell.y + direction || this.isFirstStep 
-      && (target.y === this.cell.y + firstStepDirection)) 
-      && target.x === this.cell.x 
+    if (((target.y === this.cell.y + direction) || (this.isFirstStep
+      && (target.y === this.cell.y + firstStepDirection) && this.cell.board.getCell(target.x, this.cell.y + direction).isEmpty()))
+      && target.x === this.cell.x
       && this.cell.board.getCell(target.x, target.y).isEmpty()) {
       return true;
     }
 
-    if (target.y === this.cell.y + direction 
-      && (target.x === this.cell.x + 1 || target.x === this.cell.x - 1) 
+    if (target.y === this.cell.y + direction
+      && (target.x === this.cell.x + 1 || target.x === this.cell.x - 1)
       && this.cell.isEnemy(target)) {
       return true;
     }

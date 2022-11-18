@@ -1,0 +1,43 @@
+
+.player {
+  background-color: #f9f9f9;
+  align-items: center;
+
+  &__name{
+    padding: 10px 0 10px 10px;
+    position: relative;
+    display: inline-block;
+    &::before{
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border: 1px solid #646464;
+      border-radius: 50%;
+      left: -20px;
+      top: 15px;
+    }
+  }
+
+  &__timer{
+    padding-bottom: 10px;
+  }
+
+  &.player--active{
+    background-color: skyblue;
+    .player__name::before {
+      background-color: #19be21 ;
+      border-color: #19be21;
+    }
+  }
+
+  &:first-child{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  &:last-child{
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+}

@@ -1,9 +1,6 @@
 import { Cell } from "../Cell";
 import { Colors } from "../Colors";
 import { Figure, FigureNames } from "./Figure";
-// import blackLogo from "../../public/black-knight.png";
-// import whiteLogo from "../../public/white-knight.png";
-
 const blackLogo = require("../../assets/img/black-knight.png");
 const whiteLogo = require("../../assets/img/white-knight.png");
 
@@ -14,8 +11,8 @@ export class Knight extends Figure {
     this.name = FigureNames.KNIGHT;
   }
 
-  canMove(target: Cell): boolean {
-    if (!super.canMove(target)) {
+  validMove(target: Cell, checkKing: boolean = false): boolean {
+    if (!super.validMove(target, checkKing)) {
       return false;
     }
 
