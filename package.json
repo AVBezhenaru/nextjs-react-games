@@ -56,8 +56,8 @@
     "typescript": "^4.8.4"
   },
   "lint-staged": {
-    "/**/*.{js,jsx,ts,tsx}": ["eslint --cache --fix"],
-    "/**/*.{js,jsx,ts,tsx,css,scss,md}": ["prettier --write"]
+    "/*.{js,jsx,ts,tsx}": ["eslint"],
+    "/*.{js,jsx,ts,tsx,css,scss,md}": ["prettier --write"]
   },
   "husky": {
     "hooks": {

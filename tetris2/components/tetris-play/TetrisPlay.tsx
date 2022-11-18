@@ -25,7 +25,7 @@ import Button from '../button/button';
 
 import styles from './tetris-play.module.scss';
 
-const a;
+const b;
 
 function TetrisPlay() {
   const dispatch = useAppDispatch();
