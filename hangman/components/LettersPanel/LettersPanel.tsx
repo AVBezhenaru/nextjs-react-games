@@ -32,7 +32,7 @@ const LettersPanel: NextPage = () => {
         const handleFindLetter = ({ target }: MouseEvent) => {
           const selectLetter = (target as HTMLSpanElement).textContent;
 
-          guessWord.forEach((guessLetter, index) => {
+          guessWord.forEach((guessLetter:any, index:number) => {
             if (guessLetter === selectLetter) {
               //* open new letter in GuessWord
               dispatch(addLetterAtCurrentWord({ index, letter: guessLetter }));
