@@ -1,13 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-
-import Chess from "./components/chess/Chess";
+import { BrowserRouter as Router } from "react-router-dom";
+import App from "./components/App";
+import '../../src/style.css'
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
-import './styles/globals.scss'
 
 root.render(
-  <Chess />
+  <React.StrictMode>
+    <Router>
+      <App />
+    </Router>
+  </React.StrictMode>
 );

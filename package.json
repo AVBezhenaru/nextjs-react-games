@@ -9,23 +9,24 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@next/eslint-plugin-next": "^13.0.3",
     "@reduxjs/toolkit": "^1.8.5",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@types/react-select": "^5.0.1",
     "axios": "^1.1.2",
     "classnames": "^2.3.2",
     "next": "12.2.2",
     "react": "^18.2.0",
+    "react-cookie": "^4.1.1",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.36.1",
     "react-redux": "^8.0.4",
     "react-router-dom": "^6.4.2",
     "react-select": "^5.6.1",
-    "react-transition-group": "^4.4.5",
     "reactjs-popup": "^2.0.5",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "yarn": "^1.22.19"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
