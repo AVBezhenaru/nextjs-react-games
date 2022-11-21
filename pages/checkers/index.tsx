@@ -8,11 +8,11 @@ export default function index() {
         Ш<span>а</span>ш<span>к</span>и
       </h1>
       <div className="container___head__page">
-        <Link href="/checkers/СhoosePlayer">
-          <span className="head__page-play">Выбор сoперника</span>
+        <Link href="/checkers/ChoosePlayer">
+          <span className="head__page-play">Играть онлайн</span>
         </Link>
         <Link href="/checkers/Home">
-          <span className="head__page-play">Играть</span>
+          <span className="head__page-play">Играть с ботом</span>
         </Link>
       </div>
     </div>
