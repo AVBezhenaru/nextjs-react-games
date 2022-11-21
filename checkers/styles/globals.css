@@ -43,14 +43,87 @@ a {
     background: black;
   }
 }
+.lobbi-container {
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 388px;
+  background-color: #8a8a8a;
+  border: 1px solid #8a8a8a;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  padding: 4px;
+ 
+  margin: 48px 0 20px 16px;
+}
+.lobbi-span{
+  padding-left: 20px;
+}
+.lobbi-label{
+  white-space: nowrap;
+}
+.lobbiCreckers_header {
+  font-family: 'True Lies(RUS BY LYAJKA)';
+}
+.lobbiCreckers-button__container {
+  display: flex;
+  justify-content: center;
+  margin: 10px 47px 15px 0;
+}
+.lobbiCreckers-button {
+  margin: 0 auto;
+  display: block;
+  font-family: monospace;
+  font-size: 18px;
+  color: black;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: transparent;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+.lobbiCreckers-button:hover {
+  background-color: black;
+  color: white;
+}
+.lobbiCreckers_select {
+  cursor: pointer;
+  width: 242px;
+  height: 35px;
+  padding: 5px;
+  background-color: white;
+  color: black;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  border-radius: 7px;
+  border: 2px solid black;
+}
+.lobbiCreckers_v:hover {
+  background-color: black;
+  color: white;
+}
+.lobbiCreckers_text {
+  font-family: 'True Lies(RUS BY LYAJKA)';
+  white-space: nowrap;
+  padding-top: 20px;
+}
+.lobbiCreckers__container {
+  float: left;
+  width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: '';
+  display: table;
+  clear: both;
+}
 .closePlayer__page {
   width: 100vw;
   height: 100vh;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
 
   background-image: url('../images/depositphotos_567117172-stock-illustration-abstract-video-game-for-game.jpg');
   background-size: cover;
@@ -388,9 +461,9 @@ a {
   color: white;
 }
 .lobbiCreckers__modal-button {
-  margin-top: 200px;
+margin-top: 250px;
   font-family: 'Yahfie Heavy';
-  /* font-size: 24px; */
+ margin-left: 55px;
   text-transform: uppercase;
   text-align: center;
   font-weight: bold;
@@ -409,14 +482,15 @@ a {
   cursor: pointer;
 
   transition: all 0.5s ease 0s;
+  border: 2px solid #ff00de
 }
-.lobbiCreckers__modal-button:hover {
+/* .lobbiCreckers__modal-button:hover {
   border: 2px solid #ff00de;
 
   color: #ff00de;
   text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 40px #ff00de, 0 0 80px #ff00de, 0 0 90px #ff00de,
     0 0 100px #ff00de, 0 0 150px #ff00de;
-}
+} */
 .modal {
   position: fixed;
   left: 0;
@@ -455,7 +529,7 @@ a {
   border: solid 1px #8a8a8a;
 
   color: black;
-/* 
+  /* 
   background-image: linear-gradient(90deg, transparent 708px, #ed82ad 710px, #ed82ad 711px, transparent 712px),
     linear-gradient(#e9e9e9 1px, transparent 0px), linear-gradient(90deg, #e9e9e9 1px, transparent 0px); */
   background-size: 100% 100%, 20px 20px, 20px 20px;
@@ -474,6 +548,8 @@ a {
 .modal-header,
 .modal-footer {
   padding: 10px;
+  display: flex;
+  justify-content: center;
 }
 .modal-title {
   font-size: 22px;
@@ -488,7 +564,7 @@ a {
 .modal-button {
   font-family: monospace;
   font-size: 18px;
-
+  color: black;
   border: 1px solid black;
   border-radius: 10px;
   padding: 5px 10px;

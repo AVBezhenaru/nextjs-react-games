@@ -561,6 +561,11 @@ const BoardCheckers: FC<BoardProps> = ({
                   забрать эту шашку и последующие шашки которые распологаются на одной клетке за ней, и если есть
                   свободное пространство после взятой шашки.
                 </p>
+                <div className="modal-footer">
+                  <button className="modal-button" type="button" onClick={() => setShow(false)}>
+                    Закрыть
+                  </button>
+                </div>
               </Modal>
             </div>
             <div className="board">

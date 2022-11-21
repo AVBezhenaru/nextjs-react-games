@@ -25,11 +25,6 @@ const Modal = (props) => {
             <h4 className="modal-title">{props.title}</h4>
           </div>
           <div className="modal-body">{props.children}</div>
-          <div className="modal-footer">
-            <button className="modal-button" type="button" onClick={props.onClose}>
-              Закрыть
-            </button>
-          </div>
         </div>
       </div>
     </CSSTransition>
