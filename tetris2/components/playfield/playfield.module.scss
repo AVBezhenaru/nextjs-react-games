@@ -3,7 +3,6 @@
 .grid {
   display: grid;
   height: 506px;
-  // width: 256px;
   grid-template-columns: repeat(10, 25px);
   grid-template-rows: repeat(20, 25px); 
   border: 3px solid darkgray;

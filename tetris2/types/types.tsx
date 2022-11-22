@@ -14,7 +14,6 @@ export type DetailType = {
 };
 
 export type DetailsType = {
-  // '0': DetailType;
   I: DetailType;
   J: DetailType;
   L: DetailType;

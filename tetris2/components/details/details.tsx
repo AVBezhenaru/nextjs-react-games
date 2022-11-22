@@ -1,7 +1,6 @@
 import { DetailsType } from '../../types/types';
 
 export const DETAILS: DetailsType = {
-  // position: 0,  
   I: {
     shape: [
       [
@@ -146,12 +145,3 @@ export const randomDetail = () => {
 
   return DETAILS[randomKey] || 'I';
 };
-
-
-// export const randomDetail = () => {
-//   const allDetails = 'IJLOSTZ';
-//   DETAILS.position = DETAILS.position >= allDetails.length - 1 ? 0 : DETAILS.position += 1;
-//   const currentDetail = allDetails[DETAILS.position]; 
-//   console.log('cur', currentDetail);
-//   return currentDetail;
-// };

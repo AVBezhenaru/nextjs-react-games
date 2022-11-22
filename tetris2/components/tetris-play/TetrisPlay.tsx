@@ -19,7 +19,6 @@ import {
   countScore,
   changeDropTime,
   countLevel,
-  checkDownCollision,
 } from '../../store/tetrisSlice';
 import Button from '../button/button';
 
@@ -29,10 +28,7 @@ function TetrisPlay() {
   const dispatch = useAppDispatch();
   const isGameOver = useAppSelector((state) => state.tetris.isGameOver);
   const detailCollided = useAppSelector((state) => state.tetris.detail.collided);
-  const y = useAppSelector((state) => state.tetris.detail.position.y);
-  const collided = useAppSelector((state) => state.tetris.hasCollided);
   const nextDetail = useAppSelector((state) => state.tetris.nextDetail);
-  const detail = useAppSelector((state) => state.tetris.detail);
   const linesCleared = useAppSelector((state) => state.tetris.linesCleared);
   const dropTime = useAppSelector((state) => state.tetris.dropTime);
 
@@ -42,20 +38,7 @@ function TetrisPlay() {
     dispatch(updateDetailPostion());
   }, []);
 
-  // const handleMoveDown = () => {
-  //   dispatch(checkDownCollision());
-  //   if (!isGameOver) {
-  //     console.log('in handleMoveDown timer')
-  //     // dispatch(checkDownCollision());
-  //     const id = setInterval(() => handleMoveDown(), dropTime);
-  //     return () => clearInterval(id);
-  //   }
-  // };
   useEffect(() => {
-    // console.log('useEffect - y', y);
-    // console.log('collided detail', detailCollided);
-    // console.log('stage detail', collided);
-
     if (!isGameOver) {
       const id = setInterval(() => handleMoveDown(), dropTime);
       return () => clearInterval(id);
@@ -115,9 +98,6 @@ function TetrisPlay() {
       <PlayField />
       <div className={styles['playfield_inner-wrapper']}>
         <NextDetails />
-        {/* <div onClick={() => dispatch(gamePaused())}>
-          <Button theme="startGame">{!isGamePaused ? 'Play' : 'Pause'}</Button>
-        </div> */}
         <GameScore />
       </div>
     </div>

@@ -37,9 +37,6 @@ const tetrisSlice = createSlice({
   name: 'tetris',
   initialState,
   reducers: {
-    toggleGameOver(state) {
-      state.isGameOver = true;
-    },
     move(state, action: PayloadAction<string>) {
       const posX = state.detail.position.x;
       const posY = state.detail.position.y;
@@ -139,8 +136,6 @@ const tetrisSlice = createSlice({
         state.rotationIdx = 0;
         state.detail.tetromino = randomDetail().shape[state.rotationIdx];
       }
-      // console.log('det', current(state.detail));
-      // const leng =  state.detail.tetromino[state.rotationIdx].length;
       if (state.hasCollided && !state.detail.collided && posY <= 1) {
         state.isGameOver = true;
       }
@@ -149,7 +144,6 @@ const tetrisSlice = createSlice({
         // проверка for для возможности фиксации детали, в случае невозможности дальнейшего спуска вниз
         // если эту проверку убрать - то деталь не будет останавливаться внизу и уйдет за край экрана
         const length = detail === undefined ? [] : detail.length;
-        console.log('detail22', detail);
         if (detail === undefined) {
           state.rotationIdx = 0;
           state.detail.tetromino = randomDetail().shape[state.rotationIdx];
@@ -167,12 +161,10 @@ const tetrisSlice = createSlice({
           }
         }
         state.detail.position.y += 1;
-        //  } else if (!state.hasCollided && state.detail.collided && posY < 1) {
       }
     },
     startGame(state) {
       state.stage = createStage();
-      // state.nextDetailStage = createNextDetailStage();
       state.detail = {
         position: {
           x: STAGE_WIDTH / 2 - 2,
@@ -199,12 +191,6 @@ const tetrisSlice = createSlice({
       state.isGamePaused = false;
       state.isOut = false;
     },
-    gamePaused(state) {
-      state.isGamePaused = !state.isGamePaused;
-      if (state.isGamePaused) {
-        state.intervalId = null;
-      }
-    },
     setNextDetail(state) {
       // отрисовка след детали на боковой панели (замена детали происходит в функции updateActivePiece)
       // создали дубликат новой боковой панели
@@ -216,7 +202,6 @@ const tetrisSlice = createSlice({
       );
 
       const updatedNextDetail = state.nextDetail.tetromino[0];
-      // const updatedNextDetail = state.nextDetail.tetromino;
       // если клетка детали окрашена - переносим в новую боковую панель
       updatedNextDetail.forEach((row: number[], y: number) => {
         row.forEach((value, x) => {
@@ -277,7 +262,7 @@ const tetrisSlice = createSlice({
           state.isGameOver = true;
         }
         state.detail = state.nextDetail;
-        state.detail.collided = false; // **
+        state.detail.collided = false;
       } catch (error) {
         console.log('Error in updateActivePiece');
       }
@@ -289,15 +274,6 @@ const tetrisSlice = createSlice({
         state.nextDetail.tetromino = fig.shape;
       } catch (error) {
         console.log('Error in updateNextPiece');
-      }
-    },
-    checkDownCollision(state) {
-      console.log('checkDownCollision');
-      const { x, y } = state.detail.position;
-      if (state.detail.collided && y < 1) {
-        console.log('OVEROVER');
-        state.hasCollided = true;
-        state.isGameOver = true;
       }
     },
     checkCollided(state, action) {
@@ -334,7 +310,6 @@ const tetrisSlice = createSlice({
         console.log('XY', x, y);
         for (let i = 0; i < detail.length; i++) {
           for (let j = 0; j < detail[i].length; j++) {
-            // console.log('y + i + posY', y + i + posY);
             if (
               detail[i][j] !== 0 &&
               (state.stage[y + i + posY] === undefined ||
@@ -342,7 +317,6 @@ const tetrisSlice = createSlice({
                 state.stage[y + i + posY][x + j + posX][1] !== 'clear')
             ) {
               state.hasCollided = true;
-              // state.detail.position.y += 1;
             }
           }
         }
@@ -361,7 +335,6 @@ const tetrisSlice = createSlice({
         return acc;
       }, []);
       state.stage = updatedStage;
-      // console.log('lines', state.linesCleared);
     },
     countScore(state) {
       state.score += SCORE_COUNT[state.linesCleared.toString()];
@@ -384,19 +357,11 @@ export const {
   setNextDetail,
   updateDetailPostion,
   checkCollided,
-  checkDownCollision,
   updateActivePiece,
   updateNextPiece,
   checkRows,
   countScore,
   countLevel,
   changeDropTime,
-  toggleGameOver,
-  gamePaused,
 } = tetrisSlice.actions;
 export default tetrisSlice.reducer;
-
-
-
-// троттлингнг
-// убрать "мусор"

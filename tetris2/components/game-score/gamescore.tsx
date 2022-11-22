@@ -1,6 +1,5 @@
 import { useAppSelector } from '../../../hooks';
 
-// import { SCORE_COUNT, calculateScore } from './score-count';
 import styles from './gamescore.module.scss';
 
 function GameScore() {

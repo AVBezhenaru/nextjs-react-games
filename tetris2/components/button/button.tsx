@@ -68,18 +68,6 @@ const withTheme5 = (Button: React.ElementType) => (props: { theme: string }) => 
   return <Button {...props} />;
 };
 
-// const withTheme6 = (Button: React.ElementType) => (props: { theme: string }) => {
-//   if (props.theme === 'startGame') {
-//     return (
-//       <div className={style.startGame}>
-//         <Button {...props} />
-//       </div>
-//     );
-//   }
-
-//   return <Button {...props} />;
-// };
-
 const withTheme7 = (Button: React.ElementType) => (props: { theme: string }) => {
   if (props.theme === 'settings') {
     return (
@@ -117,7 +105,6 @@ const Button = compose(
   withTheme3,
   withTheme4,
   withTheme5,
-  // withTheme6,
   withTheme7,
   withTheme8,
 )(ButtonBase);
