@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import Link from 'next/link';
+import throttle from 'lodash.throttle';
 
 import PlayField from '../playfield/playfield';
 import NextDetails from '../next-details/next-details';
@@ -46,12 +47,15 @@ function TetrisPlay() {
   }, [isGameOver]);
 
   // отслеживаем навигацию пользователя - через handleKeyPress на window
-  const handleKeyPress = useCallback((event: any) => {
-    dispatch(checkCollided(event.code));
-    dispatch(move(event.code));
-    dispatch(checkRows());
-    dispatch(updateDetailPostion());
-  }, []);
+  const handleKeyPress = useCallback(
+    throttle((event: any) => {
+      dispatch(checkCollided(event.code));
+      dispatch(move(event.code));
+      dispatch(checkRows());
+      dispatch(updateDetailPostion());
+    }, 150),
+    [],
+  );
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyPress);
