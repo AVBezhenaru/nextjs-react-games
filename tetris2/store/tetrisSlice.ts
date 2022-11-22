@@ -98,7 +98,14 @@ const tetrisSlice = createSlice({
             if (!state.hasCollided && !state.detail.collided) {
               // проверка for для возможности фиксации детали, в случае невозможности дальнейшего спуска вниз
               // если эту проверку отсюда убрать, то деталь улетит вниз за пределы экрана
-              for (let i = 0; i < detail.length; i++) {
+              const length = detail === undefined ? [] : detail.length;
+              console.log('detail', detail);
+              if (detail === undefined) {
+                state.rotationIdx = 0;
+                state.detail.tetromino = randomDetail().shape[state.rotationIdx];
+              }
+
+              for (let i = 0; i < length; i++) {
                 for (let j = 0; j < detail[i].length; j++) {
                   if (detail[i][j] !== 0) {
                     if (
@@ -128,19 +135,26 @@ const tetrisSlice = createSlice({
       const posX = state.detail.position.x;
       const posY = state.detail.position.y;
       const detail = state.detail.tetromino[state.rotationIdx];
+      if (detail === undefined) {
+        state.rotationIdx = 0;
+        state.detail.tetromino = randomDetail().shape[state.rotationIdx];
+      }
       // console.log('det', current(state.detail));
       // const leng =  state.detail.tetromino[state.rotationIdx].length;
-      if (state.hasCollided && !state.detail.collided && posY < 1) {
-        console.log('y', current(state.detail.position.y));
-        console.log('IN MOVEDOWN gameover');
+      if (state.hasCollided && !state.detail.collided && posY <= 1) {
         state.isGameOver = true;
       }
 
       if (!state.hasCollided && !state.detail.collided && !state.isGameOver) {
-        // console.log('in if');
         // проверка for для возможности фиксации детали, в случае невозможности дальнейшего спуска вниз
         // если эту проверку убрать - то деталь не будет останавливаться внизу и уйдет за край экрана
-        for (let i = 0; i < detail.length; i++) {
+        const length = detail === undefined ? [] : detail.length;
+        console.log('detail22', detail);
+        if (detail === undefined) {
+          state.rotationIdx = 0;
+          state.detail.tetromino = randomDetail().shape[state.rotationIdx];
+        }
+        for (let i = 0; i < length; i++) {
           for (let j = 0; j < detail[i].length; j++) {
             if (detail[i][j] !== 0) {
               if (
@@ -202,6 +216,7 @@ const tetrisSlice = createSlice({
       );
 
       const updatedNextDetail = state.nextDetail.tetromino[0];
+      // const updatedNextDetail = state.nextDetail.tetromino;
       // если клетка детали окрашена - переносим в новую боковую панель
       updatedNextDetail.forEach((row: number[], y: number) => {
         row.forEach((value, x) => {
@@ -216,8 +231,16 @@ const tetrisSlice = createSlice({
     updateDetailPostion(state) {
       // отрисовка активной и уже выпавших деталей на поле:
       try {
-        const detail = state.detail.tetromino[state.rotationIdx];
+        let detail = state.detail.tetromino[state.rotationIdx];
+
+        if (detail === undefined) {
+          const data = randomDetail().shape[state.rotationIdx];
+          state.rotationIdx = 0;
+          state.detail.tetromino = data;
+          detail = data;
+        }
         const { x, y } = state.detail.position;
+        console.log('xy', x, y);
         const newStage = state.stage.map((row) =>
           row.map((value: any) => (value[1] === 'clear' ? [0, 'clear'] : value)),
         );
@@ -231,7 +254,11 @@ const tetrisSlice = createSlice({
             });
           });
         } catch (error) {
-          console.log('error in detail render');
+          state.rotationIdx = 0;
+          state.detail.tetromino = randomDetail().shape[state.rotationIdx];
+          state.detail.collided = true;
+          console.log('xy', x, y);
+          console.log('error in detail render', current(state.detail));
         }
 
         state.stage = newStage;
@@ -246,6 +273,9 @@ const tetrisSlice = createSlice({
         // делаем обновление целиком детали, а не только tetromino
         // при этом nextDetail меняем в отдельной функции, иначе nextStage будет показывать
         // активную деталь, а не следующую
+        if (state.detail.collided && state.detail.position.y <= 3) {
+          state.isGameOver = true;
+        }
         state.detail = state.nextDetail;
         state.detail.collided = false; // **
       } catch (error) {
@@ -264,65 +294,11 @@ const tetrisSlice = createSlice({
     checkDownCollision(state) {
       console.log('checkDownCollision');
       const { x, y } = state.detail.position;
-      // const detail = state.detail.tetromino[state.rotationIdx];
-      // for (let i = 0; i < detail.length; i++) {
-      //   for (let j = 0; j < detail[i].length; j++) {
-      //     console.log('y + i + posY', y + i + 1);
-      //     if (
-      //       detail[i][j] !== 0 &&
-      //       (state.stage[y + i + 1] === undefined ||
-      //         state.stage[y + i + 1][x + j] === undefined ||
-      //         state.stage[y + i + 1][x + j][1] !== 'clear')
-      //     ) {
-      //       console.log('HERE!!');
-      //       state.hasCollided = true;
-      //       // state.detail.position.y += 1;
-      //     }
-      //   }
-      // }
       if (state.detail.collided && y < 1) {
         console.log('OVEROVER');
         state.hasCollided = true;
         state.isGameOver = true;
       }
-      // const { x, y } = state.detail.position;
-      // const detail = state.detail.tetromino[state.rotationIdx];
-      // const length = detail.length - 1;
-
-      //   try {
-      //     for (let i = 0; i < detail.length; i++) {
-      //       for (let j = 0; j < detail[i].length; j++) {
-      //         if (
-      //           detail[i][j] !== 0 &&
-      //           (state.stage[y + i + length] === undefined ||
-      //             state.stage[y + i + length][x + j] === undefined ||
-      //             state.stage[y + i + length][x + j][1] !== 'clear')
-      //         ) {
-      //           state.hasCollided = true;
-      //         }
-      //       }
-      //     }
-      //     console.log('!!!!checkDownCollided!', state.hasCollided);
-      //   } catch (error) {
-      //     console.log('Error in checkDownCollided');
-      //   }
-      //   // const posX = state.detail.position.x;
-      //   // const posY = state.detail.position.y;
-      //   // const detail = state.detail.tetromino[state.rotationIdx];
-      //   // for (let i = 0; i < detail.length; i++) {
-      //   //   for (let j = 0; j < detail[i].length; j++) {
-      //   //     console.log('posY + i + 2', posY + i + 2);
-      //   //     if (detail[i][j] !== 0) {
-      //   //       if (
-      //   //         state.stage[posY + i + 2] === undefined ||
-      //   //         state.stage[posY + i + 2][posX + j][1] !== 'clear'
-      //   //       ) {
-      //   //         state.detail.collided = true;
-      //   //         console.log('IN DOWN');
-      //   //       }
-      //   //     }
-      //   //   }
-      //   // }
     },
     checkCollided(state, action) {
       console.log('in checkcollided', state.hasCollided);
@@ -332,6 +308,10 @@ const tetrisSlice = createSlice({
       let posY = 0;
       const { x, y } = state.detail.position;
       const detail = state.detail.tetromino[state.rotationIdx];
+      if (detail === undefined) {
+        state.rotationIdx = 0;
+        state.detail.tetromino = randomDetail().shape[state.rotationIdx];
+      }
 
       switch (action.payload) {
         case 'KeyA':
@@ -351,6 +331,7 @@ const tetrisSlice = createSlice({
       }
 
       try {
+        console.log('XY', x, y);
         for (let i = 0; i < detail.length; i++) {
           for (let j = 0; j < detail[i].length; j++) {
             // console.log('y + i + posY', y + i + posY);
@@ -414,3 +395,8 @@ export const {
   gamePaused,
 } = tetrisSlice.actions;
 export default tetrisSlice.reducer;
+
+
+
+// троттлингнг
+// убрать "мусор"

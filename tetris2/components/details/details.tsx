@@ -1,7 +1,7 @@
 import { DetailsType } from '../../types/types';
 
 export const DETAILS: DetailsType = {
-  // 0: { shape: [[[0]], [[0]]], color: '0, 0, 0' },
+  // position: 0,  
   I: {
     shape: [
       [
@@ -139,31 +139,19 @@ export const DETAILS: DetailsType = {
   },
 };
 
-export const determineColor = (key: string) => {
-  // console.log('key', key);
-  switch (key) {
-    case 'I':
-      return '80, 227, 230';
-    case 'J':
-      return '36, 95, 223';
-    case 'L':
-      return '223, 173, 36';
-    case 'O':
-      return '190, 80, 120';
-    case 'S':
-      return '190, 80, 120';
-    case 'T':
-      return '132, 65, 198';
-    case 'Z':
-      return '227, 78, 78';
-    default:
-      break;
-  }
-};
-
 export const randomDetail = () => {
   const allDetails = 'IJLOSTZ';
-  const randomKey = allDetails[Math.floor(Math.random() * allDetails.length)];
-  determineColor(randomKey);
-  return DETAILS[randomKey as keyof DetailsType];
+  const randomKey = allDetails[Math.floor(Math.random() * (allDetails.length - 1))];
+  console.log('DETAILS[randomKey]', DETAILS[randomKey]);
+
+  return DETAILS[randomKey] || 'I';
 };
+
+
+// export const randomDetail = () => {
+//   const allDetails = 'IJLOSTZ';
+//   DETAILS.position = DETAILS.position >= allDetails.length - 1 ? 0 : DETAILS.position += 1;
+//   const currentDetail = allDetails[DETAILS.position]; 
+//   console.log('cur', currentDetail);
+//   return currentDetail;
+// };
