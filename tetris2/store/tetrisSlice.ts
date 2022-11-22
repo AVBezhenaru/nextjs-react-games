@@ -96,7 +96,6 @@ const tetrisSlice = createSlice({
               // проверка for для возможности фиксации детали, в случае невозможности дальнейшего спуска вниз
               // если эту проверку отсюда убрать, то деталь улетит вниз за пределы экрана
               const length = detail === undefined ? [] : detail.length;
-              console.log('detail', detail);
               if (detail === undefined) {
                 state.rotationIdx = 0;
                 state.detail.tetromino = randomDetail().shape[state.rotationIdx];
@@ -115,7 +114,7 @@ const tetrisSlice = createSlice({
                 }
               }
               state.detail.position.y += 1;
-            } else if (state.hasCollided && !state.detail.collided && posY < 1) {
+            } else if (state.detail.collided && posY < 1) {
               state.isGameOver = true;
             }
 
@@ -225,7 +224,6 @@ const tetrisSlice = createSlice({
           detail = data;
         }
         const { x, y } = state.detail.position;
-        console.log('xy', x, y);
         const newStage = state.stage.map((row) =>
           row.map((value: any) => (value[1] === 'clear' ? [0, 'clear'] : value)),
         );
@@ -242,7 +240,6 @@ const tetrisSlice = createSlice({
           state.rotationIdx = 0;
           state.detail.tetromino = randomDetail().shape[state.rotationIdx];
           state.detail.collided = true;
-          console.log('xy', x, y);
           console.log('error in detail render', current(state.detail));
         }
 
@@ -258,7 +255,7 @@ const tetrisSlice = createSlice({
         // делаем обновление целиком детали, а не только tetromino
         // при этом nextDetail меняем в отдельной функции, иначе nextStage будет показывать
         // активную деталь, а не следующую
-        if (state.detail.collided && state.detail.position.y <= 3) {
+        if (!state.detail.collided && state.detail.position.y <= 3) {
           state.isGameOver = true;
         }
         state.detail = state.nextDetail;
@@ -277,7 +274,6 @@ const tetrisSlice = createSlice({
       }
     },
     checkCollided(state, action) {
-      console.log('in checkcollided', state.hasCollided);
       // posX & posY - предстоящее передвижение, в зависимости от нажатой клавиши.
       // Т.е.если мы нажали, а движение туда невозможно, то должна сработать проверка на collided - ниже
       let posX = 0;
@@ -307,7 +303,6 @@ const tetrisSlice = createSlice({
       }
 
       try {
-        console.log('XY', x, y);
         for (let i = 0; i < detail.length; i++) {
           for (let j = 0; j < detail[i].length; j++) {
             if (
@@ -321,6 +316,12 @@ const tetrisSlice = createSlice({
           }
         }
       } catch (error) {
+        if (detail === undefined) {
+          state.rotationIdx = 0;
+          state.detail.tetromino = randomDetail().shape[state.rotationIdx];
+          state.detail.position.x = STAGE_WIDTH / 2 - 2;
+          state.detail.position.y = 0;
+        }
         console.log('Error in checkCollided');
       }
     },
