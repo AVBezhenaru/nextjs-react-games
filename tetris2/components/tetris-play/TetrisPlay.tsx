@@ -19,23 +19,16 @@ import {
   countScore,
   changeDropTime,
   countLevel,
-  checkDownCollision,
 } from '../../store/tetrisSlice';
 import Button from '../button/button';
 
 import styles from './tetris-play.module.scss';
 
-const b;
-
 function TetrisPlay() {
-  const a = 10;
   const dispatch = useAppDispatch();
   const isGameOver = useAppSelector((state) => state.tetris.isGameOver);
   const detailCollided = useAppSelector((state) => state.tetris.detail.collided);
-  const y = useAppSelector((state) => state.tetris.detail.position.y);
-  const collided = useAppSelector((state) => state.tetris.hasCollided);
   const nextDetail = useAppSelector((state) => state.tetris.nextDetail);
-  const detail = useAppSelector((state) => state.tetris.detail);
   const linesCleared = useAppSelector((state) => state.tetris.linesCleared);
   const dropTime = useAppSelector((state) => state.tetris.dropTime);
 

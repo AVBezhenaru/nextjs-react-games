@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import hangmanReducer from '../hangman/store/HangmanSlice';
-import tetrisSlice from '../tetris/store/tetrisSlice';
+import tetrisSlice from '../tetris2/store/tetrisSlice';
 
 import user from './userSlice';
 

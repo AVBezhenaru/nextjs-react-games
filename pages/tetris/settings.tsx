@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-import Settings from '../../tetris/components/settings/settings';
-import Button from '../../tetris/components/button/button';
+import Settings from '../../tetris2/components/settings/settings';
+import Button from '../../tetris2/components/button/button';
 
 function GameSettings() {
   return (
