@@ -28,6 +28,7 @@ import styles from './tetris-play.module.scss';
 const b;
 
 function TetrisPlay() {
+  const a = 10;
   const dispatch = useAppDispatch();
   const isGameOver = useAppSelector((state) => state.tetris.isGameOver);
   const detailCollided = useAppSelector((state) => state.tetris.detail.collided);

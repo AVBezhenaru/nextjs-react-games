@@ -7,8 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint --fix",
-    "prepare": "husky install", 
-    "pre-commit": "lint-staged"
+    "prepare": "husky install"
   },
   "dependencies": {
     "@next/eslint-plugin-next": "^13.0.3",
@@ -49,19 +48,21 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.8",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "husky": "^8.0.0",
+    "husky": "^8.0.2",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "sass": "^1.55.0",
     "typescript": "^4.8.4"
   },
-  "lint-staged": {
-    "/*.{js,jsx,ts,tsx}": ["eslint"],
-    "/*.{js,jsx,ts,tsx,css,scss,md}": ["prettier --write"]
-  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "npm run lint:fix",
+      "git add"
+    ]
   }
 }
