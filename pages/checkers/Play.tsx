@@ -7,7 +7,7 @@ import { Player } from '../../checkers/model/Player';
 import { Colors } from '../../checkers/model/Colors';
 import { Figure } from '../../checkers/model/figures/Figure';
 
-export default function Home() {
+export default function Play() {
   const [board, setBoard] = useState(new Board());
   const [show, setShow] = useState(false);
   const [whitePlayer] = useState(new Player(Colors.WHITE));

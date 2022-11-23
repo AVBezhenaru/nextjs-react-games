@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export default function index() {
+export default function Home() {
   return (
     <div className="head__page">
       <h2 className="head__page-title">Добро пожаловать в игру</h2>
@@ -11,7 +11,7 @@ export default function index() {
         <Link href="/checkers/ChoosePlayer">
           <span className="head__page-play">Играть онлайн</span>
         </Link>
-        <Link href="/checkers/Home">
+        <Link href="/checkers/Play">
           <span className="head__page-play">Играть с ботом</span>
         </Link>
       </div>

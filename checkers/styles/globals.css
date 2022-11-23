@@ -49,19 +49,22 @@ a {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  width: 388px;
-  background-color: #8a8a8a;
-  border: 1px solid #8a8a8a;
+
+  background-color: black;
+  border: 1px solid white;
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
-  padding: 4px;
+  padding: 10px;
+  border-radius: 10px;
+}
+.lobbi-span {
  
-  margin: 48px 0 20px 16px;
+
+  font-family: 'Yahfie Heavy';
+  text-transform: uppercase;
+  font-weight: bold;
 }
-.lobbi-span{
-  padding-left: 20px;
-}
-.lobbi-label{
+.lobbi-label {
   white-space: nowrap;
 }
 .lobbiCreckers_header {
@@ -124,8 +127,10 @@ a {
 .closePlayer__page {
   width: 100vw;
   height: 100vh;
-
-  background-image: url('../images/depositphotos_567117172-stock-illustration-abstract-video-game-for-game.jpg');
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../images/apps.53192.14379170605024367.a314d276-3cdb-4d7d-afcc-ad09bd8549f9.jpeg');
   background-size: cover;
 }
 .head__page {
@@ -461,36 +466,35 @@ a {
   color: white;
 }
 .lobbiCreckers__modal-button {
-margin-top: 250px;
   font-family: 'Yahfie Heavy';
- margin-left: 55px;
   text-transform: uppercase;
-  text-align: center;
   font-weight: bold;
   font-style: italic;
-
-  border: 2px #ff00de;
   border-radius: 13px;
   padding: 10px 20px;
-
-  color: #ff00de;
-  text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 40px #ff00de, 0 0 80px #ff00de, 0 0 90px #ff00de,
-    0 0 100px #ff00de, 0 0 150px #ff00de;
-
-  background-color: transparent;
-
-  cursor: pointer;
+  color: white;
+  margin: 20px 0 0 211px;
 
   transition: all 0.5s ease 0s;
-  border: 2px solid #ff00de
+  border: 2px solid white;
+ 
 }
-/* .lobbiCreckers__modal-button:hover {
-  border: 2px solid #ff00de;
-
-  color: #ff00de;
-  text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 40px #ff00de, 0 0 80px #ff00de, 0 0 90px #ff00de,
-    0 0 100px #ff00de, 0 0 150px #ff00de;
-} */
+.lobbiCreckers__modal-button:hover {
+  background-color: black;
+}
+.lobbi-btn {
+  border: 1px solid white;
+  display: block;
+  float: right;
+  border-radius: 10px;
+  margin-bottom: 3px;
+  padding: 10px;
+  cursor: pointer;
+}
+.lobbi-btn:hover {
+  background-color: white;
+  color: black;
+}
 .modal {
   position: fixed;
   left: 0;

@@ -13,8 +13,8 @@ const СhoosePlayer: FC<СhoosePlayerProps> = () => {
 
   return (
     <div className="closePlayer__page">
-      <Lobbi name="" playConditional={undefined} />
-      <div className="lobbiCreckers-button__container">
+      <div>
+        <Lobbi />
         <button
           type="button"
           className="lobbiCreckers__modal-button"
@@ -26,12 +26,11 @@ const СhoosePlayer: FC<СhoosePlayerProps> = () => {
           Создать игру
         </button>
       </div>
+
       <Modal onClose={() => setShow(false)} show={show}>
         <div className="row">
           <h1 className="lobbiCreckers_header">Настройки вашей игры</h1>
           <div className="lobbiCreckers__container">
-            <p className="lobbiCreckers_text">Имя</p>
-            <input className="lobbiCreckers_select" type="text" />
             <p className="lobbiCreckers_text">Цвет шашки</p>
             <select className="lobbiCreckers_select">
               <option>Выберите цвет шашки </option>
@@ -40,18 +39,22 @@ const СhoosePlayer: FC<СhoosePlayerProps> = () => {
             </select>
           </div>
           <div className="column">
-            <p className="lobbiCreckers_text">Донаты</p>
+            <p className="lobbiCreckers_text">Ставка</p>
             <select className="lobbiCreckers_select">
-              <option>Выбор размера донат </option>
-              <option value="хз">100р</option>
-              <option value="хз">500р</option>
-              <option value="хз">1000р</option>
+              <option>Выбор вашей ставки </option>
+              <option>10</option>
+              <option>50</option>
+              <option>100</option>
+              <option>1000</option>
+              <option>2000</option>
+              <option>5000</option>
+              <option>10.000</option>
             </select>
           </div>
         </div>
         <div className="lobbiCreckers-button__container">
           <button className="lobbiCreckers-button" type="button" onClick={() => setShow(false)}>
-            Выбрать игрока
+            Подтвердить
           </button>
         </div>
       </Modal>
