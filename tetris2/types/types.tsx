@@ -62,6 +62,7 @@ export type InitialStateType = {
   isGamePaused: boolean;
   intervalId: any;
   isOut: boolean;
+  countToScore: number;
 };
 
 export type UsePlayerType = {

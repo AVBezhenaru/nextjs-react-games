@@ -32,6 +32,7 @@ const initialState: InitialStateType = {
   isGamePaused: false,
   intervalId: null,
   isOut: false,
+  countToScore: 0,
 };
 const tetrisSlice = createSlice({
   name: 'tetris',
@@ -135,7 +136,8 @@ const tetrisSlice = createSlice({
         state.rotationIdx = 0;
         state.detail.tetromino = randomDetail().shape[state.rotationIdx];
       }
-      if (state.hasCollided && !state.detail.collided && posY <= 1) {
+      if (state.detail.collided && posY < 1) {
+        console.log('TWO');
         state.isGameOver = true;
       }
 
@@ -155,6 +157,9 @@ const tetrisSlice = createSlice({
                 state.stage[posY + i + 2][posX + j][1] !== 'clear'
               ) {
                 state.detail.collided = true;
+                if (state.detail.position.y <= 1) {
+                  state.isGameOver = true;
+                }
               }
             }
           }
@@ -326,25 +331,34 @@ const tetrisSlice = createSlice({
       }
     },
     checkRows(state) {
+      const count = []; // массив, в который пушим заполненные строки, чтобы потом считать, ск баллов начислить
+      // if (state.detail.collided) {
+
+      // }
       const updatedStage = state.stage.reduce((acc: any, row: any) => {
         if (row.findIndex((cell: (string | number)[]) => cell[0] === 0) === -1) {
+          count.push(row);
           state.linesCleared++;
           acc.unshift(new Array(state.stage[0].length).fill([0, 'clear']));
           return acc;
         }
         acc.push(row);
+        state.countToScore = count.length;
         return acc;
       }, []);
       state.stage = updatedStage;
+      state.countToScore = count.length;
     },
     countScore(state) {
-      state.score += SCORE_COUNT[state.linesCleared.toString()];
+      state.score += SCORE_COUNT[state.countToScore.toString()];
     },
     changeDropTime(state) {
+      console.log('DROPTIME', state.dropTime);
       state.dropTime = DROPTIME_COUNT[state.score.toString()];
     },
     countLevel(state) {
-      if (state.score === 1000) {
+      // console.log('state.linesCleared', state.linesCleared);
+      if (state.linesCleared % 10 === 0) {
         state.level++;
       }
     },
