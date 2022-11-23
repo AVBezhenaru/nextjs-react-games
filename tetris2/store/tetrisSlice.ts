@@ -334,9 +334,6 @@ const tetrisSlice = createSlice({
     },
     checkRows(state) {
       const count = []; // массив, в который пушим заполненные строки, чтобы потом считать, ск баллов начислить
-      // if (state.detail.collided) {
-
-      // }
       const updatedStage = state.stage.reduce((acc: any, row: any) => {
         if (row.findIndex((cell: (string | number)[]) => cell[0] === 0) === -1) {
           count.push(row);
@@ -355,13 +352,16 @@ const tetrisSlice = createSlice({
       state.score += SCORE_COUNT[state.countToScore.toString()];
     },
     changeDropTime(state) {
-      console.log('DROPTIME', state.dropTime);
-      state.dropTime = DROPTIME_COUNT[state.score.toString()];
+      if (state.score < 1000) {
+        state.dropTime = 1000;
+      } else if (DROPTIME_COUNT[state.score.toString()]){
+        state.dropTime = DROPTIME_COUNT[state.score.toString()];
+      }
     },
     countLevel(state) {
-      if (LEVEL_COUNT[state.score.toString()] === undefined) {
+      if (state.score < 1000) {
         state.level = 1;
-      } else {
+      } else if (LEVEL_COUNT[state.score.toString()]) {
         state.level = LEVEL_COUNT[state.score.toString()];
       }
     },

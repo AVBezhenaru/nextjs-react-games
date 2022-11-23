@@ -1,7 +1,7 @@
 import { ScoreType } from '../../types/types';
 
 export const DROPTIME_COUNT: ScoreType = {
-  '500': 900,
+  '1000': 900,
   '1500': 800,
   '2000': 700,
   '2500': 600,

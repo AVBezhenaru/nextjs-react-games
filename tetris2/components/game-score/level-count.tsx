@@ -1,5 +1,6 @@
 import { ScoreType } from '../../types/types';
 
+// в зависимости от набранных очков - идет начисление уровня. См в tetrisSlice - levelCount
 export const LEVEL_COUNT: ScoreType = {
   '1000': 2,
   '1500': 3,

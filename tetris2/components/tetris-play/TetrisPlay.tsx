@@ -33,7 +33,8 @@ function TetrisPlay() {
   const linesCleared = useAppSelector((state) => state.tetris.linesCleared);
   const dropTime = useAppSelector((state) => state.tetris.dropTime);
   const levelCount = useAppSelector((state) => state.tetris.levelCount);
-
+  const score = useAppSelector((state) => state.tetris.score);
+  
   const handleMoveDown = useCallback(() => {
     dispatch(moveDown());
     dispatch(updateDetailPostion());
@@ -41,10 +42,11 @@ function TetrisPlay() {
 
   useEffect(() => {
     if (!isGameOver) {
+      console.log('dropInUse', dropTime);
       const id = setInterval(() => handleMoveDown(), dropTime);
       return () => clearInterval(id);
     }
-  }, [isGameOver]);
+  }, [isGameOver, dropTime, score]);
 
   // отслеживаем навигацию пользователя - через handleKeyPress на window
   const handleKeyPress = useCallback(
@@ -79,18 +81,10 @@ function TetrisPlay() {
     if (detailCollided) {
       dispatch(checkRows());
       dispatch(countScore());
-      if (linesCleared % 5 === 0) {
-        dispatch(countLevel());
-      }
-      // dispatch(countLevel());
+      dispatch(countLevel());
       dispatch(changeDropTime());
     }
      }, [detailCollided]);
-
-  // useEffect(() => {
-  //   console.log('inUSe');
-  //   dispatch(countLevel());
-  // }, [levelCount]);
 
   return (
     <div className={styles.container}>
