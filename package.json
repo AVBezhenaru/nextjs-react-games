@@ -2,12 +2,13 @@
   "name": "host-app",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "lint:fix": "next lint --fix",
+    "lint:fix": "next lint --fix -color",
     "prepare": "husky install",
     "pre-commit": "lint-staged"
   },
@@ -63,8 +64,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "npm run lint",
-      "git add"
+      "npm run lint:fix"
     ]
   }
 }

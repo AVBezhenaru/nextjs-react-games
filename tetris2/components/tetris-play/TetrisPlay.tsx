@@ -46,7 +46,7 @@ function TetrisPlay() {
   }, [isGameOver]);
 
   // отслеживаем навигацию пользователя - через handleKeyPress на window
-  const handleKeyPress = useCallback((event: any) => {
+  const handleKeyPress = useCallback((event: KeyboardEvent) => {
     dispatch(checkCollided(event.code));
     dispatch(move(event.code));
     dispatch(checkRows());
