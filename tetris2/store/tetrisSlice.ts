@@ -30,11 +30,7 @@ const initialState: InitialStateType = {
   score: 0,
   linesCleared: 0,
   level: 1,
-  isGamePaused: false,
-  intervalId: null,
-  isOut: false,
   countToScore: 0,
-  levelCount: 0,
 };
 const tetrisSlice = createSlice({
   name: 'tetris',
@@ -139,7 +135,6 @@ const tetrisSlice = createSlice({
         state.detail.tetromino = randomDetail().shape[state.rotationIdx];
       }
       if (state.detail.collided && posY < 1) {
-        console.log('TWO');
         state.isGameOver = true;
       }
 
@@ -194,8 +189,6 @@ const tetrisSlice = createSlice({
       state.score = 0;
       state.linesCleared = 0;
       state.level = 1;
-      state.isGamePaused = false;
-      state.isOut = false;
     },
     setNextDetail(state) {
       // отрисовка след детали на боковой панели (замена детали происходит в функции updateActivePiece)
@@ -354,7 +347,7 @@ const tetrisSlice = createSlice({
     changeDropTime(state) {
       if (state.score < 1000) {
         state.dropTime = 1000;
-      } else if (DROPTIME_COUNT[state.score.toString()]){
+      } else if (DROPTIME_COUNT[state.score.toString()]) {
         state.dropTime = DROPTIME_COUNT[state.score.toString()];
       }
     },

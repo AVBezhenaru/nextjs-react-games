@@ -30,11 +30,9 @@ function TetrisPlay() {
   const isGameOver = useAppSelector((state) => state.tetris.isGameOver);
   const detailCollided = useAppSelector((state) => state.tetris.detail.collided);
   const nextDetail = useAppSelector((state) => state.tetris.nextDetail);
-  const linesCleared = useAppSelector((state) => state.tetris.linesCleared);
   const dropTime = useAppSelector((state) => state.tetris.dropTime);
-  const levelCount = useAppSelector((state) => state.tetris.levelCount);
   const score = useAppSelector((state) => state.tetris.score);
-  
+
   const handleMoveDown = useCallback(() => {
     dispatch(moveDown());
     dispatch(updateDetailPostion());
@@ -42,7 +40,6 @@ function TetrisPlay() {
 
   useEffect(() => {
     if (!isGameOver) {
-      console.log('dropInUse', dropTime);
       const id = setInterval(() => handleMoveDown(), dropTime);
       return () => clearInterval(id);
     }
@@ -84,7 +81,7 @@ function TetrisPlay() {
       dispatch(countLevel());
       dispatch(changeDropTime());
     }
-     }, [detailCollided]);
+  }, [detailCollided]);
 
   return (
     <div className={styles.container}>

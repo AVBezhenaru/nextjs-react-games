@@ -59,11 +59,7 @@ export type InitialStateType = {
   score: number;
   linesCleared: number;
   level: number;
-  isGamePaused: boolean;
-  intervalId: any;
-  isOut: boolean;
   countToScore: number;
-  levelCount: number;
 };
 
 export type UsePlayerType = {
