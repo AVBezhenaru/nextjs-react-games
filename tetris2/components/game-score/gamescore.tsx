@@ -4,12 +4,13 @@ import styles from './gamescore.module.scss';
 
 function GameScore() {
   const score = useAppSelector((state) => state.tetris.score);
+  const level = useAppSelector((state) => state.tetris.level);
 
   return (
     <ul>
       <li className={styles.playfield_score}>
         Level
-        <span>01</span>
+        <span>{level < 10 ? `0${level}` : level}</span>
       </li>
       <li className={styles.playfield_score}>
         Points

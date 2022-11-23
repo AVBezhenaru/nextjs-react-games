@@ -5,6 +5,7 @@ import { createSlice, PayloadAction, current } from '@reduxjs/toolkit';
 import { STAGE_WIDTH, createStage, createNextDetailStage } from '../components/stage/stage';
 import { SCORE_COUNT } from '../components/game-score/score-count';
 import { DROPTIME_COUNT } from '../components/game-score/drop-time-count';
+import { LEVEL_COUNT } from '../components/game-score/level-count';
 import { InitialStateType } from '../types/types';
 import { randomDetail } from '../components/details/details';
 
@@ -28,11 +29,12 @@ const initialState: InitialStateType = {
   isGameOver: false,
   score: 0,
   linesCleared: 0,
-  level: 0,
+  level: 1,
   isGamePaused: false,
   intervalId: null,
   isOut: false,
   countToScore: 0,
+  levelCount: 0,
 };
 const tetrisSlice = createSlice({
   name: 'tetris',
@@ -191,7 +193,7 @@ const tetrisSlice = createSlice({
       state.isGameOver = false;
       state.score = 0;
       state.linesCleared = 0;
-      state.level = 0;
+      state.level = 1;
       state.isGamePaused = false;
       state.isOut = false;
     },
@@ -357,9 +359,10 @@ const tetrisSlice = createSlice({
       state.dropTime = DROPTIME_COUNT[state.score.toString()];
     },
     countLevel(state) {
-      // console.log('state.linesCleared', state.linesCleared);
-      if (state.linesCleared % 10 === 0) {
-        state.level++;
+      if (LEVEL_COUNT[state.score.toString()] === undefined) {
+        state.level = 1;
+      } else {
+        state.level = LEVEL_COUNT[state.score.toString()];
       }
     },
   },

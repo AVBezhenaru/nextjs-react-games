@@ -32,12 +32,10 @@ function TetrisPlay() {
   const nextDetail = useAppSelector((state) => state.tetris.nextDetail);
   const linesCleared = useAppSelector((state) => state.tetris.linesCleared);
   const dropTime = useAppSelector((state) => state.tetris.dropTime);
-  const score = useAppSelector((state) => state.tetris.score);
-  const hasCollided = useAppSelector((state) => state.tetris.hasCollided);
+  const levelCount = useAppSelector((state) => state.tetris.levelCount);
 
   const handleMoveDown = useCallback(() => {
     dispatch(moveDown());
-    // dispatch(checkRows());
     dispatch(updateDetailPostion());
   }, []);
 
@@ -53,7 +51,6 @@ function TetrisPlay() {
     throttle((event: any) => {
       dispatch(checkCollided(event.code));
       dispatch(move(event.code));
-      // dispatch(checkRows());
       dispatch(updateDetailPostion());
     }, 150),
     [],
@@ -80,14 +77,20 @@ function TetrisPlay() {
 
   useEffect(() => {
     if (detailCollided) {
-      console.log('inUSe');
       dispatch(checkRows());
       dispatch(countScore());
-      dispatch(countLevel());
+      if (linesCleared % 5 === 0) {
+        dispatch(countLevel());
+      }
+      // dispatch(countLevel());
       dispatch(changeDropTime());
-    }    
-  // }, [linesCleared]);
+    }
      }, [detailCollided]);
+
+  // useEffect(() => {
+  //   console.log('inUSe');
+  //   dispatch(countLevel());
+  // }, [levelCount]);
 
   return (
     <div className={styles.container}>

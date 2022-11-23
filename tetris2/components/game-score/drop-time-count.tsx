@@ -1,6 +1,6 @@
-import { DropTimeType } from '../../types/types';
+import { ScoreType } from '../../types/types';
 
-export const DROPTIME_COUNT: DropTimeType = {
+export const DROPTIME_COUNT: ScoreType = {
   '500': 900,
   '1500': 800,
   '2000': 700,

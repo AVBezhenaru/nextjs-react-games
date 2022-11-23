@@ -63,6 +63,7 @@ export type InitialStateType = {
   intervalId: any;
   isOut: boolean;
   countToScore: number;
+  levelCount: number;
 };
 
 export type UsePlayerType = {
