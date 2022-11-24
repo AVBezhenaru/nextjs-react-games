@@ -14,7 +14,6 @@ export class Checker extends Figure {
 
   canMove(target: Cell): boolean {
     if (!super.canMove(target)) return false;
-
     const direction = this.cell.figure?.color === Colors.BLACK ? 1 : -1;
     const directionEmpty = this.cell.figure?.color === Colors.BLACK ? -1 : 1;
     const twoStepDirection = this.cell.figure?.color === Colors.BLACK ? 2 : -2;
