@@ -1,5 +1,5 @@
-import Popup from "reactjs-popup";
-import styled from "styled-components";
+import Popup from 'reactjs-popup';
+import styled from 'styled-components';
 
 export const App = styled.div`
   // height: 100vh;
@@ -12,11 +12,10 @@ export const App = styled.div`
   width: 100%;
   margin: 0 auto;
   background-color: #fff;
-
 `;
 
 export const Container = styled.div`
-// background-color: #fff;
+  // background-color: #fff;
 
   max-width: 1680px;
   width: 100%;
@@ -31,8 +30,8 @@ export const HeaderLogo = styled.img`
 `;
 
 export const Board = styled.div`
-  ${() => `width: calc(74px * 8);`}
-  ${() => `height: calc(74px * 8);`}
+  ${() => 'width: calc(74px * 8);'}
+  ${() => 'height: calc(74px * 8);'}
   display: flex;
   flex-wrap: wrap;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
@@ -55,7 +54,7 @@ export const FigureLogo = styled.img`
 export const Settings = styled(Popup)`
   &-overlay {
     // overflow: hidden;
-    background-color: rgba(0, 0, 0, .5);
+    background-color: rgba(0, 0, 0, 0.5);
   }
 
   &-content {
@@ -67,14 +66,14 @@ export const Settings = styled(Popup)`
     height: 60vh;
     padding: 30px 20px 80px 15px;
   }
-`
+`;
 
 export const StyledPopup = styled(Popup)`
   // use your custom style for ".popup-overlay"
 
   &-overlay {
     // overflow: hidden;
-    background-color: rgba(0, 0, 0, .5);
+    background-color: rgba(0, 0, 0, 0.5);
   }
 
   // use your custom style for ".popup-content"
@@ -96,8 +95,8 @@ export const StyledPopupButton = styled.button`
   font-family: 'Audiowide', cursive;
   font-weight: 600;
   color: #646464;
-  transition: .3s;
-  &:hover{
+  transition: 0.3s;
+  &:hover {
     color: #000;
   }
 `;
@@ -160,13 +159,12 @@ export const StyledLostFigures = styled.div`
 `;
 
 export const TransformFigure = styled.div`
-
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
-  background-color: rgba(0,0,0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
   display: flex;
   align-items: center;
@@ -177,7 +175,7 @@ export const TransformFigureOverlay = styled.div`
   max-width: 500px;
   width: 100%;
   height: 200px;
-  background-color: #f1dad0;;
+  background-color: #f1dad0;
   font-size: 50px;
   color: red;
   display: flex;
@@ -188,13 +186,12 @@ export const TransformFigureOverlay = styled.div`
 export const TransformFigureImg = styled.img`
   width: 100px;
   height: 100px;
-  transition: .3s;
+  transition: 0.3s;
   cursor: pointer;
   & + & {
     margin-left: 10px;
   }
-  &:hover{
-    transform: scale(1.2)
+  &:hover {
+    transform: scale(1.2);
   }
-
 `;

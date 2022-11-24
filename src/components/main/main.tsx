@@ -1,22 +1,22 @@
-import React from "react";
+import React from 'react';
 import Link from 'next/link';
-import {DivForm, H1, InputBtn, P, Section} from "./mainStyle";
+
+import { DivForm, H1, InputBtn, P, Section } from './mainStyle';
 
 const Main = () => (
-    <Section>
-        <DivForm>
-            <H1>Welcome</H1>
-            <P>
-                <Link href="/login">
-                    <InputBtn type={"button"} children={'login'}/>
-                </Link>
-                <Link href="/registration">
-                    <InputBtn type={"button"} children={'guest'}/>
-                </Link>
-            </P>
-        </DivForm>
-
-    </Section>
+  <Section>
+    <DivForm>
+      <H1>Welcome</H1>
+      <P>
+        <Link href="/login">
+          <InputBtn type="button" children="login" />
+        </Link>
+        <Link href="/registration">
+          <InputBtn type="button" children="guest" />
+        </Link>
+      </P>
+    </DivForm>
+  </Section>
 );
 
-export {Main};
+export { Main };

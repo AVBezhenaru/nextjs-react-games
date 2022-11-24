@@ -1,7 +1,10 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Section = styled.section`
   font-family: Inter, sans-serif;
+  letter-spacing: initial;
+  line-height: initial;
+  font-weight: initial;
   position: relative;
   flex-direction: column;
   justify-content: space-between;
@@ -9,17 +12,17 @@ export const Section = styled.section`
   max-width: 1440px;
   min-height: 100vh;
   height: auto;
-  background: #F5F5F5;
+  background: #f5f5f5;
   overflow-x: hidden;
   overflow-y: hidden;
-`
+`;
 
 export const DivPage = styled.div`
   align-items: stretch;
-  padding-top: 75px;    
+  padding-top: 75px;
   min-height: 100vh;
   height: auto;
-`
+`;
 
 export const SideBar = styled.div`
   display: block;
@@ -29,11 +32,10 @@ export const SideBar = styled.div`
   width: 170px;
   height: calc(100vh - 75px);
   padding: 10px 32px 20px 0;
-  border-right: 1px solid #F2F2F2;
+  border-right: 1px solid #f2f2f2;
   background-color: #fff;
-`
+`;
 export const Page = styled.div`
-  
   display: flex;
   gap: 40px;
   margin-left: 240px;
@@ -42,56 +44,52 @@ export const Page = styled.div`
   margin-top: 50px;
   margin-bottom: 50px;
   overflow-y: hidden;
-`
+`;
 
-export const  BlockLeft = styled.div`
+export const BlockLeft = styled.div`
   width: 800px;
-`
+`;
 
-export const DivImgBack =styled.div`
+export const DivImgBack = styled.div`
   height: 280px;
   padding: 10px;
   border-radius: 20px;
   background-color: white;
   margin-bottom: 30px;
-  
-`
-export const  ImgBack = styled.div`
+`;
+export const ImgBack = styled.div`
   background-color: rgba(255, 127, 57, 0.2);
   height: 100%;
   text-align: center;
   border-radius: 10px;
+`;
 
-`
-
-export const DivProfileNav =styled.div`
+export const DivProfileNav = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
   gap: 50px;
-  height:60px;
+  height: 60px;
   border-radius: 10px;
   padding-left: 30px;
   background-color: white;
   margin-bottom: 30px;
-`
+`;
 
-export const DivComments =styled.div`
+export const DivComments = styled.div`
   background-color: white;
   min-height: 270px;
   padding: 35px;
   border-radius: 10px;
-`
+`;
 
-export const AddComments =styled.div`
-  
-`
-export const P =styled.p`
+export const AddComments = styled.div``;
+export const P = styled.p`
   font-size: 18px;
   font-weight: 600;
   padding-bottom: 10px;
-  border-bottom: 1px solid #F2F2F2;
-`
+  border-bottom: 1px solid #f2f2f2;
+`;
 export const Textarea = styled.textarea`
   resize: none;
   background-color: rgba(217, 217, 217, 0.15);
@@ -116,46 +114,42 @@ export const Button = styled.button`
   border: none;
   cursor: pointer;
   height: 60px;
-  
-  
-  :focus{
+
+  :focus {
     border-bottom: 1px solid #fe3d3d;
     color: black;
   }
-`
+`;
 
-export const  BlockRight = styled.div`
+export const BlockRight = styled.div`
   width: 240px;
-`
-export const  User = styled.div`
-  height: 140px;
+`;
+export const User = styled.div`
   text-align: center;
   padding: 40px 0;
-`
-export const  UserStatic = styled.div`
+`;
+export const UserStatic = styled.div`
   height: 80px;
   text-align: center;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  border-top: 1px solid #F2F2F2;
-  border-bottom: 1px solid #F2F2F2;
-
-`
-export const  Follower = styled.div`
+  border-top: 1px solid #f2f2f2;
+  border-bottom: 1px solid #f2f2f2;
+`;
+export const Follower = styled.div`
   padding: 20px 15px 15px 15px;
-  border-right: 1px solid #F2F2F2;
+  border-right: 1px solid #f2f2f2;
   width: 50%;
   text-align: center;
   font-size: 14px;
-`
-export const  Posts = styled.div`
+`;
+export const Posts = styled.div`
   padding: 20px 15px 15px 15px;
   width: 50%;
   text-align: center;
   font-size: 14px;
-
-`
+`;
 
 export const InputBtnUser = styled.button`
   height: 70px;
@@ -166,27 +160,27 @@ export const InputBtnUser = styled.button`
   font-weight: 500;
   text-transform: uppercase;
   font-size: 12px;
-   color: #e85a19;
+  color: #e85a19;
   background-color: white;
   border-radius: 10px;
-  
-  :hover{
+
+  :hover {
     color: white;
     background-color: #e85a19;
     outline: none;
   }
-`
+`;
 
 export const H3 = styled.h3`
   text-align: center;
   padding: 20px;
-  border-bottom: 1px solid #F2F2F2;
-`
+  border-bottom: 1px solid #f2f2f2;
+`;
 
-export const DivProfileInfo =styled.div`
+export const DivProfileInfo = styled.div`
   width: 100%;
   height: 370px;
   border-radius: 10px;
   background-color: white;
   margin-bottom: 30px;
-`
+`;

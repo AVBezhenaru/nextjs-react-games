@@ -1,38 +1,43 @@
-import { Cell } from "./Cell"
-import { Colors } from './Colors'
-import { Queen } from "./figures/Queen";
-import { Pawn } from "./figures/Pawn";
-import { Bishop } from "./figures/Bishop";
-import { King } from "./figures/King";
-import { Knight } from "./figures/Knight";
-import { Rook } from "./figures/Rook";
-import { Figure } from "./figures/Figure";
+import { Cell } from './Cell';
+import { Colors } from './Colors';
+import { Queen } from './figures/Queen';
+import { Pawn } from './figures/Pawn';
+import { Bishop } from './figures/Bishop';
+import { King } from './figures/King';
+import { Knight } from './figures/Knight';
+import { Rook } from './figures/Rook';
+import { Figure } from './figures/Figure';
 
 interface TransformData {
-  shouldTransform: boolean
-  figure: Figure | null
+  shouldTransform: boolean;
+  figure: Figure | null;
 }
 
 interface HistoryMoveData {
-  figureData: Figure | null,
-  moveData: string
-  eatFigureData: string | null
-  check: boolean
+  figureData: Figure | null;
+  moveData: string;
+  eatFigureData: string | null;
+  check: boolean;
 }
 export class Board {
   cells: Cell[][] = [];
+
   lostWhiteFigures: Figure[] = [];
+
   lostBlackFigures: Figure[] = [];
+
   blackKing: King | null = null;
+
   whiteKing: King | null = null;
-  stalemate: boolean = false; //проверка на пат
+
+  stalemate = false; // проверка на пат
+
   transformData: TransformData = {
     shouldTransform: false,
-    figure: null
-  }
-  historyMove: HistoryMoveData[] = []
+    figure: null,
+  };
 
-
+  historyMove: HistoryMoveData[] = [];
 
   public addFigureToLost(figure: Figure) {
     if (figure.color === Colors.WHITE) {
@@ -60,18 +65,18 @@ export class Board {
     const newBoard = new Board();
     newBoard.cells = this.cells;
     for (let i = 0; i < this.cells.length; i++) {
-      const row = this.cells[i]
+      const row = this.cells[i];
       for (let j = 0; j < row.length; j++) {
-        row[j].board = newBoard
+        row[j].board = newBoard;
       }
     }
     newBoard.lostWhiteFigures = this.lostWhiteFigures;
     newBoard.lostBlackFigures = this.lostBlackFigures;
-    newBoard.transformData = this.transformData
-    newBoard.whiteKing = this.whiteKing
-    newBoard.blackKing = this.blackKing
-    newBoard.stalemate = this.stalemate
-    newBoard.historyMove = this.historyMove
+    newBoard.transformData = this.transformData;
+    newBoard.whiteKing = this.whiteKing;
+    newBoard.blackKing = this.blackKing;
+    newBoard.stalemate = this.stalemate;
+    newBoard.historyMove = this.historyMove;
     return newBoard;
   }
 
@@ -85,20 +90,19 @@ export class Board {
     }
   }
 
-
   canAttackKing(kingColor: Colors) {
-    const kingToCheck = kingColor === Colors.BLACK ? this.blackKing! : this.whiteKing!
-    kingToCheck.underAttackKing = false
+    const kingToCheck = kingColor === Colors.BLACK ? this.blackKing! : this.whiteKing!;
+    kingToCheck.underAttackKing = false;
 
     for (let i = 0; i < this.cells.length; i++) {
-      const row = this.cells[i]
+      const row = this.cells[i];
       for (let j = 0; j < row.length; j++) {
-        const target = this.getCell(j, i)
+        const target = this.getCell(j, i);
         if (target.figure != null && target?.figure?.color !== kingToCheck.color) {
           // Определили вражеские фигуры
           if (target.figure?.canMove(kingToCheck.cell, true)) {
-            kingToCheck.underAttackKing = true
-            break
+            kingToCheck.underAttackKing = true;
+            break;
           }
         }
       }
@@ -106,43 +110,44 @@ export class Board {
   }
 
   checkForCheckMate(kingToCheck: King) {
-    let canSaveKing = false
+    let canSaveKing = false;
     for (let i = 0; i < this.cells.length; i++) {
-      const row = this.cells[i]
+      const row = this.cells[i];
       for (let j = 0; j < row.length; j++) {
-        const target = this.getCell(j, i)
+        const target = this.getCell(j, i);
         if (target.figure != null && target?.figure?.color === kingToCheck.color) {
           for (let i = 0; i < this.cells.length; i++) {
             const row = this.cells[i];
             for (let j = 0; j < row.length; j++) {
               const checkCell = row[j];
               if (target.figure?.canMove(checkCell)) {
-                canSaveKing = true
-                break
+                canSaveKing = true;
+                break;
               }
             }
           }
         }
       }
     }
-    return !canSaveKing
+    return !canSaveKing;
   }
 
-  checkForStalemate() { // проверка на пат
-    let counter = 0
+  checkForStalemate() {
+    // проверка на пат
+    let counter = 0;
     for (let i = 0; i < this.cells.length; i++) {
-      const row = this.cells[i]
+      const row = this.cells[i];
       for (let j = 0; j < row.length; j++) {
-        const target = this.getCell(j, i)
+        const target = this.getCell(j, i);
         if (target.figure) {
-          counter++
+          counter++;
           if (counter > 2) {
-            return false
+            return false;
           }
         }
       }
     }
-    this.stalemate = true
+    this.stalemate = true;
   }
 
   public getCell(x: number, y: number) {

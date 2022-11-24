@@ -1,5 +1,5 @@
-import FriendsForm from "../src/components/friend/friendsForm";
+import FriendsForm from '../src/components/friend/friendsForm';
 
-const Chats = () => <FriendsForm/>;
+const Chats = () => <FriendsForm />;
 
 export default Chats;

@@ -61,7 +61,9 @@ export class Cell {
                 ? !this?.board?.getCell(this.x + dx2 * i - 2, this.y + dy2 * i + 2)?.isEmpty()
                 : false)
             ) {
-              this.board.getCell(this.x + dx2 * i, this.y + dy2 * i).isFigure()!.cell.figureDeleteColor = true;
+              this.board
+                .getCell(this.x + dx2 * i, this.y + dy2 * i)
+                .isFigure()!.cell.figureDeleteColor = true;
               return true;
             }
             if (
@@ -76,7 +78,9 @@ export class Cell {
               return false;
             }
 
-            this.board.getCell(this.x + dx2 * i, this.y + dy2 * i).isFigure()!.cell.figureDeleteColor = true;
+            this.board
+              .getCell(this.x + dx2 * i, this.y + dy2 * i)
+              .isFigure()!.cell.figureDeleteColor = true;
             return true;
           }
           if (
@@ -108,7 +112,9 @@ export class Cell {
                 ? !this?.board?.getCell(this.x + dx3 * i + 2, this.y + dy3 * i + 2)?.isEmpty()
                 : false)
             ) {
-              this.board.getCell(this.x + dx3 * i, this.y + dy3 * i).isFigure()!.cell.figureDeleteColor = true;
+              this.board
+                .getCell(this.x + dx3 * i, this.y + dy3 * i)
+                .isFigure()!.cell.figureDeleteColor = true;
               return true;
             }
             if (
@@ -122,7 +128,9 @@ export class Cell {
             if (!this.board.getCell(this.x + dx3 * i + 1, this.y + dy3 * i + 1)?.isEmpty()) {
               return false;
             }
-            this.board.getCell(this.x + dx3 * i, this.y + dy3 * i).isFigure()!.cell.figureDeleteColor = true;
+            this.board
+              .getCell(this.x + dx3 * i, this.y + dy3 * i)
+              .isFigure()!.cell.figureDeleteColor = true;
             return true;
           }
           if (
@@ -154,7 +162,9 @@ export class Cell {
                 ? !this?.board?.getCell(this.x + dx4 * i - 2, this.y + dy4 * i - 2)?.isEmpty()
                 : false)
             ) {
-              this.board.getCell(this.x + dx4 * i, this.y + dy4 * i).isFigure()!.cell.figureDeleteColor = true;
+              this.board
+                .getCell(this.x + dx4 * i, this.y + dy4 * i)
+                .isFigure()!.cell.figureDeleteColor = true;
               return true;
             }
             if (
@@ -171,7 +181,9 @@ export class Cell {
               return false;
             }
 
-            this.board.getCell(this.x + dx4 * i, this.y + dy4 * i).isFigure()!.cell.figureDeleteColor = true;
+            this.board
+              .getCell(this.x + dx4 * i, this.y + dy4 * i)
+              .isFigure()!.cell.figureDeleteColor = true;
             return true;
           }
           if (
@@ -203,7 +215,9 @@ export class Cell {
                 ? !this?.board?.getCell(this.x + dx5 * i + 2, this.y + dy5 * i - 2)?.isEmpty()
                 : false)
             ) {
-              this.board.getCell(this.x + dx5 * i, this.y + dy5 * i).isFigure()!.cell.figureDeleteColor = true;
+              this.board
+                .getCell(this.x + dx5 * i, this.y + dy5 * i)
+                .isFigure()!.cell.figureDeleteColor = true;
               return true;
             }
             if (
@@ -218,7 +232,9 @@ export class Cell {
               return false;
             }
 
-            this.board.getCell(this.x + dx5 * i, this.y + dy5 * i).isFigure()!.cell.figureDeleteColor = true;
+            this.board
+              .getCell(this.x + dx5 * i, this.y + dy5 * i)
+              .isFigure()!.cell.figureDeleteColor = true;
             return true;
           }
           if (
@@ -252,7 +268,9 @@ export class Cell {
                 ? !this?.board?.getCell(this.x + dx2 * i - 2, this.y + dy2 * i + 2)?.isEmpty()
                 : false)
             ) {
-              this.board.getCell(this.x + dx2 * i, this.y + dy2 * i).isFigure()!.cell.figureDeleteColor = true;
+              this.board
+                .getCell(this.x + dx2 * i, this.y + dy2 * i)
+                .isFigure()!.cell.figureDeleteColor = true;
               return true;
             }
             if (
@@ -267,7 +285,9 @@ export class Cell {
               return false;
             }
 
-            this.board.getCell(this.x + dx2 * i, this.y + dy2 * i).isFigure()!.cell.figureDeleteColor = true;
+            this.board
+              .getCell(this.x + dx2 * i, this.y + dy2 * i)
+              .isFigure()!.cell.figureDeleteColor = true;
             return true;
           }
           if (
@@ -299,7 +319,9 @@ export class Cell {
                 ? !this?.board?.getCell(this.x + dx3 * i + 2, this.y + dy3 * i + 2)?.isEmpty()
                 : false)
             ) {
-              this.board.getCell(this.x + dx3 * i, this.y + dy3 * i).isFigure()!.cell.figureDeleteColor = true;
+              this.board
+                .getCell(this.x + dx3 * i, this.y + dy3 * i)
+                .isFigure()!.cell.figureDeleteColor = true;
               return true;
             }
             if (
@@ -315,7 +337,9 @@ export class Cell {
               console.log('h22');
               return false;
             }
-            this.board.getCell(this.x + dx3 * i, this.y + dy3 * i).isFigure()!.cell.figureDeleteColor = true;
+            this.board
+              .getCell(this.x + dx3 * i, this.y + dy3 * i)
+              .isFigure()!.cell.figureDeleteColor = true;
             return true;
           }
           if (
@@ -347,7 +371,9 @@ export class Cell {
                 ? !this?.board?.getCell(this.x + dx4 * i - 2, this.y + dy4 * i - 2)?.isEmpty()
                 : false)
             ) {
-              this.board.getCell(this.x + dx4 * i, this.y + dy4 * i).isFigure()!.cell.figureDeleteColor = true;
+              this.board
+                .getCell(this.x + dx4 * i, this.y + dy4 * i)
+                .isFigure()!.cell.figureDeleteColor = true;
               return true;
             }
             if (
@@ -364,7 +390,9 @@ export class Cell {
               return false;
             }
 
-            this.board.getCell(this.x + dx4 * i, this.y + dy4 * i).isFigure()!.cell.figureDeleteColor = true;
+            this.board
+              .getCell(this.x + dx4 * i, this.y + dy4 * i)
+              .isFigure()!.cell.figureDeleteColor = true;
             return true;
           }
           if (
@@ -396,7 +424,9 @@ export class Cell {
                 ? !this?.board?.getCell(this.x + dx5 * i + 2, this.y + dy5 * i - 2)?.isEmpty()
                 : false)
             ) {
-              this.board.getCell(this.x + dx5 * i, this.y + dy5 * i).isFigure()!.cell.figureDeleteColor = true;
+              this.board
+                .getCell(this.x + dx5 * i, this.y + dy5 * i)
+                .isFigure()!.cell.figureDeleteColor = true;
               return true;
             }
             if (
@@ -411,7 +441,9 @@ export class Cell {
               return false;
             }
 
-            this.board.getCell(this.x + dx5 * i, this.y + dy5 * i).isFigure()!.cell.figureDeleteColor = true;
+            this.board
+              .getCell(this.x + dx5 * i, this.y + dy5 * i)
+              .isFigure()!.cell.figureDeleteColor = true;
             return true;
           }
           if (
@@ -451,7 +483,8 @@ export class Cell {
   }
 
   deleteFigure(cellFigure: Cell, x: number, y: number) {
-    const figureDeleteColorOther = cellFigure?.figure?.color !== this.board.getCell(x, y)?.isFigure()?.color;
+    const figureDeleteColorOther =
+      cellFigure?.figure?.color !== this.board.getCell(x, y)?.isFigure()?.color;
     if (figureDeleteColorOther) {
       this.board.getCell(x, y)?.nullFigure();
     }

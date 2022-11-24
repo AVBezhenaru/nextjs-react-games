@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const SectionLayout = styled.section`
   font-family: Inter, sans-serif;
@@ -7,4 +7,5 @@ export const SectionLayout = styled.section`
   max-width: 1440px;
   min-height: 100vh;
   width: 100%;
-`
+  box-sizing: revert;
+`;

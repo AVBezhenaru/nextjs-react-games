@@ -1,14 +1,14 @@
-import { Routes, Route } from "react-router-dom";
-import Chess from "./Chess";
-import LoginForm from "../../../components/forms/loginForm";
+import { Routes, Route } from 'react-router-dom';
 
-const App = () => {
-  return (
-    <Routes>
-      <Route path="/chess" element={<Chess />} />
-        <Route path="/login" element={<LoginForm />} />
-    </Routes>
-  );
-};
+import LoginForm from '../../../components/forms/loginForm';
+
+import Chess from './Chess';
+
+const App = () => (
+  <Routes>
+    <Route path="/chess" element={<Chess />} />
+    <Route path="/login" element={<LoginForm />} />
+  </Routes>
+);
 
 export default App;

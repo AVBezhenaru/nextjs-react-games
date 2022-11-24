@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const DivHeader = styled.div`
   max-width: 1440px;
@@ -11,7 +11,7 @@ export const DivHeader = styled.div`
   box-shadow: rgb(223 221 221 / 56%) 0 10px 20px;
   position: fixed;
   z-index: 1;
-`
+`;
 export const DivLogo = styled.div`
   display: flex;
   gap: 20px;
@@ -19,8 +19,8 @@ export const DivLogo = styled.div`
   justify-content: flex-start;
   width: 202px;
   height: 75px;
-  border-right: 1px solid #F2F2F2;
-`
+  border-right: 1px solid #f2f2f2;
+`;
 export const DivNav = styled.div`
   display: flex;
   flex-grow: 1;
@@ -28,7 +28,7 @@ export const DivNav = styled.div`
   justify-content: space-between;
   height: 75px;
   padding: 0 45px;
-`
+`;
 
 export const LogOut = styled.button`
   cursor: pointer;
@@ -49,7 +49,7 @@ export const LogOut = styled.button`
     background-color: #e85a19;
     outline: none;
   }
-`
+`;
 
 export const Search = styled.input`
   width: 40%;
@@ -57,13 +57,13 @@ export const Search = styled.input`
   height: 40px;
   padding: 0 20px;
   border-radius: 5px;
-  background: #F5F5F5;
-  border: 1px solid #E4E7EB;
+  background: #f5f5f5;
+  border: 1px solid #e4e7eb;
   outline: none;
-`
+`;
 
 export const Span = styled.span`
   display: flex;
   align-items: center;
   gap: 10px;
-`
+`;

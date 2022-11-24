@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Page = styled.div`
   display: flex;
@@ -7,15 +7,14 @@ export const Page = styled.div`
   transition: all 0.25s linear;
   position: relative;
   overflow-y: hidden;
-`
+`;
 
 export const Friend = styled.div`
   border-radius: 10px;
   padding: 20px;
   width: 350px;
   background-color: white;
-`
-
+`;
 
 export const Chat = styled.div`
   display: flex;
@@ -24,24 +23,23 @@ export const Chat = styled.div`
   width: 760px;
   height: 700px;
   background-color: white;
-`
+`;
 
 export const SelectFriend = styled.div`
   padding: 10px 20px;
   height: 10%;
   border-bottom: 1px solid rgba(128, 128, 128, 0.11);
-`
+`;
 export const FullChat = styled.div`
   padding: 20px;
   height: 85%;
-`
+`;
 export const SentMessage = styled.div`
   display: flex;
   align-items: center;
   padding: 10px;
-  height: 5%;
   border-top: 1px solid rgba(128, 128, 128, 0.11);
-`
+`;
 export const InputMessage = styled.textarea`
   position: relative;
   overflow: hidden;
@@ -51,5 +49,5 @@ export const InputMessage = styled.textarea`
   border: none;
   padding: 5px 10px;
   border-radius: 25px;
-  background: #F5F5F5;
-`
+  background: #f5f5f5;
+`;
