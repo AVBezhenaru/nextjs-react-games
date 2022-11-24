@@ -53,3 +53,11 @@ export const InputMessage = styled.textarea`
   border-radius: 25px;
   background: #F5F5F5;
 `
+
+export const Span = styled.span`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0 0 10px 0;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.11)
+`
