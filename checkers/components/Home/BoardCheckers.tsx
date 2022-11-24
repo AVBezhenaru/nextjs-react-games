@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux';
-
 import React, { FC, useEffect, useState } from 'react';
 import Link from 'next/link';
 
@@ -9,7 +8,7 @@ import { Colors } from '../../model/Colors';
 import { Player } from '../../model/Player';
 import { Figure } from '../../model/figures/Figure';
 import Modal from '../Modal/Modal';
-import { RootState } from '../../../store';
+// import { RootState } from '../../../store'; // заменила на any тк был конфликт.
 import { players } from '../Lobbi/PlayersForOnlinePlay';
 
 import CellComponent from './CellComponent';
@@ -44,7 +43,7 @@ const BoardCheckers: FC<BoardProps> = ({
   let directionEmpty = selectedCell?.figure?.color === Colors.BLACK ? -1 : 1;
   let directionEmptyTwo = selectedCell?.figure?.color === Colors.BLACK ? 1 : -1;
 
-  const { isPlayWithBoot, idForPlayersOnline } = useSelector((state: RootState) => state.checkers);
+  const { isPlayWithBoot, idForPlayersOnline } = useSelector((state: any) => state.checkers);
 
   const click = (cell: Cell) => {
     let banOnHitting = true;

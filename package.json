@@ -60,11 +60,11 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "env FORCE_COLOR=1 lint-staged"
     }
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
+    "**/*.{js,jsx,ts,tsx}": [
       "prettier --write",
       "npm run lint:fix"
     ]
