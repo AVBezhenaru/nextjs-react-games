@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { setPlayWithBoot, setUserSelectedId } from '../../store/checkersReducer';
 import { RootState } from '../../../store';
 
-import { players } from './PlayersForOnlinePlay';
+import { players } from './PlayersForOnlinePlay' ;
 
 interface PlayConditional {
   colorCheckers: string;
