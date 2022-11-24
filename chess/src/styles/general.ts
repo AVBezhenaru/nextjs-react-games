@@ -5,6 +5,8 @@ html,
 body {
     padding: 0;
     margin: 0;
+    background-color: #fff;
+    border: 4px solid red;
 }
 a {
     color: inherit;
