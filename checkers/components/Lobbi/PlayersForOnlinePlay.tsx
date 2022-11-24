@@ -5,4 +5,3 @@ export const players = [
   { id: 4, name: 'Алина', playConditional: { colorCheckers: 'black', bid: 5000 } },
   { id: 5, name: 'Жора', playConditional: { colorCheckers: 'black', bid: 2000 } },
 ];
-

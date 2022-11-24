@@ -1,9 +1,12 @@
+import { useDispatch, useSelector } from 'react-redux';
+
 import React, { FC } from 'react';
 import Link from 'next/link';
-import { useDispatch,useSelector } from 'react-redux';
-import { players } from './PlayersForOnlinePlay';
+
 import { setPlayWithBoot, setUserSelectedId } from '../../store/checkersReducer';
 import { RootState } from '../../../store';
+
+import { players } from './PlayersForOnlinePlay';
 
 interface PlayConditional {
   colorCheckers: string;
@@ -18,9 +21,9 @@ interface UserProps {
 
 const Lobbi: FC<UserProps> = () => {
   const dispatch = useDispatch();
-  const count = useSelector((state: RootState) => state.checkers.idForPlayersOnline)
+  const count = useSelector((state: RootState) => state.checkers.idForPlayersOnline);
   console.log(count);
-  
+
   return (
     <ul className="lobbi-container">
       {players.map((el) => (
@@ -28,8 +31,11 @@ const Lobbi: FC<UserProps> = () => {
           {el.name} {el.playConditional?.bid} {el.playConditional?.colorCheckers}{' '}
           {dispatch(setPlayWithBoot(false)) && (
             <Link href="../../../checkers/Play">
-              <button type="button"  className="lobbi-btn" onClick={()=> dispatch(setUserSelectedId(el.id))
-              }>
+              <button
+                type="button"
+                className="lobbi-btn"
+                onClick={() => dispatch(setUserSelectedId(el.id))}
+              >
                 Присоединиться
               </button>
             </Link>

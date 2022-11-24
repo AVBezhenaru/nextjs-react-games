@@ -20,7 +20,9 @@ const CellComponent: FC<CellProps> = ({ cell, selected, click }) => {
         click(cell);
         setTrueColor(true);
       }}
-      style={{ background: trueColor && cell.figureDeleteColor && !selected && cell.figure ? 'red' : '' }}
+      style={{
+        background: trueColor && cell.figureDeleteColor && !selected && cell.figure ? 'red' : '',
+      }}
     >
       {cell.available && !cell.figure && cell.color === 'white' && <div className="available" />}
       {cell.figure?.image && <Image src={cell.figure.image} style={{ cursor: 'pointer' }} />}

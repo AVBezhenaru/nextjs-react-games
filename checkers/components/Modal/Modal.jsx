@@ -18,7 +18,12 @@ const Modal = (props) => {
   }, []);
 
   return (
-    <CSSTransition in={props.show} unmountOnExit timeout={{ enter: 0, exit: 300 }} nodeRef={nodeRef}>
+    <CSSTransition
+      in={props.show}
+      unmountOnExit
+      timeout={{ enter: 0, exit: 300 }}
+      nodeRef={nodeRef}
+    >
       <div className="modal" onClick={props.onClose} ref={nodeRef}>
         <div className="modal-content" onClick={(e) => e.stopPropagation()}>
           <div className="modal-header">
