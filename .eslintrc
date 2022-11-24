@@ -76,7 +76,10 @@
     "no-shadow": "off",
     "camelcase": "off",
     "indent": ["off", 2],
-    "semi": "error"
+    "semi": "error",
+    "no-plusplus": "off",
+    "no-nested-ternary": "off",
+    "no-new": 0
   },
   "settings": {
     "import/resolver": {
