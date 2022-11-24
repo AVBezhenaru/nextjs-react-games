@@ -1,7 +1,8 @@
 export const players = [
-  { name: 'Вася', playConditional: { colorCheckers: 'белая шашка', bid: 100 } },
-  { name: 'Андрей', playConditional: { colorCheckers: 'черная шашка', bid: 1000 } },
-  { name: 'Катя', playConditional: { colorCheckers: 'белая шашка', bid: 500 } },
-  { name: 'Алина', playConditional: { colorCheckers: 'черная шашка', bid: 5000 } },
-  { name: 'Жора', playConditional: { colorCheckers: 'черная шашка', bid: 2000 } },
+  { id: 1, name: 'Василий', playConditional: { colorCheckers: 'white', bid: 100 } },
+  { id: 2, name: 'Андрей', playConditional: { colorCheckers: 'black', bid: 1000 } },
+  { id: 3, name: 'Екатерина', playConditional: { colorCheckers: 'white', bid: 500 } },
+  { id: 4, name: 'Алина', playConditional: { colorCheckers: 'black', bid: 5000 } },
+  { id: 5, name: 'Жора', playConditional: { colorCheckers: 'black', bid: 2000 } },
 ];
+

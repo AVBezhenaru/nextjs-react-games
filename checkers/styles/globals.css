@@ -58,8 +58,6 @@ a {
   border-radius: 10px;
 }
 .lobbi-span {
- 
-
   font-family: 'Yahfie Heavy';
   text-transform: uppercase;
   font-weight: bold;
@@ -473,11 +471,10 @@ a {
   border-radius: 13px;
   padding: 10px 20px;
   color: white;
-  margin: 20px 0 0 211px;
+  margin: 20px 0 0 167px;
 
   transition: all 0.5s ease 0s;
   border: 2px solid white;
- 
 }
 .lobbiCreckers__modal-button:hover {
   background-color: black;

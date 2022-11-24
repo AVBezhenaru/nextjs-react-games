@@ -1,30 +1,42 @@
 import React, { FC } from 'react';
 import Link from 'next/link';
-
+import { useDispatch,useSelector } from 'react-redux';
 import { players } from './PlayersForOnlinePlay';
+import { setPlayWithBoot, setUserSelectedId } from '../../store/checkersReducer';
+import { RootState } from '../../../store';
 
 interface PlayConditional {
-  colorCheckers?: string;
+  colorCheckers: string;
 
-  bid?: number;
+  bid: number;
 }
 interface UserProps {
+  id: number;
   name?: string;
-  playConditional?: PlayConditional;
+  playConditional: PlayConditional;
 }
 
-const Lobbi: FC<UserProps> = () => (
-  <ul className="lobbi-container">
-    {players.map((el, index) => (
-      <li className="lobbi-span" key={index}>
-        {el.name} {el.playConditional?.bid} {el.playConditional?.colorCheckers}{' '}
-        <Link href="../../../checkers/Play">
-          <button type="button" className="lobbi-btn">
-            Присоединиться
-          </button>
-        </Link>
-      </li>
-    ))}
-  </ul>
-);
+const Lobbi: FC<UserProps> = () => {
+  const dispatch = useDispatch();
+  const count = useSelector((state: RootState) => state.checkers.idForPlayersOnline)
+  console.log(count);
+  
+  return (
+    <ul className="lobbi-container">
+      {players.map((el) => (
+        <li className="lobbi-span" key={el.id}>
+          {el.name} {el.playConditional?.bid} {el.playConditional?.colorCheckers}{' '}
+          {dispatch(setPlayWithBoot(false)) && (
+            <Link href="../../../checkers/Play">
+              <button type="button"  className="lobbi-btn" onClick={()=> dispatch(setUserSelectedId(el.id))
+              }>
+                Присоединиться
+              </button>
+            </Link>
+          )}
+        </li>
+      ))}
+    </ul>
+  );
+};
 export default Lobbi;
