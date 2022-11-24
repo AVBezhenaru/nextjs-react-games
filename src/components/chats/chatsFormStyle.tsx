@@ -28,9 +28,28 @@ export const Chat = styled.div`
 
 export const SelectFriend = styled.div`
   padding: 10px 20px;
-  height: 50px;
+  height: 10%;
   border-bottom: 1px solid rgba(128, 128, 128, 0.11);
 `
 export const FullChat = styled.div`
   padding: 20px;
+  height: 85%;
+`
+export const SentMessage = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  height: 5%;
+  border-top: 1px solid rgba(128, 128, 128, 0.11);
+`
+export const InputMessage = styled.textarea`
+  position: relative;
+  overflow: hidden;
+  resize: none;
+  outline: none;
+  width: 500px;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 25px;
+  background: #F5F5F5;
 `

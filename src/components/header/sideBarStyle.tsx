@@ -1,4 +1,5 @@
 import styled  from "styled-components";
+import Link from "next/link";
 
 export const DivSideBar = styled.div`
   display: block;
@@ -21,17 +22,37 @@ export const LiHeader= styled.li`
   margin: 10px 0 10px 30px;
   text-transform: uppercase;
 `
-export const Li= styled.li`
+
+interface StyledLinkProps {
+    pathname?: string;
+    active?:string
+}
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+`
+
+export const Li= styled.li<StyledLinkProps>`
   font-size: 14px;
-  color: rgba(0, 0, 0, 0.66);
+  text-decoration: none;
   cursor: pointer;
   padding: 10px 0 10px 30px;
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
-
-
   :hover {
     background: rgba(244, 97, 25, 0.05);
     color: #F46119;
   }
+  color: ${(props) => {
+    return ( (!!props.active?props.active.replace('/',''):'')=== props.pathname ? "#F46119" : "rgba(0, 0, 0, 0.66)")
+  }};
+  background:  ${(props) => {
+    return ( (!!props.active?props.active.replace('/',''):'')=== props.pathname ? "rgba(244, 97, 25, 0.05)" : "none")
+  }};;
 `
