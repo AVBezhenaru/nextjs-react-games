@@ -3,6 +3,8 @@ import {AppProps} from 'next/app';
 import {Provider} from 'react-redux';
 import {Layout} from '../src/components/layout/layout';
 import {store} from '../src/store';
+import '../checkers/styles/globals.css';
+
 
 const MyApp: NextPage<AppProps> = ({Component, pageProps}) => (
     <Layout>
