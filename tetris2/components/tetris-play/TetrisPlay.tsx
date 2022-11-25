@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import Link from 'next/link';
-import throttle from 'lodash.throttle';
+import throttle from 'lodash/throttle';
 
 import PlayField from '../playfield/playfield';
 import NextDetails from '../next-details/next-details';
