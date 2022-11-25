@@ -1,12 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
-
 import React, { FC } from 'react';
 import Link from 'next/link';
 
 import { setPlayWithBoot, setUserSelectedId } from '../../store/checkersReducer';
 import { RootState } from '../../../store';
 
-import { players } from './PlayersForOnlinePlay' ;
+import { players } from './PlayersForOnlinePlay';
 
 interface PlayConditional {
   colorCheckers: string;
@@ -14,9 +13,9 @@ interface PlayConditional {
   bid: number;
 }
 interface UserProps {
-  id: number;
+  id?: number;
   name?: string;
-  playConditional: PlayConditional;
+  playConditional?: PlayConditional;
 }
 
 const Lobbi: FC<UserProps> = () => {
