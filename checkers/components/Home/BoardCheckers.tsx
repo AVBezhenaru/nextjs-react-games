@@ -44,6 +44,7 @@ const BoardCheckers: FC<BoardProps> = ({
   let directionEmptyTwo = selectedCell?.figure?.color === Colors.BLACK ? 1 : -1;
 
   const { isPlayWithBoot, idForPlayersOnline } = useSelector((state: any) => state.checkers);
+
   const click = (cell: Cell) => {
     let banOnHitting = true;
     let ok = 0;
