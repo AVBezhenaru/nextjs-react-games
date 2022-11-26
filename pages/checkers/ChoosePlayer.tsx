@@ -4,9 +4,21 @@ import Modal from '../../checkers/components/Modal/Modal';
 import Lobbi from '../../checkers/components/Lobbi/Lobbi';
 import { players } from '../../checkers/components/Lobbi/PlayersForOnlinePlay';
 
+interface PlayConditional {
+  colorCheckers: string;
+
+  bid: number;
+}
+interface UserProps {
+  id: number;
+  name: string;
+  playConditional: PlayConditional;
+}
 interface СhoosePlayerProps {
   show: boolean;
   setShow: (show: boolean) => void;
+
+  players: UserProps[];
 }
 const СhoosePlayer: FC<СhoosePlayerProps> = () => {
   const [, setShowFirst] = useState(true);
