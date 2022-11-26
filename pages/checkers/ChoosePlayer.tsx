@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react';
 
 import Modal from '../../checkers/components/Modal/Modal';
 import Lobbi from '../../checkers/components/Lobbi/Lobbi';
+import { players } from '../../checkers/components/Lobbi/PlayersForOnlinePlay';
 
 interface СhoosePlayerProps {
   show: boolean;
@@ -14,7 +15,11 @@ const СhoosePlayer: FC<СhoosePlayerProps> = () => {
   return (
     <div className="closePlayer__page">
       <div>
-        <Lobbi />
+        <ul className="lobbi-container">
+          {players.map((el) => (
+            <Lobbi {...el} />
+          ))}
+        </ul>
         <button
           type="button"
           className="lobbiCreckers__modal-button"

@@ -1,12 +1,13 @@
-import React, { FC, useEffect } from "react";
-import { Board as StyledBoard } from "../../styles/chess.style";
-import CellComponent from "../CellComponent";
-import { Board } from '../../models/Board'
-import { Cell } from "../../models/Cell";
-import { Player } from "../../models/Player";
+import React, { FC, useEffect } from 'react';
 
-import TransformFigure from "../TransformFigure"
-import styles from "./BoardComponent.module.scss"
+import { Board as StyledBoard } from '../../styles/chess.style';
+import CellComponent from '../CellComponent';
+import { Board } from '../../models/Board';
+import { Cell } from '../../models/Cell';
+import { Player } from '../../models/Player';
+import TransformFigure from '../TransformFigure';
+
+import styles from './BoardComponent.module.scss';
 
 interface BoardProps {
   board: Board;
@@ -15,7 +16,7 @@ interface BoardProps {
   changePlayer: () => void;
   restart: () => void;
   selectedCell: Cell | null;
-  setSelectedCell: (cell: Cell | null) => void
+  setSelectedCell: (cell: Cell | null) => void;
 }
 
 const BoardComponent: FC<BoardProps> = ({
@@ -25,23 +26,16 @@ const BoardComponent: FC<BoardProps> = ({
   changePlayer,
   restart,
   selectedCell,
-  setSelectedCell
+  setSelectedCell,
 }) => {
-
-  function click(cell: Cell, checkMate = false, winKing = null) {
-    if (
-      selectedCell &&
-      selectedCell !== cell &&
-      selectedCell.figure?.canMove(cell)
-    ) {
+  function click(cell: Cell) {
+    if (selectedCell && selectedCell !== cell && selectedCell.figure?.canMove(cell)) {
       selectedCell.moveFigure(cell);
       setSelectedCell(null);
       updateBoard();
       changePlayer();
-    } else {
-      if (cell.figure?.color === currentPlayer?.color) {
-        setSelectedCell(cell);
-      }
+    } else if (cell.figure?.color === currentPlayer?.color) {
+      setSelectedCell(cell);
     }
   }
 
@@ -58,33 +52,34 @@ const BoardComponent: FC<BoardProps> = ({
     setBoard(board.getCopyBoard());
   }
 
-  const transformFigureComponent = <TransformFigure
-    transformData={board.transformData}
-    board={board}
-    updateBoard={updateBoard}
-  />
+  const transformFigureComponent = (
+    <TransformFigure transformData={board.transformData} board={board} updateBoard={updateBoard} />
+  );
 
-  const endGame = board.whiteKing?.chekAndMateFlag || board.blackKing?.chekAndMateFlag || board.stalemate ? () => { } : click
+  const endGame =
+    board.whiteKing?.chekAndMateFlag || board.blackKing?.chekAndMateFlag || board.stalemate
+      ? () => {}
+      : click;
 
-  const selectFigureBox = board.transformData.shouldTransform ? transformFigureComponent : null
+  const selectFigureBox = board.transformData.shouldTransform ? transformFigureComponent : null;
 
-  const columnName = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
-  const rowName = ['8', '7', '6', '5', '4', '3', '2', '1']
-  const columnNameElement = columnName.map((item, i) => {
-    return (
-      <div className={styles['board__item-column']} key={i}>{item}</div>
-    )
-  })
-  let rowNameElements = rowName.map((item, i) => {
-    return (
-      <div className={styles['board__item-row']} key={i}>{item}</div>
-    )
-  })
+  const columnName = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+  const rowName = ['8', '7', '6', '5', '4', '3', '2', '1'];
+  const columnNameElement = columnName.map((item, i) => (
+    <div className={styles['board__item-column']} key={i}>
+      {item}
+    </div>
+  ));
+  const rowNameElements = rowName.map((item, i) => (
+    <div className={styles['board__item-row']} key={i}>
+      {item}
+    </div>
+  ));
 
   return (
     <div className={styles.board}>
       {selectFigureBox}
-      <div className={`${styles['board__items']} ${styles['board__items-row']}`}>
+      <div className={`${styles.board__items} ${styles['board__items-row']}`}>
         {rowNameElements}
       </div>
       <StyledBoard>
@@ -95,15 +90,13 @@ const BoardComponent: FC<BoardProps> = ({
                 click={endGame}
                 cell={cell}
                 key={cell.id}
-                selected={
-                  cell.x === selectedCell?.x && cell.y === selectedCell?.y
-                }
+                selected={cell.x === selectedCell?.x && cell.y === selectedCell?.y}
               />
             ))}
           </React.Fragment>
         ))}
       </StyledBoard>
-      <div className={`${styles['board__items']} ${styles['board__items-column']}`}>
+      <div className={`${styles.board__items} ${styles['board__items-column']}`}>
         {columnNameElement}
       </div>
     </div>
