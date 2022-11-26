@@ -2,10 +2,23 @@ import React, { FC, useState } from 'react';
 
 import Modal from '../../checkers/components/Modal/Modal';
 import Lobbi from '../../checkers/components/Lobbi/Lobbi';
+import { players } from '../../checkers/components/Lobbi/PlayersForOnlinePlay';
 
+interface PlayConditional {
+  colorCheckers: string;
+
+  bid: number;
+}
+interface UserProps {
+  id: number;
+  name: string;
+  playConditional: PlayConditional;
+}
 interface СhoosePlayerProps {
   show: boolean;
   setShow: (show: boolean) => void;
+
+  players: UserProps[];
 }
 const СhoosePlayer: FC<СhoosePlayerProps> = () => {
   const [, setShowFirst] = useState(true);
@@ -14,7 +27,11 @@ const СhoosePlayer: FC<СhoosePlayerProps> = () => {
   return (
     <div className="closePlayer__page">
       <div>
-        <Lobbi />
+        <ul className="lobbi-container">
+          {players.map((el) => (
+            <Lobbi {...el} />
+          ))}
+        </ul>
         <button
           type="button"
           className="lobbiCreckers__modal-button"
