@@ -1,4 +1,4 @@
-type TetrominoType = (string | number)[][];
+type TetrominoType = [number, string][][];
 
 export type CreateStageType = TetrominoType;
 
@@ -39,7 +39,7 @@ export type InitialStateType = {
     collided: boolean;
   }[];
   stage: CreateStageType;
-  nextDetailStage: any; // ???
+  nextDetailStage: any;
   detail: {
     position: { x: number; y: number };
     tetromino: any;

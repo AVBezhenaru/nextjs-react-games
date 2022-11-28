@@ -141,5 +141,5 @@ export const DETAILS: DetailsType = {
 export const randomDetail = () => {
   const allDetails = 'IJLOSTZ';
   const randomKey = allDetails[Math.floor(Math.random() * (allDetails.length - 1))];
-  return DETAILS[randomKey] || 'I';
+  return DETAILS[randomKey as keyof DetailsType] || 'I';
 };

@@ -11,4 +11,4 @@ export const LEVEL_COUNT: ScoreType = {
   '4000': 8,
   '5000': 9,
   '6000': 10,
-}
+};

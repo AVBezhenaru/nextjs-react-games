@@ -107,6 +107,7 @@ const tetrisSlice = createSlice({
                       state.stage[posY + i + 2] === undefined ||
                       state.stage[posY + i + 2][posX + j][1] !== 'clear'
                     ) {
+                      console.log('cur', current(state.stage));
                       state.detail.collided = true;
                     }
                   }
