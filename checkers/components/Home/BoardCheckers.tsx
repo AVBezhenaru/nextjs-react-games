@@ -597,7 +597,7 @@ const BoardCheckers: FC<BoardProps> = ({
                       : 'Черного игрока'
                     : currentPlayer?.color === 'white'
                     ? selectedUser.map((el) => el.name) || 'Белого'
-                    : 'Черного'}
+                    : selectedUser.map((el) => el.name) || 'Черного'}
                 </span>{' '}
                 {/* игрока{' '} */}
               </h3>
