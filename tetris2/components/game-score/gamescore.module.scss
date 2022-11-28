@@ -1,0 +1,18 @@
+.playfield_score {
+  font-size: 14px;
+  font-weight: 400;
+  color: gray;
+  letter-spacing: 0.5;
+  margin-bottom: 10px;
+
+  span {
+    display: block;
+    font-size: 20px;
+    font-weight: 400;
+    color: #D65B88;
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+}
