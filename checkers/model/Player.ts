@@ -7,16 +7,13 @@ export class Player {
 
   bid: number | null;
 
-  private _color: Colors;
+  color: Colors;
 
-  constructor(id: number | null, name: string, bid: number, color: Colors) {
+
+  constructor(id: number | null, name: string | null, bid: number | null, color: Colors) {
     this.id = id;
     this.name = name;
     this.bid = bid;
-    this._color = color;
-  }
-
-  set color(value: Colors) {
-    this._color = value;
+    this.color = color;
   }
 }

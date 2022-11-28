@@ -8,39 +8,35 @@ import { Player } from '../../checkers/model/Player';
 import { Colors } from '../../checkers/model/Colors';
 import { Figure } from '../../checkers/model/figures/Figure';
 import { RootState } from '../../store';
-import { players } from '../../checkers/components/Lobbi/PlayersForOnlinePlay';
+import { players, player } from '../../checkers/components/Lobbi/PlayersForOnlinePlay';
 
 export default function Play() {
-  const { isPlayWithBoot } = useSelector((state: RootState) => state.checkers);
-  let whiteP;
-  let blackP;
+  const { isPlayWithBoot, idForPlayersOnline } = useSelector((state: RootState) => state.checkers);
+
   const setPlayer = () => {
-    if (isPlayWithBoot) {
-      const findWhite = players.find((p) => p.playConditional.colorCheckers === 'white');
-      whiteP = new Player(
-        findWhite.id,
-        findWhite.name,
-        findWhite.playConditional.bid,
-        Colors.WHITE,
+    const blackAndWhitePlayers = [];
+    if (!isPlayWithBoot) {
+      const findWhite = players.find((p) => p.id === idForPlayersOnline);
+      blackAndWhitePlayers.push(
+        new Player(findWhite.id, findWhite.name, findWhite.playConditional.bid, Colors.WHITE),
       );
-      const findBlack = players.find((p) => p.playConditional.colorCheckers === 'black');
-      blackP = new Player(
-        findBlack.id,
-        findBlack.name,
-        findBlack.playConditional.bid,
-        Colors.BLACK,
+      const findBlack = player;
+      blackAndWhitePlayers.push(
+        new Player(findBlack.id, findBlack.name, findBlack.playConditional.bid, Colors.BLACK),
       );
-    } else {
-      whiteP = new Player(null, null, null, Colors.WHITE);
-      blackP = new Player(null, null, null, Colors.BLACK);
+      return blackAndWhitePlayers;
     }
+    const WHITE_BOT_NAME = 'Белого Игрока';
+    const BLACK_BOT_NAME = 'Черного Игрока';
+    blackAndWhitePlayers.push(new Player(null, WHITE_BOT_NAME, null, Colors.WHITE));
+    blackAndWhitePlayers.push(new Player(null, BLACK_BOT_NAME, null, Colors.BLACK));
+    return blackAndWhitePlayers;
   };
-  setPlayer();
   const [board, setBoard] = useState(new Board());
   const [show, setShow] = useState(false);
-  const [whitePlayer] = useState(whiteP);
-  const [blackPlayer] = useState(blackP);
-  const [currentPlayer, setCurrentPlayer] = useState<Player | null>(null);
+  const [whitePlayer] = useState(setPlayer()[0]);
+  const [blackPlayer] = useState(setPlayer()[1]);
+  const [currentPlayer, setCurrentPlayer] = useState<Player | null>(whitePlayer);
   const [currentFigure, setCurrentFigure] = useState<Figure | null>(null);
 
   const restart = () => {

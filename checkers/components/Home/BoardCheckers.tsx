@@ -543,18 +543,11 @@ const BoardCheckers: FC<BoardProps> = ({
       }
       return { color: 'black', fontSize: '30px' };
     }
-    return { color: currentPlayer.color, fontSize: '30px' };
+    return { color: currentPlayer?.color, fontSize: '30px' };
   };
-  const getPlayerColorByCondition = (condition: boolean) => {
-    const isWhite = currentPlayer?.color === 'white';
-    if (condition) {
-      if (isWhite) {
-        return 'Белого игрока';
-      }
-      return 'Черного игрока';
-    }
-  };
-
+  const getPlayerColorByCondition = () =>
+    // const isWhite = currentPlayer?.color === 'white';
+    currentPlayer.name
   // isPlayWithBoot === true
   //     ? currentPlayer?.color === 'white'
   //         ? 'Белого игрока'
@@ -615,7 +608,7 @@ const BoardCheckers: FC<BoardProps> = ({
                   className="checkers__content-title__player"
                   style={setStyleColorFigureByConditional(currentPlayer?.color === 'white')}
                 >
-                  {getPlayerColorByCondition(isPlayWithBoot)}
+                  {getPlayerColorByCondition()}
                 </span>{' '}
                 игрока{' '}
               </h3>
@@ -626,7 +619,7 @@ const BoardCheckers: FC<BoardProps> = ({
                   className="checkers__content-title__player"
                   style={setStyleColorFigureByConditional(currentPlayer?.color === 'white')}
                 >
-                  {getPlayerColorByCondition(isPlayWithBoot)}
+                  {getPlayerColorByCondition()}
                 </span>{' '}
                 {/* игрока{' '} */}
               </h3>
