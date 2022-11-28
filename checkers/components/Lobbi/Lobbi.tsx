@@ -10,7 +10,7 @@ interface PlayConditional {
 
   bid: number;
 }
-interface UserProps {
+export interface UserProps {
   id: number;
   name?: string;
   playConditional: PlayConditional;
