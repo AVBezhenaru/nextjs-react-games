@@ -1,6 +1,8 @@
-type TetrominoType = [number, string][][];
+type TetrominoType = (number | string)[][];
 
-export type CreateStageType = TetrominoType;
+// export type CreateStageType = TetrominoType;
+
+export type CreateStageType = [number, string][][];
 
 export type CellIntrAttrType = {
   key: number;
