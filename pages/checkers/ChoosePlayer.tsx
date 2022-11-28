@@ -29,7 +29,7 @@ const СhoosePlayer: FC<СhoosePlayerProps> = () => {
       <div>
         <ul className="lobbi-container">
           {players.map((el) => (
-            <Lobbi {...el} />
+            <Lobbi key={el.id} {...el} />
           ))}
         </ul>
         <button

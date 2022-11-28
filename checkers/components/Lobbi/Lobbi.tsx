@@ -22,7 +22,7 @@ const Lobbi: FC<UserProps> = (props) => {
   console.log(count);
 
   return (
-    <li className="lobbi-span" key={props.id}>
+    <li className="lobbi-span">
       {props.name} {props.playConditional?.bid} {props.playConditional?.colorCheckers}{' '}
       {dispatch(setPlayWithBoot(false)) && (
         <Link href="../../../checkers/Play">
