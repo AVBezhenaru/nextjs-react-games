@@ -19,7 +19,6 @@ export const checkers = createSlice({
       state.idForPlayersOnline = action.payload;
     },
   },
-  // extraReducers: () => {},
 });
 
 export const { setPlayWithBoot, setUserSelectedId } = checkers.actions;

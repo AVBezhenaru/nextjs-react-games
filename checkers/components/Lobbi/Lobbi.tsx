@@ -10,10 +10,11 @@ interface PlayConditional {
 
   bid: number;
 }
-export interface UserProps {
-  id: number;
+
+interface UserProps {
+  id?: number;
   name?: string;
-  playConditional: PlayConditional;
+  playConditional?: PlayConditional;
 }
 
 const Lobbi: FC<UserProps> = (props) => {

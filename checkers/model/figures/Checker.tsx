@@ -39,7 +39,7 @@ export class Checker extends Figure {
       target.x === this.cell.x + 2 &&
       this.cell.board.getCell(target.x, target.y).isEmpty() &&
       !this.cell.board.getCell(target.x - 1, target.y + directionEmpty)?.isEmpty() &&
-      this.cell.board.getCell(target.x - 1, target.y + directionEmpty)?.isFigure().color !==
+      this.cell.board.getCell(target.x - 1, target.y + directionEmpty)?.isFigure()?.color !==
         this.cell.figure?.color
     ) {
       this.cell.board.getCell(target.x - 1, target.y + directionEmpty).figureDeleteColor = true;
@@ -50,7 +50,7 @@ export class Checker extends Figure {
       target.x === this.cell.x + 2 &&
       this.cell.board.getCell(target.x, target.y).isEmpty() &&
       !this.cell.board.getCell(target.x - 1, target.y + direction)?.isEmpty() &&
-      this.cell.board.getCell(target.x - 1, target.y + direction)?.isFigure().color !==
+      this.cell.board.getCell(target.x - 1, target.y + direction)?.isFigure()?.color !==
         this.cell.figure?.color
     ) {
       this.cell.board.getCell(target.x - 1, target.y + direction).figureDeleteColor = true;
@@ -61,7 +61,7 @@ export class Checker extends Figure {
       target.x === this.cell.x - 2 &&
       this.cell.board.getCell(target.x, target.y).isEmpty() &&
       !this.cell.board.getCell(target.x + 1, target.y + directionEmpty)?.isEmpty() &&
-      this.cell.board.getCell(target.x + 1, target.y + directionEmpty)?.isFigure().color !==
+      this.cell.board.getCell(target.x + 1, target.y + directionEmpty)?.isFigure()?.color !==
         this.cell.figure?.color
     ) {
       this.cell.board.getCell(target.x + 1, target.y + directionEmpty).figureDeleteColor = true;
@@ -72,7 +72,7 @@ export class Checker extends Figure {
       target.x === this.cell.x - 2 &&
       this.cell.board.getCell(target.x, target.y).isEmpty() &&
       !this.cell.board.getCell(target.x + 1, target.y + direction)?.isEmpty() &&
-      this.cell.board.getCell(target.x + 1, target.y + direction)?.isFigure().color !==
+      this.cell.board.getCell(target.x + 1, target.y + direction)?.isFigure()?.color !==
         this.cell.figure?.color
     ) {
       this.cell.board.getCell(target.x + 1, target.y + direction).figureDeleteColor = true;
