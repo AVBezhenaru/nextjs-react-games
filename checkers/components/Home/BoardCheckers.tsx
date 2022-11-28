@@ -487,6 +487,7 @@ const BoardCheckers: FC<BoardProps> = ({
       }
     }
   };
+
   function updateBoard() {
     const newBoard = board.getCopyBoard();
     setBoard(newBoard);
@@ -496,6 +497,7 @@ const BoardCheckers: FC<BoardProps> = ({
     board.highlightCells(selectedCell);
     updateBoard();
   }
+
   useEffect(() => {
     highlightCells();
   }, [selectedCell]);
@@ -515,10 +517,51 @@ const BoardCheckers: FC<BoardProps> = ({
     }
     return div;
   }
+
   const selectedUser = players.filter((el) => el.id === idForPlayersOnline);
   const colorSelectedUser = selectedUser.map((el) => el.playConditional.colorCheckers).join();
+
   console.log(colorSelectedUser);
 
+  // const getWhitePlayer = () => {
+  //   const colorPlayer1 = player1.playConditional.colorCheckers;
+  //   if (colorPlayer1 === 'white') {
+  //     return colorPlayer1;
+  //   }
+  //   return player2.playConditional.colorCheckers;
+  // };  // const getWhitePlayer = () => {
+  //   //   const colorPlayer1 = player1.playConditional.colorCheckers;
+  //   //   if (colorPlayer1 === 'white') {
+  //   //     return colorPlayer1;
+  //   //   }
+  //   //   return player2.playConditional.colorCheckers;
+  //   // };
+  const setStyleColorFigureByConditional = (condition: boolean) => {
+    if (isPlayWithBoot) {
+      if (condition) {
+        return { color: 'white', fontSize: '30px' };
+      }
+      return { color: 'black', fontSize: '30px' };
+    }
+    return { color: currentPlayer.color, fontSize: '30px' };
+  };
+  const getPlayerColorByCondition = (condition: boolean) => {
+    const isWhite = currentPlayer?.color === 'white';
+    if (condition) {
+      if (isWhite) {
+        return 'Белого игрока';
+      }
+      return 'Черного игрока';
+    }
+  };
+
+  // isPlayWithBoot === true
+  //     ? currentPlayer?.color === 'white'
+  //         ? 'Белого игрока'
+  //         : 'Черного игрока'
+  //     : currentPlayer?.color === 'white'
+  //         ? selectedUser.map((el) => el.name) || 'Белого'
+  //         : 'Черного'
   return (
     <div className="page__checkers">
       {board.lostWhiteFigure?.length === 12 || board.lostBlackFigure?.length === 12 ? (
@@ -570,13 +613,9 @@ const BoardCheckers: FC<BoardProps> = ({
                 Текущий ход{' '}
                 <span
                   className="checkers__content-title__player"
-                  style={
-                    currentFigure?.color === 'white'
-                      ? { color: 'white', fontSize: '30px' }
-                      : { color: 'black', fontSize: '30px' }
-                  }
+                  style={setStyleColorFigureByConditional(currentPlayer?.color === 'white')}
                 >
-                  {currentFigure?.color === 'white' ? 'Белого' : 'Черного'}
+                  {getPlayerColorByCondition(isPlayWithBoot)}
                 </span>{' '}
                 игрока{' '}
               </h3>
@@ -585,19 +624,9 @@ const BoardCheckers: FC<BoardProps> = ({
                 Текущий ход{' '}
                 <span
                   className="checkers__content-title__player"
-                  style={
-                    currentPlayer?.color === 'white'
-                      ? { color: 'white', fontSize: '30px' }
-                      : { color: 'black', fontSize: '30px' }
-                  }
+                  style={setStyleColorFigureByConditional(currentPlayer?.color === 'white')}
                 >
-                  {isPlayWithBoot === true
-                    ? currentPlayer?.color === 'white'
-                      ? 'Белого игрока'
-                      : 'Черного игрока'
-                    : currentPlayer?.color === 'white'
-                    ? selectedUser.map((el) => el.name) || 'Белого'
-                    : selectedUser.map((el) => el.name) || 'Черного'}
+                  {getPlayerColorByCondition(isPlayWithBoot)}
                 </span>{' '}
                 {/* игрока{' '} */}
               </h3>
