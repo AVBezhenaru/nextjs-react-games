@@ -1,4 +1,5 @@
 {
+  "root": true,
   "env": {
     "browser": true,
     "es6": true
@@ -46,9 +47,6 @@
     "jsx-a11y/no-noninteractive-element-interactions": "off",
     "jsx-a11y/no-static-element-interactions": "off",
     "jsx-a11y/click-events-have-key-events": "off",
-    "no-plusplus": "off",
-    "no-new": 0,
-
     "import/order": [
       2,
       {
@@ -79,7 +77,10 @@
     "no-shadow": "off",
     "camelcase": "off",
     "indent": ["off", 2],
-    "semi": "error"
+    "semi": "error",
+    "no-plusplus": "off",
+    "no-nested-ternary": "off",
+    "no-new": 0
   },
   "settings": {
     "import/resolver": {

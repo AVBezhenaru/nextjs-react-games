@@ -1,19 +1,19 @@
 @font-face {
-  font-family: "ljk_RoadRage";
+  font-family: 'ljk_RoadRage';
   src: url(../fonts/13891.ttf);
 }
 @font-face {
-  font-family: "Yahfie Heavy";
+  font-family: 'Yahfie Heavy';
   src: url(../fonts/20686.ttf);
 }
 @font-face {
-  font-family: "True Lies(RUS BY LYAJKA)";
+  font-family: 'True Lies(RUS BY LYAJKA)';
   src: url(../fonts/10918.otf);
 }
 
 html,
 body {
-  font-family: "True Lies(RUS BY LYAJKA)";
+  font-family: 'True Lies(RUS BY LYAJKA)';
   letter-spacing: 10px;
   line-height: 35px;
   font-weight: 900;
@@ -43,7 +43,94 @@ a {
     background: black;
   }
 }
+.lobbi-container {
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
 
+  background-color: black;
+  border: 1px solid white;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  padding: 10px;
+  border-radius: 10px;
+}
+.lobbi-span {
+  font-family: 'Yahfie Heavy';
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.lobbi-label {
+  white-space: nowrap;
+}
+.lobbiCreckers_header {
+  font-family: 'True Lies(RUS BY LYAJKA)';
+}
+.lobbiCreckers-button__container {
+  display: flex;
+  justify-content: center;
+  margin: 10px 47px 15px 0;
+}
+.lobbiCreckers-button {
+  margin: 0 auto;
+  display: block;
+  font-family: monospace;
+  font-size: 18px;
+  color: black;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: transparent;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+.lobbiCreckers-button:hover {
+  background-color: black;
+  color: white;
+}
+.lobbiCreckers_select {
+  cursor: pointer;
+  width: 242px;
+  height: 35px;
+  padding: 5px;
+  background-color: white;
+  color: black;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  border-radius: 7px;
+  border: 2px solid black;
+}
+.lobbiCreckers_v:hover {
+  background-color: black;
+  color: white;
+}
+.lobbiCreckers_text {
+  font-family: 'True Lies(RUS BY LYAJKA)';
+  white-space: nowrap;
+  padding-top: 20px;
+}
+.lobbiCreckers__container {
+  float: left;
+  width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+.closePlayer__page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../images/apps.53192.14379170605024367.a314d276-3cdb-4d7d-afcc-ad09bd8549f9.jpeg');
+  background-size: cover;
+}
 .head__page {
   width: 100vw;
   height: 100vh;
@@ -53,28 +140,28 @@ a {
   align-items: center;
   flex-direction: column;
 
-  background-image: url("../images/back2.jpg");
+  background-image: url('../images/back2.jpg');
   background-size: cover;
 }
 .head__page-play {
+  text-align: center;
+
+  width: 289px;
+  height: 75px;
   position: relative;
-  top: -40px;
 
-  font-family: "Yahfie Heavy";
-  font-size: 40px;
-
-  padding: 20px 40px;
+  font-family: 'Yahfie Heavy';
+  font-size: 39px;
 
   border: 3px dotted black;
   outline: 3px dotted white;
   border-radius: 13px;
-
   color: white;
-
+  -webkit-backdrop-filter: blur(9px);
   backdrop-filter: blur(9px);
-
   cursor: pointer;
 }
+
 .head__page-play:hover {
   border: 3px dotted white;
   outline: 3px dotted black;
@@ -85,11 +172,15 @@ a {
 
   cursor: pointer;
 }
+.container___head__page {
+  display: flex;
+  gap: 15px;
+}
 .head__page-title {
   position: relative;
   top: -30px;
 
-  font-family: "Yahfie Heavy";
+  font-family: 'Yahfie Heavy';
   font-size: 70px;
 
   color: white;
@@ -98,7 +189,7 @@ a {
   position: relative;
   top: -30px;
 
-  font-family: "ljk_RoadRage";
+  font-family: 'ljk_RoadRage';
   font-size: 130px;
 
   margin: 150px 0;
@@ -111,7 +202,7 @@ a {
   width: 100vw;
   height: 100vh;
 
-  background-image: url("../images/aaaa.jpg");
+  background-image: url('../images/aaaa.jpg');
 }
 .app {
   width: 100vw;
@@ -255,7 +346,7 @@ a {
 }
 .checkers__numbers-left ul li,
 .checkers__numbers-right ul li {
-  font-family: "ljk_RoadRage";
+  font-family: 'ljk_RoadRage';
   font-size: 25px;
 
   list-style-type: none;
@@ -280,7 +371,7 @@ a {
 }
 .checkers__letters-up ul li,
 .checkers__letters-down ul li {
-  font-family: "ljk_RoadRage";
+  font-family: 'ljk_RoadRage';
   /* font-family: "Yahfie Heavy"; */
   font-size: 23px;
 
@@ -305,7 +396,7 @@ a {
   width: 130px;
   height: 130px;
 
-  font-family: "Yahfie Heavy";
+  font-family: 'Yahfie Heavy';
   font-size: 24px;
 
   border-radius: 50%;
@@ -346,8 +437,8 @@ a {
   top: 55px;
   right: -220px;
 
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
-    "Helvetica Neue", sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+    'Helvetica Neue', sans-serif;
   font-size: 20px;
   letter-spacing: normal;
 }
@@ -372,7 +463,35 @@ a {
 
   color: white;
 }
+.lobbiCreckers__modal-button {
+  font-family: 'Yahfie Heavy';
+  text-transform: uppercase;
+  font-weight: bold;
+  font-style: italic;
+  border-radius: 13px;
+  padding: 10px 20px;
+  color: white;
+  margin: 20px 0 0 167px;
 
+  transition: all 0.5s ease 0s;
+  border: 2px solid white;
+}
+.lobbiCreckers__modal-button:hover {
+  background-color: black;
+}
+.lobbi-btn {
+  border: 1px solid white;
+  display: block;
+  float: right;
+  border-radius: 10px;
+  margin-bottom: 3px;
+  padding: 10px;
+  cursor: pointer;
+}
+.lobbi-btn:hover {
+  background-color: white;
+  color: black;
+}
 .modal {
   position: fixed;
   left: 0;
@@ -411,9 +530,9 @@ a {
   border: solid 1px #8a8a8a;
 
   color: black;
-
+  /* 
   background-image: linear-gradient(90deg, transparent 708px, #ed82ad 710px, #ed82ad 711px, transparent 712px),
-    linear-gradient(#e9e9e9 1px, transparent 0px), linear-gradient(90deg, #e9e9e9 1px, transparent 0px);
+    linear-gradient(#e9e9e9 1px, transparent 0px), linear-gradient(90deg, #e9e9e9 1px, transparent 0px); */
   background-size: 100% 100%, 20px 20px, 20px 20px;
   background-position: 0 0, -1px -1px, -1px 1px;
   background-color: white;
@@ -430,6 +549,8 @@ a {
 .modal-header,
 .modal-footer {
   padding: 10px;
+  display: flex;
+  justify-content: center;
 }
 .modal-title {
   font-size: 22px;
@@ -444,7 +565,7 @@ a {
 .modal-button {
   font-family: monospace;
   font-size: 18px;
-
+  color: black;
   border: 1px solid black;
   border-radius: 10px;
   padding: 5px 10px;

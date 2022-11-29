@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Board } from './Board';
 import { Colors } from './Colors';
 import { Figure } from './figures/Figure';
@@ -465,7 +467,7 @@ export class Cell {
   }
 
   // ? добавление удаленных фигур в массив
-  // ПОСМОТРЕТЬ РАБОТАЕТ ЛИ
+
   addLostFigure(figure: Figure | null) {
     if (figure) {
       if (figure?.color === Colors.BLACK) this.board.lostBlackFigure.push(figure);
