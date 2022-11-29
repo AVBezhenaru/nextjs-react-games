@@ -54,5 +54,16 @@
     "prettier": "^2.7.1",
     "sass": "^1.55.0",
     "typescript": "^4.8.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "env FORCE_COLOR=1 lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "npm run lint:fix"
+    ]
   }
 }
