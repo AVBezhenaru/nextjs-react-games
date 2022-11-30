@@ -6,8 +6,12 @@ export const players = [
   { id: 5, name: 'Жора', playConditional: { colorCheckers: 'black', bid: 2000 } },
 ];
 
+export const colors = [
+  { value: 'black', label: 'black' },
+  { value: 'white', label: 'white' },
+];
 export const player = {
   id: 1,
   name: 'Алина',
-  playConditional: { colorCheckers: 'black', bid: 5000 },
+  playConditional: { colorCheckers: '', bid: 5000 },
 };

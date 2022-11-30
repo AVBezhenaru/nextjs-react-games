@@ -1,11 +1,14 @@
 import React, { FC, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { RootState } from '../../store';
+import { setColor } from '../../checkers/store/checkersReducer';
 import Modal from '../../checkers/components/Modal/Modal';
 import Lobbi from '../../checkers/components/Lobbi/Lobbi';
-import { players } from '../../checkers/components/Lobbi/PlayersForOnlinePlay';
+import { players, colors } from '../../checkers/components/Lobbi/PlayersForOnlinePlay';
 
 interface PlayConditional {
-  colorCheckers: string;
+  colorCheckers: string | number;
 
   bid: number;
 }
@@ -14,15 +17,23 @@ interface UserProps {
   name: string;
   playConditional: PlayConditional;
 }
+interface ColorProps {
+  label: string;
+  value: string;
+}
 interface СhoosePlayerProps {
   show: boolean;
   setShow: (show: boolean) => void;
-
+  colors: ColorProps;
   players: UserProps[];
 }
 const СhoosePlayer: FC<СhoosePlayerProps> = () => {
   const [, setShowFirst] = useState(true);
   const [show, setShow] = useState(false);
+  const [input, setInput] = useState('');
+  const dispatch = useDispatch();
+  const count = useSelector((state: RootState) => state.checkers.color);
+  console.log(count);
 
   return (
     <div className="closePlayer__page">
@@ -49,10 +60,10 @@ const СhoosePlayer: FC<СhoosePlayerProps> = () => {
           <h1 className="lobbiCreckers_header">Настройки вашей игры</h1>
           <div className="lobbiCreckers__container">
             <p className="lobbiCreckers_text">Цвет шашки</p>
-            <select className="lobbiCreckers_select">
+            <select className="lobbiCreckers_select" onChange={(e) => setInput(e.target.value)}>
               <option>Выберите цвет шашки </option>
-              <option value="Белая шашка">&#9898;</option>
-              <option value="Черная шашка">&#9899;</option>
+              <option value={colors[0].label}>&#9899;</option>
+              <option value={colors[1].label}>&#9898;</option>
             </select>
           </div>
           <div className="column">
@@ -70,7 +81,14 @@ const СhoosePlayer: FC<СhoosePlayerProps> = () => {
           </div>
         </div>
         <div className="lobbiCreckers-button__container">
-          <button className="lobbiCreckers-button" type="button" onClick={() => setShow(false)}>
+          <button
+            className="lobbiCreckers-button"
+            type="button"
+            onClick={() => {
+              setShow(false);
+              dispatch(setColor(input));
+            }}
+          >
             Подтвердить
           </button>
         </div>

@@ -1,4 +1,4 @@
-import { Colors } from './Colors';
+// import { Colors } from './Colors';
 
 export class Player {
   id: number | null;
@@ -7,13 +7,21 @@ export class Player {
 
   bid: number | null;
 
-  color: Colors;
+  // colors: Colors;
 
+  color: string;
 
-  constructor(id: number | null, name: string | null, bid: number | null, color: Colors) {
+  constructor(
+    id: number | null,
+    name: string | null,
+    bid: number | null,
+    // colors: Colors,
+    color: string,
+  ) {
     this.id = id;
     this.name = name;
     this.bid = bid;
+    // this.colors = colors;
     this.color = color;
   }
 }

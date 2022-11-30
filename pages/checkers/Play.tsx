@@ -11,19 +11,37 @@ import { RootState } from '../../store';
 import { players, player } from '../../checkers/components/Lobbi/PlayersForOnlinePlay';
 
 export default function Play() {
-  const { isPlayWithBoot, idForPlayersOnline } = useSelector((state: RootState) => state.checkers);
+  const { isPlayWithBoot, idForPlayersOnline, color } = useSelector(
+    (state: RootState) => state.checkers,
+  );
 
   const setPlayer = () => {
     const blackAndWhitePlayers = [];
     if (!isPlayWithBoot) {
       const findWhite = players.find((p) => p.id === idForPlayersOnline);
+      console.log(findWhite);
+      console.log(players);
+      console.log(idForPlayersOnline);
+
       blackAndWhitePlayers.push(
-        new Player(findWhite.id, findWhite.name, findWhite.playConditional.bid, Colors.WHITE),
+        new Player(
+          findWhite?.id,
+
+          findWhite?.name,
+          findWhite?.playConditional.bid,
+
+          findWhite?.playConditional.colorCheckers,
+        ),
       );
+      console.log(blackAndWhitePlayers);
+
       const findBlack = player;
+
       blackAndWhitePlayers.push(
-        new Player(findBlack.id, findBlack.name, findBlack.playConditional.bid, Colors.BLACK),
+        new Player(findBlack.id, findBlack.name, findBlack.playConditional.bid, color),
       );
+      console.log(blackAndWhitePlayers);
+
       return blackAndWhitePlayers;
     }
     const WHITE_BOT_NAME = 'Белого Игрока';
@@ -34,8 +52,8 @@ export default function Play() {
   };
   const [board, setBoard] = useState(new Board());
   const [show, setShow] = useState(false);
-  const [whitePlayer] = useState(setPlayer()[0]);
-  const [blackPlayer] = useState(setPlayer()[1]);
+  const [whitePlayer] = useState(setPlayer().find((el) => el.color === Colors.WHITE));
+  const [blackPlayer] = useState(setPlayer().find((el) => el.color === Colors.BLACK));
   const [currentPlayer, setCurrentPlayer] = useState<Player | null>(whitePlayer);
   const [currentFigure, setCurrentFigure] = useState<Figure | null>(null);
 
