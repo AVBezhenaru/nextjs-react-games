@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import BoardCheckers from '../../checkers/components/Home/BoardCheckers';
 import { Board } from '../../checkers/model/Board';
@@ -8,17 +8,21 @@ import { Player } from '../../checkers/model/Player';
 import { Colors } from '../../checkers/model/Colors';
 import { Figure } from '../../checkers/model/figures/Figure';
 import { RootState } from '../../store';
+import { setShow } from '../../checkers/store/checkersReducer';
 import { players, player } from '../../checkers/components/Lobbi/PlayersForOnlinePlay';
 
 export default function Play() {
-  const { isPlayWithBoot, idForPlayersOnline, color } = useSelector(
+  const dispatch = useDispatch();
+  const { isPlayWithBoot, idForPlayersOnline, color, bid } = useSelector(
     (state: RootState) => state.checkers,
   );
 
   const setPlayer = () => {
     const blackAndWhitePlayers = [];
     if (!isPlayWithBoot) {
-      const findWhite = players.find((p) => p.id === idForPlayersOnline);
+      const idSelectedPlayers =
+        idForPlayersOnline === -1 ? localStorage.getItem('id') : idForPlayersOnline;
+      const findWhite = players.find((p) => p.id === idSelectedPlayers);
       console.log(findWhite);
       console.log(players);
       console.log(idForPlayersOnline);
@@ -37,9 +41,7 @@ export default function Play() {
 
       const findBlack = player;
 
-      blackAndWhitePlayers.push(
-        new Player(findBlack.id, findBlack.name, findBlack.playConditional.bid, color),
-      );
+      blackAndWhitePlayers.push(new Player(findBlack.id, findBlack.name, bid, color));
       console.log(blackAndWhitePlayers);
 
       return blackAndWhitePlayers;
@@ -51,7 +53,7 @@ export default function Play() {
     return blackAndWhitePlayers;
   };
   const [board, setBoard] = useState(new Board());
-  const [show, setShow] = useState(false);
+
   const [whitePlayer] = useState(setPlayer().find((el) => el.color === Colors.WHITE));
   const [blackPlayer] = useState(setPlayer().find((el) => el.color === Colors.BLACK));
   const [currentPlayer, setCurrentPlayer] = useState<Player | null>(whitePlayer);
@@ -65,7 +67,7 @@ export default function Play() {
   };
   useEffect(() => {
     restart();
-    setShow(true);
+    dispatch(setShow(true));
     setCurrentPlayer(whitePlayer);
   }, []);
 
@@ -114,8 +116,6 @@ export default function Play() {
           swapPlayer={swapPlayer}
           swapFigure={swapFigure}
           restart={restart}
-          show={show}
-          setShow={setShow}
         />
       </main>
     </div>

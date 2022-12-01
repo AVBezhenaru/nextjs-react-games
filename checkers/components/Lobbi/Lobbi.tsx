@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { setPlayWithBoot, setUserSelectedId } from '../../store/checkersReducer';
 import { RootState } from '../../../store';
 
-import { players, player } from './PlayersForOnlinePlay';
+import { players } from './PlayersForOnlinePlay';
 
 interface PlayConditional {
   colorCheckers: string;
@@ -22,13 +22,14 @@ export interface UserProps {
 const Lobbi: FC<UserProps> = (props) => {
   const dispatch = useDispatch();
   const route = useRouter();
-  const color = useSelector((state: RootState) => state.checkers.color);
+  const { color, bid, isCreatedPlay } = useSelector((state: RootState) => state.checkers);
 
   const colorSelectedUser = players.find((el) => el.id === props.id).playConditional.colorCheckers;
-  console.log(colorSelectedUser);
+  const bidSelectedUser = players.find((el) => el.id === props.id).playConditional.bid;
+  const disable = color !== colorSelectedUser && bidSelectedUser >= bid;
 
   return (
-    <li className="lobbi-span" key={props.id}>
+    <li className="lobbi-span">
       {props.name} {props.playConditional?.bid} {props.playConditional?.colorCheckers}{' '}
       {dispatch(setPlayWithBoot(false)) && (
         <button
@@ -36,17 +37,13 @@ const Lobbi: FC<UserProps> = (props) => {
           className="lobbi-btn"
           onClick={() => {
             dispatch(setUserSelectedId(props.id));
-
-            const colorSelectedUser = players.find((el) => el.id === props.id).playConditional
-              .colorCheckers;
-
-            const disable = color !== colorSelectedUser;
-            return disable
-              ? route.push('../../../checkers/Play')
-              : route.push('../../../checkers/ChoosePlayer');
+            if (localStorage === window.localStorage) {
+              localStorage.setItem('id', JSON.stringify(props.id));
+            }
+            return isCreatedPlay && disable && route.push('../../../checkers/Play');
           }}
         >
-          Присоединиться
+          {disable ? 'Присоединиться' : 'Не возможно'}
         </button>
       )}
     </li>

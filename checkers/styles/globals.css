@@ -480,6 +480,7 @@ a {
   background-color: black;
 }
 .lobbi-btn {
+  width:122px;
   border: 1px solid white;
   display: block;
   float: right;

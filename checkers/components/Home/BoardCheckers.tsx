@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import React, { FC, useEffect, useState } from 'react';
 import Link from 'next/link';
 
@@ -9,6 +9,7 @@ import { Player } from '../../model/Player';
 import { Figure } from '../../model/figures/Figure';
 import Modal from '../Modal/Modal';
 import { RootState } from '../../../store';
+import { setShow, setShowFirst } from '../../store/checkersReducer';
 
 import CellComponent from './CellComponent';
 
@@ -20,8 +21,8 @@ interface BoardProps {
   swapPlayer: (num: string) => void;
   swapFigure: (figure: Figure | null) => void;
   restart: () => void;
-  show: boolean;
-  setShow: (show: boolean) => void;
+  // show: boolean;
+  // setShow: (show: boolean) => void;
 }
 
 const BoardCheckers: FC<BoardProps> = ({
@@ -32,17 +33,18 @@ const BoardCheckers: FC<BoardProps> = ({
   swapPlayer,
   swapFigure,
   restart,
-  show,
-  setShow,
+  // show,
+  // setShow,
 }) => {
   const [selectedCell, setSelectedCell] = useState<Cell | null>(null);
-  const [showFirst, setShowFirst] = useState(true);
+
   const [prevBlack, setPrevBlack] = useState(board.lostBlackFigure?.length);
   const [prevWhite, setPrevWhite] = useState(board.lostWhiteFigure?.length);
   let directionEmpty = selectedCell?.figure?.color === Colors.BLACK ? -1 : 1;
   let directionEmptyTwo = selectedCell?.figure?.color === Colors.BLACK ? 1 : -1;
 
-  const { isPlayWithBoot } = useSelector((state: RootState) => state.checkers);
+  const { isPlayWithBoot, show, showFirst } = useSelector((state: RootState) => state.checkers);
+  const dispatch = useDispatch();
 
   const click = (cell: Cell) => {
     let banOnHitting = true;
@@ -615,8 +617,8 @@ const BoardCheckers: FC<BoardProps> = ({
                 type="button"
                 className="checkers__modal-button"
                 onClick={() => {
-                  setShow(true);
-                  setShowFirst(false);
+                  dispatch(setShow(true));
+                  dispatch(setShowFirst(false));
                 }}
               >
                 Правила игры
@@ -627,7 +629,7 @@ const BoardCheckers: FC<BoardProps> = ({
                     ? 'Уважаемый игрок, перед началом игры ознакомьтесь пожалуйста с правилами!'
                     : 'Правила игры'
                 }
-                onClose={() => setShow(false)}
+                onClose={() => dispatch(setShow(false))}
                 show={show}
               >
                 <p style={{ color: 'red' }}>
@@ -674,7 +676,11 @@ const BoardCheckers: FC<BoardProps> = ({
                   свободное пространство после взятой шашки.
                 </p>
                 <div className="modal-footer">
-                  <button className="modal-button" type="button" onClick={() => setShow(false)}>
+                  <button
+                    className="modal-button"
+                    type="button"
+                    onClick={() => dispatch(setShow(false))}
+                  >
                     Закрыть
                   </button>
                 </div>
