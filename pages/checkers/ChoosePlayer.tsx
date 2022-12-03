@@ -11,46 +11,50 @@ import {
 } from '../../checkers/store/checkersReducer';
 import Modal from '../../checkers/components/Modal/Modal';
 import Lobbi from '../../checkers/components/Lobbi/Lobbi';
-import { players, colors, bids } from '../../checkers/components/Lobbi/PlayersForOnlinePlay';
+import {
+  players,
+  colors,
+  bids,
+  player,
+} from '../../checkers/components/Lobbi/PlayersForOnlinePlay';
+import { UserProps, PlayerProps } from '../../checkers/interfaces/Interfaces';
 
-interface PlayConditional {
-  colorCheckers: string | number;
-
-  bid: number;
-}
-interface UserProps {
-  id: number;
-  name: string;
-  playConditional: PlayConditional;
-}
 interface ColorProps {
   label: string;
   value: string;
 }
 interface СhoosePlayerProps {
-  // show: boolean;
-  // setShow: (show: boolean) => void;
   colors: ColorProps;
   players: UserProps[];
+  playerForgameMe: PlayerProps;
+  restart: () => void;
 }
 const СhoosePlayer: FC<СhoosePlayerProps> = () => {
-  // const [, setShowFirst] = useState(true);
-  // const [show, setShow] = useState(false);
   const [input, setInput] = useState('');
   const [inputForBids, setInputForBids] = useState('');
   const dispatch = useDispatch();
   const { color, bid, show } = useSelector((state: RootState) => state.checkers);
   console.log(color, bid);
-  // const playersFunk = ()=> {
-  // players.push()
-  // }
+
+  function playersFunk(bids: number, color: string) {
+    const changeMyPlayer = {
+      id: player.id,
+      name: player.name,
+      playConditional: { colorCheckers: color, bid: bids },
+    };
+    changeMyPlayer.playConditional.bid = Number(bid);
+    changeMyPlayer.playConditional.colorCheckers = color;
+    return [...players, changeMyPlayer];
+  }
   return (
     <div className="closePlayer__page">
       <div>
         <ul className="lobbi-container">
-          {players.map((el) => (
-            <Lobbi key={el.id} {...el} />
-          ))}
+          {playersFunk(bid, color)
+            .filter((p) => p.playConditional.bid !== 0 && p.playConditional.colorCheckers !== '')
+            .map((el: UserProps) => (
+              <Lobbi key={el.id} {...el} />
+            ))}
         </ul>
         <button
           type="button"
@@ -100,6 +104,7 @@ const СhoosePlayer: FC<СhoosePlayerProps> = () => {
               dispatch(setShow(false));
               dispatch(setColor(input));
               dispatch(setBid(inputForBids));
+              playersFunk(bid, color);
             }}
           >
             Подтвердить

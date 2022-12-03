@@ -33,8 +33,6 @@ const BoardCheckers: FC<BoardProps> = ({
   swapPlayer,
   swapFigure,
   restart,
-  // show,
-  // setShow,
 }) => {
   const [selectedCell, setSelectedCell] = useState<Cell | null>(null);
 
@@ -43,7 +41,12 @@ const BoardCheckers: FC<BoardProps> = ({
   let directionEmpty = selectedCell?.figure?.color === Colors.BLACK ? -1 : 1;
   let directionEmptyTwo = selectedCell?.figure?.color === Colors.BLACK ? 1 : -1;
 
-  const { isPlayWithBoot, show, showFirst } = useSelector((state: RootState) => state.checkers);
+  const { isPlayWithBoot, show, showFirst, color } = useSelector(
+    (state: RootState) => state.checkers,
+  );
+
+  const transformBord = color === 'black' ? 'board-transform' : 'board';
+
   const dispatch = useDispatch();
 
   const click = (cell: Cell) => {
@@ -686,7 +689,8 @@ const BoardCheckers: FC<BoardProps> = ({
                 </div>
               </Modal>
             </div>
-            <div className="board">
+
+            <div className={transformBord}>
               {board.cells.map((row, index) => (
                 <React.Fragment key={index}>
                   {row.map((cell) => (

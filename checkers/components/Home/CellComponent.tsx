@@ -1,7 +1,9 @@
 import { FC, useState } from 'react';
 import Image from 'next/image';
+import { useSelector } from 'react-redux';
 
 import { Cell } from '../../model/Cell';
+import { RootState } from '../../../store';
 
 interface CellProps {
   cell: Cell;
@@ -11,11 +13,16 @@ interface CellProps {
 
 const CellComponent: FC<CellProps> = ({ cell, selected, click }) => {
   const [trueColor, setTrueColor] = useState(false);
-
+  const { color } = useSelector((state: RootState) => state.checkers);
+  const transformColor = color === 'black' ? 'cell-transform' : 'cell';
   return (
     // ? обозначение шашки и ее хода
     <div
-      className={['cell', cell.color, selected && cell.figure?.image ? 'selected' : ' '].join(' ')}
+      className={[
+        transformColor,
+        cell.color,
+        selected && cell.figure?.image ? 'selected' : ' ',
+      ].join(' ')}
       onClick={() => {
         click(cell);
         setTrueColor(true);

@@ -1,5 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { players, player } from '../components/Lobbi/PlayersForOnlinePlay';
+import { UserProps, PlayerProps } from '../interfaces/Interfaces';
+
 interface Checker {
   isPlayWithBoot: boolean;
   idForPlayersOnline: number;
@@ -9,6 +12,8 @@ interface Checker {
   showFirst: boolean;
   show: boolean;
   isCreatedPlay: boolean;
+  listPlayers: UserProps[];
+  playerForgameMe: PlayerProps;
 }
 const initialState: Checker = {
   isPlayWithBoot: false,
@@ -19,6 +24,8 @@ const initialState: Checker = {
   showFirst: true,
   show: false,
   isCreatedPlay: false,
+  listPlayers: players,
+  playerForgameMe: player,
 };
 export const checkers = createSlice({
   name: 'checkers',

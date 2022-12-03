@@ -11,7 +11,7 @@ export const colors = [
   { value: 'white', label: 'white' },
 ];
 export const player = {
-  id: 1,
+  id: Math.random(),
   name: 'Алина',
   playConditional: { colorCheckers: '', bid: 5000 },
 };

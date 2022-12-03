@@ -8,7 +8,7 @@ import { Player } from '../../checkers/model/Player';
 import { Colors } from '../../checkers/model/Colors';
 import { Figure } from '../../checkers/model/figures/Figure';
 import { RootState } from '../../store';
-import { setShow } from '../../checkers/store/checkersReducer';
+import { setShow, setColor } from '../../checkers/store/checkersReducer';
 import { players, player } from '../../checkers/components/Lobbi/PlayersForOnlinePlay';
 
 export default function Play() {
@@ -23,9 +23,6 @@ export default function Play() {
     let bids;
     if (!isPlayWithBoot) {
       const selectedPlayer = players.find((p) => p.id === idForPlayersOnline);
-      console.log(selectedPlayer);
-      console.log(players);
-      console.log(idForPlayersOnline);
 
       blackAndWhitePlayers.push(
         new Player(
@@ -51,7 +48,8 @@ export default function Play() {
         bids = selectedPlayer?.playConditional.bid;
       }
       blackAndWhitePlayers.push(new Player(player.id, player.name, bids, colorForMyUser));
-      console.log(blackAndWhitePlayers);
+
+      dispatch(setColor(colorForMyUser));
 
       return blackAndWhitePlayers;
     }

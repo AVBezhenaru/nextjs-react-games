@@ -225,6 +225,17 @@ a {
   /* border: 1px solid black; */
   /* outline: 10px solid black; */
 }
+.board-transform {
+  width: calc(84px * 8);
+  height: calc(84px * 8);
+  transform: rotate(180deg);
+  display: flex;
+  flex-wrap: wrap;
+
+  outline: 35px solid rgba(196, 187, 181, 0.3);
+  /* border: 1px solid black; */
+  /* outline: 10px solid black; */
+}
 
 .cell {
   width: 84px;
@@ -233,6 +244,15 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.cell-transform{
+  width: 84px;
+  height: 84px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotate(180deg);
 }
 
 .black {
