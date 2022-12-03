@@ -19,29 +19,38 @@ export default function Play() {
 
   const setPlayer = () => {
     const blackAndWhitePlayers = [];
+    let colorForMyUser;
+    let bids;
     if (!isPlayWithBoot) {
-      const idSelectedPlayers =
-        idForPlayersOnline === -1 ? localStorage.getItem('id') : idForPlayersOnline;
-      const findWhite = players.find((p) => p.id === idSelectedPlayers);
-      console.log(findWhite);
+      const selectedPlayer = players.find((p) => p.id === idForPlayersOnline);
+      console.log(selectedPlayer);
       console.log(players);
       console.log(idForPlayersOnline);
 
       blackAndWhitePlayers.push(
         new Player(
-          findWhite?.id,
+          selectedPlayer?.id,
 
-          findWhite?.name,
-          findWhite?.playConditional.bid,
+          selectedPlayer?.name,
+          selectedPlayer?.playConditional.bid,
 
-          findWhite?.playConditional.colorCheckers,
+          selectedPlayer?.playConditional.colorCheckers,
         ),
       );
-      console.log(blackAndWhitePlayers);
 
-      const findBlack = player;
-
-      blackAndWhitePlayers.push(new Player(findBlack.id, findBlack.name, bid, color));
+      if (selectedPlayer?.playConditional.colorCheckers === color) {
+        if (selectedPlayer?.playConditional.colorCheckers === 'black') {
+          colorForMyUser = Colors.WHITE;
+        } else {
+          colorForMyUser = Colors.BLACK;
+        }
+      } else {
+        colorForMyUser = color;
+      }
+      if (selectedPlayer?.playConditional.bid !== bid) {
+        bids = selectedPlayer?.playConditional.bid;
+      }
+      blackAndWhitePlayers.push(new Player(player.id, player.name, bids, colorForMyUser));
       console.log(blackAndWhitePlayers);
 
       return blackAndWhitePlayers;

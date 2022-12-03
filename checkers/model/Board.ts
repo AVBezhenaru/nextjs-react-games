@@ -60,16 +60,23 @@ export class Board {
   addChecker() {
     for (let i = 0; i < 8; i++) {
       if (i % 2 === 0) {
-        new Checker(Colors.BLACK, this.getCell(i, 0));
-        new Checker(Colors.WHITE, this.getCell(i, 6));
-        new Checker(Colors.BLACK, this.getCell(i, 2));
+        new Checker(Colors.WHITE, this.getCell(i, 0));
+        new Checker(Colors.BLACK, this.getCell(i, 6));
+        new Checker(Colors.WHITE, this.getCell(i, 2));
       } else {
-        new Checker(Colors.WHITE, this.getCell(i, 5));
-        new Checker(Colors.BLACK, this.getCell(i, 1));
-        new Checker(Colors.WHITE, this.getCell(i, 7));
+        new Checker(Colors.BLACK, this.getCell(i, 5));
+        new Checker(Colors.WHITE, this.getCell(i, 1));
+        new Checker(Colors.BLACK, this.getCell(i, 7));
       }
     }
   }
+  //   new Checker(Colors.WHITE, this.getCell(i, 5));
+  //   new Checker(Colors.BLACK, this.getCell(i, 1));
+  //   new Checker(Colors.WHITE, this.getCell(i, 7));
+  // } else {
+  //   new Checker(Colors.BLACK, this.getCell(i, 0));
+  //   new Checker(Colors.WHITE, this.getCell(i, 6));
+  //   new Checker(Colors.BLACK, this.getCell(i, 2));
 
   addCheckerQueenWhite(i: number) {
     new CheckerQueen(Colors.WHITE, this.getCell(i, 0));
