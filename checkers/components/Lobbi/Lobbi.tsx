@@ -4,14 +4,22 @@ import React, { FC, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import { UserProps } from '../../interfaces/Interfaces';
-import { setPlayWithBoot, setUserSelectedId } from '../../store/checkersReducer';
+import { setPlayWithBoot, setUserSelectedId, setShow } from '../../store/checkersReducer';
 import { RootState } from '../../../store';
 
 const Lobbi: FC<UserProps> = (props) => {
   const dispatch = useDispatch();
   const route = useRouter();
-  const { isCreatedPlay } = useSelector((state: RootState) => state.checkers);
+  const { isCreatedPlay, playerForgameMe } = useSelector((state: RootState) => state.checkers);
 
+  const buttonSelection = () => {
+    if (props.name === playerForgameMe?.name) {
+      dispatch(setShow(true));
+    } else {
+      dispatch(setUserSelectedId(props.id));
+      return isCreatedPlay && route.push('../../../checkers/Play');
+    }
+  };
   useEffect(() => {
     dispatch(setUserSelectedId(props.id));
   }, []);
@@ -23,12 +31,10 @@ const Lobbi: FC<UserProps> = (props) => {
           type="button"
           className="lobbi-btn"
           onClick={() => {
-            dispatch(setUserSelectedId(props.id));
-
-            return isCreatedPlay && route.push('../../../checkers/Play');
+            buttonSelection();
           }}
         >
-          Присоединиться
+          {props.name === playerForgameMe?.name ? 'Настройки' : 'Присоединиться'}
         </button>
       )}
     </li>

@@ -21,8 +21,6 @@ interface BoardProps {
   swapPlayer: (num: string) => void;
   swapFigure: (figure: Figure | null) => void;
   restart: () => void;
-  // show: boolean;
-  // setShow: (show: boolean) => void;
 }
 
 const BoardCheckers: FC<BoardProps> = ({

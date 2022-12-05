@@ -1,68 +1,22 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import BoardCheckers from '../../checkers/components/Home/BoardCheckers';
 import { Board } from '../../checkers/model/Board';
 import { Player } from '../../checkers/model/Player';
 import { Colors } from '../../checkers/model/Colors';
 import { Figure } from '../../checkers/model/figures/Figure';
-import { RootState } from '../../store';
-import { setShow, setColor } from '../../checkers/store/checkersReducer';
-import { players, player } from '../../checkers/components/Lobbi/PlayersForOnlinePlay';
+import { setShow } from '../../checkers/store/checkersReducer';
+import { SetPlayer } from '../../checkers/components/Home/SetPlayer';
 
 export default function Play() {
   const dispatch = useDispatch();
-  const { isPlayWithBoot, idForPlayersOnline, color, bid } = useSelector(
-    (state: RootState) => state.checkers,
-  );
 
-  const setPlayer = () => {
-    const blackAndWhitePlayers = [];
-    let colorForMyUser;
-    let bids;
-    if (!isPlayWithBoot) {
-      const selectedPlayer = players.find((p) => p.id === idForPlayersOnline);
-
-      blackAndWhitePlayers.push(
-        new Player(
-          selectedPlayer?.id,
-
-          selectedPlayer?.name,
-          selectedPlayer?.playConditional.bid,
-
-          selectedPlayer?.playConditional.colorCheckers,
-        ),
-      );
-
-      if (selectedPlayer?.playConditional.colorCheckers === color) {
-        if (selectedPlayer?.playConditional.colorCheckers === 'black') {
-          colorForMyUser = Colors.WHITE;
-        } else {
-          colorForMyUser = Colors.BLACK;
-        }
-      } else {
-        colorForMyUser = color;
-      }
-      if (selectedPlayer?.playConditional.bid !== bid) {
-        bids = selectedPlayer?.playConditional.bid;
-      }
-      blackAndWhitePlayers.push(new Player(player.id, player.name, bids, colorForMyUser));
-
-      dispatch(setColor(colorForMyUser));
-
-      return blackAndWhitePlayers;
-    }
-    const WHITE_BOT_NAME = 'Белого Игрока';
-    const BLACK_BOT_NAME = 'Черного Игрока';
-    blackAndWhitePlayers.push(new Player(null, WHITE_BOT_NAME, null, Colors.WHITE));
-    blackAndWhitePlayers.push(new Player(null, BLACK_BOT_NAME, null, Colors.BLACK));
-    return blackAndWhitePlayers;
-  };
   const [board, setBoard] = useState(new Board());
 
-  const [whitePlayer] = useState(setPlayer().find((el) => el.color === Colors.WHITE));
-  const [blackPlayer] = useState(setPlayer().find((el) => el.color === Colors.BLACK));
+  const [whitePlayer] = useState(SetPlayer().find((el) => el.color === Colors.WHITE));
+  const [blackPlayer] = useState(SetPlayer().find((el) => el.color === Colors.BLACK));
   const [currentPlayer, setCurrentPlayer] = useState<Player | null>(whitePlayer);
   const [currentFigure, setCurrentFigure] = useState<Figure | null>(null);
 
