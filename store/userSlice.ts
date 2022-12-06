@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { User } from '../gamesItemTypes';
+import { User } from '../src/gamesItemTypes';
 
 // import {fetchLoginUser, fetchRegisterUser} from '../../api/service';
 
