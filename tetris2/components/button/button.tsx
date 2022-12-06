@@ -92,6 +92,7 @@ const withTheme8 = (Button: React.ElementType) => (props: { theme: string }) => 
   return <Button {...props} />;
 };
 
+console.log('check');
 // ф-я для оборачивания компонента в несколько HOC
 const compose =
   (...hocs: any[]) =>

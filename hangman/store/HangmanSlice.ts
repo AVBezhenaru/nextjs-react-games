@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { RootState } from '../../store';
+import { RootState } from '../../src/store';
 import { appApi } from '../services';
 import { COMMON_STATUS, IInitialStateApp } from '../types';
 import { Theme } from '../types/HangmanSlice';

@@ -15,28 +15,30 @@ function HelloTetris() {
       <Head>
         <meta name="keywords" content="tetris, online-games" />
       </Head>
-      <Link href="/tetris/settings">
-        <a>
-          <Button theme="settings">
-            <Image src={SettingPic} alt="" />
-          </Button>
-        </a>
-      </Link>
-      <Link href="/tetris/game">
-        <a onClick={() => dispatch(startGame())}>
-          <Button theme="play">Play</Button>
-        </a>
-      </Link>
-      <Link href="/tetris/score-table">
-        <a>
-          <Button theme="score">Score</Button>
-        </a>
-      </Link>
-      <Link href="/">
-        <a>
-          <Button theme="back">Back</Button>
-        </a>
-      </Link>
+      <main>
+        <Link href="/tetris/settings">
+          <a>
+            <Button theme="settings">
+              <Image src={SettingPic} alt="" />
+            </Button>
+          </a>
+        </Link>
+        <Link href="/tetris/game">
+          <a onClick={() => dispatch(startGame())}>
+            <Button theme="play">Play</Button>
+          </a>
+        </Link>
+        <Link href="/tetris/score-table">
+          <a>
+            <Button theme="score">Score</Button>
+          </a>
+        </Link>
+        <Link href="/">
+          <a>
+            <Button theme="back">Back</Button>
+          </a>
+        </Link>
+      </main>
     </div>
   );
 }

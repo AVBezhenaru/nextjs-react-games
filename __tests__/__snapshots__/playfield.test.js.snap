@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`check cell component should look like this 1`] = `
+<div
+  className="grid_item"
+  style={
+    {
+      "backgroundColor": "rgba(190, 80, 120)",
+    }
+  }
+/>
+`;

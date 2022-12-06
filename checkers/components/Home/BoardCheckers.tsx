@@ -497,7 +497,6 @@ const BoardCheckers: FC<BoardProps> = ({
     const newBoard = board.getCopyBoard();
     setBoard(newBoard);
   }
-
   function highlightCells() {
     board.highlightCells(selectedCell);
     updateBoard();
@@ -546,7 +545,7 @@ const BoardCheckers: FC<BoardProps> = ({
             ) : (
               <span>Белого</span>
             )}{' '}
-            игрока с победой!!!
+            игрока с победой!!! игрока с победой!!!
           </h2>
           <div className="wrap">{displayForm()}</div>
           <div className="checkers__win-buttons">
@@ -554,7 +553,7 @@ const BoardCheckers: FC<BoardProps> = ({
               Продолжить игру
             </button>
             <button type="button" className="win-button__right">
-              <Link href="../../../checkers">Выйти на главную</Link>
+              <Link href="/">Выйти на главную</Link>
             </button>
           </div>
         </div>
@@ -600,7 +599,7 @@ const BoardCheckers: FC<BoardProps> = ({
                 >
                   {getPlayerColorByCondition()}
                 </span>{' '}
-                {/* игрока{' '} */}
+                игрока{' '}
               </h3>
             )}
             <div className="checkers__letters-up">
