@@ -25,7 +25,7 @@ const LoginForm = () => {
     clearErrors,
   } = useForm<Inputs>();
   const { users } = useAppSelector((state) => state.user);
-  const [cookies, setCookies] = useCookies(["user"]);
+  const [cookies, setCookies] = useCookies(['user']);
 
   const onSubmit: SubmitHandler<Inputs> = (date) => {
     const user = {
@@ -33,17 +33,16 @@ const LoginForm = () => {
       username: date.username,
       password: date.password,
     };
-    console.log("user :", user);
+    console.log('user :', user);
 
     clearErrors();
     const authUser = users.find(
       (u) =>
-        (u.email === user.email || u.username === user.username) && u.password === user.password
-    );
+        (u.email === user.email || u.username === user.username) && u.password === user.password);
     if (authUser) {
       setCookies('user', authUser);
-      console.log("auth");
-      router.push("/profile");
+      console.log('auth');
+      router.push('/profile');
     } else {
     }
   };
@@ -67,33 +66,33 @@ const LoginForm = () => {
         </H4>
         <Input
           placeholder="User Name  or  email..."
-          {...register("username", {
-            required: "Required field"
+          {...register('username', {
+            required: 'Required field',
           })}
         />
         {errors?.username && <PError>{errors.username.message}</PError>}
 
         <Input
           placeholder="Password"
-          {...register("password", {
-            required: "You must specify a password",
+          {...register('password', {
+            required: 'You must specify a password',
             minLength: {
               value: 6,
-              message: "Password must have at least 6 characters"
+              message: 'Password must have at least 6 characters',
             },
             maxLength: {
               value: 40,
-              message: "Password must have maximum 40 characters"
-            }
+              message: 'Password must have maximum 40 characters',
+            },
           })}
         />
         {errors.password && <PError>{errors.password.message}</PError>}
 
         <InputBtn type="submit" children="Register" />
         <P>
-          Don`t have an account?{" "}
+          Don`t have an account?{''}
           <Link href="/registration">
-            <a style={{ color: "#F46119" }}>Sign Up</a>
+            <a style={{ color: '#F46119' }}>Sign Up</a>
           </Link>
         </P>
       </Form>
