@@ -15,6 +15,9 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/_document.tsx", "pages/_app.tsx", "async-pages/_app.jsx", "store/userSlice.js", "store/userSlice.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/_document.tsx", "pages/_app.tsx", "async-pages/_app.jsx",
+    "src/store/userSlice",
+    "src/store/userSlice"
+  ],
   "exclude": ["node_modules"]
 }
