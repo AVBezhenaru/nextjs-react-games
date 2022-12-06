@@ -1,13 +1,13 @@
-import { SubmitHandler, useForm } from "react-hook-form";
-import React from "react";
-import Link from "next/link";
-import { router } from "next/client";
-import { useCookies } from "react-cookie";
+import { SubmitHandler, useForm } from 'react-hook-form';
+import React from 'react';
+import Link from 'next/link';
+import { router } from 'next/client';
+import { useCookies } from 'react-cookie';
 
-import facebook from "../img/facebook.svg";
-import google from "../img/google.svg";
-import twitter from "../img/twitter.svg";
-import { useAppDispatch, useAppSelector } from "../../../hooks";
+import facebook from '../img/facebook.svg';
+import google from '../img/google.svg';
+import twitter from '../img/twitter.svg';
+import { useAppSelector } from '../../../hooks';
 
 import { DivImgLogo, Form, H4, ImgLogo, Input, InputBtn, P, PError, Section, Span } from "./loginFormStyle";
 
@@ -22,9 +22,8 @@ const LoginForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-    clearErrors
+    clearErrors,
   } = useForm<Inputs>();
-  const dispatch = useAppDispatch();
   const { users } = useAppSelector((state) => state.user);
   const [cookies, setCookies] = useCookies(["user"]);
 
@@ -32,7 +31,7 @@ const LoginForm = () => {
     const user = {
       email: date.username,
       username: date.username,
-      password: date.password
+      password: date.password,
     };
     console.log("user :", user);
 
@@ -42,7 +41,7 @@ const LoginForm = () => {
         (u.email === user.email || u.username === user.username) && u.password === user.password
     );
     if (authUser) {
-      setCookies("user", authUser);
+      setCookies('user', authUser);
       console.log("auth");
       router.push("/profile");
     } else {
