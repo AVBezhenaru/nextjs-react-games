@@ -1,0 +1,40 @@
+
+{
+  "moduleNameMapper": {
+    "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|avif|ico|bmp|svg)$/i":
+      "<rootDir>/__mocks__/fileMock.js",
+    "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
+    "^.+\\.(css|sass|scss)$": "<rootDir>/__mocks__/styleMock.js",
+    "^@/components/(.*)$": "<rootDir>/components/$1",
+    "^.+\\.(css|less|scss)$": "babel-jest"
+  },
+  "modulePaths": [ "<rootDir>" ],
+  "globals": {
+    "ts-jest": {
+     "diagnostics": false
+    }
+  },
+  "testEnvironment": "jsdom",
+  "coverageProvider": "v8",
+  "collectCoverageFrom": [
+    "**/*.{js,jsx,ts,tsx}",
+    "!**/*.d.ts",
+    "!**/node_modules/**",
+    "!<rootDir>/out/**",
+    "!<rootDir>/.next/**",
+    "!<rootDir>/*.config.js",
+    "!<rootDir>/coverage/**"
+  ],
+  "testPathIgnorePatterns": ["<rootDir>/node_modules/", "<rootDir>/.next/"],
+  "transform": {
+    "^.+\\.(js|jsx|ts|tsx|cjs)$": ["babel-jest", { "presets": ["next/babel"] }],
+    "\\.js$": "<rootDir>/node_modules/babel-jest",
+     "^.+\\.svg$": "jest-transform-stub"
+  },
+  "transformIgnorePatterns": [
+    "/node_modules/",
+    "node_modules/(?!axios)",
+    "^.+\\.module\\.(css|sass|scss)$"
+  ],
+  "setupFilesAfterEnv": ["<rootDir>/jest.setup.js"]
+}
