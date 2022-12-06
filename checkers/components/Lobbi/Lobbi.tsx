@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 // import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -20,9 +20,7 @@ const Lobbi: FC<UserProps> = (props) => {
       return isCreatedPlay && route.push('../../../checkers/Play');
     }
   };
-  useEffect(() => {
-    dispatch(setUserSelectedId(props.id));
-  }, []);
+
   return (
     <li className="lobbi-span">
       {props.name} {props.playConditional?.bid} {props.playConditional?.colorCheckers}{' '}
