@@ -1,40 +1,41 @@
-import { FC, useState } from "react"
-import { Settings, StyledPopupButton } from "../../styles/chess.style"
-import Image from "next/image"
-import Select from 'react-select'
-import { Colors } from "../../models/Colors"
+import { FC, useState } from 'react';
+import Image from 'next/image';
+import Select from 'react-select';
 
-import styles from "./gameSettings.module.scss"
-const headerLogo = require("../../assets/img/header-logo.png")
+import { Settings, StyledPopupButton } from '../../styles/chess.style';
+import { Colors } from '../../models/Colors';
+
+import styles from './gameSettings.module.scss';
+
+const headerLogo = require('../../assets/img/header-logo.png');
 
 interface SelectOption {
-  value: string,
-  label: string,
+  value: string;
+  label: string;
 }
 
 interface GameSettingsProps {
-  setGameTime: (time: string | null) => void
-  setGainTime: (time: string | null) => void
+  setGameTime: (time: string | null) => void;
+  setGainTime: (time: string | null) => void;
   settingsGame: {
-    gameTime: string | null,
-    gainTime: string | null,
-    startColor: Colors,
-    gameMode: string,
-  }
+    gameTime: string | null;
+    gainTime: string | null;
+    startColor: Colors;
+    gameMode: string;
+  };
 }
 
 const GameSettings: FC<GameSettingsProps> = ({ setGainTime, setGameTime, settingsGame }) => {
-
   const color = [
     { value: 'random', label: 'случайными' },
     { value: 'black', label: 'черными' },
     { value: 'white', label: 'белыми' },
-  ]
+  ];
 
   const gameMode = [
     { value: 'friendOnline', label: 'с другом на одном устройстве' },
     { value: 'friendOffline', label: 'с другом по сети' },
-  ]
+  ];
 
   const timeGame = [
     { value: 'unlimited', label: 'неограниченно' },
@@ -44,7 +45,7 @@ const GameSettings: FC<GameSettingsProps> = ({ setGainTime, setGameTime, setting
     { value: '30', label: '30 минут' },
     { value: '45', label: '45 минут' },
     { value: '60', label: '1 час' },
-  ]
+  ];
 
   const timeGain = [
     { value: 'no increase', label: 'без прибавки' },
@@ -57,19 +58,18 @@ const GameSettings: FC<GameSettingsProps> = ({ setGainTime, setGameTime, setting
     { value: '30', label: '30 секунд' },
     { value: '45', label: '45 секунд' },
     { value: '60', label: '1 минута' },
-  ]
-
+  ];
 
   const setTimeGame = (option: SelectOption | null) => {
-    const time = Number(option!.value)
-    let newTime
+    const time = Number(option!.value);
+    let newTime;
     if (time < 10 && time !== null) {
-      newTime = `0${time} : 00`
+      newTime = `0${time} : 00`;
     } else {
-      newTime = `${time} : 00`
+      newTime = `${time} : 00`;
     }
-    setGameTime(newTime)
-  }
+    setGameTime(newTime);
+  };
 
   return (
     <Settings
@@ -77,9 +77,14 @@ const GameSettings: FC<GameSettingsProps> = ({ setGainTime, setGameTime, setting
       modal
       closeOnDocumentClick
     >
-
       <div className={styles.settings__logo}>
-        <Image className={styles['settings__logo-img']} src={headerLogo} alt="logo" width='100' height='100' />
+        <Image
+          className={styles['settings__logo-img']}
+          src={headerLogo}
+          alt="logo"
+          width="100"
+          height="100"
+        />
       </div>
       <h2 className={styles.setting__header}>Выберите настройки</h2>
       <form action="" className={styles.settings__form}>
@@ -87,12 +92,10 @@ const GameSettings: FC<GameSettingsProps> = ({ setGainTime, setGameTime, setting
           <div className={styles.settings__item}>
             <label className={styles['settings__form-title']}>Цвет</label>
             <Select options={color} defaultValue={color[0]} />
-
           </div>
           <div className={styles.settings__item}>
             <label className={styles['settings__form-title']}>Режим игры</label>
             <Select options={gameMode} defaultValue={gameMode[0]} />
-
           </div>
           <div className={styles.settings__item}>
             <label className={styles['settings__form-title']}>Время на игру</label>
@@ -104,9 +107,11 @@ const GameSettings: FC<GameSettingsProps> = ({ setGainTime, setGameTime, setting
           </div>
         </div>
       </form>
-      <button className={styles.settings__btn} type="submit">Начать игру</button>
+      <button className={styles.settings__btn} type="submit">
+        Начать игру
+      </button>
     </Settings>
-  )
-}
+  );
+};
 
-export default GameSettings
+export default GameSettings;

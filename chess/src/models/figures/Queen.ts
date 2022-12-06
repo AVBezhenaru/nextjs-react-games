@@ -1,9 +1,10 @@
-import { Cell } from "../Cell";
-import { Colors } from "../Colors";
-import { Figure, FigureNames } from "./Figure";
+import { Cell } from '../Cell';
+import { Colors } from '../Colors';
 
-const blackLogo = require("../../assets/img/black-queen.png");
-const whiteLogo = require("../../assets/img/white-queen.png");
+import { Figure, FigureNames } from './Figure';
+
+const blackLogo = require('../../assets/img/black-queen.png');
+const whiteLogo = require('../../assets/img/white-queen.png');
 
 export class Queen extends Figure {
   constructor(color: Colors, cell: Cell) {
@@ -12,7 +13,7 @@ export class Queen extends Figure {
     this.name = FigureNames.QUEEN;
   }
 
-  validMove(target: Cell, checkKing: boolean = false): boolean {
+  validMove(target: Cell, checkKing = false): boolean {
     if (!super.validMove(target, checkKing)) {
       return false;
     }
