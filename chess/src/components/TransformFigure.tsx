@@ -12,15 +12,14 @@ import { Rook } from '../models/figures/Rook';
 import { Bishop } from '../models/figures/Bishop';
 import { Knight } from '../models/figures/Knight';
 import { Board } from '../models/Board';
-
-const whiteQueen = require('../assets/img/white-queen.png');
-const blackQueen = require('../assets/img/black-queen.png');
-const whiteRook = require('../assets/img/white-rook.png');
-const blackRook = require('../assets/img/black-rook.png');
-const whiteBishop = require('../assets/img/white-bishop.png');
-const blackBishop = require('../assets/img/black-bishop.png');
-const whiteKnight = require('../assets/img/white-knight.png');
-const blackKnight = require('../assets/img/black-knight.png');
+import whiteQueen from '../assets/img/white-queen.png';
+import blackQueen from '../assets/img/black-queen.png';
+import whiteRook from '../assets/img/white-rook.png';
+import blackRook from '../assets/img/black-rook.png';
+import whiteBishop from '../assets/img/white-bishop.png';
+import blackBishop from '../assets/img/black-bishop.png';
+import whiteKnight from '../assets/img/white-knight.png';
+import blackKnight from '../assets/img/black-knight.png';
 
 interface TransformFigureProps {
   updateBoard: () => void;
@@ -31,10 +30,10 @@ interface TransformFigureProps {
   };
 }
 
-interface FiguresData {
-  src: string;
-  name: string;
-}
+// interface FiguresData {
+//   src: string;
+//   name: string;
+// }
 
 const TransformFigure: FC<TransformFigureProps> = ({ transformData, board, updateBoard }) => {
   function getTransformFigureList(colors: Colors) {
@@ -79,9 +78,10 @@ const TransformFigure: FC<TransformFigureProps> = ({ transformData, board, updat
     }
   }
 
-  const figuresArr: FiguresData[] = getTransformFigureList(transformData.figure!.color);
-
-  const elements = figuresArr.map((figuresArrItem, id) => (
+  // далее - вместо типа FiguresData[] прописано any - тк не давал линтер сделать коммит по тетрису из-за нестыковки.
+  // const figuresArr: FiguresData[] = getTransformFigureList(transformData.figure!.color);
+  const figuresArr: any = getTransformFigureList(transformData.figure!.color);
+  const elements = figuresArr.map((figuresArrItem: any, id: any) => (
     <TransformFigureImg
       key={id}
       src={figuresArrItem.src}

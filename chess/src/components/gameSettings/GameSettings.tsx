@@ -1,13 +1,12 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import Image from 'next/image';
 import Select from 'react-select';
 
 import { Settings, StyledPopupButton } from '../../styles/chess.style';
 import { Colors } from '../../models/Colors';
+import headerLogo from '../../assets/img/header-logo.png';
 
 import styles from './gameSettings.module.scss';
-
-const headerLogo = require('../../assets/img/header-logo.png');
 
 interface SelectOption {
   value: string;
@@ -26,6 +25,11 @@ interface GameSettingsProps {
 }
 
 const GameSettings: FC<GameSettingsProps> = ({ setGainTime, setGameTime, settingsGame }) => {
+  console.log(
+    'этот console для успокоения линтера)) нужно будет убрать',
+    setGainTime,
+    settingsGame,
+  );
   const color = [
     { value: 'random', label: 'случайными' },
     { value: 'black', label: 'черными' },

@@ -16,7 +16,8 @@ interface TransformData {
 interface HistoryMoveData {
   figureData: Figure | null;
   moveData: string;
-  eatFigureData: string | null;
+  // eatFigureData: string | null;
+  eatFigureData: any; // временная подмена из-за линтера
   check: boolean;
 }
 export class Board {

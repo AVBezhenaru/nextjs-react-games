@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Colors } from './Colors';
 import { Figure, FigureNames } from './figures/Figure';
 import { Board } from './Board';

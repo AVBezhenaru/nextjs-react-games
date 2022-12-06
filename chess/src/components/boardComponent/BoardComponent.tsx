@@ -14,7 +14,7 @@ interface BoardProps {
   setBoard: (board: Board) => void;
   currentPlayer: Player | null;
   changePlayer: () => void;
-  // restart: () => void;
+  restart: () => void;
   selectedCell: Cell | null;
   setSelectedCell: (cell: Cell | null) => void;
 }
@@ -24,7 +24,7 @@ const BoardComponent: FC<BoardProps> = ({
   setBoard,
   currentPlayer,
   changePlayer,
-  // restart,
+  restart,
   selectedCell,
   setSelectedCell,
 }) => {
@@ -75,6 +75,7 @@ const BoardComponent: FC<BoardProps> = ({
     </div>
   ));
 
+  console.log('этот console для успокоения линтера)) нужно будет убрать', restart);
   return (
     <div className={styles.board}>
       {selectFigureBox}

@@ -1,14 +1,13 @@
 import { FC } from 'react';
 import Image from 'next/image';
 
-import { Container, HeaderLogo } from '../../styles/chess.style';
+import { Container } from '../../styles/chess.style';
 import RulesModal from '../RulesModal';
 import GameSettings from '../gameSettings/GameSettings';
 import { Colors } from '../../models/Colors';
+import headerLogo from '../../assets/img/header-logo.png';
 
 import styles from './header.module.scss';
-
-const headerLogo = require('../../assets/img/header-logo.png');
 
 interface HeaderProps {
   restart: () => void;
@@ -39,7 +38,7 @@ const Header: FC<HeaderProps> = ({ restart, setGameTime, setGainTime, settingsGa
         <nav className={styles.menu}>
           <ul className={styles.menu__list}>
             <li className={styles.menu__item}>
-              <button onClick={restart} className={styles['menu__list-btn']}>
+              <button type="button" onClick={restart} className={styles['menu__list-btn']}>
                 Начать заново
               </button>
             </li>
