@@ -364,8 +364,21 @@ a {
 
   z-index: 100;
 }
+.checkerstransform__numbers-left ul,
+.checkerstransform__numbers-right ul {
+
+  flex-direction: column-reverse;
+
+  position: relative;
+
+  margin-top: 100px;
+
+  z-index: 100;
+}
+
 .checkers__numbers-left ul li,
-.checkers__numbers-right ul li {
+.checkers__numbers-right ul li,.checkerstransform__numbers-left ul li,
+.checkerstransform__numbers-right ul li {
   font-family: 'ljk_RoadRage';
   font-size: 25px;
 

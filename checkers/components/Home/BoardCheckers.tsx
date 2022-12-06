@@ -44,7 +44,10 @@ const BoardCheckers: FC<BoardProps> = ({
   );
 
   const transformBord = color === 'black' ? 'board-transform' : 'board';
-
+  const transformCheckersNumbersLeft =
+    color === 'black' ? 'checkerstransform__numbers-left' : 'checkers__numbers-left';
+  const transformCheckersNumbersRigth =
+    color === 'black' ? 'checkerstransform__numbers-right' : 'checkers__numbers-right';
   const dispatch = useDispatch();
 
   const click = (cell: Cell) => {
@@ -564,7 +567,7 @@ const BoardCheckers: FC<BoardProps> = ({
             </h3>
             <span className="left-count__number">{board.lostWhiteFigure?.length}</span>
           </div>
-          <div className="checkers__numbers-left">
+          <div className={transformCheckersNumbersLeft}>
             <ul>
               <li>1</li>
               <li>2</li>
@@ -715,7 +718,7 @@ const BoardCheckers: FC<BoardProps> = ({
               </ul>
             </div>
           </div>
-          <div className="checkers__numbers-right">
+          <div className={transformCheckersNumbersRigth}>
             <ul>
               <li>1</li>
               <li>2</li>
