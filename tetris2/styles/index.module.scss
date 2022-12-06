@@ -1,6 +1,16 @@
 .container {
   position: relative;
   display: block;
-  width: 190px;  
+  background-image: url('../../public/white_bg.jpg');
+  // height: 100vh;
+
+  main {
+    height: 100vh;
+  }
 }
 
+.game_wrapper{
+  background-image: url('../../public/white_bg.jpg');
+  height: 100vh;
+  overflow: hidden;
+}

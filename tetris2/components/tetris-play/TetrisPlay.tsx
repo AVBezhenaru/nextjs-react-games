@@ -84,26 +84,28 @@ function TetrisPlay() {
   }, [detailCollided]);
 
   return (
-    <div className={styles.container}>
-      {isGameOver && (
-        <>
-          <Notification text="Game over" />
-          <Link href="/tetris/game">
-            <a onClick={() => dispatch(startGame())}>
-              <Button theme="restart">Restart</Button>
-            </a>
-          </Link>
-          <Link href="/tetris">
-            <a>
-              <Button theme="exit">Exit</Button>
-            </a>
-          </Link>
-        </>
-      )}
-      <PlayField />
-      <div className={styles['playfield_inner-wrapper']}>
-        <NextDetails />
-        <GameScore />
+    <div className={styles.wrapper}>
+      <div className={styles.container}>
+        {isGameOver && (
+          <>
+            <Notification text="Game over" />
+            <Link href="/tetris/game">
+              <a onClick={() => dispatch(startGame())}>
+                <Button theme="restart">Restart</Button>
+              </a>
+            </Link>
+            <Link href="/tetris">
+              <a>
+                <Button theme="exit">Exit</Button>
+              </a>
+            </Link>
+          </>
+        )}
+        <PlayField />
+        <div className={styles['playfield_inner-wrapper']}>
+          <NextDetails />
+          <GameScore />
+        </div>
       </div>
     </div>
   );
