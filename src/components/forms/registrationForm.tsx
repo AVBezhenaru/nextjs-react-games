@@ -40,7 +40,7 @@ const RegistrationForm = () => {
   } = useForm<Inputs>();
   const [cookies, setCookies] = useCookies(['user']);
   const dispatch = useAppDispatch();
-  const router = useRouter();
+  const { push } = useRouter();
   const { updateList } = userSlice.actions;
 
   const onSubmit: SubmitHandler<Inputs> = (date: Inputs) => {
@@ -54,7 +54,7 @@ const RegistrationForm = () => {
     clearErrors();
     dispatch(updateList([user]));
     cookies.user = user;
-    router.push('/profile');
+    push('/profile');
   };
 
   return (
