@@ -1,4 +1,4 @@
-import { DetailsType } from '../../types/types';
+import { DetailsType, DetailType } from '../../types/types';
 
 export const DETAILS: DetailsType = {
   I: {
@@ -138,8 +138,10 @@ export const DETAILS: DetailsType = {
   },
 };
 
-export const randomDetail = () => {
-  const allDetails = 'IJLOSTZ';
+export const randomDetail = (): DetailType => {
+  const allDetails = Object.keys(DETAILS).filter((el) => el !== 'color');
   const randomKey = allDetails[Math.floor(Math.random() * (allDetails.length - 1))];
-  return DETAILS[randomKey as keyof DetailsType] || 'I';
+
+  const figure: DetailType = DETAILS[randomKey as keyof DetailsType] || DETAILS.I;
+  return figure;
 };

@@ -8,7 +8,7 @@ import { useAppDispatch } from '../../../hooks';
 import google from '../img/google.svg';
 import facebook from '../img/facebook.svg';
 import twitter from '../img/twitter.svg';
-import { userSlice } from '../../store/userSlice';
+import { userSlice } from '../../../store/userSlice';
 import { User } from '../../gamesItemTypes';
 
 import {

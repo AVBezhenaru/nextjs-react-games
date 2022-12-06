@@ -1,18 +1,23 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
+import { useDispatch } from 'react-redux';
 
 import BoardCheckers from '../../checkers/components/Home/BoardCheckers';
 import { Board } from '../../checkers/model/Board';
 import { Player } from '../../checkers/model/Player';
 import { Colors } from '../../checkers/model/Colors';
 import { Figure } from '../../checkers/model/figures/Figure';
+import { setShow } from '../../checkers/store/checkersReducer';
+import { SetPlayer } from '../../checkers/components/Home/SetPlayer';
 
 export default function Play() {
+  const dispatch = useDispatch();
+
   const [board, setBoard] = useState(new Board());
-  const [show, setShow] = useState(false);
-  const [whitePlayer] = useState(new Player(Colors.WHITE));
-  const [blackPlayer] = useState(new Player(Colors.BLACK));
-  const [currentPlayer, setCurrentPlayer] = useState<Player | null>(null);
+
+  const [whitePlayer] = useState(SetPlayer().find((el) => el.color === Colors.WHITE));
+  const [blackPlayer] = useState(SetPlayer().find((el) => el.color === Colors.BLACK));
+  const [currentPlayer, setCurrentPlayer] = useState<Player | null>(whitePlayer);
   const [currentFigure, setCurrentFigure] = useState<Figure | null>(null);
 
   const restart = () => {
@@ -23,7 +28,7 @@ export default function Play() {
   };
   useEffect(() => {
     restart();
-    setShow(true);
+    dispatch(setShow(true));
     setCurrentPlayer(whitePlayer);
   }, []);
 
@@ -72,8 +77,6 @@ export default function Play() {
           swapPlayer={swapPlayer}
           swapFigure={swapFigure}
           restart={restart}
-          show={show}
-          setShow={setShow}
         />
       </main>
     </div>

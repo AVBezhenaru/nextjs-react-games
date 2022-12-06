@@ -14,7 +14,7 @@ interface BoardProps {
   setBoard: (board: Board) => void;
   currentPlayer: Player | null;
   changePlayer: () => void;
-  restart: () => void;
+  // restart: () => void;
   selectedCell: Cell | null;
   setSelectedCell: (cell: Cell | null) => void;
 }
@@ -24,11 +24,14 @@ const BoardComponent: FC<BoardProps> = ({
   setBoard,
   currentPlayer,
   changePlayer,
-  restart,
+  // restart,
   selectedCell,
   setSelectedCell,
 }) => {
-  function click(cell: Cell, checkMate = false, winKing = null) {
+  function updateBoard() {
+    setBoard(board.getCopyBoard());
+  }
+  function click(cell: Cell) {
     if (selectedCell && selectedCell !== cell && selectedCell.figure?.canMove(cell)) {
       selectedCell.moveFigure(cell);
       setSelectedCell(null);
@@ -38,27 +41,23 @@ const BoardComponent: FC<BoardProps> = ({
       setSelectedCell(cell);
     }
   }
-
-  useEffect(() => {
-    highlightCells();
-  }, [selectedCell]);
-
   function highlightCells() {
     board.highlightCells(selectedCell);
     updateBoard();
   }
-
-  function updateBoard() {
-    setBoard(board.getCopyBoard());
-  }
+  useEffect(() => {
+    highlightCells();
+  }, [selectedCell]);
 
   const transformFigureComponent = (
+    // eslint-disable-next-line react/jsx-no-bind
     <TransformFigure transformData={board.transformData} board={board} updateBoard={updateBoard} />
   );
 
   const endGame =
     board.whiteKing?.chekAndMateFlag || board.blackKing?.chekAndMateFlag || board.stalemate
-      ? () => {}
+      ? // eslint-disable-next-line @typescript-eslint/no-empty-function
+        () => {}
       : click;
 
   const selectFigureBox = board.transformData.shouldTransform ? transformFigureComponent : null;
