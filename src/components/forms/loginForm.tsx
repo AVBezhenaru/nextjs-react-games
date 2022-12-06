@@ -1,27 +1,15 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
-import React from 'react';
-import Link from 'next/link';
-import { withRouter } from 'next/router';
-import { router } from 'next/client';
-import { useCookies } from 'react-cookie';
+import { SubmitHandler, useForm } from "react-hook-form";
+import React from "react";
+import Link from "next/link";
+import { router } from "next/client";
+import { useCookies } from "react-cookie";
 
-import facebook from '../img/facebook.svg';
-import google from '../img/google.svg';
-import twitter from '../img/twitter.svg';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
+import facebook from "../img/facebook.svg";
+import google from "../img/google.svg";
+import twitter from "../img/twitter.svg";
+import { useAppDispatch, useAppSelector } from "../../../hooks";
 
-import {
-  DivImgLogo,
-  Form,
-  H4,
-  ImgLogo,
-  Input,
-  InputBtn,
-  P,
-  PError,
-  Section,
-  Span,
-} from './loginFormStyle';
+import { DivImgLogo, Form, H4, ImgLogo, Input, InputBtn, P, PError, Section, Span } from "./loginFormStyle";
 
 export type Inputs = {
   email: string;
@@ -34,30 +22,29 @@ const LoginForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-    clearErrors,
+    clearErrors
   } = useForm<Inputs>();
   const dispatch = useAppDispatch();
   const { users } = useAppSelector((state) => state.user);
-  const [cookies, setCookies] = useCookies(['user']);
+  const [cookies, setCookies] = useCookies(["user"]);
 
   const onSubmit: SubmitHandler<Inputs> = (date) => {
     const user = {
       email: date.username,
       username: date.username,
-      password: date.password,
+      password: date.password
     };
-    console.log('user :', user);
+    console.log("user :", user);
 
     clearErrors();
-    // dispatch(fetchLoginUser());
     const authUser = users.find(
       (u) =>
-        (u.email === user.email || u.username === user.username) && u.password === user.password,
+        (u.email === user.email || u.username === user.username) && u.password === user.password
     );
     if (authUser) {
-      setCookies('user', authUser);
-      console.log('auth');
-      router.push('/profile');
+      setCookies("user", authUser);
+      console.log("auth");
+      router.push("/profile");
     } else {
     }
   };
@@ -81,33 +68,33 @@ const LoginForm = () => {
         </H4>
         <Input
           placeholder="User Name  or  email..."
-          {...register('username', {
-            required: 'Required field',
+          {...register("username", {
+            required: "Required field"
           })}
         />
         {errors?.username && <PError>{errors.username.message}</PError>}
 
         <Input
           placeholder="Password"
-          {...register('password', {
-            required: 'You must specify a password',
+          {...register("password", {
+            required: "You must specify a password",
             minLength: {
               value: 6,
-              message: 'Password must have at least 6 characters',
+              message: "Password must have at least 6 characters"
             },
             maxLength: {
               value: 40,
-              message: 'Password must have maximum 40 characters',
-            },
+              message: "Password must have maximum 40 characters"
+            }
           })}
         />
         {errors.password && <PError>{errors.password.message}</PError>}
 
         <InputBtn type="submit" children="Register" />
         <P>
-          Don`t have an account?{' '}
+          Don`t have an account?{" "}
           <Link href="/registration">
-            <a style={{ color: '#F46119' }}>Sign Up</a>
+            <a style={{ color: "#F46119" }}>Sign Up</a>
           </Link>
         </P>
       </Form>

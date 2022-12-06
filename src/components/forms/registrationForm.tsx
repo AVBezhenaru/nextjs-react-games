@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 import { useCookies } from 'react-cookie';
 
 import { useAppDispatch } from '../../../hooks';
-import { fetchRegisterUser } from '../../../api/service';
 import google from '../img/google.svg';
 import facebook from '../img/facebook.svg';
 import twitter from '../img/twitter.svg';
@@ -53,7 +52,6 @@ const RegistrationForm = () => {
     };
     console.log('user :', user);
     clearErrors();
-    // dispatch(fetchRegisterUser());
     dispatch(updateList([user]));
     cookies.user = user;
     router.push('/profile');
