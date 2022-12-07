@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import Image from 'next/image';
 
 import {
@@ -8,25 +9,24 @@ import {
   StyledPopupFigureCardsBlock,
   ImgFigureMove,
 } from '../styles/chess.style';
-
-const whiteKing = require('../assets/img/white-king.png');
-const blackKing = require('../assets/img/black-king.png');
-const whiteQueen = require('../assets/img/white-queen.png');
-const blackQueen = require('../assets/img/black-queen.png');
-const whiteRook = require('../assets/img/white-rook.png');
-const blackRook = require('../assets/img/black-rook.png');
-const whiteBishop = require('../assets/img/white-bishop.png');
-const blackBishop = require('../assets/img/black-bishop.png');
-const whiteKnight = require('../assets/img/white-knight.png');
-const blackKnight = require('../assets/img/black-knight.png');
-const whitePawn = require('../assets/img/white-pawn.png');
-const blackPawn = require('../assets/img/black-pawn.png');
-const bishopMove = require('../assets/img/bishop-move.gif');
-const rookMove = require('../assets/img/rook-move.gif');
-const queenMove = require('../assets/img/queen-move.gif');
-const knightMove = require('../assets/img/knight-move.gif');
-const pawnMove = require('../assets/img/pawn-move.gif');
-const cellExample = require('../assets/img/cell-example.gif');
+import whiteKing from '../assets/img/white-king.png';
+import blackKing from '../assets/img/black-king.png';
+import whiteQueen from '../assets/img/white-queen.png';
+import blackQueen from '../assets/img/black-queen.png';
+import whiteRook from '../assets/img/white-rook.png';
+import blackRook from '../assets/img/black-rook.png';
+import whiteBishop from '../assets/img/white-bishop.png';
+import blackBishop from '../assets/img/black-bishop.png';
+import whiteKnight from '../assets/img/white-knight.png';
+import blackKnight from '../assets/img/black-knight.png';
+import whitePawn from '../assets/img/white-pawn.png';
+import blackPawn from '../assets/img/black-pawn.png';
+import bishopMove from '../assets/img/bishop-move.gif';
+import rookMove from '../assets/img/rook-move.gif';
+import queenMove from '../assets/img/queen-move.gif';
+import knightMove from '../assets/img/knight-move.gif';
+import pawnMove from '../assets/img/pawn-move.gif';
+import cellExample from '../assets/img/cell-example.gif';
 
 const RulesModal = () => (
   <StyledPopup

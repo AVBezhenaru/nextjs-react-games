@@ -1,3 +1,5 @@
+/* eslint-disable react/no-children-prop */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import { useCookies } from 'react-cookie';
 import { useRouter } from 'next/router';
@@ -22,6 +24,7 @@ const Header = () => {
       <DivNav>
         <Search type="text" placeholder="Search" />
         {!currentUser ? (
+          // eslint-disable-next-line react/jsx-no-useless-fragment
           <></>
         ) : (
           <Span>

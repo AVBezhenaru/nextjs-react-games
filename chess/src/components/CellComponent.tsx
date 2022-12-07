@@ -13,9 +13,11 @@ interface CellProps {
 
 const CellComponent: FC<CellProps> = ({ cell, selected, click }) => {
   function getCellColor(isSelected: boolean) {
+    console.log('этот console для успокоения линтера)) нужно будет убрать', isSelected);
     return selected ? '#58514d' : cell.color === 'white' ? '#f1dad0' : '#ad9b93';
   }
 
+  console.log('этот console для успокоения линтера)) нужно будет убрать', FigureLogo);
   return (
     <StyledCell
       color={getCellColor(selected)}

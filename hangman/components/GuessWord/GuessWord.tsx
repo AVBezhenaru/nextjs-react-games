@@ -1,4 +1,5 @@
 import { NextPage } from 'next';
+import { Key } from 'react';
 
 import { useAppSelector } from '../../../hooks';
 import { getAppState } from '../../store/HangmanSlice';
@@ -18,7 +19,7 @@ const GuessWord: NextPage = () => {
 
   return (
     <div className={styles.container}>
-      {currentWord.map((letter, index) => (
+      {currentWord.map((letter: string, index: Key) => (
         <RenderLetter key={index} letter={letter as string} />
       ))}
     </div>

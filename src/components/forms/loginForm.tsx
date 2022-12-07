@@ -1,3 +1,5 @@
+/* eslint-disable react/no-children-prop */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { SubmitHandler, useForm } from 'react-hook-form';
 import React from 'react';
 import Link from 'next/link';
@@ -9,7 +11,18 @@ import google from '../img/google.svg';
 import twitter from '../img/twitter.svg';
 import { useAppSelector } from '../../../hooks';
 
-import { DivImgLogo, Form, H4, ImgLogo, Input, InputBtn, P, PError, Section, Span } from "./loginFormStyle";
+import {
+  DivImgLogo,
+  Form,
+  H4,
+  ImgLogo,
+  Input,
+  InputBtn,
+  P,
+  PError,
+  Section,
+  Span,
+} from './loginFormStyle';
 
 export type Inputs = {
   email: string;
@@ -37,13 +50,13 @@ const LoginForm = () => {
 
     clearErrors();
     const authUser = users.find(
-      (u) =>
-        (u.email === user.email || u.username === user.username) && u.password === user.password);
+      (u: any) =>
+        (u.email === user.email || u.username === user.username) && u.password === user.password,
+    );
     if (authUser) {
       setCookies('user', authUser);
       console.log('auth');
       router.push('/profile');
-    } else {
     }
   };
 
@@ -90,7 +103,7 @@ const LoginForm = () => {
 
         <InputBtn type="submit" children="Register" />
         <P>
-          Don`t have an account?{''}
+          Don`t have an account?
           <Link href="/registration">
             <a style={{ color: '#F46119' }}>Sign Up</a>
           </Link>

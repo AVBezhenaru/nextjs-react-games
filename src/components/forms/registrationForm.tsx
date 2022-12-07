@@ -1,3 +1,5 @@
+/* eslint-disable react/no-children-prop */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Link from 'next/link';

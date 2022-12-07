@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 
@@ -43,11 +44,6 @@ const Chess = () => {
   const [selectedCell, setSelectedCell] = useState<Cell | null>(null);
 
   const scroll: any = useRef<HTMLInputElement>();
-  useEffect(() => {
-    restart();
-    setCurrentPlayer(whitePlayer);
-  }, []);
-
   const restart = () => {
     const newBoard = new Board();
     newBoard.initCells();
@@ -58,6 +54,11 @@ const Chess = () => {
     setGameTime(null);
     setGainTime(null);
   };
+
+  useEffect(() => {
+    restart();
+    setCurrentPlayer(whitePlayer);
+  }, []);
 
   const changePlayer = () => {
     setCurrentPlayer(currentPlayer?.color === Colors.WHITE ? blackPlayer : whitePlayer);

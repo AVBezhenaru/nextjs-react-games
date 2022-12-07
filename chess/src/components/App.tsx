@@ -1,8 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
 
-import LoginForm from '../../../components/forms/loginForm';
+import LoginForm from '../../../src/components/forms/loginForm';
 
-import Chess from './Chess';
+import Chess from './chess/Chess';
 
 const App = () => (
   <Routes>
