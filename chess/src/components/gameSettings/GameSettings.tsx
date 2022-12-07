@@ -1,83 +1,88 @@
-import { FC } from 'react';
 import Image from 'next/image';
 import Select from 'react-select';
+import Link from 'next/link';
+import { useDispatch } from 'react-redux';
+
+import { FC, useState } from 'react';
 
 import { Settings, StyledPopupButton } from '../../styles/chess.style';
-import { Colors } from '../../models/Colors';
 import headerLogo from '../../assets/img/header-logo.png';
+import { GameSettingsProps } from '../../interfaces/Interfaces';
+import { setDataForCurrentPlayer, closeModal, setOnline } from '../../store/DataSlice';
+import { useAppSelector } from '../../../../hooks';
 
 import styles from './gameSettings.module.scss';
+import { color, gameMode } from './PlayersData';
 
-interface SelectOption {
-  value: string;
-  label: string;
-}
+const GameSettings: FC<GameSettingsProps> = () => {
+  const bids = useAppSelector((state) => state.rootSlice.bidsData);
+  const [confirm, setConfirm] = useState(false);
+  const [inputData, setInputData] = useState({
+    colors: 'черные',
+    mode: 'с ботом',
+    time: 'неограниченно',
+    bid: 'нет ставки',
+    gain: 'без прибавки',
+  });
+  const dispatch = useDispatch();
+  // const setTimeGame = (option: SelectOption | null) => {
+  //   const time = Number(option.value);
+  //   let newTime;
+  //   if (time < 10 && time !== null) {
+  //     newTime = `0${time} : 00`;
+  //   } else {
+  //     newTime = `${time} : 00`;
+  //   }
+  //   setGameTime(newTime);
+  // };
 
-interface GameSettingsProps {
-  setGameTime: (time: string | null) => void;
-  setGainTime: (time: string | null) => void;
-  settingsGame: {
-    gameTime: string | null;
-    gainTime: string | null;
-    startColor: Colors;
-    gameMode: string;
-  };
-}
+  const isOnline =
+    inputData.mode === 'онлайн' ? (
+      <div>
+        <label className={styles['settings__form-title']}>Ставка</label>
+        <Select
+          className={styles.bid}
+          onChange={(event) => {
+            setConfirm(false);
+            setInputData({ ...inputData, bid: event!.label });
+          }}
+          options={bids}
+          defaultValue={bids[0]}
+        />
+      </div>
+    ) : null;
 
-const GameSettings: FC<GameSettingsProps> = ({ setGainTime, setGameTime, settingsGame }) => {
-  console.log(
-    'этот console для успокоения линтера)) нужно будет убрать',
-    setGainTime,
-    settingsGame,
-  );
-  const color = [
-    { value: 'random', label: 'случайными' },
-    { value: 'black', label: 'черными' },
-    { value: 'white', label: 'белыми' },
-  ];
+  const isConfirmed =
+    confirm && inputData.mode === 'с ботом' ? (
+      <span className={styles.link}>
+        <Link href="/chess/game">Играть</Link>
+      </span>
+    ) : null;
 
-  const gameMode = [
-    { value: 'friendOnline', label: 'с другом на одном устройстве' },
-    { value: 'friendOffline', label: 'с другом по сети' },
-  ];
-
-  const timeGame = [
-    { value: 'unlimited', label: 'неограниченно' },
-    { value: '3', label: '3 минуты' },
-    { value: '5', label: '5 минут' },
-    { value: '15', label: '15 минут' },
-    { value: '30', label: '30 минут' },
-    { value: '45', label: '45 минут' },
-    { value: '60', label: '1 час' },
-  ];
-
-  const timeGain = [
-    { value: 'no increase', label: 'без прибавки' },
-    { value: '1', label: '1 секунда' },
-    { value: '2', label: '2 секунды' },
-    { value: '3', label: '3 секунды' },
-    { value: '5', label: '5 секунд' },
-    { value: '10', label: '10 секунд' },
-    { value: '15', label: '15 секунд' },
-    { value: '30', label: '30 секунд' },
-    { value: '45', label: '45 секунд' },
-    { value: '60', label: '1 минута' },
-  ];
-
-  const setTimeGame = (option: SelectOption | null) => {
-    const time = Number(option!.value);
-    let newTime;
-    if (time < 10 && time !== null) {
-      newTime = `0${time} : 00`;
-    } else {
-      newTime = `${time} : 00`;
-    }
-    setGameTime(newTime);
-  };
+  const isCloseModal =
+    confirm && inputData.mode === 'онлайн' ? (
+      <span>
+        <button
+          className={styles.link}
+          type="submit"
+          onClick={() => {
+            dispatch(closeModal());
+            dispatch(setOnline());
+          }}
+        >
+          Выбрать соперника
+        </button>
+      </span>
+    ) : null;
 
   return (
     <Settings
-      trigger={<StyledPopupButton>Создать игру</StyledPopupButton>}
+      className={styles.wrapper}
+      trigger={
+        <StyledPopupButton>
+          <span className={styles.title}>Создать игру</span>
+        </StyledPopupButton>
+      }
       modal
       closeOnDocumentClick
     >
@@ -91,29 +96,79 @@ const GameSettings: FC<GameSettingsProps> = ({ setGainTime, setGameTime, setting
         />
       </div>
       <h2 className={styles.setting__header}>Выберите настройки</h2>
-      <form action="" className={styles.settings__form}>
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          dispatch(
+            setDataForCurrentPlayer({
+              label: { ...inputData, name: 'Вероника' },
+            }),
+          );
+          // dispatch(addToAllPlayers({ label: { ...inputData, name: 'Вероника' } }));
+          setConfirm(true);
+        }}
+        action=""
+        className={styles.settings__form}
+      >
         <div className={styles.settings__inner}>
           <div className={styles.settings__item}>
             <label className={styles['settings__form-title']}>Цвет</label>
-            <Select options={color} defaultValue={color[0]} />
+            <Select
+              className={styles.colors}
+              onChange={(event) => {
+                setInputData({ ...inputData, colors: event!.label });
+                setConfirm(false);
+              }}
+              options={color}
+              defaultValue={color[0]}
+            />
           </div>
           <div className={styles.settings__item}>
             <label className={styles['settings__form-title']}>Режим игры</label>
-            <Select options={gameMode} defaultValue={gameMode[0]} />
+            <Select
+              className={styles.mode}
+              onChange={(event) => {
+                setInputData({ ...inputData, mode: event!.label });
+                setConfirm(false);
+              }}
+              options={gameMode}
+              defaultValue={gameMode[0]}
+            />
           </div>
-          <div className={styles.settings__item}>
-            <label className={styles['settings__form-title']}>Время на игру</label>
-            <Select onChange={setTimeGame} options={timeGame} defaultValue={timeGame[0]} />
-          </div>
-          <div className={styles.settings__item}>
-            <label className={styles['settings__form-title']}>Прибавка на ход</label>
-            <Select options={timeGain} defaultValue={timeGain[0]} />
-          </div>
+          {/* <div className={styles.settings__item}> */}
+          {/*  <label className={styles['settings__form-title']}>Время на игру</label> */}
+          {/*  <Select */}
+          {/*    className={styles.time} */}
+          {/*    onChange={(event) => { */}
+          {/*      // setTimeGame(event); */}
+          {/*      setInputData({ ...inputData, time: event!.value }); */}
+          {/*      setConfirm(false); */}
+          {/*    }} */}
+          {/*    options={timeGame} */}
+          {/*    defaultValue={timeGame[0]} */}
+          {/*  /> */}
+          {/* </div> */}
+          {/* <div className={styles.settings__item}> */}
+          {/*  <label className={styles['settings__form-title']}>Прибавка на ход</label> */}
+          {/*  <Select */}
+          {/*    className={styles.gain} */}
+          {/*    onChange={(event) => { */}
+          {/*      setInputData({ ...inputData, gain: event!.value }); */}
+          {/*      setConfirm(false); */}
+          {/*    }} */}
+          {/*    options={timeGain} */}
+          {/*    defaultValue={timeGain[0]} */}
+          {/*  /> */}
+          {/* </div> */}
         </div>
+        {isOnline}
+
+        <button className={styles.settings__btn} type="submit">
+          Подвердить
+        </button>
+        {isConfirmed}
+        {isCloseModal}
       </form>
-      <button className={styles.settings__btn} type="submit">
-        Начать игру
-      </button>
     </Settings>
   );
 };

@@ -34,7 +34,7 @@ export const Board = styled.div`
   ${() => 'height: calc(74px * 8);'}
   display: flex;
   flex-wrap: wrap;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
   flex-shrink: 0;
 `;
 
@@ -60,10 +60,10 @@ export const Settings = styled(Popup)`
   &-content {
     background-color: white;
     box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.15);
-    width: 50vw;
-    padding: 1%;
+    width: 65vw;
+    //padding: 1%;
     overflow-y: auto;
-    height: 60vh;
+    height: 80vh;
     padding: 30px 20px 80px 15px;
   }
 `;
@@ -130,6 +130,9 @@ export const StyledPopupSpan = styled.span`
   display: flex;
   align-items: center;
   width: 170px;
+  font-family: 'Audiowide', cursive;
+  font-weight: 600;
+  color: #646464;
 `;
 
 export const StyledAvailableCell = styled.span`
@@ -155,7 +158,7 @@ export const CurrentPlayerText = styled.div`
 `;
 
 export const StyledLostFigures = styled.div`
-  margin: 50px auto 0px 10px;
+  margin: 50px auto 0 10px;
 `;
 
 export const TransformFigure = styled.div`

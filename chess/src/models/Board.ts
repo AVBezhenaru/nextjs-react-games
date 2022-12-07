@@ -1,3 +1,5 @@
+import { StaticImageData } from 'next/image';
+
 import { Cell } from './Cell';
 import { Colors } from './Colors';
 import { Queen } from './figures/Queen';
@@ -16,8 +18,7 @@ interface TransformData {
 interface HistoryMoveData {
   figureData: Figure | null;
   moveData: string;
-  // eatFigureData: string | null;
-  eatFigureData: any; // временная подмена из-за линтера
+  eatFigureData: undefined | null | StaticImageData;
   check: boolean;
 }
 export class Board {
@@ -49,13 +50,13 @@ export class Board {
   }
 
   public initCells() {
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 8; i += 1) {
       const row: Cell[] = [];
-      for (let j = 0; j < 8; j++) {
+      for (let j = 0; j < 8; j += 1) {
         if ((i + j) % 2 !== 0) {
-          row.push(new Cell(this, j, i, Colors.BLACK, null));
-        } else {
           row.push(new Cell(this, j, i, Colors.WHITE, null));
+        } else {
+          row.push(new Cell(this, j, i, Colors.BLACK, null));
         }
       }
       this.cells.push(row);
@@ -65,9 +66,9 @@ export class Board {
   public getCopyBoard(): Board {
     const newBoard = new Board();
     newBoard.cells = this.cells;
-    for (let i = 0; i < this.cells.length; i++) {
+    for (let i = 0; i < this.cells.length; i += 1) {
       const row = this.cells[i];
-      for (let j = 0; j < row.length; j++) {
+      for (let j = 0; j < row.length; j += 1) {
         row[j].board = newBoard;
       }
     }
@@ -82,7 +83,7 @@ export class Board {
   }
 
   public highlightCells(selectedCell: Cell | null) {
-    for (let i = 0; i < this.cells.length; i++) {
+    for (let i = 0; i < this.cells.length; i += 1) {
       const row = this.cells[i];
       for (let j = 0; j < row.length; j++) {
         const target = row[j];
@@ -95,9 +96,9 @@ export class Board {
     const kingToCheck = kingColor === Colors.BLACK ? this.blackKing! : this.whiteKing!;
     kingToCheck.underAttackKing = false;
 
-    for (let i = 0; i < this.cells.length; i++) {
+    for (let i = 0; i < this.cells.length; i += 1) {
       const row = this.cells[i];
-      for (let j = 0; j < row.length; j++) {
+      for (let j = 0; j < row.length; j += 1) {
         const target = this.getCell(j, i);
         if (target.figure != null && target?.figure?.color !== kingToCheck.color) {
           // Определили вражеские фигуры

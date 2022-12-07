@@ -1,3 +1,8 @@
+.transformBoard{
+  position: relative;
+  transform: rotate(180deg);
+}
+
 .board{
   position: relative;
 
@@ -6,6 +11,15 @@
     display: flex;
     font-size: 20px;
     font-weight: 400;
+
+  }
+
+
+  &__items-row-transform{
+    right: -20px;
+    top: 0;
+    flex-direction: column;
+    transform: rotate(180deg);
   }
 
   &__items-row{
@@ -19,11 +33,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color: #646464;
   }
 
   &__items-column{
     width: 100%;
     margin-top: 3px;
+    color: #646464;
+
   }
 
   &__item-column{

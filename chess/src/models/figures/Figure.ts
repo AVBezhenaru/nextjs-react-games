@@ -1,8 +1,9 @@
-import _ from 'lodash';
-
 import { Colors } from '../Colors';
 import { Cell } from '../Cell';
 import logo from '../../assets/img/black-bishop.png';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const _ = require('lodash');
 
 export enum FigureNames {
   FIGURE = 'Фигура',
@@ -24,8 +25,6 @@ export class Figure {
   name: FigureNames;
 
   id: number;
-
-  underAttackKing: any; // добавлена типизация для underAttackKing, т.к. линтер не давал сделать коммит по тетрису
 
   constructor(color: Colors, cell: Cell) {
     this.color = color;
@@ -76,6 +75,7 @@ export class Figure {
     return true;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
-  moveFigure(targer: Cell) {} // метод при помощи которого будем фигуру перемещать
+  moveFigure(targer: Cell) {
+    return targer;
+  } // метод при помощи которого будем фигуру перемещать
 }

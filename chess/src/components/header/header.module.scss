@@ -1,6 +1,7 @@
 
 .header {
-  padding: 5px 0px;
+
+  padding: 5px 0;
   width: 100%;
   box-shadow: 0 -1px  10px 0px rgba(0, 0, 0, 0.5);
   &__inner {
@@ -25,9 +26,6 @@
   // }
   .login-btn {
     transition: .3s;
-    &:hover{
-      color: #000;
-    }
   }
 
 }
@@ -38,16 +36,19 @@
   max-width: 400px;
   width: 100%;
   &__list{
+    color: #646464;
+    font-family:'Audiowide', cursive !important;
     display: flex;
     justify-content: space-between;
   }
 
   &__item-link {
+    color: #646464;
+
     transition: .3s;
   }
 
   &__list-btn{
-    font-family: 'Audiowide', cursive;
     font-size: 18px;
     font-weight: 600;
     color: #646464;
@@ -61,5 +62,15 @@
   &__list-btn:hover{
     color: #000;
   }
+
+}
+.header__title-text{
+  color: #646464;
+  font-family:'Audiowide', cursive !important;
+}
+
+.login-btn{
+  color: #646464;
+  font-family:'Audiowide', cursive !important;
 
 }

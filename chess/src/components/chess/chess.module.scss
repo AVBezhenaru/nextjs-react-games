@@ -1,19 +1,22 @@
 .chess{
   display: flex;
   justify-content: space-between;
-  margin: 130px auto 0;
+  margin: 40px auto 0;
   max-width: 90%;
   width: 100%;
   font-size: 25px;
+
 
   &__data,
   &__info{
     max-width: 25%;
     width: 100%;
+    font-family:'Audiowide', cursive !important;
+    color: #646464;
   }
 
   &__data{
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     padding: 10px;
     overflow-y: hidden;
     height: 592px;
@@ -21,7 +24,7 @@
 
   &__data-wrapper{
     display: flex;
-    align-items: top;
+    align-items: start;
     margin-bottom: 5px;
   }
 
@@ -53,7 +56,7 @@
   }
 
   &__info-wrapper{
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     text-align: center;
     border-radius: 10px;
   }
@@ -102,7 +105,7 @@
     font-size: 15px;
     display: flex;
     height: 100%;
-    align-items: top;
+    align-items: start;
     justify-content: center;
     margin-bottom: 5px;
 

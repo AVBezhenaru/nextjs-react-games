@@ -1,5 +1,7 @@
-import Chess from '../../chess/src/components/chess/Chess';
+import Lobby from '../../chess/src/components/lobby/Lobby';
 
-const App = () => <Chess />;
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+const App = () => <Lobby />;
 
 export default App;
