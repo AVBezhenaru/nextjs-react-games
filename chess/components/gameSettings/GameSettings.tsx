@@ -2,14 +2,13 @@ import Image from 'next/image';
 import Select from 'react-select';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
-
 import { FC, useState } from 'react';
 
 import { Settings, StyledPopupButton } from '../../styles/chess.style';
 import headerLogo from '../../assets/img/header-logo.png';
 import { GameSettingsProps } from '../../interfaces/Interfaces';
 import { setDataForCurrentPlayer, closeModal, setOnline } from '../../store/DataSlice';
-import { useAppSelector } from '../../../../hooks';
+import { useAppSelector } from '../../../hooks';
 
 import styles from './gameSettings.module.scss';
 import { color, gameMode } from './PlayersData';
@@ -107,7 +106,7 @@ const GameSettings: FC<GameSettingsProps> = () => {
           // dispatch(addToAllPlayers({ label: { ...inputData, name: 'Вероника' } }));
           setConfirm(true);
         }}
-        action=""
+        action="chess/components/gameSettings/GameSettings"
         className={styles.settings__form}
       >
         <div className={styles.settings__inner}>

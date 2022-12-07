@@ -6,7 +6,7 @@ import { Board } from '../../models/Board';
 import { Cell } from '../../models/Cell';
 import { Player } from '../../models/Player';
 import TransformFigure from '../TransformFigure';
-import { useAppSelector } from '../../../../hooks';
+import { useAppSelector } from '../../../hooks';
 
 import styles from './BoardComponent.module.scss';
 

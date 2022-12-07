@@ -4,7 +4,7 @@ import GameSettings from '../gameSettings/GameSettings';
 import { Colors } from '../../models/Colors';
 import RulesModal from '../RulesModal';
 import ListPlayers from '../listPlayers/ListPlayers';
-import { useAppSelector } from '../../../../hooks';
+import { useAppSelector } from '../../../hooks';
 
 import styles from './Lobby.module.scss';
 

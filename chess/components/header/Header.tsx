@@ -1,5 +1,4 @@
 import Image from 'next/image';
-
 import { FC } from 'react';
 
 import { Container } from '../../styles/chess.style';
@@ -30,7 +29,7 @@ const Header: FC<HeaderProps> = ({ restart, setGainTime, settingsGame }) => {
     <header className={styles.header}>
       <Container>
         <div className={styles.header__inner}>
-          <a href="#" className={styles.header__title}>
+          <a href="chess/components/header/Header#" className={styles.header__title}>
             <Image
               src={headerLogo}
               width="50"

@@ -1,9 +1,8 @@
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
-
 import React from 'react';
 
-import { useAppSelector } from '../../../../hooks';
+import { useAppSelector } from '../../../hooks';
 import {
   openModal,
   setDataForCurrentPlayer,

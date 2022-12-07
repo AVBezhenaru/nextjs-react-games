@@ -1,11 +1,10 @@
 import Image from 'next/image';
-
 import { FC } from 'react';
 
 import { Cell as StyledCell, StyledAvailableCell } from '../styles/chess.style';
 import { Cell } from '../models/Cell';
 import { King } from '../models/figures/King';
-import { useAppSelector } from '../../../hooks';
+import { useAppSelector } from '../../hooks';
 
 import styles from './CellComponent.module.scss';
 

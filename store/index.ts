@@ -3,7 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import hangmanReducer from '../hangman/store/HangmanSlice';
 import checkersReducer from '../checkers/store/checkersReducer';
 import tetrisSlice from '../tetris2/store/tetrisSlice';
-import DataSlice from '../chess/src/store/DataSlice';
+import DataSlice from '../chess/store/DataSlice';
 
 import user from './userSlice';
 

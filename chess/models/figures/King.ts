@@ -1,10 +1,9 @@
 import { Cell } from '../Cell';
 import { Colors } from '../Colors';
+import blackLogo from '../../assets/img/black-king.png';
+import whiteLogo from '../../assets/img/white-king.png';
 
 import { Figure, FigureNames } from './Figure';
-
-const blackLogo = require('../../assets/img/black-king.png');
-const whiteLogo = require('../../assets/img/white-king.png');
 
 export class King extends Figure {
   underAttackKing: boolean;

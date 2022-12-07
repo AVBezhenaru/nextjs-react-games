@@ -1,5 +1,4 @@
 import Image from 'next/image';
-
 import React, { useState, useEffect, useRef } from 'react';
 
 import { App as MainChess, Container, CurrentPlayerText } from '../../styles/chess.style';
@@ -15,7 +14,7 @@ import { Cell } from '../../models/Cell';
 import { GameMode } from '../../models/Settings';
 // import { useAppSelector } from '../../../../hooks/useAppSelector';
 
-import { useAppSelector } from '../../../../hooks';
+import { useAppSelector } from '../../../hooks';
 
 import styles from './chess.module.scss';
 // import {useAppSelector} from "../../../../hooks";
