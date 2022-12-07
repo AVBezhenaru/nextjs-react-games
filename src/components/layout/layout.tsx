@@ -18,6 +18,7 @@ const Layout = ({ children }: LayoutProps) => {
   }
 
   if (typeof window === 'undefined') {
+    // eslint-disable-next-line react/jsx-no-useless-fragment
     return <></>;
   }
   return <SectionLayout>{children}</SectionLayout>;
