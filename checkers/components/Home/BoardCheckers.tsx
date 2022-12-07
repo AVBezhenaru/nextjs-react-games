@@ -599,7 +599,7 @@ const BoardCheckers: FC<BoardProps> = ({
                 >
                   {getPlayerColorByCondition()}
                 </span>{' '}
-                игрока{' '}
+                {/* игрока{' '} */}
               </h3>
             )}
             <div className="checkers__letters-up">

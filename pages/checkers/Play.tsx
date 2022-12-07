@@ -14,7 +14,7 @@ export default function Play() {
   const dispatch = useDispatch();
 
   const [board, setBoard] = useState(new Board());
-
+  // TODO Refactor
   const [whitePlayer] = useState(SetPlayer().find((el) => el.color === Colors.WHITE));
   const [blackPlayer] = useState(SetPlayer().find((el) => el.color === Colors.BLACK));
   const [currentPlayer, setCurrentPlayer] = useState<Player | null>(whitePlayer);
