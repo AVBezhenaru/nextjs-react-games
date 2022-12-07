@@ -67,7 +67,7 @@ export const Board = () => {
     if (ctx === null || ctx === undefined) {
       return;
     }
-    function washerInitialPosition(x: number, y: number) {
+    const washerInitialPosition = (x: number, y: number) => {
       ctx?.beginPath();
       ctx?.arc(x, y, 43, 0, (Math.PI / 180) * 360);
       ctx!.fillStyle = 'black';
@@ -75,20 +75,20 @@ export const Board = () => {
       ctx!.shadowColor = 'black';
       ctx!.closePath();
       ctx!.fill();
-    }
+    };
     washerInitialPosition(centerBoardX, centerBoardY);
 
-    function stickLeftInitialPosition(x: number, y: number) {
+    const stickLeftInitialPosition = (x: number, y: number) => {
       ctx?.beginPath();
       ctx?.arc(x, y, 80, 0, (Math.PI / 180) * 360);
       ctx!.fillStyle = 'blue';
       ctx!.shadowColor = 'black';
       ctx?.closePath();
       ctx?.fill();
-    }
+    };
     stickLeftInitialPosition(stickLefttInitPos.x, stickLefttInitPos.y);
 
-    function stickRightInitialPosition(x: number, y: number) {
+    const stickRightInitialPosition = (x: number, y: number) => {
       ctx?.beginPath();
       ctx?.arc(x, y, 80, 0, (Math.PI / 180) * 360);
       ctx!.fillStyle = 'red';
@@ -96,47 +96,44 @@ export const Board = () => {
       ctx!.shadowBlur = 1;
       ctx?.closePath();
       ctx?.fill();
-    }
+    };
     stickRightInitialPosition(stickRightInitPos.x, stickRightInitPos.y);
   };
-
-  function mousemoveHandler(event: MouseEvent) {
+  const mousemoveHandler = (event: MouseEvent) => {
     const rect = canvasRef.current?.getBoundingClientRect();
     stickLefttInitPos.x = event.clientX - rect!.left;
     stickLefttInitPos.y = event.clientY - rect!.top;
-    console.log(stickLefttInitPos.x, stickLefttInitPos.y);
-  }
-  function mouseleaveHandler() {
+    // console.log(stickLefttInitPos.x, stickLefttInitPos.y);
+  };
+  const mouseleaveHandler = () => {
     mouse.over = false;
-  }
-  function mouseenterHandler() {
+  };
+  const mouseenterHandler = () => {
     mouse.over = true;
-  }
-  function mousedownHandler(event: MouseEvent) {
+  };
+  const mousedownHandler = (event: MouseEvent) => {
     if (event.type === 'mousedown') {
       mouse.isDown = true;
       mouse.isPressed = true;
       mouse.isUp = false;
     }
-  }
-  function mouseupHandler(event: MouseEvent) {
+  };
+  const mouseupHandler = (event: MouseEvent) => {
     if (event.type === 'mouseup') {
       mouse.isDown = false;
       mouse.isPressed = false;
       mouse.isUp = true;
     }
-  }
-
-  function update() {
+  };
+  const update = () => {
     mouse.isDown = false;
     mouse.isUp = false;
-  }
-
-  function animate() {
+  };
+  const animate = () => {
     requestAnimationFrame(animate);
     // console.log(mouse.isUp + '- ' + mouse.isPressed );
     update();
-  }
+  };
 
   const listener = () => {
     canvasRef.current?.addEventListener('mousemove', mousemoveHandler);

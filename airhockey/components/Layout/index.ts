@@ -4,22 +4,18 @@ const rotate = keyframes`
   0% {
     transform: rotate(180deg) scale(0.9);
   }
-
   50% {
     transform: rotate(250deg) scale(0.5);
   }
-
   100% {
     transform: rotate(360deg) scale(1);
   }
 `;
-
 export const WrapperLayoutMain = styled.div`
   position: relative;
   background: linear-gradient(to bottom right, #000, #3d232a);
   width: 100%;
 `;
-
 export const WrapperContent = styled.div`
   position: relative;
   width: 100%;
@@ -37,13 +33,11 @@ export const WrapperContent = styled.div`
     padding-right: 0;
   }
 `;
-
 export const WrapperImage = styled.div`
   position: absolute;
   top: 10%;
   left: 0%;
 `;
-
 export const WrapperSphere = styled.div`
   position: absolute;
   right: 374px;
@@ -55,7 +49,6 @@ export const WrapperSphere = styled.div`
   animation: ${rotate} 8s cubic-bezier(0.8, 0.2, 0.2, 0.8) alternate infinite;
   border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
 `;
-
 export const H1 = styled.h1`
   font-size: 170px;
   margin-top: 209px;
@@ -76,7 +69,6 @@ export const H1 = styled.h1`
     font-size: 50px;
   }
 `;
-
 export const Container = styled.div`
   display: flex;
   flex-direction: row;

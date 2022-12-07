@@ -1,5 +1,5 @@
 import { Board } from '../../airhockey/components/Board/Board';
 
-const GamePage = () => <Board />;
+const GameLink = () => <Board />;
 
-export default GamePage;
+export default GameLink;
