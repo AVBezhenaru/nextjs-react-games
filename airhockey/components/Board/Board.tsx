@@ -149,7 +149,7 @@ export const Board = () => {
       mouse.y > stickLefttInitPos.y - 80 &&
       mouse.y < stickLefttInitPos.y + 80
     ) {
-      // console.log('stick');
+      console.log('stick');
     } else if (
       mouse.x < stickRightInitPos.x + 80 &&
       mouse.x > stickRightInitPos.x - 80 &&
