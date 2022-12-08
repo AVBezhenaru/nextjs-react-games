@@ -7,9 +7,6 @@ import { useAppSelector } from '../../../hooks';
 
 import styles from './Lobby.module.scss';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-
 interface LobbyProps {
   setGameTime: (time: string | null) => void;
   setGainTime: (time: string | null) => void;

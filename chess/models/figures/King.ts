@@ -35,7 +35,6 @@ export class King extends Figure {
     ) {
       return true;
     }
-
     return false;
   }
 }
