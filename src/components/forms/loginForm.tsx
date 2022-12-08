@@ -3,7 +3,7 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import React from 'react';
 import Link from 'next/link';
-import { router } from 'next/client';
+import { useRouter } from 'next/router';
 import { useCookies } from 'react-cookie';
 
 import facebook from '../img/facebook.svg';
@@ -31,6 +31,8 @@ export type Inputs = {
 };
 
 const LoginForm = () => {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -46,7 +48,7 @@ const LoginForm = () => {
       username: date.username,
       password: date.password,
     };
-    console.log('user :', user);
+    // console.log('user :', user);
 
     clearErrors();
     const authUser = users.find(
@@ -55,7 +57,7 @@ const LoginForm = () => {
     );
     if (authUser) {
       setCookies('user', authUser);
-      console.log('auth');
+      // console.log('auth');
       router.push('/profile');
     }
   };
