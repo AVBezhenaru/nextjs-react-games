@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 
 import { Layout } from '../src/components/layout/layout';
 import { store } from '../store';
-import '../checkers/styles/globals.css';
+import '../styles/index.scss';
 
 const MyApp: NextPage<AppProps> = ({ Component, pageProps }) => (
   <Layout>
