@@ -19,7 +19,7 @@ const initialState: Checker = {
   isPlayWithBoot: false,
   idForPlayersOnline: -1,
   modal: false,
-  color: '',
+  color: 'black',
   bid: 0,
   showFirst: true,
   show: false,
