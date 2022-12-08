@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import React, { FC } from 'react';
 
-import { openModal, setOffline } from '../../store/DataSlice';
+import { openModal, setOffline } from '../../dataSlice/DataSlice';
 
 import styles from './CustomLink.module.scss';
 

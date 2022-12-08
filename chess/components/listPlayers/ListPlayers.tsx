@@ -8,7 +8,7 @@ import {
   setDataForCurrentPlayer,
   setDataForRival,
   setOffline,
-} from '../../store/DataSlice';
+} from '../../dataSlice/DataSlice';
 
 import styles from './ListPlayers.module.scss';
 
