@@ -12,6 +12,7 @@ export const Section = styled.section`
   max-width: 1440px;
   min-height: 100vh;
   height: auto;
+  margin: 0 auto;
   background: #f5f5f5;
   overflow-x: hidden;
   overflow-y: hidden;

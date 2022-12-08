@@ -1,17 +1,15 @@
 /* eslint-disable react/no-children-prop */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import React from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { router } from 'next/client';
 import { useCookies } from 'react-cookie';
 
-import { useAppDispatch } from '../../../hooks';
-import google from '../img/google.svg';
 import facebook from '../img/facebook.svg';
+import google from '../img/google.svg';
 import twitter from '../img/twitter.svg';
-import { userSlice } from '../../../store/userSlice';
-import { User } from '../../gamesItemTypes';
+import { useAppSelector } from '../../hooks';
 
 import {
   DivImgLogo,
@@ -26,37 +24,40 @@ import {
   Span,
 } from './loginFormStyle';
 
-type Inputs = {
-  username: string;
+export type Inputs = {
   email: string;
+  username: string;
   password: string;
-  password_repeat: string;
 };
 
-const RegistrationForm = () => {
+const LoginForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     clearErrors,
   } = useForm<Inputs>();
+  const { users } = useAppSelector((state) => state.user);
   const [cookies, setCookies] = useCookies(['user']);
-  const dispatch = useAppDispatch();
-  const router = useRouter();
-  const { updateList } = userSlice.actions;
 
-  const onSubmit: SubmitHandler<Inputs> = (date: Inputs) => {
-    const user: User = {
-      image: '',
+  const onSubmit: SubmitHandler<Inputs> = (date) => {
+    const user = {
+      email: date.username,
       username: date.username,
-      email: date.email,
       password: date.password,
     };
     console.log('user :', user);
+
     clearErrors();
-    dispatch(updateList([user]));
-    cookies.user = user;
-    router.push('/profile');
+    const authUser = users.find(
+      (u: any) =>
+        (u.email === user.email || u.username === user.username) && u.password === user.password,
+    );
+    if (authUser) {
+      setCookies('user', authUser);
+      console.log('auth');
+      router.push('/profile');
+    }
   };
 
   return (
@@ -77,35 +78,14 @@ const RegistrationForm = () => {
           <Span>or with Email</Span>
         </H4>
         <Input
-          placeholder="Username"
+          placeholder="User Name  or  email..."
           {...register('username', {
             required: 'Required field',
-            minLength: {
-              value: 3,
-              message: 'At least 3 characters',
-            },
-            maxLength: {
-              value: 20,
-              message: 'Maximum 20 character',
-            },
           })}
         />
         {errors?.username && <PError>{errors.username.message}</PError>}
 
         <Input
-          placeholder="Some@example.com"
-          {...register('email', {
-            required: 'Required field',
-            pattern: {
-              value: /^\S+@\S+\.\S+$/,
-              message: 'Type valid email',
-            },
-          })}
-        />
-        {errors?.email && <PError>{errors.email.message}</PError>}
-
-        <Input
-          type="password"
           placeholder="Password"
           {...register('password', {
             required: 'You must specify a password',
@@ -121,11 +101,11 @@ const RegistrationForm = () => {
         />
         {errors.password && <PError>{errors.password.message}</PError>}
 
-        <InputBtn type="submit" children="Create" />
+        <InputBtn type="submit" children="Register" />
         <P>
-          Already have an account?{' '}
-          <Link href="/login">
-            <a>Sign In.</a>
+          Don`t have an account?
+          <Link href="/registration">
+            <a style={{ color: '#F46119' }}>Sign Up</a>
           </Link>
         </P>
       </Form>
@@ -133,4 +113,4 @@ const RegistrationForm = () => {
   );
 };
 
-export default RegistrationForm;
+export default LoginForm;

@@ -1,4 +1,4 @@
-import FriendsForm from '../src/components/friend/friendsForm';
+import FriendsForm from '../user/friend/friendsForm';
 
 const Chats = () => <FriendsForm />;
 

@@ -31,6 +31,32 @@ const SideBar = () => {
         <LiHeader>Main</LiHeader>
         <Li>News</Li>
         <Li>Store</Li>
+        <LiHeader>Games</LiHeader>
+        <StyledLink href="/chess" passHref>
+          <Li pathname="chess" active={router.pathname}>
+            Chess
+          </Li>
+        </StyledLink>
+        <StyledLink href="/checkers" passHref>
+          <Li pathname="checkers" active={router.pathname}>
+            Checkers
+          </Li>
+        </StyledLink>
+        <StyledLink href="/hangman" passHref>
+          <Li pathname="hangman" active={router.pathname}>
+            Hangman
+          </Li>
+        </StyledLink>
+        <StyledLink href="/tetris" passHref>
+          <Li pathname="tetris" active={router.pathname}>
+            Tetris
+          </Li>
+        </StyledLink>
+        <StyledLink href="/games" passHref>
+          <Li pathname="games" active={router.pathname}>
+            All games
+          </Li>
+        </StyledLink>
         <LiHeader>Support</LiHeader>
         <Li>Report</Li>
         <Li>Help</Li>

@@ -1,4 +1,4 @@
-import ChatsForm from '../src/components/chats/chatsForm';
+import ChatsForm from '../user/chats/chatsForm';
 
 const Chats = () => <ChatsForm />;
 
