@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Inter:wght@300;400;500;600&display=swap');
+
+html,
+body,
+p {
+  padding: 0;
+  margin: 0;
+  font-family: 'Audiowide', cursive;
+  font-size: 18px;
+  font-weight: 600;
+  color: #646464;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+li,
+ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
