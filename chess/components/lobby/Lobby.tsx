@@ -39,5 +39,4 @@ const Lobby: FC<LobbyProps> = (props) => {
     </div>
   );
 };
-
 export default Lobby;
