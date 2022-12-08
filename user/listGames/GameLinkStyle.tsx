@@ -26,7 +26,7 @@ export const Icon = styled.div`
 
 export const GameName = styled.p`
   margin-top: 5px;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: 600;
   text-transform: uppercase;
 `;

@@ -8,6 +8,7 @@ import tetrisIcon from '../img/tetrisIcon.png';
 import chessIcon from '../img/chessIcon.png';
 import checkersIcon from '../img/checkersIcon.png';
 import hangmanIcon from '../img/hangmanIcon.png';
+import aerohokkeyIcon from '../img/aerohokkeyIcon.png';
 
 import { GameLink } from './GameLink';
 import { Games, Page, HeaderGames, ListGames } from './listGamesStyle';
@@ -25,6 +26,7 @@ const ListGamesForm = () => (
             <GameLink src={chessIcon.src} title="chess" href="/chess" />
             <GameLink src={checkersIcon.src} title="checkers" href="/checkers" />
             <GameLink src={hangmanIcon.src} title="hangman" href="/hangman" />
+            <GameLink src={aerohokkeyIcon.src} title="aerohockey" href="/aerohockey" />
           </ListGames>
         </Games>
       </Page>
