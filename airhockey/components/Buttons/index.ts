@@ -7,7 +7,6 @@ export const ButtonsDiv = styled.div`
   padding-right: 62px;
   position: relative;
 `;
-
 export const ButtonPlay = styled.button`
   background-color: transparent;
   width: 200px;
@@ -28,7 +27,6 @@ export const ButtonPlay = styled.button`
   color: white;
   font-weight: bold;
 `;
-
 export const ButtonSpecification = styled.button`
   background-color: transparent;
   height: 100px;

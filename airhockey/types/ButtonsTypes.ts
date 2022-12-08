@@ -4,5 +4,3 @@ export interface IButton {
   path: string;
   id?: number;
 }
-
-
