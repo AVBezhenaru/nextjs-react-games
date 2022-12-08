@@ -34,48 +34,49 @@ export class Checker extends Figure {
     ) {
       return true;
     }
-    const directionStepsBack = (step: number) => {
-      if (
-        target.y === this.cell.y + step &&
-        target.x === this.cell.x + 2 &&
-        this.cell.board.getCell(target.x, target.y).isEmpty() &&
-        !this.cell.board.getCell(target.x - 1, target.y + directionEmpty)?.isEmpty() &&
-        this.cell.board.getCell(target.x - 1, target.y + directionEmpty)?.isFigure()?.color !==
-          this.cell.figure?.color
-      ) {
-        this.cell.board.getCell(target.x - 1, target.y + directionEmpty).figureDeleteColor = true;
-        return true;
-      }
-      return false;
-    };
-    const directionStepsRigth = (step: number) => {
-      if (
-        target.y === this.cell.y + step &&
-        target.x === this.cell.x - 2 &&
-        this.cell.board.getCell(target.x, target.y).isEmpty() &&
-        !this.cell.board.getCell(target.x + 1, target.y + directionEmpty)?.isEmpty() &&
-        this.cell.board.getCell(target.x + 1, target.y + directionEmpty)?.isFigure()?.color !==
-          this.cell.figure?.color
-      ) {
-        this.cell.board.getCell(target.x + 1, target.y + directionEmpty).figureDeleteColor = true;
-        return true;
-      }
-      return false;
-    };
-    if (directionStepsBack(twoStepDirectionEmpty)) {
-      return directionStepsBack(twoStepDirectionEmpty);
+    if (
+      target.y === this.cell.y + twoStepDirection &&
+      target.x === this.cell.x + 2 &&
+      this.cell.board.getCell(target.x, target.y).isEmpty() &&
+      !this.cell.board.getCell(target.x - 1, target.y + directionEmpty)?.isEmpty() &&
+      this.cell.board.getCell(target.x - 1, target.y + directionEmpty)?.isFigure().color !==
+        this.cell.figure?.color
+    ) {
+      this.cell.board.getCell(target.x - 1, target.y + directionEmpty).figureDeleteColor = true;
+      return true;
     }
-
-    if (directionStepsBack(twoStepDirection)) {
-      return directionStepsBack(twoStepDirection);
+    if (
+      target.y === this.cell.y + twoStepDirectionEmpty &&
+      target.x === this.cell.x + 2 &&
+      this.cell.board.getCell(target.x, target.y).isEmpty() &&
+      !this.cell.board.getCell(target.x - 1, target.y + direction)?.isEmpty() &&
+      this.cell.board.getCell(target.x - 1, target.y + direction)?.isFigure().color !==
+        this.cell.figure?.color
+    ) {
+      this.cell.board.getCell(target.x - 1, target.y + direction).figureDeleteColor = true;
+      return true;
     }
-
-    if (directionStepsRigth(twoStepDirection)) {
-      return directionStepsRigth(twoStepDirection);
+    if (
+      target.y === this.cell.y + twoStepDirection &&
+      target.x === this.cell.x - 2 &&
+      this.cell.board.getCell(target.x, target.y).isEmpty() &&
+      !this.cell.board.getCell(target.x + 1, target.y + directionEmpty)?.isEmpty() &&
+      this.cell.board.getCell(target.x + 1, target.y + directionEmpty)?.isFigure().color !==
+        this.cell.figure?.color
+    ) {
+      this.cell.board.getCell(target.x + 1, target.y + directionEmpty).figureDeleteColor = true;
+      return true;
     }
-
-    if (directionStepsRigth(twoStepDirectionEmpty)) {
-      return directionStepsRigth(twoStepDirectionEmpty);
+    if (
+      target.y === this.cell.y + twoStepDirectionEmpty &&
+      target.x === this.cell.x - 2 &&
+      this.cell.board.getCell(target.x, target.y).isEmpty() &&
+      !this.cell.board.getCell(target.x + 1, target.y + direction)?.isEmpty() &&
+      this.cell.board.getCell(target.x + 1, target.y + direction)?.isFigure().color !==
+        this.cell.figure?.color
+    ) {
+      this.cell.board.getCell(target.x + 1, target.y + direction).figureDeleteColor = true;
+      return true;
     }
 
     return false;

@@ -49,7 +49,10 @@ const BoardCheckers: FC<BoardProps> = ({
   const transformCheckersNumbersRigth =
     color === 'black' ? 'checkerstransform__numbers-right' : 'checkers__numbers-right';
   const dispatch = useDispatch();
-
+  const getPlayerColorByCondition = () => currentPlayer?.name;
+  useEffect(() => {
+    getPlayerColorByCondition();
+  }, []);
   const click = (cell: Cell) => {
     let banOnHitting = true;
     let ok = 0;
@@ -531,7 +534,6 @@ const BoardCheckers: FC<BoardProps> = ({
     }
     return { color: currentPlayer?.color, fontSize: '30px' };
   };
-  const getPlayerColorByCondition = () => currentPlayer?.name;
 
   return (
     <div className="page__checkers">
