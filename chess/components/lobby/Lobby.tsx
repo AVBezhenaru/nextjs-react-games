@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 
 import GameSettings from '../gameSettings/GameSettings';
 import { Colors } from '../../models/Colors';
-import RulesModal from '../RulesModal';
 import ListPlayers from '../listPlayers/ListPlayers';
 import { useAppSelector } from '../../../hooks';
 
