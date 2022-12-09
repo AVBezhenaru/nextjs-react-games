@@ -29,7 +29,7 @@ const Header: FC<HeaderProps> = ({ restart, setGainTime, settingsGame }) => {
     <header className={styles.header}>
       <Container>
         <div className={styles.header__inner}>
-          <a href="chess/components/header/Header#" className={styles.header__title}>
+          <a href="../chess" className={styles.header__title}>
             <Image
               src={headerLogo}
               width="50"

@@ -16,24 +16,24 @@ function HelloTetris() {
         <meta name="keywords" content="tetris, online-games" />
       </Head>
       <main>
-        <Link href="/tetris/settings">
+        <Link href="./tetris/settings">
           <a>
             <Button theme="settings">
               <Image src={SettingPic} alt="" />
             </Button>
           </a>
         </Link>
-        <Link href="/tetris/game">
+        <Link href="./tetris/game">
           <a onClick={() => dispatch(startGame())}>
             <Button theme="play">Play</Button>
           </a>
         </Link>
-        <Link href="/tetris/score-table">
+        <Link href="./tetris/score-table">
           <a>
             <Button theme="score">Score</Button>
           </a>
         </Link>
-        <Link href="/">
+        <Link href="../games">
           <a>
             <Button theme="back">Back</Button>
           </a>

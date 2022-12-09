@@ -16,7 +16,7 @@ const Lobbi: FC<UserProps> = (props) => {
       dispatch(setShow(true));
     } else {
       dispatch(setUserSelectedId(props.id));
-      return route.push('../../../checkers/Play');
+      return route.push('../checkers/Play');
     }
   };
 

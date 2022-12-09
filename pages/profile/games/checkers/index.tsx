@@ -12,12 +12,12 @@ export default function Home() {
         Ш<span>а</span>ш<span>к</span>и
       </h1>
       <div className="container___head__page">
-        <Link href="/checkers/ChoosePlayer">
+        <Link href="./checkers/ChoosePlayer">
           <span className="head__page-play">Играть онлайн</span>
         </Link>
 
         {dispatch(setPlayWithBoot(true)) && (
-          <Link href="/checkers/Play">
+          <Link href="./checkers/Play">
             <span className="head__page-play">Играть с ботом</span>
           </Link>
         )}

@@ -7,7 +7,7 @@ import style from '../../../../tetris2/styles/index.module.scss';
 function TetrisGame() {
   return (
     <div className={style.game_wrapper}>
-      <Link href="/tetris">
+      <Link href="../tetris">
         <a>
           <Button theme="backToMenu">Back</Button>
         </a>
