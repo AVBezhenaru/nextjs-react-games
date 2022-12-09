@@ -44,7 +44,6 @@ export const SetPlayer = () => {
     blackAndWhitePlayers.push(new Player(player.id, player.name, bids, colorForMyUser));
 
     dispatch(setColor(colorForMyUser));
-    console.log(blackAndWhitePlayers);
 
     return blackAndWhitePlayers;
   }

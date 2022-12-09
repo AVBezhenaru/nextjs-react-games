@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
 import React, { FC } from 'react';
-// import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { UserProps } from '../../interfaces/Interfaces';
