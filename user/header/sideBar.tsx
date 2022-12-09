@@ -6,9 +6,11 @@ import { DivSideBar, Li, LiHeader, StyledLink, Ul } from './sideBarStyle';
 
 const SideBar = () => {
   const router = useRouter();
-  const [pathName, setPathName] = useState(router.pathname);
+  // const [pathName, setPathName] = useState(router.pathname);
+
   const path = '/profile';
-  const pathGames = 'profile/games/';
+  const pathGames = '/games';
+
   return (
     <DivSideBar>
       <Ul>
@@ -33,32 +35,32 @@ const SideBar = () => {
         <Li>News</Li>
         <Li>Store</Li>
         <LiHeader>Games</LiHeader>
-        <StyledLink href={`${pathGames}chess`} passHref>
+        <StyledLink href={`${path}${pathGames}/chess`} passHref>
           <Li pathname="chess" active={router.pathname}>
             Chess
           </Li>
         </StyledLink>
-        <StyledLink href={`${pathGames}checkers`} passHref>
+        <StyledLink href={`${path}${pathGames}/checkers`} passHref>
           <Li pathname="checkers" active={router.pathname}>
             Checkers
           </Li>
         </StyledLink>
-        <StyledLink href={`${pathGames}hangman`} passHref>
+        <StyledLink href={`${path}${pathGames}/hangman`} passHref>
           <Li pathname="hangman" active={router.pathname}>
             Hangman
           </Li>
         </StyledLink>
-        <StyledLink href={`${pathGames}tetris`} passHref>
+        <StyledLink href={`${path}${pathGames}/tetris`} passHref>
           <Li pathname="tetris" active={router.pathname}>
             Tetris
           </Li>
         </StyledLink>
-        <StyledLink href={`${pathGames}airhockey`} passHref>
+        <StyledLink href={`${path}${pathGames}/airhockey`} passHref>
           <Li pathname="airhockey" active={router.pathname}>
             AirHockey
           </Li>
         </StyledLink>
-        <StyledLink href={pathGames} passHref>
+        <StyledLink href={`${path}${pathGames}`} passHref>
           <Li pathname="games" active={router.pathname}>
             All games
           </Li>
