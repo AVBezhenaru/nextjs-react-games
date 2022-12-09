@@ -40,6 +40,7 @@ export const SetPlayer = () => {
     if (selectedPlayer?.playConditional.bid !== bid) {
       bids = selectedPlayer?.playConditional.bid;
     }
+
     blackAndWhitePlayers.push(new Player(player.id, player.name, bids, colorForMyUser));
 
     dispatch(setColor(colorForMyUser));
