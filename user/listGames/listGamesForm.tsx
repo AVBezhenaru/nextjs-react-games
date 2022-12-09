@@ -26,7 +26,7 @@ const ListGamesForm = () => (
             <GameLink src={chessIcon.src} title="chess" href="/chess" />
             <GameLink src={checkersIcon.src} title="checkers" href="/checkers" />
             <GameLink src={hangmanIcon.src} title="hangman" href="/hangman" />
-            <GameLink src={aerohokkeyIcon.src} title="aerohockey" href="/aerohockey" />
+            <GameLink src={aerohokkeyIcon.src} title="airhockey" href="/airhockey" />
           </ListGames>
         </Games>
       </Page>
