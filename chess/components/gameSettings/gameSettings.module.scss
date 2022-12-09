@@ -1,0 +1,94 @@
+.settings {
+
+  &__logo{
+    text-align: center;
+  }
+
+  &__logo-img{
+    max-width: 100px;
+  }
+
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  &__item {
+    max-width: 45%;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  &__form-title{
+    display: inline-block;
+    font-family: "Audiowide", cursive;
+    color: #646464;
+  }
+
+  &__btn {
+    font-size: 20px;
+    padding: 10px;
+    margin-right: 30px;
+    text-transform: uppercase;
+    font-family: 'Audiowide', cursive;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    color: #646464;
+    border: 1px solid #646464;
+    border-radius: 5px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    will-change: transform;
+    transition: .3s;
+    -webkit-backface-visibility: hidden; /* Chrome, Safari, Opera */
+    backface-visibility: hidden;
+    margin-top: 20px;
+    max-width: 250px;
+    width: 100%;
+
+    &:hover{
+      transform: scale(1.05);
+      color: black;
+      border-color: black;
+    }
+  }
+}
+
+.link{
+  font-size: 20px;
+  padding: 10px;
+  text-transform: uppercase;
+  font-family: 'Audiowide', cursive;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  color: #646464;
+  border: 1px solid #646464;
+  border-radius: 5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  will-change: transform;
+  transition: .3s;
+  -webkit-backface-visibility: hidden; /* Chrome, Safari, Opera */
+  backface-visibility: hidden;
+  margin-top: 20px;
+  max-width: 350px;
+  width: 100%;
+
+}
+
+.colors,.gain,.time,.mode,.bid {
+  font-family: "Audiowide", cursive;
+  color: #646464;
+
+}
+
+.title{
+  color: black;
+  font-family: "Audiowide", cursive;
+  font-weight: bold;
+  font-size: 50px;
+}
+
+.setting__header{
+  color: #646464;
+  font-family: "Audiowide", cursive;
+  margin-bottom: 25px;
+}

@@ -5,12 +5,12 @@
 // import { Provider } from 'react-redux';
 
 // import PlayField from '../tetris2/components/playfield/playfield';
-// import { store } from '../store';
+// import { dataSlice } from '../dataSlice';
 
 // describe('PlayField', () => {
 //   test('snapshot renders', () => {
 //     const component = renderer.create(
-//       <Provider store={store}>
+//       <Provider dataSlice={dataSlice}>
 //         <PlayField />
 //       </Provider>,
 //     );

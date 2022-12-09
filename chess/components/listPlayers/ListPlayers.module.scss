@@ -1,0 +1,50 @@
+.wrapper{
+  position: absolute;
+  width: 450px;
+  max-height: 500px;
+  background-color: #8a8a8a;
+  left: 900px;
+  top: 100px;
+  border-radius: 15px;
+  opacity: 0.7;
+  overflow: scroll;
+  color: black;
+}
+
+.list{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.list-item{
+  font-family: "Audiowide", cursive;
+
+  margin-left: 20px;
+}
+
+.player-name{
+  font-family: "Audiowide", cursive;
+
+  margin-right: 10px;
+}
+
+.button:hover{
+  box-shadow: 0 0 17px 6px rgba(34, 60, 80, 0.2);
+}
+
+.button{
+  font-family: "Audiowide", cursive;
+  font-weight: 900;
+  margin-left: 20px;
+  margin-top: 5px;
+  color: black;
+  border: 2px solid #646464;
+  border-radius: 4px;
+  height: 28px;
+}
+
+.colorRevers{
+  font-family: "Audiowide", cursive;
+  margin-left: 20px;
+}
