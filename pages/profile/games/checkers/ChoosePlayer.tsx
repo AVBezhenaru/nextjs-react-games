@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { RootState } from '../../store';
-import { setShow, setShowFirst } from '../../checkers/store/checkersReducer';
-import Lobbi from '../../checkers/components/Lobbi/Lobbi';
-import { players, player } from '../../checkers/components/Lobbi/PlayersForOnlinePlay';
-import { UserProps, PlayerProps } from '../../checkers/interfaces/Interfaces';
-import ModalCreateGame from '../../checkers/components/Modal/ModalCreateGame';
+import { RootState } from '../../../../store';
+import { setShow, setShowFirst } from '../../../../checkers/store/checkersReducer';
+import Lobbi from '../../../../checkers/components/Lobbi/Lobbi';
+import { players, player } from '../../../../checkers/components/Lobbi/PlayersForOnlinePlay';
+import { UserProps, PlayerProps } from '../../../../checkers/interfaces/Interfaces';
+import ModalCreateGame from '../../../../checkers/components/Modal/ModalCreateGame';
 
 interface ColorProps {
   label: string;

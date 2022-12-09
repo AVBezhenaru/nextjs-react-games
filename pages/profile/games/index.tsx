@@ -1,4 +1,4 @@
-import ListGamesForm from '../user/listGames/listGamesForm';
+import ListGamesForm from '../../../user/listGames/listGamesForm';
 
 const ListGames = () => <ListGamesForm />;
 

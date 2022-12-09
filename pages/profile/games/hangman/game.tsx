@@ -2,10 +2,10 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { NextPage } from 'next';
 
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getAppState, getWord, resetGame } from '../../hangman/store/HangmanSlice';
-import { StatusGame } from '../../hangman/types/HangmanSlice';
-import { bodyParts } from '../../hangman/utils/bodyParts';
+import { useAppDispatch, useAppSelector } from '../../../../hooks';
+import { getAppState, getWord, resetGame } from '../../../../hangman/store/HangmanSlice';
+import { StatusGame } from '../../../../hangman/types/HangmanSlice';
+import { bodyParts } from '../../../../hangman/utils/bodyParts';
 import {
   ButtonChangeTheme,
   GallowsPlace,
@@ -15,7 +15,7 @@ import {
   LettersPanel,
   Main,
   StatusGameMessage,
-} from '../../hangman/components';
+} from '../../../../hangman/components';
 
 const Game: NextPage = () => {
   const [statusGame, setStatusGame] = useState<StatusGame>('idle');

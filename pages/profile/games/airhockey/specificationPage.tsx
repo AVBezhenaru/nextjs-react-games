@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-import { Specification } from '../../airhockey/components/Specification/Specification';
+import { Specification } from '../../../../airhockey/components/Specification/Specification';
 
 const SpecificationPage = () => (
   <>

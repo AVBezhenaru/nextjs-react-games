@@ -21,6 +21,7 @@ export const LiHeader = styled.li`
   font-weight: 600 !important;
   margin: 10px 0 10px 30px;
   text-transform: uppercase;
+  color: #646464;
 `;
 
 interface StyledLinkProps {
@@ -42,7 +43,7 @@ export const Li = styled.li<StyledLinkProps>`
   font-size: 14px;
   text-decoration: none;
   cursor: pointer;
-  padding: 10px 0 10px 30px;
+  padding: 9px 0 10px 30px;
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
   :hover {

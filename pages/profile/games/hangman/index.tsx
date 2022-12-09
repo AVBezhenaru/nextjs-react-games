@@ -1,8 +1,8 @@
 import { NextPage } from 'next';
 import React from 'react';
 
-import { Layout } from '../../hangman/components';
-import HelloTable from '../../hangman/components/HelloTable/HelloTable';
+import { Layout } from '../../../../hangman/components';
+import HelloTable from '../../../../hangman/components/HelloTable/HelloTable';
 
 const Home: NextPage = () => (
   <Layout>

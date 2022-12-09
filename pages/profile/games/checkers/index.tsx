@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import Link from 'next/link';
 
-import { setPlayWithBoot } from '../../checkers/store/checkersReducer';
+import { setPlayWithBoot } from '../../../../checkers/store/checkersReducer';
 
 export default function Home() {
   const dispatch = useDispatch();

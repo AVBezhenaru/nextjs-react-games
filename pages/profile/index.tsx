@@ -1,4 +1,4 @@
-import ProfileForm from '../user/profile/profileForm';
+import ProfileForm from '../../user/profile/profileForm';
 
 const Profile = () => <ProfileForm />;
 

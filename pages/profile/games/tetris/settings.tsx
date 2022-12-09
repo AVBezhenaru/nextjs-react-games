@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
-import Settings from '../../tetris2/components/settings/settings';
-import Button from '../../tetris2/components/button/button';
-import style from '../../tetris2/styles/index.module.scss';
+import Settings from '../../../../tetris2/components/settings/settings';
+import Button from '../../../../tetris2/components/button/button';
+import style from '../../../../tetris2/styles/index.module.scss';
 
 function GameSettings() {
   return (

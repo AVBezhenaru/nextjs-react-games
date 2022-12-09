@@ -13,25 +13,34 @@ import aerohokkeyIcon from '../img/aerohokkeyIcon.png';
 import { GameLink } from './GameLink';
 import { Games, Page, HeaderGames, ListGames } from './listGamesStyle';
 
-const ListGamesForm = () => (
-  <Section>
-    <Header />
-    <DivPage>
-      <SideBar />
-      <Page>
-        <Games>
-          <HeaderGames>GAMES</HeaderGames>
-          <ListGames>
-            <GameLink src={tetrisIcon.src} title="tetris" href="/tetris" />
-            <GameLink src={chessIcon.src} title="chess" href="/chess" />
-            <GameLink src={checkersIcon.src} title="checkers" href="/checkers" />
-            <GameLink src={hangmanIcon.src} title="hangman" href="/hangman" />
-            <GameLink src={aerohokkeyIcon.src} title="airhockey" href="/airhockey" />
-          </ListGames>
-        </Games>
-      </Page>
-    </DivPage>
-  </Section>
-);
+const ListGamesForm = () => {
+  const path = 'games/';
+
+  const gameLinksArr = [
+    { src: tetrisIcon.src, title: 'tetris' },
+    { src: chessIcon.src, title: 'chess' },
+    { src: checkersIcon.src, title: 'checkers' },
+    { src: hangmanIcon.src, title: 'hangman' },
+    { src: aerohokkeyIcon.src, title: 'airhockey' },
+  ];
+  return (
+    <Section>
+      <Header />
+      <DivPage>
+        <SideBar />
+        <Page>
+          <Games>
+            <HeaderGames>GAMES</HeaderGames>
+            <ListGames>
+              {gameLinksArr.map((item) => (
+                <GameLink src={item.src} title={item.title} href={`${path}${item.title}`} />
+              ))}
+            </ListGames>
+          </Games>
+        </Page>
+      </DivPage>
+    </Section>
+  );
+};
 
 export default withRouter(ListGamesForm);

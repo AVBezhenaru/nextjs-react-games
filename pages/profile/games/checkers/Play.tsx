@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useDispatch } from 'react-redux';
 
-import BoardCheckers from '../../checkers/components/Home/BoardCheckers';
-import { Board } from '../../checkers/model/Board';
-import { Player } from '../../checkers/model/Player';
-import { Colors } from '../../checkers/model/Colors';
-import { Figure } from '../../checkers/model/figures/Figure';
-import { setShow } from '../../checkers/store/checkersReducer';
-import { SetPlayer } from '../../checkers/components/Home/SetPlayer';
+import BoardCheckers from '../../../../checkers/components/Home/BoardCheckers';
+import { Board } from '../../../../checkers/model/Board';
+import { Player } from '../../../../checkers/model/Player';
+import { Colors } from '../../../../checkers/model/Colors';
+import { Figure } from '../../../../checkers/model/figures/Figure';
+import { setShow } from '../../../../checkers/store/checkersReducer';
+import { SetPlayer } from '../../../../checkers/components/Home/SetPlayer';
 
 export default function Play() {
   const dispatch = useDispatch();

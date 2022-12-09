@@ -2,11 +2,11 @@ import Link from 'next/link';
 import Head from 'next/head';
 import Image from 'next/image';
 
-import style from '../../tetris2/styles/index.module.scss';
-import Button from '../../tetris2/components/button/button';
-import { startGame } from '../../tetris2/store/tetrisSlice';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
-import SettingPic from '../../public/gear-svgrepo-com.svg';
+import style from '../../../../tetris2/styles/index.module.scss';
+import Button from '../../../../tetris2/components/button/button';
+import { startGame } from '../../../../tetris2/store/tetrisSlice';
+import { useAppDispatch } from '../../../../hooks/useAppDispatch';
+import SettingPic from '../../../../public/gear-svgrepo-com.svg';
 
 function HelloTetris() {
   const dispatch = useAppDispatch();

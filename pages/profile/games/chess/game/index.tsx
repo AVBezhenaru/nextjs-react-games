@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Chess from '../../../chess/components/chess/Chess';
+import Chess from '../../../../../chess/components/chess/Chess';
 
 const Index = () => <Chess />;
 
