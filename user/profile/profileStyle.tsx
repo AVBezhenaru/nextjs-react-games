@@ -9,7 +9,6 @@ export const Section = styled.section`
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  max-width: 1440px;
   min-height: 100vh;
   height: auto;
   margin: 0 auto;

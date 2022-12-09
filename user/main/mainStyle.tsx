@@ -4,7 +4,6 @@ export const Section = styled.section`
   position: absolute;
   height: 100%;
   margin: 0 auto;
-  max-width: 1440px;
   min-height: 100vh;
   width: 100%;
   background-image: url('https://pro-theme.com/html/teamhost/assets/img/bg-first-screen.jpg');
