@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Page = styled.div`
   display: flex;
   gap: 15px;
-  margin: 50px 30px 50px 230px;
+  margin: 50px 30px 0 230px;
   transition: all 0.25s linear;
   position: relative;
   overflow-y: hidden;

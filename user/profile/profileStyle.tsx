@@ -18,7 +18,7 @@ export const Section = styled.section`
 export const DivPage = styled.div`
   align-items: stretch;
   padding-top: 75px;
-  min-height: calc(100vh - 70px);
+  min-height: 100vh;
 `;
 
 export const SideBar = styled.div`
@@ -40,7 +40,6 @@ export const Page = styled.div`
   transition: all 0.25s linear;
   position: relative;
   margin-top: 50px;
-  margin-bottom: 50px;
 `;
 
 export const BlockLeft = styled.div`
