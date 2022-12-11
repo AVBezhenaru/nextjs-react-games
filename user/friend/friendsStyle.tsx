@@ -16,15 +16,16 @@ export const DivSearch = styled.div`
   background-color: white;
   border-radius: 10px;
   width: 100%;
+  max-width: 1440px;
   padding: 20px;
 `;
 
 export const SelectFilter = styled.div`
-  width: 15%;
+  width: 150px;
   padding: 0 10px;
 `;
 export const FriendItem = styled.div`
-  width: 530px;
+  width: calc((100% / 3 - 14px));
   border-radius: 10px;
   height: 70px;
   background-color: white;
@@ -34,7 +35,7 @@ export const DivFriends = styled.div`
   flex-wrap: wrap;
   gap: 20px;
   width: 100%;
-  padding: 20px;
+  max-width: 1440px;
   background-color: transparent;
 `;
 export const Search = styled.input`

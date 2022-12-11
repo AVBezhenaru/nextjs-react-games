@@ -1,6 +1,11 @@
 import React, { ReactNode, useEffect, useState } from 'react';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
-import { SectionLayout } from './layoutStyle';
+import exit from '../img/exit.png';
+
+import { SectionLayout, LayoutHeader, ButtonBack } from './layoutStyle';
 
 type LayoutProps = {
   children: ReactNode;
@@ -8,6 +13,8 @@ type LayoutProps = {
 
 const Layout = ({ children }: LayoutProps) => {
   const [showing, setShowing] = useState(false);
+  const router = useRouter();
+  const linkLength = router.pathname.split('/').length;
 
   useEffect(() => {
     setShowing(true);
@@ -21,7 +28,21 @@ const Layout = ({ children }: LayoutProps) => {
     // eslint-disable-next-line react/jsx-no-useless-fragment
     return <></>;
   }
-  return <SectionLayout>{children}</SectionLayout>;
+  return (
+    <>
+      {linkLength > 3 && (
+        <LayoutHeader>
+          <Link href="/profile/games/" passHref>
+            <ButtonBack>
+              <Image src={exit} alt="вернуться" width={35} height={30} />
+              <span> к списку игр</span>
+            </ButtonBack>
+          </Link>
+        </LayoutHeader>
+      )}
+      <SectionLayout>{children}</SectionLayout>;
+    </>
+  );
 };
 
 export { Layout };

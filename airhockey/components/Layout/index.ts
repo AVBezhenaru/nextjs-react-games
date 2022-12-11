@@ -15,6 +15,7 @@ export const WrapperLayoutMain = styled.div`
   position: relative;
   background: linear-gradient(to bottom right, #000, #3d232a);
   width: 100%;
+  overflow: hidden;
 `;
 export const WrapperContent = styled.div`
   position: relative;

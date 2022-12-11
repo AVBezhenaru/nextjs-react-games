@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
 export const Section = styled.section`
-  position: absolute;
-  height: 100%;
+  position: fixed;
+  height: 100vh;
   margin: 0 auto;
-  min-height: 100vh;
   width: 100%;
   background-image: url('https://pro-theme.com/html/teamhost/assets/img/bg-first-screen.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  overflow: hidden;
 
   :before {
     content: '';

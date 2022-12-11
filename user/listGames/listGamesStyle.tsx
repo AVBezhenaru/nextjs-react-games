@@ -17,6 +17,7 @@ export const Games = styled.div`
   align-items: flex-start;
   border-radius: 10px;
   width: 90%;
+  max-width: 1440px;
   background-color: white;
 `;
 
@@ -24,6 +25,7 @@ export const HeaderGames = styled.div`
   padding: 20px;
   width: 100%;
   text-align: center;
+  color: #646464;
   border-bottom: 1px solid rgba(128, 128, 128, 0.11);
 `;
 

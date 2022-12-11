@@ -55,11 +55,11 @@ const SideBar = () => {
             Tetris
           </Li>
         </StyledLink>
-        <StyledLink href={`${path}${pathGames}/airhockey`} passHref>
+        {/* <StyledLink href={`${path}${pathGames}/airhockey`} passHref>
           <Li pathname="airhockey" active={router.pathname}>
             AirHockey
           </Li>
-        </StyledLink>
+        </StyledLink> */}
         <StyledLink href={`${path}${pathGames}`} passHref>
           <Li pathname="games" active={router.pathname}>
             All games

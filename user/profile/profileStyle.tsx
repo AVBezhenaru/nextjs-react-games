@@ -13,15 +13,12 @@ export const Section = styled.section`
   height: auto;
   margin: 0 auto;
   background: #f5f5f5;
-  overflow-x: hidden;
-  overflow-y: hidden;
 `;
 
 export const DivPage = styled.div`
   align-items: stretch;
   padding-top: 75px;
-  min-height: 100vh;
-  height: auto;
+  min-height: calc(100vh - 70px);
 `;
 
 export const SideBar = styled.div`
@@ -37,13 +34,13 @@ export const SideBar = styled.div`
 `;
 export const Page = styled.div`
   display: flex;
+  justify-content: center;
   gap: 40px;
   margin-left: 240px;
   transition: all 0.25s linear;
   position: relative;
   margin-top: 50px;
   margin-bottom: 50px;
-  overflow-y: hidden;
 `;
 
 export const BlockLeft = styled.div`
@@ -85,6 +82,7 @@ export const DivComments = styled.div`
 
 export const AddComments = styled.div``;
 export const P = styled.p`
+  color: #646464;
   font-size: 18px;
   font-weight: 600;
   padding-bottom: 10px;
@@ -93,6 +91,7 @@ export const P = styled.p`
 export const Textarea = styled.textarea`
   resize: none;
   background-color: rgba(217, 217, 217, 0.15);
+  color: #646464;
   border-radius: 4px;
   box-sizing: border-box;
   font-size: 14px;
@@ -143,12 +142,14 @@ export const Follower = styled.div`
   width: 50%;
   text-align: center;
   font-size: 14px;
+  color: #646464;
 `;
 export const Posts = styled.div`
   padding: 20px 15px 15px 15px;
   width: 50%;
   text-align: center;
   font-size: 14px;
+  color: #646464;
 `;
 
 export const InputBtnUser = styled.button`
@@ -175,6 +176,7 @@ export const H3 = styled.h3`
   text-align: center;
   padding: 20px;
   border-bottom: 1px solid #f2f2f2;
+  color: #646464;
 `;
 
 export const DivProfileInfo = styled.div`

@@ -3,6 +3,7 @@ import { withRouter } from 'next/router';
 
 import Header from '../header/header';
 import SideBar from '../header/sideBar';
+import { FooterBar } from '../footer/footer';
 import { DivPage, Section } from '../profile/profileStyle';
 import tetrisIcon from '../img/tetrisIcon.png';
 import chessIcon from '../img/chessIcon.png';
@@ -24,22 +25,25 @@ const ListGamesForm = () => {
     { src: aerohokkeyIcon.src, title: 'airhockey' },
   ];
   return (
-    <Section>
-      <Header />
-      <DivPage>
-        <SideBar />
-        <Page>
-          <Games>
-            <HeaderGames>GAMES</HeaderGames>
-            <ListGames>
-              {gameLinksArr.map((item) => (
-                <GameLink src={item.src} title={item.title} href={`${path}${item.title}`} />
-              ))}
-            </ListGames>
-          </Games>
-        </Page>
-      </DivPage>
-    </Section>
+    <>
+      <Section>
+        <Header />
+        <DivPage>
+          <SideBar />
+          <Page>
+            <Games>
+              <HeaderGames>GAMES</HeaderGames>
+              <ListGames>
+                {gameLinksArr.map((item) => (
+                  <GameLink src={item.src} title={item.title} href={`${path}${item.title}`} />
+                ))}
+              </ListGames>
+            </Games>
+          </Page>
+        </DivPage>
+      </Section>
+      <FooterBar />
+    </>
   );
 };
 

@@ -8,6 +8,7 @@ import { useCookies } from 'react-cookie';
 import { InputBtn } from '../forms/loginFormStyle';
 import Header from '../header/header';
 import SideBar from '../header/sideBar';
+import { FooterBar } from '../footer/footer';
 import { Li, Ul } from '../header/sideBarStyle';
 
 import {
@@ -69,70 +70,73 @@ const ProfileForm = () => {
     return <></>;
   }
   return (
-    <Section>
-      <Header />
-      <DivPage>
-        <SideBar />
-        <Page>
-          <BlockLeft>
-            <DivImgBack>
-              <ImgBack>
+    <>
+      <Section>
+        <Header />
+        <DivPage>
+          <SideBar />
+          <Page>
+            <BlockLeft>
+              <DivImgBack>
+                <ImgBack>
+                  {!currentUser ? (
+                    <></>
+                  ) : (
+                    <ProfileAvatar
+                      icon="https://consultus.org/cus/wp-content/uploads/2015/06/Avatare-w-2.jpg"
+                      name={currentUser.username}
+                    />
+                  )}
+                </ImgBack>
+              </DivImgBack>
+              <DivProfileNav>
+                <Button children="Overview" />
+                <Button children="Info" />
+                <Button children="Activity" />
+                <Button children="Friends" />
+                <Button children="Group" />
+              </DivProfileNav>
+              <DivComments>
+                <AddComments>
+                  <P>Leave a comments</P>
+
+                  <Textarea placeholder="Please enter your text..." />
+                  <InputBtn children="SEND MESSAGE" />
+                </AddComments>
+              </DivComments>
+            </BlockLeft>
+            <BlockRight>
+              <DivProfileInfo>
                 {!currentUser ? (
                   <></>
                 ) : (
                   <ProfileAvatar
                     icon="https://consultus.org/cus/wp-content/uploads/2015/06/Avatare-w-2.jpg"
                     name={currentUser.username}
+                    tagName="@tagName"
                   />
                 )}
-              </ImgBack>
-            </DivImgBack>
-            <DivProfileNav>
-              <Button children="Overview" />
-              <Button children="Info" />
-              <Button children="Activity" />
-              <Button children="Friends" />
-              <Button children="Group" />
-            </DivProfileNav>
-            <DivComments>
-              <AddComments>
-                <P>Leave a comments</P>
-
-                <Textarea placeholder="Please enter your text..." />
-                <InputBtn children="SEND MESSAGE" />
-              </AddComments>
-            </DivComments>
-          </BlockLeft>
-          <BlockRight>
-            <DivProfileInfo>
-              {!currentUser ? (
-                <></>
-              ) : (
-                <ProfileAvatar
-                  icon="https://consultus.org/cus/wp-content/uploads/2015/06/Avatare-w-2.jpg"
-                  name={currentUser.username}
-                  tagName="@tagName"
-                />
-              )}
-              <UserStatic>
-                <Follower children="followers" />
-                <Posts children="posts" />
-              </UserStatic>
-              <InputBtnUser children="WIEV MY PROFILE" />
-            </DivProfileInfo>
-            <DivProfileInfo>
-              <H3>My friend</H3>
-              <Ul>
-                <Li>friend</Li>
-                <Li>friend</Li>
-                <Li>friend</Li>
-              </Ul>
-              <InputBtnUser children="VIEW ALL" />
-            </DivProfileInfo>
-          </BlockRight>
-        </Page>
-      </DivPage>
-    </Section>
+                <UserStatic>
+                  <Follower children="followers" />
+                  <Posts children="posts" />
+                </UserStatic>
+                <InputBtnUser children="WIEV MY PROFILE" />
+              </DivProfileInfo>
+              <DivProfileInfo>
+                <H3>My friend</H3>
+                <Ul>
+                  <Li>friend</Li>
+                  <Li>friend</Li>
+                  <Li>friend</Li>
+                </Ul>
+                <InputBtnUser children="VIEW ALL" />
+              </DivProfileInfo>
+            </BlockRight>
+          </Page>
+        </DivPage>
+      </Section>
+      <FooterBar />
+    </>
   );
 };
 

@@ -22,6 +22,7 @@ export const Chat = styled.div`
   border-radius: 10px;
   width: 760px;
   height: 700px;
+  color: #646464;
   background-color: white;
 `;
 

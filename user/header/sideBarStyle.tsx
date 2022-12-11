@@ -7,7 +7,7 @@ export const DivSideBar = styled.div`
   position: fixed;
   top: 65px;
   width: 202px;
-  height: calc(100vh - 75px);
+  height: calc(100vh - 65px);
   padding: 10px 32px 20px 0;
   border-right: 1px solid #f2f2f2;
   background-color: #fff;
@@ -16,6 +16,8 @@ export const DivSideBar = styled.div`
 export const Ul = styled.ul`
   list-style: none;
   padding: 0;
+
+  border-bottom: 1px solid #e4e7eb;
 `;
 export const LiHeader = styled.li`
   font-weight: 600 !important;

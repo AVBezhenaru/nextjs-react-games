@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Section = styled.section`
+  position: fixed;
   font-family: Inter, sans-serif;
   letter-spacing: initial;
   line-height: initial;
