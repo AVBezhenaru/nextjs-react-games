@@ -21,7 +21,7 @@ interface СhoosePlayerProps {
 const СhoosePlayer: FC<СhoosePlayerProps> = () => {
   const dispatch = useDispatch();
   const { color, bid } = useSelector((state: RootState) => state.checkers);
-  console.log(color, bid);
+  // console.log(color, bid);
 
   const playersFunk = (bids: number, color: string) => {
     const changeMyPlayer = {
