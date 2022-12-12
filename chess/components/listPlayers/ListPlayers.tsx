@@ -28,7 +28,7 @@ const ListPlayers = () => {
               <span className={styles['player-color']}>цвет шахмат: {item?.label?.colors}</span>
             </li>
             <span>
-              <Link href="/chess/game">
+              <Link href="./chess/game">
                 <button
                   onClick={() => {
                     dispatch(setDataForRival(item));

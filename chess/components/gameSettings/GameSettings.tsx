@@ -54,7 +54,7 @@ const GameSettings: FC<GameSettingsProps> = () => {
   const isConfirmed =
     confirm && inputData.mode === 'с ботом' ? (
       <span className={styles.link}>
-        <Link href="/chess/game">Играть</Link>
+        <Link href="./chess/game">Играть</Link>
       </span>
     ) : null;
 

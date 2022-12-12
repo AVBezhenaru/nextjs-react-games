@@ -5,8 +5,8 @@ import { IButton } from '../../types/ButtonsTypes';
 import { ButtonsDiv, ButtonPlay, ButtonSpecification } from './index';
 
 const buttons: IButton[] = [
-  { title: 'PLAY', node: ButtonPlay, path: 'airhockey/gamePage' },
-  { title: 'SPECIFICATION', node: ButtonSpecification, path: 'airhockey/specificationPage' },
+  { title: 'PLAY', node: ButtonPlay, path: './airhockey/gamePage' },
+  { title: 'SPECIFICATION', node: ButtonSpecification, path: './airhockey/specificationPage' },
 ];
 
 const Buttons = () => (
