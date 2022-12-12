@@ -24,11 +24,14 @@ import {
   BoardScoreDiv,
   BoardScoreLeftDiv,
   BoardScoreRightDiv,
+  ScoreLeftSpan,
+  ScoreRightSpan,
   CanvasContainer,
 } from './index';
 
 export const Board = () => {
   const [titleStatus, setTitleStatus] = useState(false);
+  const [gameStatus, setGameStatus] = useState(false);
   const [mouse] = useState<IMouse>({
     x: 0,
     y: 0,
@@ -51,23 +54,24 @@ export const Board = () => {
     x: widthBoard / 1.35,
     y: centerBoardY,
   });
-  // const [sticks, setSticks] = useState<IStickParams>({
-  //   clickDown: false,
-  //   clickUp: false,
-  //   speed: 0,
-  // });
+
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
+  const handleTitleGame = () => {
+    setGameStatus(true);
+  };
   const handleTitle = () => {
     setTitleStatus(!titleStatus);
   };
 
   const initialCanvas = () => {
     const ctx = canvasRef.current?.getContext('2d');
+
     if (ctx === null || ctx === undefined) {
       return;
     }
     const washerInitialPosition = (x: number, y: number) => {
+      ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
       ctx?.beginPath();
       ctx?.arc(x, y, 43, 0, (Math.PI / 180) * 360);
       ctx!.fillStyle = 'black';
@@ -98,12 +102,26 @@ export const Board = () => {
       ctx?.fill();
     };
     stickRightInitialPosition(stickRightInitPos.x, stickRightInitPos.y);
+
+    requestAnimationFrame(initialCanvas);
   };
   const mousemoveHandler = (event: MouseEvent) => {
     const rect = canvasRef.current?.getBoundingClientRect();
-    stickLefttInitPos.x = event.clientX - rect!.left;
-    stickLefttInitPos.y = event.clientY - rect!.top;
-    // console.log(stickLefttInitPos.x, stickLefttInitPos.y);
+    mouse.x = event.clientX - rect!.left;
+    mouse.y = event.clientY - rect!.top;
+    if (mouse.x < centerBoardX - 80 && mouse.x > 85 && mouse.y < heightBoard - 80 && mouse.y > 75) {
+      stickLefttInitPos.x = mouse.x;
+      stickLefttInitPos.y = mouse.y;
+    }
+    if (
+      mouse.x > centerBoardX + 80 &&
+      mouse.x < widthBoard - 80 &&
+      mouse.y < heightBoard - 80 &&
+      mouse.y > 80
+    ) {
+      stickRightInitPos.x = mouse.x;
+      stickRightInitPos.y = mouse.y;
+    }
   };
   const mouseleaveHandler = () => {
     mouse.over = false;
@@ -111,70 +129,52 @@ export const Board = () => {
   const mouseenterHandler = () => {
     mouse.over = true;
   };
-  const mousedownHandler = (event: MouseEvent) => {
-    if (event.type === 'mousedown') {
-      mouse.isDown = true;
-      mouse.isPressed = true;
-      mouse.isUp = false;
-    }
-  };
-  const mouseupHandler = (event: MouseEvent) => {
-    if (event.type === 'mouseup') {
-      mouse.isDown = false;
-      mouse.isPressed = false;
-      mouse.isUp = true;
-    }
-  };
-  const update = () => {
-    mouse.isDown = false;
-    mouse.isUp = false;
-  };
-  const animate = () => {
-    requestAnimationFrame(animate);
-    // console.log(mouse.isUp + '- ' + mouse.isPressed );
-    update();
-  };
+  // const update = () => {
+  //   mouse.isDown = false;
+  //   mouse.isUp = false;
+  // };
+  // const animate = () => {
+  //   requestAnimationFrame(animate);
+  //   // console.log(mouse.isUp + '- ' + mouse.isPressed );
+  //   update();
+  // };
 
   const listener = () => {
     canvasRef.current?.addEventListener('mousemove', mousemoveHandler);
     canvasRef.current?.addEventListener('mouseleave', mouseleaveHandler);
     canvasRef.current?.addEventListener('mouseenter', mouseenterHandler);
-    canvasRef.current?.addEventListener('mousedown', mousedownHandler);
-    canvasRef.current?.addEventListener('mouseup', mouseupHandler);
   };
-  const clickedStick = () => {
-    if (
-      mouse.x < stickLefttInitPos.x + 80 &&
-      mouse.x > stickLefttInitPos.x - 80 &&
-      mouse.y > stickLefttInitPos.y - 80 &&
-      mouse.y < stickLefttInitPos.y + 80
-    ) {
-      console.log('stick');
-    } else if (
-      mouse.x < stickRightInitPos.x + 80 &&
-      mouse.x > stickRightInitPos.x - 80 &&
-      mouse.y > stickRightInitPos.y - 80 &&
-      mouse.y < stickRightInitPos.y + 80
-    ) {
-      // console.log('stick2');
-    }
-  };
+  // const clickedStick = (e) => {
+  //   console.log(e);
+  //   if (mouse.x < stickLefttInitPos.x + 80 && mouse.x > stickLefttInitPos.x - 80 && mouse.y > stickLefttInitPos.y - 80 && mouse.y < stickLefttInitPos.y + 80) {
+  //     console.log('stick');
+  //   } else if (
+  //     mouse.x < stickRightInitPos.x + 80 &&
+  //     mouse.x > stickRightInitPos.x - 80 &&
+  //     mouse.y > stickRightInitPos.y - 80 &&
+  //     mouse.y < stickRightInitPos.y + 80
+  //   ) {
+  //     // console.log('stick2');
+  //   }
+  // };
 
   useEffect(() => {
     const timer = setInterval(handleTitle, 1000);
-    return () => clearInterval(timer);
+    if (mouse.x !== 0) {
+      handleTitleGame();
+      return () => clearInterval(timer);
+    }
   }, [titleStatus]);
 
   useEffect(() => {
     listener();
-    initialCanvas();
-    requestAnimationFrame(animate);
-  }, []);
+    requestAnimationFrame(initialCanvas);
+  }, [stickLefttInitPos.x, stickLefttInitPos.y, stickRightInitPos.x, stickRightInitPos.y]);
 
   return (
     <GameWrapperDiv>
-      <GameWrapperTitleP titleStatus={titleStatus}>
-        Use the left mouse button to control the right player.
+      <GameWrapperTitleP titleStatus={titleStatus} gameStatus={gameStatus}>
+        {gameStatus ? 'GAME TIME!' : 'Hover over the club to control the trajectory of movement'}
       </GameWrapperTitleP>
       <BoardContainerDiv>
         <LeftGatesDiv />
@@ -194,16 +194,15 @@ export const Board = () => {
           <WrapperCirclesRightLowerSpan />
         </WrapperCirclesRightDiv>
         <RightGatesDiv />
-        <CanvasContainer
-          ref={canvasRef}
-          width={`${widthBoard}px`}
-          height={`${heightBoard}px`}
-          onClick={clickedStick}
-        />
+        <CanvasContainer ref={canvasRef} width={`${widthBoard}px`} height={`${heightBoard}px`} />
       </BoardContainerDiv>
       <BoardScoreDiv>
-        <BoardScoreLeftDiv />
-        <BoardScoreRightDiv />
+        <BoardScoreLeftDiv>
+          <ScoreLeftSpan>0</ScoreLeftSpan>
+        </BoardScoreLeftDiv>
+        <BoardScoreRightDiv>
+          <ScoreRightSpan>0</ScoreRightSpan>
+        </BoardScoreRightDiv>
       </BoardScoreDiv>
     </GameWrapperDiv>
   );
