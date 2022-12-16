@@ -11,7 +11,6 @@ const MainPage: FC = () => (
       <Link href="./checkersReborn/online">
         <span className={classes.MainPageButton}>Играть онлайн</span>
       </Link>
-
       <Link href="./checkersReborn/single">
         <span className={classes.MainPageButton}>Играть с ботом</span>
       </Link>

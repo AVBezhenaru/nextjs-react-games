@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 interface IBoardProps {
-  
+  online: boolean,
 }
 
 const CheckersBoard: FC<IBoardProps> = () => {

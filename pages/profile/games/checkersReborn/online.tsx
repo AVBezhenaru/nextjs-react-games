@@ -4,7 +4,7 @@ import CheckersBoard from '../../../../checkersReborn/components/CheckersBoard/C
 
 const Online: NextPage = () => (
   <main className="app">
-    <CheckersBoard />
+    <CheckersBoard online />
   </main>
 );
 
