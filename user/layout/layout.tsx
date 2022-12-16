@@ -40,7 +40,7 @@ const Layout = ({ children }: LayoutProps) => {
           </Link>
         </LayoutHeader>
       )}
-      <SectionLayout>{children}</SectionLayout>;
+      <SectionLayout>{children}</SectionLayout>
     </>
   );
 };
