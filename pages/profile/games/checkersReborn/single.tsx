@@ -2,10 +2,10 @@ import { NextPage } from 'next';
 
 import CheckersBoard from '../../../../checkersReborn/components/CheckersBoard/CheckersBoard';
 
+import classes from './Styles.module.scss';
+
 const Single: NextPage = () => (
-  <main className="app">
-    <CheckersBoard online={false} />
-  </main>
+  <CheckersBoard online={false} />
 );
 
 export default Single;
