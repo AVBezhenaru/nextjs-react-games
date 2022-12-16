@@ -1,7 +1,7 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { useState, useEffect, useRef } from 'react';
 
-import { IMouse } from '../../types/MouseTypes';
 import { IStick } from '../../types/Sticks';
 
 import {
@@ -27,32 +27,42 @@ import {
   ScoreLeftSpan,
   ScoreRightSpan,
   CanvasContainer,
+  GameOverP,
 } from './index';
 
 export const Board = () => {
+  const [widthBoard] = useState(1414);
+  const [heightBoard] = useState(723);
+  const [centerX] = useState(widthBoard / 2);
+  const [centerY] = useState(heightBoard / 2);
+
   const [titleStatus, setTitleStatus] = useState(false);
   const [gameStatus, setGameStatus] = useState(false);
-  const [mouse] = useState<IMouse>({
-    x: 0,
-    y: 0,
-    isPressed: false,
-    isDown: false,
-    isUp: false,
-    over: false,
+  const [gameOverStatus, setGameOverStatus] = useState(false);
+
+  const [washer] = useState({
+    x: widthBoard / 2,
+    y: heightBoard / 2,
+    dx: 5,
+    dy: 5,
   });
-  const [widthBoard] = useState<number>(1774);
-  const [heightBoard] = useState<number>(723);
-
-  const [centerBoardX] = useState<number>(widthBoard / 2);
-  const [centerBoardY] = useState<number>(heightBoard / 2);
-
-  const [stickLefttInitPos] = useState<IStick>({
+  const [mouseLeft] = useState<IStick>({
     x: widthBoard / 4,
-    y: centerBoardY,
+    y: heightBoard / 2,
+    prevX: 1,
+    prevY: 1,
+    dx: 0,
+    dy: 0,
+    score: 0,
   });
-  const [stickRightInitPos] = useState<IStick>({
+  const [mouseRight] = useState<IStick>({
     x: widthBoard / 1.35,
-    y: centerBoardY,
+    y: heightBoard / 2,
+    prevX: 10,
+    prevY: 10,
+    dx: 0,
+    dy: 0,
+    score: 0,
   });
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -64,7 +74,7 @@ export const Board = () => {
     setTitleStatus(!titleStatus);
   };
 
-  const initialCanvas = () => {
+  const animate = () => {
     const ctx = canvasRef.current?.getContext('2d');
 
     if (ctx === null || ctx === undefined) {
@@ -73,14 +83,14 @@ export const Board = () => {
     const washerInitialPosition = (x: number, y: number) => {
       ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
       ctx?.beginPath();
-      ctx?.arc(x, y, 43, 0, (Math.PI / 180) * 360);
+      ctx?.arc(x, y, widthBoard * 0.04, 0, (Math.PI / 180) * 360);
       ctx!.fillStyle = 'black';
       ctx!.shadowBlur = 5;
       ctx!.shadowColor = 'black';
       ctx!.closePath();
       ctx!.fill();
     };
-    washerInitialPosition(centerBoardX, centerBoardY);
+    washerInitialPosition(washer.x, washer.y);
 
     const stickLeftInitialPosition = (x: number, y: number) => {
       ctx?.beginPath();
@@ -90,7 +100,7 @@ export const Board = () => {
       ctx?.closePath();
       ctx?.fill();
     };
-    stickLeftInitialPosition(stickLefttInitPos.x, stickLefttInitPos.y);
+    stickLeftInitialPosition(mouseLeft.x, mouseLeft.y);
 
     const stickRightInitialPosition = (x: number, y: number) => {
       ctx?.beginPath();
@@ -101,81 +111,124 @@ export const Board = () => {
       ctx?.closePath();
       ctx?.fill();
     };
-    stickRightInitialPosition(stickRightInitPos.x, stickRightInitPos.y);
+    stickRightInitialPosition(mouseRight.x, mouseRight.y);
 
-    requestAnimationFrame(initialCanvas);
+    requestAnimationFrame(animate);
   };
+
   const mousemoveHandler = (event: MouseEvent) => {
     const rect = canvasRef.current?.getBoundingClientRect();
-    mouse.x = event.clientX - rect!.left;
-    mouse.y = event.clientY - rect!.top;
-    if (mouse.x < centerBoardX - 80 && mouse.x > 85 && mouse.y < heightBoard - 80 && mouse.y > 75) {
-      stickLefttInitPos.x = mouse.x;
-      stickLefttInitPos.y = mouse.y;
-    }
     if (
-      mouse.x > centerBoardX + 80 &&
-      mouse.x < widthBoard - 80 &&
-      mouse.y < heightBoard - 80 &&
-      mouse.y > 80
+      event.clientX - rect!.left < centerX - 80 &&
+      event.clientY - rect!.top > 80 &&
+      event.clientX - rect!.left > 80 &&
+      event.clientY - rect!.top < heightBoard - 80
     ) {
-      stickRightInitPos.x = mouse.x;
-      stickRightInitPos.y = mouse.y;
+      mouseLeft.x = event.clientX - rect!.left;
+      mouseLeft.y = event.clientY - rect!.top;
+
+      mouseLeft.dx = mouseLeft.x - mouseLeft.prevX;
+      mouseLeft.dy = mouseLeft.y - mouseLeft.prevY;
+
+      mouseLeft.prevX = mouseLeft.x;
+      mouseLeft.prevY = mouseLeft.y;
+    } else if (
+      event.clientX - rect!.left > centerX + 80 &&
+      event.clientY - rect!.top < heightBoard - 80 &&
+      event.clientY - rect!.top > 80 &&
+      event.clientX - rect!.left < widthBoard - 80
+    ) {
+      mouseRight.x = event.clientX - rect!.left;
+      mouseRight.y = event.clientY - rect!.top;
+
+      mouseRight.dx = mouseRight.x - mouseRight.prevX;
+      mouseRight.dy = mouseRight.y - mouseRight.prevY;
+
+      mouseRight.prevX = mouseRight.x;
+      mouseRight.prevY = mouseRight.y;
     }
   };
-  const mouseleaveHandler = () => {
-    mouse.over = false;
+
+  const update = () => {
+    washer.x += washer.dx;
+    washer.y += washer.dy;
+
+    const a = Math.abs(washer.x - mouseLeft.x);
+    const b = Math.abs(washer.y - mouseLeft.y);
+    const c = Math.sqrt(a ** 2 + b ** 2);
+
+    const a2 = Math.abs(washer.x - mouseRight.x);
+    const b2 = Math.abs(washer.y - mouseRight.y);
+    const c2 = Math.sqrt(a2 ** 2 + b2 ** 2);
+
+    if (washer.x + widthBoard * 0.04 > widthBoard || washer.x - widthBoard * 0.04 < 0) {
+      washer.dx *= -1;
+      if (washer.x > 0 && washer.x < 150 && washer.y > 200 && washer.y < 470) {
+        mouseLeft.score += 1;
+        washer.x *= -2;
+        washer.x = centerX;
+      }
+      if (
+        washer.x > widthBoard - 150 &&
+        washer.x < widthBoard &&
+        washer.y > 180 &&
+        washer.y < 470
+      ) {
+        mouseRight.score += 1;
+        // if (mouseRight.score === 2) {
+        //   setGameOverStatus(!gameOverStatus);
+        //   setGameStatus(false);
+        // }
+        washer.x *= 2;
+        washer.x = centerX;
+        washer.dx += -0.1;
+      }
+    }
+    if (washer.y + widthBoard * 0.04 > heightBoard || washer.y - widthBoard * 0.04 < 0) {
+      washer.dy *= -1;
+    }
+    if (c < widthBoard * 0.04 + widthBoard * 0.05) {
+      mouseLeft.dx === 0 ? (washer.dx *= -1) : (washer.dx += mouseLeft.dx * 0.5);
+      mouseLeft.dy === 0 ? (washer.dy *= -1) : (washer.dy += mouseLeft.dy * 0.5);
+    }
+    if (c2 < widthBoard * 0.04 + widthBoard * 0.05) {
+      mouseRight.dx === 0 ? (washer.dx *= -1) : (washer.dx -= mouseRight.dx * 0.1);
+      mouseRight.dy === 0 ? (washer.dy *= -1) : (washer.dy -= mouseRight.dy * 0.1);
+    }
+
+    // Math.sign(washer.dx) === 1 ? (washer.dx -= 0.1) : (washer.dx += 0.1);
+    // Math.sign(washer.dy) === 1 ? (washer.dy -= 0.1) : (washer.dy += 0.1);
+
+    requestAnimationFrame(update);
   };
-  const mouseenterHandler = () => {
-    mouse.over = true;
-  };
-  // const update = () => {
-  //   mouse.isDown = false;
-  //   mouse.isUp = false;
-  // };
-  // const animate = () => {
-  //   requestAnimationFrame(animate);
-  //   // console.log(mouse.isUp + '- ' + mouse.isPressed );
-  //   update();
-  // };
 
   const listener = () => {
     canvasRef.current?.addEventListener('mousemove', mousemoveHandler);
-    canvasRef.current?.addEventListener('mouseleave', mouseleaveHandler);
-    canvasRef.current?.addEventListener('mouseenter', mouseenterHandler);
   };
-  // const clickedStick = (e) => {
-  //   console.log(e);
-  //   if (mouse.x < stickLefttInitPos.x + 80 && mouse.x > stickLefttInitPos.x - 80 && mouse.y > stickLefttInitPos.y - 80 && mouse.y < stickLefttInitPos.y + 80) {
-  //     console.log('stick');
-  //   } else if (
-  //     mouse.x < stickRightInitPos.x + 80 &&
-  //     mouse.x > stickRightInitPos.x - 80 &&
-  //     mouse.y > stickRightInitPos.y - 80 &&
-  //     mouse.y < stickRightInitPos.y + 80
-  //   ) {
-  //     // console.log('stick2');
-  //   }
-  // };
+
+  useEffect(() => {
+    listener();
+    requestAnimationFrame(animate);
+  }, [mouseLeft.x, mouseLeft.y, mouseRight.x, mouseRight.y]);
 
   useEffect(() => {
     const timer = setInterval(handleTitle, 1000);
-    if (mouse.x !== 0) {
+    if (mouseLeft.prevX || mouseRight.prevX) {
       handleTitleGame();
       return () => clearInterval(timer);
     }
   }, [titleStatus]);
 
   useEffect(() => {
-    listener();
-    requestAnimationFrame(initialCanvas);
-  }, [stickLefttInitPos.x, stickLefttInitPos.y, stickRightInitPos.x, stickRightInitPos.y]);
+    requestAnimationFrame(update);
+  }, []);
 
   return (
     <GameWrapperDiv>
       <GameWrapperTitleP titleStatus={titleStatus} gameStatus={gameStatus}>
         {gameStatus ? 'GAME TIME!' : 'Hover over the club to control the trajectory of movement'}
       </GameWrapperTitleP>
+      <GameOverP gameOverStatus={gameOverStatus}>GAME OVER</GameOverP>
       <BoardContainerDiv>
         <LeftGatesDiv />
         <WrapperCirclesLeftDiv>
@@ -198,10 +251,10 @@ export const Board = () => {
       </BoardContainerDiv>
       <BoardScoreDiv>
         <BoardScoreLeftDiv>
-          <ScoreLeftSpan>0</ScoreLeftSpan>
+          <ScoreLeftSpan>{mouseLeft.score}</ScoreLeftSpan>
         </BoardScoreLeftDiv>
         <BoardScoreRightDiv>
-          <ScoreRightSpan>0</ScoreRightSpan>
+          <ScoreRightSpan>{mouseRight.score}</ScoreRightSpan>
         </BoardScoreRightDiv>
       </BoardScoreDiv>
     </GameWrapperDiv>
