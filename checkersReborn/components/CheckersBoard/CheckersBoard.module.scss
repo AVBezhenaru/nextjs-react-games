@@ -1,3 +1,5 @@
+@import '../../styles/Variables.scss';
+
 .CheckersBoard {
   height: 120%;
   background-image: url('../../images/aaaa.jpg');
@@ -11,6 +13,42 @@
   align-items: center;
   
   padding-top: 20px;
+}
+
+.ScoreAndGameContainer {
+  display: flex;
+  align-items: center;
+}
+
+.GameBoardContainer {
+  background-color: rgba(255, 255, 255, 0.4);
+  margin-top: 2em;
+
+  .HorizontalContainer {
+    display: flex;
+
+    .LeftNumbers,
+    .RightNumbers {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+
+      font-family: 'ljk_RoadRage';
+      padding: 0 0 0 0.5em;
+    }
+  }
+
+  .TopLetters,
+  .BottomLetters {
+    display: flex;
+    justify-content: space-around;
+
+    padding: 0.2em 1em;
+    font-family: 'ljk_RoadRage';
+  }
+
+
 }
 
 .GameBoard {

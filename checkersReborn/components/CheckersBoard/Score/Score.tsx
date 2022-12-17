@@ -10,8 +10,8 @@ interface IScoreProps {
 const Score: FC<IScoreProps> = ({ white, score }) => {
 
   return (
-    <div>
-      <div>Текущий счет сбитых {white ? 'белых шашек' : 'черных шашек'}</div>
+    <div className={classes.Score}>
+      <div className={classes.Description}>Текущий счет сбитых {white ? 'белых шашек' : 'черных шашек'}</div>
       <div>{score}</div>
     </div>
   );

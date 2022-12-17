@@ -1,6 +1,8 @@
+@import '../../../../styles/Variables.scss';
+
 .Cell {
-  width: 84px;
-  height: 84px;
+  width: $cell-width;
+  height: $cell-height;
 
   display: flex;
   justify-content: center;
@@ -8,24 +10,24 @@
 }
 
 .Black {
-  background-color: black;
+  background-color: $black-board-color;
 }
 
 .White {
-  background-color: white;
+  background-color: $white-board-color;
 }
 
 .Selected {
-  background-color: rgba(121, 85, 61);
+  background-color: $selected-board-color;
 }
 
 .CanBeCaptured {
-  background-color: red;
+  background-color: $can-be-captured-board-color;
 }
 
 .Available {
   border-radius: 50%;
-  background-color: rgba(0, 255, 127, 0.4);
+  background-color: $available-board-color;
 }
 
 .CheckerImg:hover {

@@ -5,6 +5,7 @@ import Board from "./Board/Board";
 import BoardHeader from "./BoardHeader/BoardHeader";
 
 import classes from "./CheckersBoard.module.scss";
+import Score from "./Score/Score";
 
 interface IBoardProps {
   online: boolean,
@@ -13,6 +14,9 @@ interface IBoardProps {
 const CheckersBoard: FC<IBoardProps> = () => {
   const [showRules, setShowRules] = useState(true);
   const [whiteTurn, setWhiteTurn] = useState(true);
+
+  const whiteScore = 0;
+  const blackScore = 0;
 
   return (
     <div className={classes.CheckersBoard}>
@@ -26,7 +30,55 @@ const CheckersBoard: FC<IBoardProps> = () => {
       {!showRules &&
         <div className={classes.GameBoard}>
           <BoardHeader whiteTurn={whiteTurn} showRules={() => setShowRules(true)} />
-          <Board />
+          <div className={classes.ScoreAndGameContainer}>
+            <Score white score={whiteScore} />
+            <div className={classes.GameBoardContainer}>
+              <ul className={classes.TopLetters}>
+                <li>A</li>
+                <li>B</li>
+                <li>C</li>
+                <li>D</li>
+                <li>E</li>
+                <li>F</li>
+                <li>G</li>
+                <li>H</li>
+              </ul>
+              <div className={classes.HorizontalContainer}>
+                <ul className={classes.LeftNumbers}>
+                  <li>1</li>
+                  <li>2</li>
+                  <li>3</li>
+                  <li>4</li>
+                  <li>5</li>
+                  <li>6</li>
+                  <li>7</li>
+                  <li>8</li>
+                </ul>
+                <Board />
+                <ul className={classes.RightNumbers}>
+                  <li>1</li>
+                  <li>2</li>
+                  <li>3</li>
+                  <li>4</li>
+                  <li>5</li>
+                  <li>6</li>
+                  <li>7</li>
+                  <li>8</li>
+                </ul>
+              </div>
+              <ul className={classes.BottomLetters}>
+                <li>A</li>
+                <li>B</li>
+                <li>C</li>
+                <li>D</li>
+                <li>E</li>
+                <li>F</li>
+                <li>G</li>
+                <li>H</li>
+              </ul>
+            </div>
+            <Score white={false} score={blackScore} />
+          </div>
         </div>
       }
     </div>
