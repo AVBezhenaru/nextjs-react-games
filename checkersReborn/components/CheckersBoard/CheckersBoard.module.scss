@@ -1,5 +1,5 @@
 .CheckersBoard {
-  height: 100%;
+  height: 120%;
   background-image: url('../../images/aaaa.jpg');
 }
 
@@ -11,4 +11,10 @@
   align-items: center;
   
   padding-top: 20px;
+}
+
+.GameBoard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
