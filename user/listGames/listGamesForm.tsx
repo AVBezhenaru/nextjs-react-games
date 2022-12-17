@@ -35,8 +35,8 @@ const ListGamesForm = () => {
             <Games>
               <HeaderGames>GAMES</HeaderGames>
               <ListGames>
-                {gameLinksArr.map((item) => (
-                  <GameLink src={item.src} title={item.title} href={`${path}${item.title}`} />
+                {gameLinksArr.map((item, index) => (
+                  <GameLink key={index} src={item.src} title={item.title} href={`${path}${item.title}`} />
                 ))}
               </ListGames>
             </Games>
