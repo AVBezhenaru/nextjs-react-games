@@ -12,7 +12,7 @@ const BoardHeader: FC<IBoardHeaderProps> = ({ whiteTurn, showRules }) => {
   return (
     <div className={classes.BoardHeader}>
       <h3>Текущий ход {whiteTurn ? 'белого игрока' : 'черного игрока'}</h3>
-      <button className="checkers__modal-button" type="button" onClick={showRules}>Правила игры</button>
+      <button className={classes.RulesButton} type="button" onClick={showRules}>Правила игры</button>
     </div>
   );
 }

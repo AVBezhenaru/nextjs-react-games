@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { FC } from 'react';
+import { FC, memo, useMemo } from 'react';
 
 import blackChecker from '../../../../images/blackUp.png';
 import whiteChecker from '../../../../images/whiteUp.png';
@@ -9,30 +9,43 @@ import whiteKingChecker from '../../../../images/whiteDown.png';
 import classes from './Cell.module.scss';
 import createClasses from '../../../../helpers/ClassHelper';
 import CellModel from '../../../../models/CellModel';
+import { Colors } from '../../../../models/Color';
+import { CheckerType } from '../../../../models/Checkers/CheckerType';
+import { CheckerColor } from '../../../../models/Checkers/CheckerColor';
 
 interface ICellProps {
-  cell: CellModel
+  cell: CellModel,
+  selected: boolean,
+  click: (cell: CellModel) => void,
 }
 
-const Cell: FC<ICellProps> = ({ cell }) => {
-  const { isBlack, hasBlackChecker, hasWhiteChecker, kingChecker, canBeCaptured, selected, available } = cell;
+const Cell: FC<ICellProps> = ({ cell, selected, click }) => {
+  const { color, checker } = cell;
   
-  const cellClasses = createClasses([
+  const cellClasses = useMemo(() => createClasses([
       [classes.Cell, true],
-      [classes.Black, isBlack],
-      [classes.White, !isBlack],
-      [classes.Red, canBeCaptured],
+      [classes.Black, color === Colors.BLACK],
+      [classes.White, color === Colors.WHITE],
+      // [classes.Red, isCellCanBeCaptured(cell)],
       [classes.Selected, selected],
-      [classes.Available, available]
+      // [classes.Available, isCellAvailable(cell)]
     ]
-  );
+  ), [color, selected]);
 
+  const figure = useMemo(() => {
+    if (checker?.checkerType === CheckerType.CHECKER && checker?.checkerColor === CheckerColor.BLACK) return blackChecker;
+    if (checker?.checkerType === CheckerType.KING && checker?.checkerColor === CheckerColor.BLACK) return blackKingChecker;
+    if (checker?.checkerType === CheckerType.CHECKER && checker?.checkerColor === CheckerColor.WHITE) return whiteChecker;
+    if (checker?.checkerType === CheckerType.KING && checker?.checkerColor === CheckerColor.BLACK) return blackKingChecker;
+    return null;
+  }, [checker]);
+  
   return (
-    <div className={cellClasses}>
-      {hasBlackChecker && <Image src={kingChecker ? blackKingChecker : blackChecker} className={classes.CheckerImg} />}
-      {hasWhiteChecker && <Image src={kingChecker ? whiteKingChecker : whiteChecker} className={classes.CheckerImg} />}
+    <div className={cellClasses} onClick={() => click(cell)}>
+      {figure && <Image src={figure} className={classes.CheckerImg} />}
+      {!figure && !(color === Colors.BLACK) && <div className={classes.Available} />}
     </div>
   );
 }
 
-export default Cell;
+export default memo(Cell);
