@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Board } from './Board';
 import { Colors } from './Colors';
@@ -175,11 +174,9 @@ export class Cell {
                   this.board.getCell(this.x + dx4 * i - 1, this.y + dy4 * i - 1)?.isEmpty()
                 : false
             ) {
-              console.log('h31');
               return false;
             }
             if (!this.board.getCell(this.x + dx4 * i - 1, this.y + dy4 * i - 1)?.isEmpty()) {
-              console.log('h32');
               return false;
             }
 
@@ -332,11 +329,9 @@ export class Cell {
                   this.board.getCell(this.x + dx3 * i + 1, this.y + dy3 * i + 1)?.isEmpty()
                 : false
             ) {
-              console.log('h21');
               return false;
             }
             if (!this.board.getCell(this.x + dx3 * i + 1, this.y + dy3 * i + 1)?.isEmpty()) {
-              console.log('h22');
               return false;
             }
             this.board
@@ -384,11 +379,9 @@ export class Cell {
                   this.board.getCell(this.x + dx4 * i - 1, this.y + dy4 * i - 1)?.isEmpty()
                 : false
             ) {
-              console.log('h31');
               return false;
             }
             if (!this.board.getCell(this.x + dx4 * i - 1, this.y + dy4 * i - 1)?.isEmpty()) {
-              console.log('h32');
               return false;
             }
 

@@ -34,11 +34,10 @@ export const Board = () => {
   const [widthBoard] = useState(1414);
   const [heightBoard] = useState(723);
   const [centerX] = useState(widthBoard / 2);
-  const [centerY] = useState(heightBoard / 2);
 
   const [titleStatus, setTitleStatus] = useState(false);
   const [gameStatus, setGameStatus] = useState(false);
-  const [gameOverStatus, setGameOverStatus] = useState(false);
+  const [gameOverStatus] = useState(false);
 
   const [washer] = useState({
     x: widthBoard / 2,

@@ -16,7 +16,7 @@ const ButtonChangeTheme: NextPage<ButtonProps> = ({ text }) => {
   const onClick = () => resetTheme();
 
   return (
-    <Link href="/hangman/theme">
+    <Link href="./hangman/theme">
       <a onClick={onClick}>
         <button className={styles.button} type="button">
           <span className={styles.text} title={text ? undefined : 'Сменить тему'}>

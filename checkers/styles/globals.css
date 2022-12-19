@@ -245,7 +245,7 @@ a {
   justify-content: center;
   align-items: center;
 }
-.cell-transform{
+.cell-transform {
   width: 84px;
   height: 84px;
 
@@ -366,7 +366,6 @@ a {
 }
 .checkerstransform__numbers-left ul,
 .checkerstransform__numbers-right ul {
-
   flex-direction: column-reverse;
 
   position: relative;
@@ -377,7 +376,8 @@ a {
 }
 
 .checkers__numbers-left ul li,
-.checkers__numbers-right ul li,.checkerstransform__numbers-left ul li,
+.checkers__numbers-right ul li,
+.checkerstransform__numbers-left ul li,
 .checkerstransform__numbers-right ul li {
   font-family: 'ljk_RoadRage';
   font-size: 25px;
@@ -513,7 +513,7 @@ a {
   background-color: black;
 }
 .lobbi-btn {
-  width:122px;
+  width: 122px;
   border: 1px solid white;
   display: block;
   float: right;
@@ -559,7 +559,7 @@ a {
   font-style: italic;
 
   padding: 5px 5px 5px 20px;
-  
+
   margin-bottom: 30px;
   border: solid 1px #8a8a8a;
 
