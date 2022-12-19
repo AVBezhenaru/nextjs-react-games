@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import BoardModel from "../../models/BoardModel";
 import GameRules from "../GameRules/GameRules";
 import Modal from "../Modal/Modal";

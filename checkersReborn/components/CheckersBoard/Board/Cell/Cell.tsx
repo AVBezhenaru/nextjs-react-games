@@ -28,7 +28,6 @@ const Cell: FC<ICellProps> = ({ cell, selected, click }) => {
       [classes.White, color === Colors.WHITE],
       // [classes.Red, isCellCanBeCaptured(cell)],
       [classes.Selected, selected],
-      // [classes.Available, isCellAvailable(cell)]
     ]
   ), [color, selected]);
 
@@ -36,14 +35,14 @@ const Cell: FC<ICellProps> = ({ cell, selected, click }) => {
     if (checker?.checkerType === CheckerType.CHECKER && checker?.checkerColor === CheckerColor.BLACK) return blackChecker;
     if (checker?.checkerType === CheckerType.KING && checker?.checkerColor === CheckerColor.BLACK) return blackKingChecker;
     if (checker?.checkerType === CheckerType.CHECKER && checker?.checkerColor === CheckerColor.WHITE) return whiteChecker;
-    if (checker?.checkerType === CheckerType.KING && checker?.checkerColor === CheckerColor.BLACK) return blackKingChecker;
+    if (checker?.checkerType === CheckerType.KING && checker?.checkerColor === CheckerColor.WHITE) return whiteKingChecker;
     return null;
   }, [checker]);
   
   return (
     <div className={cellClasses} onClick={() => click(cell)}>
       {figure && <Image src={figure} className={classes.CheckerImg} />}
-      {!figure && !(color === Colors.BLACK) && <div className={classes.Available} />}
+      {!figure && cell.available && <div className={classes.Available} />}
     </div>
   );
 }
