@@ -10,35 +10,31 @@ export const GameWrapperDiv = styled.div`
   height: 969px;
   background: linear-gradient(to bottom right, #000, #512934);
 `;
-
-export const GameWrapperTitleP = styled.p<{ titleStatus: boolean }>`
-  font-size: 20px;
+export const GameWrapperTitleP = styled.p<{ titleStatus: boolean; gameStatus: boolean }>`
+  font-size: 24px;
   font-weight: 800;
-  color: ${(props) => (props.titleStatus ? '#efcd8e' : 'gray')};
+  color: ${(props) => (props.titleStatus || props.gameStatus ? '#efcd8e' : 'gray')};
   margin-bottom: 10px;
   transition: 1s;
 `;
-
 export const BoardContainerDiv = styled.div`
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1800px;
-  width: 100%;
+  width: 1440px;
   height: 750px;
   border-radius: 50px;
   border: 13px solid rgb(58 57 57);
   background-color: #efecf9;
   box-shadow: inset 0px 2px 6px 0px black;
 `;
-
 export const CanvasContainer = styled.canvas`
   position: absolute;
   width: ${(props) => props.width};
   height: ${(props) => props.height};
+  border-radius: 35px;
 `;
-
 export const LeftGatesDiv = styled.div`
   position: absolute;
   top: 28%;
@@ -155,7 +151,6 @@ export const BoardCircleCenterInnerDiv = styled.div`
   border-radius: 50%;
   border: 2px solid rgb(209, 128, 128);
 `;
-
 export const BoardCircleCenterInnerDotDiv = styled.span`
   display: inline-block;
   width: 4px;
@@ -164,7 +159,6 @@ export const BoardCircleCenterInnerDotDiv = styled.span`
   background-color: rgb(209, 128, 128);
   border: 2px solid rgb(209, 128, 128);
 `;
-
 export const BoardScoreDiv = styled.div`
   display: flex;
   flex-direction: row;
@@ -179,13 +173,43 @@ export const BoardScoreDiv = styled.div`
   background-color: rgb(43, 42, 42);
 `;
 export const BoardScoreLeftDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 50%;
   height: 100%;
   border-right: 1px solid black;
 `;
+export const ScoreLeftSpan = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 110px;
+  letter-spacing: 1px;
+  border: 4px solid #41423e;
+  border-radius: 5px;
+`;
 export const BoardScoreRightDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 50%;
   height: 100%;
   border-right: 1px solid black;
   border-bottom-right-radius: 45px;
+`;
+export const ScoreRightSpan = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 110px;
+  letter-spacing: 1px;
+  border: 4px solid #41423e;
+  border-radius: 5px;
+`;
+export const GameOverP = styled.p<{ gameOverStatus: boolean }>`
+  display: ${(props) => (props.gameOverStatus ? 'block' : 'none')};
+  color: #efcd8e;
+  font-size: 24px;
+  font-weight: 800;
 `;

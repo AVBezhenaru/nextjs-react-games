@@ -12,6 +12,7 @@ import {
   WrapperImage,
   H1,
   WrapperSphere,
+  CanvasLayout,
 } from './index';
 
 interface ILayoutProps {
@@ -20,6 +21,7 @@ interface ILayoutProps {
 
 export const Layout: NextPage<ILayoutProps> = ({ children }) => (
   <WrapperLayoutMain>
+    <CanvasLayout />
     <WrapperContent>
       <Line />
       <Container>
