@@ -20,16 +20,16 @@ interface ICellProps {
 }
 
 const Cell: FC<ICellProps> = ({ cell, selected, click }) => {
-  const { color, checker } = cell;
+  const { color, checker, capturable } = cell;
   
   const cellClasses = useMemo(() => createClasses([
       [classes.Cell, true],
       [classes.Black, color === Colors.BLACK],
       [classes.White, color === Colors.WHITE],
-      // [classes.Red, isCellCanBeCaptured(cell)],
+      [classes.Captured, capturable],
       [classes.Selected, selected],
     ]
-  ), [color, selected]);
+  ), [color, selected, capturable]);
 
   const figure = useMemo(() => {
     if (checker?.checkerType === CheckerType.CHECKER && checker?.checkerColor === CheckerColor.BLACK) return blackChecker;

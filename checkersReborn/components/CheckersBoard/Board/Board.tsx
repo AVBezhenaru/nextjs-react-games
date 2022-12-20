@@ -36,8 +36,12 @@ const Board: FC<IBoardProps> = ({ board, setBoard }) => {
     setBoard(newBoard);
   }
 
+  const isCellSelected = (cell: CellModel) => {
+    return cell.x === selectedCell?.x && cell.y === selectedCell?.y;
+  }
+
   const mappedCells = board.cells.map((cell, index) => (
-    <Cell key={index} cell={cell} selected={cell.x === selectedCell?.x && cell.y === selectedCell?.y} click={click} />
+    <Cell key={index} cell={cell} selected={isCellSelected(cell)} click={click} />
   ));
 
   return (

@@ -33,7 +33,7 @@ export default class BoardModel {
       }
     }
   }
-
+  
   highlightCells(selectedCell: CellModel | null) {
     for (let i = 0; i < this.cells.length; i++) {
       const target = this.cells[i];
@@ -44,9 +44,18 @@ export default class BoardModel {
   getCopy(): BoardModel {
     const newBoard = new BoardModel();
     newBoard.cells = this.cells;
+    for (let i = 0; i < newBoard.cells.length; i++) {
+      newBoard.cells[i].board = newBoard;
+    }
     return newBoard;
   }
 
   getCell = (x: number, y: number): CellModel => 
     this.cells.find((c) => c.x === x && c.y === y);
+
+  getWhiteScore = (): number => 
+    12 - this.cells.filter((c) => c.checker?.checkerColor === CheckerColor.WHITE).length;
+  
+  getBlackScore = (): number =>
+    12 - this.cells.filter((c) => c.checker?.checkerColor === CheckerColor.BLACK).length;
 }

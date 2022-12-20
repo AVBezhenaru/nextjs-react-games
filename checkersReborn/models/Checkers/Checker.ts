@@ -26,7 +26,7 @@ export class Checker {
       // capturing
       if (this.cell.y + 2 === target.y || this.cell.y - 2 === target.y) {
         if (this.cell.x + 2 === target.x || this.cell.x - 2 === target.x)
-          return this.cell.hasBlackBetween(target);
+          return this.cell.canMove(target);
       }
     }
 
@@ -41,24 +41,21 @@ export class Checker {
           return true;
       }
 
-      // capturing
+      // capturing 
       if (this.cell.y + 2 === target.y || this.cell.y - 2 === target.y) {
         if (this.cell.x + 2 === target.x || this.cell.x - 2 === target.x) 
-          return this.cell.hasWhiteBetween(target);
+          return this.cell.canMove(target);
       }
     }
 
     return false;
   }
 
-  private canMoveWhiteKing(target: CellModel): boolean {
+  private canMoveKing(target: CellModel): boolean {
+    if (!target.checker && this.cell.onSameDiagonalWith(target.x, target.y))
+      return this.cell.canMove(target);
 
-    return true;
-  }
-
-  private canMoveBlackKing(target: CellModel): boolean {
-    
-    return true;
+    return false;
   }
 
   private canMoveChecker(target: CellModel): boolean {
@@ -67,10 +64,8 @@ export class Checker {
       : this.canMoveBlackChecker(target);
   }
 
-  private canMoveKing(target: CellModel): boolean {
-    return this.checkerColor === CheckerColor.WHITE
-      ? this.canMoveWhiteKing(target)
-      : this.canMoveBlackKing(target);
+  private makeKing() {
+    this.checkerType = CheckerType.KING;
   }
 
   canMove(target: CellModel): boolean {
@@ -83,5 +78,9 @@ export class Checker {
 
   moveChecker(target: CellModel) {
     this.cell = target;
+
+    if (this.checkerType === CheckerType.KING) return;
+    if (this.checkerColor === CheckerColor.BLACK && target.y === 0) this.makeKing();
+    if (this.checkerColor === CheckerColor.WHITE && target.y === 7) this.makeKing();
   }
 }

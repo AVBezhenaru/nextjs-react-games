@@ -17,10 +17,7 @@ const CheckersBoard: FC<IBoardProps> = () => {
   const [board, setBoard] = useState(new BoardModel());
 
   const whiteTurn = true;
-
-  const whiteScore = 0;
-  const blackScore = 0;
-
+  
   const restartGame = () => {
     const newBoard = new BoardModel();
     newBoard.initGame();
@@ -44,7 +41,7 @@ const CheckersBoard: FC<IBoardProps> = () => {
         <div className={classes.GameBoard}>
           <BoardHeader whiteTurn={whiteTurn} showRules={() => setShowRules(true)} />
           <div className={classes.ScoreAndGameContainer}>
-            <Score white score={whiteScore} />
+            <Score white score={board.getWhiteScore()} />
             <div className={classes.GameBoardContainer}>
               <ul className={classes.TopLetters}>
                 <li>A</li>
@@ -90,7 +87,7 @@ const CheckersBoard: FC<IBoardProps> = () => {
                 <li>H</li>
               </ul>
             </div>
-            <Score white={false} score={blackScore} />
+            <Score white={false} score={board.getBlackScore()} />
           </div>
         </div>
       }
