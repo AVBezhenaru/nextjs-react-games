@@ -34,11 +34,10 @@ export const Board = () => {
   const [widthBoard] = useState(1414);
   const [heightBoard] = useState(723);
   const [centerX] = useState(widthBoard / 2);
-  const [centerY] = useState(heightBoard / 2);
 
   const [titleStatus, setTitleStatus] = useState(false);
   const [gameStatus, setGameStatus] = useState(false);
-  const [gameOverStatus, setGameOverStatus] = useState(false);
+  const [gameOverStatus] = useState(false);
 
   const [washer] = useState({
     x: widthBoard / 2,
@@ -175,10 +174,6 @@ export const Board = () => {
         washer.y < 470
       ) {
         mouseRight.score += 1;
-        // if (mouseRight.score === 2) {
-        //   setGameOverStatus(!gameOverStatus);
-        //   setGameStatus(false);
-        // }
         washer.x *= 2;
         washer.x = centerX;
         washer.dx += -0.1;
@@ -195,10 +190,6 @@ export const Board = () => {
       mouseRight.dx === 0 ? (washer.dx *= -1) : (washer.dx -= mouseRight.dx * 0.1);
       mouseRight.dy === 0 ? (washer.dy *= -1) : (washer.dy -= mouseRight.dy * 0.1);
     }
-
-    // Math.sign(washer.dx) === 1 ? (washer.dx -= 0.1) : (washer.dx += 0.1);
-    // Math.sign(washer.dy) === 1 ? (washer.dy -= 0.1) : (washer.dy += 0.1);
-
     requestAnimationFrame(update);
   };
 
