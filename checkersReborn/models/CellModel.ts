@@ -33,9 +33,9 @@ export default class CellModel {
   }
 
   private checkCapturing(target: CellModel) {
-    const checkersToRemove = this.findCheckersBetween(target);
-    for (let i = 0; i < checkersToRemove.length; i++) {
-      checkersToRemove[i].removeChecker();
+    const cellsToRemoveCheckerInside = this.findCheckersBetween(target);
+    for (let i = 0; i < cellsToRemoveCheckerInside.length; i++) {
+      cellsToRemoveCheckerInside[i].removeChecker();
     }
   }
 

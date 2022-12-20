@@ -3,15 +3,15 @@ import { FC } from 'react';
 import classes from './BoardHeader.module.scss';
 
 interface IBoardHeaderProps {
-  whiteTurn: boolean,
+  whichTurn: string,
   showRules: () => void,
 }
 
-const BoardHeader: FC<IBoardHeaderProps> = ({ whiteTurn, showRules }) => {
+const BoardHeader: FC<IBoardHeaderProps> = ({ whichTurn, showRules }) => {
 
   return (
     <div className={classes.BoardHeader}>
-      <h3>Текущий ход {whiteTurn ? 'белого игрока' : 'черного игрока'}</h3>
+      <h3>Текущий ход {whichTurn} игрока</h3>
       <button className={classes.RulesButton} type="button" onClick={showRules}>Правила игры</button>
     </div>
   );
