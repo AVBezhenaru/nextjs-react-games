@@ -15,6 +15,12 @@ export class Checker {
     this.checkerColor = checkerColor;
   }
 
+  private canJumpWithCapturing(target: CellModel): boolean {
+    if (this.cell.y + 2 === target.y || this.cell.y - 2 === target.y) 
+      if (this.cell.x + 2 === target.x || this.cell.x - 2 === target.x)
+        return this.cell.canMove(target);
+  }
+
   private canMoveWhiteChecker(target: CellModel): boolean {
     if (!target.checker) {
       // move
@@ -24,10 +30,7 @@ export class Checker {
       }
 
       // capturing
-      if (this.cell.y + 2 === target.y || this.cell.y - 2 === target.y) {
-        if (this.cell.x + 2 === target.x || this.cell.x - 2 === target.x)
-          return this.cell.canMove(target);
-      }
+      return this.canJumpWithCapturing(target);
     }
 
     return false;
@@ -42,10 +45,7 @@ export class Checker {
       }
 
       // capturing 
-      if (this.cell.y + 2 === target.y || this.cell.y - 2 === target.y) {
-        if (this.cell.x + 2 === target.x || this.cell.x - 2 === target.x) 
-          return this.cell.canMove(target);
-      }
+      return this.canJumpWithCapturing(target);
     }
 
     return false;

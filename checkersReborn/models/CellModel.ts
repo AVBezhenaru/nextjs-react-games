@@ -41,7 +41,7 @@ export default class CellModel {
 
   private defineMoveDirection(target: CellModel): MoveDirection {
     if (this.x < target.x) {
-      if (this.y < target.y && (this.x - this.y) === (target.x - target.y)) return MoveDirection.RIGHT_BOTTOM;
+      if (this.y < target.y) return MoveDirection.RIGHT_BOTTOM;
       if (this.y > target.y) return MoveDirection.RIGHT_TOP;
     }
 
@@ -108,16 +108,24 @@ export default class CellModel {
   // method for common checker
   private hasOneEnemyBetween(target: CellModel): boolean {
     const checkersBetween = this.findCheckersBetween(target);
+
     if (!checkersBetween || checkersBetween.length !== 1) return false;
-    return checkersBetween[0].checker.checkerColor !== this.checker.checkerColor;
+
+    const canBeCaptured = checkersBetween[0];
+    canBeCaptured.capturable = canBeCaptured.checker.checkerColor !== this.checker.checkerColor;
+    return canBeCaptured.capturable;
   }
 
   // method for king checker
   private hasOneEnemyOrZeroBetween(target: CellModel): boolean {
     const checkersBetween = this.findCheckersBetween(target);
+
     if (!checkersBetween || checkersBetween.length > 1) return false;
     if (checkersBetween.length === 0) return true;
-    return checkersBetween[0].checker.checkerColor !== this.checker.checkerColor;
+
+    const canBeCaptured = checkersBetween[0];
+    canBeCaptured.capturable = canBeCaptured.checker.checkerColor !== this.checker.checkerColor;
+    return canBeCaptured.capturable;
   }
 
   onSameDiagonalWith(x: number, y: number): boolean {

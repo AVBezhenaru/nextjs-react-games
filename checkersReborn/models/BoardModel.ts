@@ -7,6 +7,13 @@ import { Colors } from "./Color";
 export default class BoardModel {
   cells: CellModel[] = [];
 
+  private uncheckCapturable() {
+    const capturableCells = this.cells.filter((c) => c.capturable);
+    for (let i = 0; i < capturableCells.length; i++) {
+      capturableCells[i].capturable = false;
+    }
+  }
+
   initGame() {
     for (let i = 0; i < 8; i++) {
       for (let j = 0; j < 8; j++) {
@@ -35,6 +42,8 @@ export default class BoardModel {
   }
   
   highlightCells(selectedCell: CellModel | null) {
+    this.uncheckCapturable();
+
     for (let i = 0; i < this.cells.length; i++) {
       const target = this.cells[i];
       target.available = selectedCell?.checker?.canMove(target);
