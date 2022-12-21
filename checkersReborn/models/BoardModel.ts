@@ -23,7 +23,6 @@ export default class BoardModel {
       for (let i = 0; i < this.cells.length; i++) {
         const checker = this.cells[i].checker;
         if (checker && checker.checkerColor === CheckerColor.BLACK && checker.canMoveSomewhere()) return;
-        console.log('cant move', this.turnBy, checker);
       }
 
       this.winner = Player.WHITE;
@@ -33,7 +32,6 @@ export default class BoardModel {
       for (let i = 0; i < this.cells.length; i++) {
         const checker = this.cells[i].checker;
         if (checker && checker.checkerColor === CheckerColor.WHITE && checker.canMoveSomewhere()) return;
-        console.log('cant move', this.turnBy, checker);
       }
 
       this.winner = Player.BLACK;
