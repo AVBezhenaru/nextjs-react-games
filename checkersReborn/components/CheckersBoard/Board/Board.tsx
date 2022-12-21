@@ -4,6 +4,8 @@ import Cell from "./Cell/Cell";
 import classes from './Board.module.scss';
 import CellModel from "../../../models/CellModel";
 import BoardModel from "../../../models/BoardModel";
+import { Player } from "../../../models/Player";
+import { CheckerColor } from "../../../models/Checkers/CheckerColor";
 
 interface IBoardProps {
   board: BoardModel;
@@ -14,11 +16,14 @@ const Board: FC<IBoardProps> = ({ board, setBoard }) => {
   const [selectedCell, setSelectedCell] = useState<CellModel | null>(null);
   
   const click = (cell: CellModel) => {
+    if (board.turnBy === Player.BLACK && cell.checker?.checkerColor === CheckerColor.WHITE) return;
+    if (board.turnBy === Player.WHITE && cell.checker?.checkerColor === CheckerColor.BLACK) return;
+
     if (selectedCell && selectedCell !== cell && selectedCell.checker.canMove(cell)) {
-      selectedCell.moveChecker(cell);
-      setSelectedCell(null);
+      const next = selectedCell.moveChecker(cell);
+      setSelectedCell(next);
     } else {
-      if (cell.checker) setSelectedCell(cell);
+      if (cell.checker && !board.wasCapturing) setSelectedCell(cell);
     }
   }
 

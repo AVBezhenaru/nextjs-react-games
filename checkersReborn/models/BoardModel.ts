@@ -3,15 +3,45 @@ import { Checker } from "./Checkers/Checker";
 import { CheckerColor } from "./Checkers/CheckerColor";
 import { CheckerType } from "./Checkers/CheckerType";
 import { Colors } from "./Color";
+import { Player } from "./Player";
 
 export default class BoardModel {
   cells: CellModel[] = [];
+  turnBy: Player | null = null;
+  wasCapturing: boolean = false;
+  winner: Player | null = null;
 
   private uncheckCapturable() {
-    const capturableCells = this.cells.filter((c) => c.capturable);
+    const capturableCells = this.findCapturable();
     for (let i = 0; i < capturableCells.length; i++) {
       capturableCells[i].capturable = false;
     }
+  }
+
+  private checkWinner() {
+    if (this.turnBy === Player.BLACK) {
+      for (let i = 0; i < this.cells.length; i++) {
+        const checker = this.cells[i].checker;
+        if (checker && checker.checkerColor === CheckerColor.BLACK && checker.canMoveSomewhere()) return;
+        console.log('cant move', this.turnBy, checker);
+      }
+
+      this.winner = Player.WHITE;
+    } 
+
+    if (this.turnBy === Player.WHITE) {
+      for (let i = 0; i < this.cells.length; i++) {
+        const checker = this.cells[i].checker;
+        if (checker && checker.checkerColor === CheckerColor.WHITE && checker.canMoveSomewhere()) return;
+        console.log('cant move', this.turnBy, checker);
+      }
+
+      this.winner = Player.BLACK;
+    }
+  }
+
+  findCapturable() {
+    return this.cells.filter((c) => c.capturable);
   }
 
   initGame() {
@@ -40,10 +70,15 @@ export default class BoardModel {
       }
     }
   }
+
+  changeTurn() {
+    this.turnBy = this.turnBy === Player.WHITE ? Player.BLACK : Player.WHITE;
+    this.wasCapturing = false;
+    this.checkWinner();
+  }
   
   highlightCells(selectedCell: CellModel | null) {
     this.uncheckCapturable();
-
     for (let i = 0; i < this.cells.length; i++) {
       const target = this.cells[i];
       target.available = selectedCell?.checker?.canMove(target);
@@ -56,6 +91,9 @@ export default class BoardModel {
     for (let i = 0; i < newBoard.cells.length; i++) {
       newBoard.cells[i].board = newBoard;
     }
+    newBoard.turnBy = this.turnBy;
+    newBoard.wasCapturing = this.wasCapturing;
+    newBoard.winner = this.winner;
     return newBoard;
   }
 

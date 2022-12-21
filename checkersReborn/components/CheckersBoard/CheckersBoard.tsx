@@ -17,19 +17,18 @@ interface IBoardProps {
 const CheckersBoard: FC<IBoardProps> = () => {
   const [showRules, setShowRules] = useState(true);
   const [board, setBoard] = useState(new BoardModel());
-  const [winner, setWinner] = useState<Player | null>(null);
-  const [turnBy, setTurnBy] = useState<Player | null>(null);
 
-  const whiteScore = board.getWhiteScore();
-  const blackScore = board.getBlackScore();
+  const { turnBy, getWhiteScore, getBlackScore, winner } = board;
+
+  const whiteScore = getWhiteScore();
+  const blackScore = getBlackScore();
 
   const restartGame = () => {
     const newBoard = new BoardModel();
     newBoard.initGame();
+    newBoard.turnBy = Player.WHITE;
 
     setBoard(newBoard);
-    setWinner(null);
-    setTurnBy(Player.WHITE);
   }
 
   const getWinnerName = () => {
@@ -46,16 +45,8 @@ const CheckersBoard: FC<IBoardProps> = () => {
 
   useEffect(() => {
     board.initGame();
-    setTurnBy(Player.WHITE);
+    board.turnBy = Player.WHITE;
   }, []);
-
-  useEffect(() => {
-    if (turnBy && whiteScore === 12) setWinner(Player.BLACK);
-  }, [whiteScore]);
-
-  useEffect(() => {
-    if (turnBy && blackScore === 12) setWinner(Player.WHITE);
-  }, [blackScore]);
 
   return (
     <div className={classes.CheckersBoard}>

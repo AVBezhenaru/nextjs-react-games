@@ -1,7 +1,8 @@
 import { Colors } from "../../../checkers/model/Colors";
-import CellModel from "../CellModel";
 import { CheckerColor } from "./CheckerColor";
 import { CheckerType } from "./CheckerType";
+
+import CellModel from "../CellModel";
 
 export class Checker {
   checkerType: CheckerType;
@@ -24,7 +25,7 @@ export class Checker {
   private canMoveWhiteChecker(target: CellModel): boolean {
     if (!target.checker) {
       // move
-      if (this.cell.y + 1 === target.y) {
+      if (this.cell.y + 1 === target.y && !this.cell.board.wasCapturing) {
         if (this.cell.x + 1 === target.x || this.cell.x - 1 === target.x)
           return true;
       }
@@ -39,7 +40,7 @@ export class Checker {
   private canMoveBlackChecker(target: CellModel): boolean {
     if (!target.checker) {
       // move
-      if (this.cell.y - 1 === target.y) {
+      if (this.cell.y - 1 === target.y && !this.cell.board.wasCapturing) {
         if (this.cell.x + 1 === target.x || this.cell.x - 1 === target.x)
           return true;
       }
@@ -66,6 +67,36 @@ export class Checker {
 
   private makeKing() {
     this.checkerType = CheckerType.KING;
+  }
+
+  // looking for empty cell around chosen (+/- 2 cells)
+  canMoveSomewhere(): boolean {
+    if (this.checkerType === CheckerType.KING) {
+      for (let i = this.cell.x - 2; i < this.cell.x + 2; i++) {
+        for (let j = this.cell.y - 2; j < this.cell.y + 2; j++) {
+          const target = this.cell.board.cells.find((c) => c.x === i && c.y === j);
+          if (target && this.canMove(target)) return true;
+        }
+      }
+    } else {
+      if (this.checkerColor === CheckerColor.BLACK) {
+        for (let i = this.cell.x - 2; i < this.cell.x + 2; i++) {
+          for (let j = this.cell.y - 2; j < this.cell.y; j++) {
+            const target = this.cell.board.cells.find((c) => c.x === i && c.y === j);
+            if (target && this.canMove(target)) return true;
+          }
+        }
+      } else {
+        for (let i = this.cell.x - 2; i < this.cell.x + 2; i++) {
+          for (let j = this.cell.y; j < this.cell.y + 2; j++) {
+            const target = this.cell.board.cells.find((c) => c.x === i && c.y === j);
+            if (target && this.canMove(target)) return true;
+          }
+        }
+      }
+    }
+
+    return false;
   }
 
   canMove(target: CellModel): boolean {

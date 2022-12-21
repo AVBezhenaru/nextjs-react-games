@@ -32,11 +32,13 @@ export default class CellModel {
     this.checker = null;
   }
 
-  private checkCapturing(target: CellModel) {
+  private checkCapturing(target: CellModel): boolean {
     const cellsToRemoveCheckerInside = this.findCheckersBetween(target);
     for (let i = 0; i < cellsToRemoveCheckerInside.length; i++) {
       cellsToRemoveCheckerInside[i].removeChecker();
     }
+
+    return cellsToRemoveCheckerInside.length !== 0;
   }
 
   private defineMoveDirection(target: CellModel): MoveDirection {
@@ -105,8 +107,7 @@ export default class CellModel {
     }
   }
 
-  // method for common checker
-  private hasOneEnemyBetween(target: CellModel): boolean {
+  private hasOneEnemyBetweenAndCanMove(target: CellModel): boolean {
     const checkersBetween = this.findCheckersBetween(target);
 
     if (!checkersBetween || checkersBetween.length !== 1) return false;
@@ -116,16 +117,23 @@ export default class CellModel {
     return canBeCaptured.capturable;
   }
 
-  // method for king checker
-  private hasOneEnemyOrZeroBetween(target: CellModel): boolean {
+  private hasOneEnemyOrZeroBetweenAndCanMove(target: CellModel): boolean {
     const checkersBetween = this.findCheckersBetween(target);
 
     if (!checkersBetween || checkersBetween.length > 1) return false;
-    if (checkersBetween.length === 0) return true;
+    if (checkersBetween.length === 0) {
+      return !this.board.wasCapturing;
+    } 
 
     const canBeCaptured = checkersBetween[0];
     canBeCaptured.capturable = canBeCaptured.checker.checkerColor !== this.checker.checkerColor;
     return canBeCaptured.capturable;
+  }
+
+  private canCaptureMore(): boolean {
+    this.board.highlightCells(this);
+    const capturable = this.board.findCapturable();
+    return capturable.length !== 0;
   }
 
   onSameDiagonalWith(x: number, y: number): boolean {
@@ -137,20 +145,33 @@ export default class CellModel {
   canMove(target: CellModel): boolean {
     switch (this.checker.checkerType) {
       case CheckerType.CHECKER:
-        return this.hasOneEnemyBetween(target);
+        return this.hasOneEnemyBetweenAndCanMove(target);
       case CheckerType.KING:
-        return this.hasOneEnemyOrZeroBetween(target);
+        return this.hasOneEnemyOrZeroBetweenAndCanMove(target);
       default:
         return false;
     }
   }
 
-  moveChecker(target: CellModel) {
+  moveChecker(target: CellModel): CellModel | null {
     if (this.checker && this.checker.canMove(target)) {
-      this.checkCapturing(target);
+      const captured = this.checkCapturing(target);
       this.checker.moveChecker(target);
+
       target.checker = this.checker;
       this.checker = null;
+
+      if (!captured) {
+        this.board.changeTurn();
+        return null;
+      }
+      else {
+        this.board.wasCapturing = true;
+        if (target.canCaptureMore()) return target;
+
+        this.board.changeTurn();
+        return null;
+      }
     }
   }
 }

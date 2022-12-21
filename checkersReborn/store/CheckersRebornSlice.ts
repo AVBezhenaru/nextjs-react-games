@@ -1,26 +1,27 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import CellModel from "../models/CellModel";
+import { Player } from "../models/Player";
 
 interface ICheckersState {
-  cells: CellModel[];
+  turnBy: Player | null;
 }
 
 const initialState: ICheckersState = {
-  cells: [],
+  turnBy: null,
 }
 
+// initialized for online game
 const checkersReborn = createSlice({
   name: 'checkersReborn',
   initialState,
   reducers: {
-    initGame(state) {
+    setTurn(state) {
 
     }
   }
 })
 
 export const {
-  initGame
+  setTurn
 } = checkersReborn.actions;
 
 export default checkersReborn.reducer;
