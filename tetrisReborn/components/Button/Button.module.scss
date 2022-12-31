@@ -1,0 +1,19 @@
+@import "../../styles/Variables.scss";
+
+.Button {
+  font-size: 30px;
+  font-weight: 700;
+
+  width: 190px;
+  letter-spacing: .1em;
+  border-radius: 20px;
+  padding: 20px;
+
+  border: 3px solid $main-theme-color;
+  color: $main-theme-color;
+}
+
+.Button:hover {
+  background-color: $main-theme-color;
+  color: $white-color;
+}

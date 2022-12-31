@@ -1,0 +1,14 @@
+.GameContainer {
+  padding: 60px;
+}
+
+.FieldContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.FieldAndSideBar {
+  display: flex;
+  gap: 25px;
+}

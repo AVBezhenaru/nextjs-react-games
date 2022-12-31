@@ -23,6 +23,7 @@ const ListGamesForm = () => {
     { src: checkersIcon.src, title: 'checkers' },
     { src: hangmanIcon.src, title: 'hangman' },
     { src: aerohokkeyIcon.src, title: 'airhockey' },
+    { src: tetrisIcon.src, title: 'tetrisReborn' },
   ];
   return (
     <>

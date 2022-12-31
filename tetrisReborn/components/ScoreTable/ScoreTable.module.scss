@@ -1,0 +1,30 @@
+@import "../../styles/Variables.scss";
+
+.ScoreTableContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+
+  padding: 60px;
+}
+
+.ScoreTable {
+  align-self: center;
+  border: 3px solid $main-theme-color;
+  border-collapse: collapse;
+
+  .Text {
+    text-align: center;
+    padding: 30px;
+    
+    font-size: 24px;
+    font-weight: 100;
+    letter-spacing: .1em;
+  }
+
+  .ScoreTableHeader {
+    border: 1px solid $main-text-color;
+  }
+}
+
+

@@ -1,0 +1,10 @@
+@import "../../../../styles/Variables.scss";
+
+.NextFigure {
+  width: calc($cell-width * 5);
+  height: calc($cell-height * 5);
+
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: content-box;
+}
