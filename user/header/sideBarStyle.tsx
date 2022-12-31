@@ -59,5 +59,5 @@ export const Li = styled.li<StyledLinkProps>`
   background: ${(props) =>
     (props.active ? props.active.replace('/', '') : '') === props.pathname
       ? 'rgba(244, 97, 25, 0.05)'
-      : 'none'}; ;
+      : 'none'};
 `;

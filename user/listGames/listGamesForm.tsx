@@ -20,6 +20,7 @@ const ListGamesForm = () => {
   const gameLinksArr = [
     { src: tetrisIcon.src, title: 'tetris' },
     { src: chessIcon.src, title: 'chess' },
+    { src: checkersIcon.src, title: 'checkersReborn' },
     { src: checkersIcon.src, title: 'checkers' },
     { src: hangmanIcon.src, title: 'hangman' },
     { src: aerohokkeyIcon.src, title: 'airhockey' },
@@ -34,8 +35,8 @@ const ListGamesForm = () => {
             <Games>
               <HeaderGames>GAMES</HeaderGames>
               <ListGames>
-                {gameLinksArr.map((item) => (
-                  <GameLink src={item.src} title={item.title} href={`${path}${item.title}`} />
+                {gameLinksArr.map((item, index) => (
+                  <GameLink key={index} src={item.src} title={item.title} href={`${path}${item.title}`} />
                 ))}
               </ListGames>
             </Games>
