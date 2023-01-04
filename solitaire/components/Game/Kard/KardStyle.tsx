@@ -11,7 +11,7 @@ export const CardItem = styled.div`
 
 export const Corrector = styled.div`
   height: 20px;
-  &&:first-child {
+  &&:first-of-type {
     height: 0;
   }
 `;

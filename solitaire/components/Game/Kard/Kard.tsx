@@ -5,6 +5,7 @@ import { TypeCard } from '../../../types';
 import { CardItem, Corrector } from './KardStyle';
 
 export const Kard = ({
+  first,
   img,
   name,
   position,
@@ -15,7 +16,7 @@ export const Kard = ({
   onDrop,
 }: TypeCard) => (
   <>
-    {position === 'bottom' && <Corrector />}
+    {position === 'bottom' && !first && <Corrector />}
     <CardItem
       draggable
       onDragStart={onDragStart}

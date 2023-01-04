@@ -1,34 +1,54 @@
-import { useEffect, useState } from 'react';
+import { DragEvent, MouseEvent, useEffect, useState } from 'react';
 
 import { useAppSelector } from '../../../hooks';
 import { TypeCardFull } from '../../types';
 import shirt from '../../images/cards/shirts/black.png';
 import { Rules } from '../Rules/Rules';
 
+import { Win } from './Win/Win';
+import { Header } from './Header/Header';
 import { Kard } from './Kard/Kard';
-import { HeaderGame, SectionGame, BodyGame, Stack } from './GameMainStyle';
+import { SectionGame, BodyGame, Stack } from './GameMainStyle';
+
+type TypeResultStack = {
+  [key: number]: TypeCardFull[];
+};
+type TypeDragItem = {
+  items: TypeCardFull[];
+  idStack: number;
+};
 
 export const GameMain = () => {
   const { sortCards, cards } = useAppSelector((state) => state.solitaire);
   const [gameCards, setGameCards] = useState<TypeCardFull[]>(sortCards);
-  const [cardsOut, setCardsOut] = useState<TypeCardFull[]>([]);
+  const [cardsOut, setCardsOut] = useState<TypeCardFull[][]>([]);
   const [helperCards, setHelperCards] = useState<TypeCardFull[]>([]);
   const [countFor, setCountFor] = useState(1);
   const [isReady, setIsReady] = useState(false);
   const [onRules, setOnRules] = useState(false);
-  const [dragItem, setDragItem] = useState({});
-  const [dragOver, setDragOver] = useState(0);
-  const [resultStack, setResultStack] = useState({
-    hearts: [],
-    diamonds: [],
-    clubs: [],
-    spades: [],
+  const [dragItem, setDragItem] = useState<TypeDragItem>();
+  const [dragOver, setDragOver] = useState<number>();
+  const [moveCounter, setMoveCounter] = useState<number>(0);
+  const [isWin, setIsWin] = useState<boolean>(false);
+  const [resultStack, setResultStack] = useState<TypeResultStack>({
+    14: [],
+    15: [],
+    16: [],
+    17: [],
   });
 
   const changeRandomCards = () => {
+    setMoveCounter(0);
     setIsReady(false);
     setCardsOut([]);
     setHelperCards([]);
+    setResultStack({
+      14: [],
+      15: [],
+      16: [],
+      17: [],
+    });
+    setIsWin(false);
     const newArr = [...cards].sort(() => Math.random() - 0.5);
     newArr.map((item) => {
       item.open = false;
@@ -36,7 +56,6 @@ export const GameMain = () => {
     });
     setGameCards(newArr);
     setCountFor(1);
-    console.log(gameCards);
   };
 
   const changeHelperCards = () => {
@@ -56,6 +75,7 @@ export const GameMain = () => {
       setHelperCards(arr);
       setGameCards(gameCards.slice(0, -1));
     }
+    setMoveCounter(moveCounter + 1);
   };
 
   const closeRules = () => {
@@ -66,83 +86,178 @@ export const GameMain = () => {
   };
 
   const getRandomCards = (data: TypeCardFull[], num: number) => {
-    const outArr = [...cardsOut];
-    outArr.push(
-      data.filter((item: TypeCardFull, index: number) => {
-        if (index >= data.length - num) {
-          return item;
-        }
-      }),
-    );
-    const newArr = data.filter((item, index) => {
-      if (index < data.length - num) {
-        return item;
-      }
-    });
+    const arr = [...data].filter((_, index) => index >= data.length - num);
+    const outArr = [...cardsOut, arr];
+    const newArr = data.filter((_, index) => index < data.length - num);
     setGameCards(newArr);
     setCardsOut(outArr);
   };
 
-  const dragStartHandler = (e: DragEvent, item: object, idStack) => {
+  const dragStartHandler = (e: DragEvent<Element>, item: TypeCardFull, idStack: number) => {
     if (idStack === 8) {
       setDragItem({ items: [item], idStack });
     } else {
       const index = cardsOut[idStack].indexOf(item);
-      console.log('index: ', index);
       const items = [...cardsOut[idStack]].splice(index);
       setDragItem({ items: [...items], idStack });
     }
-
-    console.log('start', dragItem.items);
   };
 
-  const dragEndHandler = (e: DragEvent) => {};
-  const dragLeaveHandler = (e: DragEvent, num) => {
-    // console.log(e.target.id, num);
-  };
-
-  const dragOverHandler = (e: DragEvent, index) => {
-    e.preventDefault();
-    if (index !== dragOver) {
-      setDragOver(index);
-      console.log(dragOver);
+  const dragEndHandler = (
+    e: DragEvent,
+    index: number,
+    items: { items: TypeCardFull[]; idStack: number | string },
+  ) => {
+    if (index <= 13) {
+      if (cardsOut[index].length === 0 && items.items[0].nameCard === 13) {
+        const newArr = cardsOut.map((arr, i) => {
+          if (i === index) {
+            arr = [...arr, ...items.items];
+          }
+          if (i === items.idStack) {
+            const count = items.items.length;
+            arr = arr.slice(0, arr.length - count);
+          }
+          return arr;
+        });
+        if (items.idStack === 8) {
+          setHelperCards([...helperCards].slice(0, helperCards.length - 1));
+        }
+        setCardsOut(newArr);
+      }
+      setMoveCounter(moveCounter + 1);
     }
-  };
 
-  const dropHandler = (e: DragEvent, items, idStack) => {
-    e.preventDefault();
-    console.log(dragOver);
-
-    const prev = cardsOut[idStack][cardsOut[idStack].length - 1];
-
-    if (prev.color !== items.items[0].color && prev.nameCard === items.items[0].nameCard + 1) {
-      const newCardsOut = cardsOut.map((arr, index) => {
-        if (index === idStack) {
+    if (index > 13 && items.items[0].nameCard === 1) {
+      const newResult = { ...resultStack };
+      newResult[index] = items.items;
+      setResultStack(newResult);
+      const newArr = cardsOut.map((arr, i) => {
+        if (i === index) {
           arr = [...arr, ...items.items];
         }
-        if (index === items.idStack) {
+        if (i === items.idStack) {
           const count = items.items.length;
           arr = arr.slice(0, arr.length - count);
         }
         return arr;
       });
-
       if (items.idStack === 8) {
+        setHelperCards([...helperCards].slice(0, helperCards.length - 1));
+      }
+      setCardsOut(newArr);
+      setMoveCounter(moveCounter + 1);
+    }
+  };
+
+  const dragOverHandler = (e: DragEvent<HTMLDivElement>, index: number) => {
+    e.preventDefault();
+    if (dragOver !== index) {
+      setDragOver(index);
+    }
+  };
+
+  const dropHandler = (
+    e: DragEvent<Element>,
+    items: { items: TypeCardFull[]; idStack: number },
+    idStack: number,
+  ) => {
+    e.preventDefault();
+
+    if (idStack < 14) {
+      const prev = cardsOut[idStack][cardsOut[idStack].length - 1];
+      if (prev.color !== items.items[0].color && prev.nameCard === items.items[0].nameCard + 1) {
+        const newCardsOut = cardsOut.map((arr, i) => {
+          if (i === idStack) {
+            arr = [...arr, ...items.items];
+          }
+          if (i === items.idStack) {
+            const count = items.items.length;
+            arr = arr.slice(0, arr.length - count);
+          }
+          return arr;
+        });
+
+        if (items.idStack === 8) {
+          setHelperCards(helperCards.slice(0, helperCards.length - 1));
+        }
+
+        setCardsOut(newCardsOut);
+      }
+      setMoveCounter(moveCounter + 1);
+    }
+    if (idStack >= 14) {
+      const prev = resultStack[idStack][resultStack[idStack].length - 1];
+
+      if (prev.suit === items.items[0].suit && prev.nameCard === items.items[0].nameCard - 1) {
+        const newCardsOut = cardsOut.map((arr, i) => {
+          if (i === items.idStack) {
+            const count = items.items.length;
+            arr = arr.slice(0, arr.length - count);
+          }
+          return arr;
+        });
+
+        setCardsOut(newCardsOut);
+        const newResult = { ...resultStack };
+        newResult[idStack] = [...newResult[idStack], ...items.items];
+        setResultStack(newResult);
+        if (items.idStack === 8) {
+          setHelperCards(helperCards.slice(0, helperCards.length - 1));
+        }
+      }
+      setMoveCounter(moveCounter + 1);
+    }
+  };
+
+  const putInResultStack = (e: MouseEvent, item: TypeCardFull, idStack: number) => {
+    e.preventDefault();
+    let idResult;
+    if (resultStack[14][0].suit === item.suit) {
+      idResult = 14;
+    }
+    if (resultStack[15][0].suit === item.suit) {
+      idResult = 15;
+    }
+    if (resultStack[16][0].suit === item.suit) {
+      idResult = 16;
+    }
+    if (resultStack[17][0].suit === item.suit) {
+      idResult = 17;
+    }
+
+    const prev = resultStack[idResult][resultStack[idResult].length - 1];
+
+    if (prev.nameCard === item.nameCard - 1) {
+      if (idStack === 8) {
         setHelperCards(helperCards.slice(0, helperCards.length - 1));
+      } else {
+        const newCardsOut = cardsOut.map((arr, i) => {
+          if (i === idStack) {
+            arr = arr.slice(0, arr.length - 1);
+          }
+          return arr;
+        });
+        setCardsOut(newCardsOut);
       }
 
-      setCardsOut(newCardsOut);
+      const newResult = { ...resultStack };
+      newResult[idResult] = [...newResult[idResult], item];
+      setResultStack(newResult);
     }
+    setMoveCounter(moveCounter + 1);
   };
 
-  const onContextMenu = (item) => {
-    if (item.name === 1) {
-      const newStack = { ...resultStack };
-      newStack[item.suit] = [item];
-      setResultStack(newStack);
+  useEffect(() => {
+    if (
+      resultStack[14].length === 13 &&
+      resultStack[15].length === 13 &&
+      resultStack[16].length === 13 &&
+      resultStack[17].length === 13
+    ) {
+      setIsWin(true);
     }
-    console.log(newStack);
-  };
+  }, [resultStack]);
 
   useEffect(() => {
     if (countFor < 8) {
@@ -152,30 +267,14 @@ export const GameMain = () => {
     if (countFor === 8) {
       setIsReady(true);
     }
-    console.log(countFor, ' useEffect');
   }, [countFor, isReady]);
 
   return (
     <SectionGame>
-      <HeaderGame>
-        <button type="button" onClick={openRules}>
-          Правила
-        </button>
-        <button type="button" onClick={changeRandomCards}>
-          Новая игра
-        </button>
-        <span>
-          Лучший счет<span>0</span>
-        </span>
-        <span>
-          Текущий счет<span>0</span>
-        </span>
-        <span>
-          Сделано ходов<span>0</span>
-        </span>
-      </HeaderGame>
+      <Header rules={openRules} newGame={changeRandomCards} moveCounter={moveCounter} />
       <BodyGame>
         {onRules && <Rules fn={closeRules} />}
+        {isWin && <Win newGame={changeRandomCards} />}
         <Stack id="bank" onClick={changeHelperCards}>
           {isReady &&
             gameCards.map((item) => (
@@ -198,13 +297,14 @@ export const GameMain = () => {
                 key={item.id}
                 draggable
                 onDragStart={(e) => dragStartHandler(e, item, 8)}
-                onDoubleClick={() => onContextMenu(item)}
+                onDragEnd={(e) => dragEndHandler(e, dragOver, dragItem)}
+                onDoubleClick={(e) => putInResultStack(e, item, 8)}
               />
             ))}
         </Stack>
-        <Stack id="hearts" onDragOver={(e) => dragEndHandler(e, 11)}>
-          {resultStack.hearts.length > 0 &&
-            resultStack.hearts.map((item) => (
+        <Stack id="14" onDragOver={(e) => dragOverHandler(e, 14)}>
+          {resultStack['14'].length > 0 &&
+            resultStack['14'].map((item) => (
               <Kard
                 img={item.img}
                 name={item.nameCard}
@@ -212,12 +312,13 @@ export const GameMain = () => {
                 key={item.id}
                 draggable
                 onDragStart={(e) => dragStartHandler(e, item, 8)}
+                onDrop={(e) => dropHandler(e, dragItem, 14)}
               />
             ))}
         </Stack>
-        <Stack id="diamonds" onDragOver={(e) => dragEndHandler(e, 12)}>
-          {resultStack.diamonds.length > 0 &&
-            resultStack.diamonds.map((item) => (
+        <Stack id="15" onDragOver={(e) => dragOverHandler(e, 15)}>
+          {resultStack['15'].length > 0 &&
+            resultStack['15'].map((item) => (
               <Kard
                 img={item.img}
                 name={item.nameCard}
@@ -225,12 +326,13 @@ export const GameMain = () => {
                 key={item.id}
                 draggable
                 onDragStart={(e) => dragStartHandler(e, item, 8)}
+                onDrop={(e) => dropHandler(e, dragItem, 15)}
               />
             ))}
         </Stack>
-        <Stack id="clubs" onDragOver={(e) => dragEndHandler(e, 13)}>
-          {resultStack.clubs.length > 0 &&
-            resultStack.clubs.map((item) => (
+        <Stack id="16" onDragOver={(e) => dragOverHandler(e, 16)}>
+          {resultStack['16'].length > 0 &&
+            resultStack['16'].map((item) => (
               <Kard
                 img={item.img}
                 name={item.nameCard}
@@ -238,12 +340,13 @@ export const GameMain = () => {
                 key={item.id}
                 draggable
                 onDragStart={(e) => dragStartHandler(e, item, 8)}
+                onDrop={(e) => dropHandler(e, dragItem, 16)}
               />
             ))}
         </Stack>
-        <Stack id="spades" onDragOver={(e) => dragEndHandler(e, 14)}>
-          {resultStack.spades.length > 0 &&
-            resultStack.spades.map((item) => (
+        <Stack id="17" onDragOver={(e) => dragOverHandler(e, 17)}>
+          {resultStack['17'].length > 0 &&
+            resultStack['17'].map((item) => (
               <Kard
                 img={item.img}
                 name={item.nameCard}
@@ -251,12 +354,13 @@ export const GameMain = () => {
                 key={item.id}
                 draggable
                 onDragStart={(e) => dragStartHandler(e, item, 8)}
+                onDrop={(e) => dropHandler(e, dragItem, 17)}
               />
             ))}
         </Stack>
       </BodyGame>
       <BodyGame>
-        <Stack id="0">
+        <Stack id="0" onDragOver={(e) => dragOverHandler(e, 0)}>
           {isReady &&
             cardsOut[0].map((item, index) => {
               if (index === cardsOut[0].length - 1) {
@@ -264,17 +368,16 @@ export const GameMain = () => {
               }
               return (
                 <Kard
+                  first={index === 0}
                   img={item.open ? item.img : shirt.src}
                   name={item.nameCard}
                   position="bottom"
                   key={item.id}
                   draggable
                   onDragStart={(e) => dragStartHandler(e, item, 0)}
-                  onDragLeave={(e) => dragEndHandler(e)}
-                  onDragEnd={(e) => dragEndHandler(e)}
+                  onDragEnd={(e) => dragEndHandler(e, dragOver, dragItem)}
                   onDrop={(e) => dropHandler(e, dragItem, 0)}
-                  onDragOver={(e) => dragOverHandler(e, 0)}
-                  onDoubleClick={() => onContextMenu(item)}
+                  onDoubleClick={(e) => putInResultStack(e, item, 0)}
                 />
               );
             })}
@@ -287,16 +390,16 @@ export const GameMain = () => {
               }
               return (
                 <Kard
+                  first={index === 0}
                   img={item.open ? item.img : shirt.src}
                   name={item.nameCard}
                   position="bottom"
                   key={item.id}
                   draggable
                   onDragStart={(e) => dragStartHandler(e, item, 1)}
-                  onDragLeave={(e) => dragEndHandler(e)}
-                  onDragEnd={(e) => dragEndHandler(e)}
+                  onDragEnd={(e) => dragEndHandler(e, dragOver, dragItem)}
                   onDrop={(e) => dropHandler(e, dragItem, 1)}
-                  onDoubleClick={() => onContextMenu(item)}
+                  onDoubleClick={(e) => putInResultStack(e, item, 1)}
                 />
               );
             })}
@@ -309,16 +412,16 @@ export const GameMain = () => {
               }
               return (
                 <Kard
+                  first={index === 0}
                   img={item.open ? item.img : shirt.src}
                   name={item.nameCard}
                   position="bottom"
                   key={item.id}
                   draggable
                   onDragStart={(e) => dragStartHandler(e, item, 2)}
-                  onDragLeave={(e) => dragEndHandler(e)}
-                  onDragEnd={(e) => dragEndHandler(e)}
+                  onDragEnd={(e) => dragEndHandler(e, dragOver, dragItem)}
                   onDrop={(e) => dropHandler(e, dragItem, 2)}
-                  onDoubleClick={() => onContextMenu(item)}
+                  onDoubleClick={(e) => putInResultStack(e, item, 2)}
                 />
               );
             })}
@@ -331,16 +434,16 @@ export const GameMain = () => {
               }
               return (
                 <Kard
+                  first={index === 0}
                   img={item.open ? item.img : shirt.src}
                   name={item.nameCard}
                   position="bottom"
                   key={item.id}
                   draggable
                   onDragStart={(e) => dragStartHandler(e, item, 3)}
-                  onDragLeave={(e) => dragEndHandler(e)}
-                  onDragEnd={(e) => dragEndHandler(e)}
+                  onDragEnd={(e) => dragEndHandler(e, dragOver, dragItem)}
                   onDrop={(e) => dropHandler(e, dragItem, 3)}
-                  onDoubleClick={() => onContextMenu(item)}
+                  onDoubleClick={(e) => putInResultStack(e, item, 3)}
                 />
               );
             })}
@@ -353,16 +456,16 @@ export const GameMain = () => {
               }
               return (
                 <Kard
+                  first={index === 0}
                   img={item.open ? item.img : shirt.src}
                   name={item.nameCard}
                   position="bottom"
                   key={item.id}
                   draggable
                   onDragStart={(e) => dragStartHandler(e, item, 4)}
-                  onDragLeave={(e) => dragEndHandler(e)}
-                  onDragEnd={(e) => dragEndHandler(e)}
+                  onDragEnd={(e) => dragEndHandler(e, dragOver, dragItem)}
                   onDrop={(e) => dropHandler(e, dragItem, 4)}
-                  onDoubleClick={() => onContextMenu(item)}
+                  onDoubleClick={(e) => putInResultStack(e, item, 4)}
                 />
               );
             })}
@@ -375,16 +478,16 @@ export const GameMain = () => {
               }
               return (
                 <Kard
+                  first={index === 0}
                   img={item.open ? item.img : shirt.src}
                   name={item.nameCard}
                   position="bottom"
                   key={item.id}
                   draggable
                   onDragStart={(e) => dragStartHandler(e, item, 5)}
-                  onDragLeave={(e) => dragEndHandler(e)}
-                  onDragEnd={(e) => dragEndHandler(e)}
+                  onDragEnd={(e) => dragEndHandler(e, dragOver, dragItem)}
                   onDrop={(e) => dropHandler(e, dragItem, 5)}
-                  onDoubleClick={() => onContextMenu(item)}
+                  onDoubleClick={(e) => putInResultStack(e, item, 5)}
                 />
               );
             })}
@@ -397,16 +500,16 @@ export const GameMain = () => {
               }
               return (
                 <Kard
+                  first={index === 0}
                   img={item.open ? item.img : shirt.src}
                   name={item.nameCard}
                   position="bottom"
                   key={item.id}
                   draggable
                   onDragStart={(e) => dragStartHandler(e, item, 6)}
-                  onDragLeave={(e) => dragEndHandler(e)}
-                  onDragEnd={(e) => dragEndHandler(e)}
+                  onDragEnd={(e) => dragEndHandler(e, dragOver, dragItem)}
                   onDrop={(e) => dropHandler(e, dragItem, 6)}
-                  onDoubleClick={() => onContextMenu(item)}
+                  onDoubleClick={(e) => putInResultStack(e, item, 6)}
                 />
               );
             })}

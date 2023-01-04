@@ -2,6 +2,7 @@ import { DragEventHandler, MouseEventHandler } from 'react';
 
 export type TypeCard = {
   style?: object;
+  first?: boolean;
   img: string;
   name: number;
   position: string;
@@ -12,6 +13,7 @@ export type TypeCard = {
   onDragOver?: DragEventHandler;
   onDrop?: DragEventHandler;
   onDoubleClick?: MouseEventHandler;
+  onContextMenu?: MouseEventHandler;
 };
 
 export interface TypeCardFull {
