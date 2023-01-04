@@ -211,41 +211,50 @@ export const GameMain = () => {
   };
 
   const putInResultStack = (e: MouseEvent, item: TypeCardFull, idStack: number) => {
-    e.preventDefault();
     let idResult;
-    if (resultStack[14][0].suit === item.suit) {
-      idResult = 14;
-    }
-    if (resultStack[15][0].suit === item.suit) {
-      idResult = 15;
-    }
-    if (resultStack[16][0].suit === item.suit) {
-      idResult = 16;
-    }
-    if (resultStack[17][0].suit === item.suit) {
-      idResult = 17;
-    }
-
-    const prev = resultStack[idResult][resultStack[idResult].length - 1];
-
-    if (prev.nameCard === item.nameCard - 1) {
-      if (idStack === 8) {
-        setHelperCards(helperCards.slice(0, helperCards.length - 1));
-      } else {
-        const newCardsOut = cardsOut.map((arr, i) => {
-          if (i === idStack) {
-            arr = arr.slice(0, arr.length - 1);
-          }
-          return arr;
-        });
-        setCardsOut(newCardsOut);
+    if (resultStack[14].length !== 0) {
+      if (resultStack[14][0].suit === item.suit) {
+        idResult = 14;
       }
-
-      const newResult = { ...resultStack };
-      newResult[idResult] = [...newResult[idResult], item];
-      setResultStack(newResult);
     }
-    setMoveCounter(moveCounter + 1);
+    if (resultStack[15].length !== 0) {
+      if (resultStack[15][0].suit === item.suit) {
+        idResult = 15;
+      }
+    }
+    if (resultStack[16].length !== 0) {
+      if (resultStack[16][0].suit === item.suit) {
+        idResult = 16;
+      }
+    }
+    if (resultStack[17].length !== 0) {
+      if (resultStack[17][0].suit === item.suit) {
+        idResult = 17;
+      }
+    }
+
+    if (idResult) {
+      const prev = resultStack[idResult][resultStack[idResult].length - 1];
+
+      if (prev.nameCard === item.nameCard - 1) {
+        if (idStack === 8) {
+          setHelperCards(helperCards.slice(0, helperCards.length - 1));
+        } else {
+          const newCardsOut = cardsOut.map((arr, i) => {
+            if (i === idStack) {
+              arr = arr.slice(0, arr.length - 1);
+            }
+            return arr;
+          });
+          setCardsOut(newCardsOut);
+        }
+
+        const newResult = { ...resultStack };
+        newResult[idResult] = [...newResult[idResult], item];
+        setResultStack(newResult);
+      }
+      setMoveCounter(moveCounter + 1);
+    }
   };
 
   useEffect(() => {

@@ -12,7 +12,6 @@ export const Main = () => {
   const setRandomCards = () => {
     const arr = Array.from(cards);
     const newArr = arr.sort(() => Math.random() - 0.5);
-    console.log(newArr);
     dispatch(sortCardsAction(newArr));
   };
 

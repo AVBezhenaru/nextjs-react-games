@@ -14,6 +14,7 @@ export const Kard = ({
   onDragEnd,
   onDragOver,
   onDrop,
+  onDoubleClick,
 }: TypeCard) => (
   <>
     {position === 'bottom' && !first && <Corrector />}
@@ -24,6 +25,7 @@ export const Kard = ({
       onDragEnd={onDragEnd}
       onDragOver={onDragOver}
       onDrop={onDrop}
+      onDoubleClick={onDoubleClick}
     >
       <Image src={img} alt={String(name)} width="120" height="165" />
     </CardItem>

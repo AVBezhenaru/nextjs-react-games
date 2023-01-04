@@ -1,10 +1,12 @@
+import React from 'react';
+
 import { RulesWrap } from './rulesStyle';
 
 interface TypeFn {
   fn: () => void;
 }
 
-export const Rules = ({ fn }: TypeFn) => (
+export const Rules: React.FC<TypeFn> = ({ fn }) => (
   <RulesWrap>
     <button type="button" onClick={fn}>
       Закрыть
