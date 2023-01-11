@@ -10,7 +10,6 @@ export const Kard = ({
   name,
   position,
   onDragStart,
-  onDragLeave,
   onDragEnd,
   onDragOver,
   onDrop,
@@ -20,8 +19,7 @@ export const Kard = ({
     {position === 'bottom' && !first && <Corrector />}
     <CardItem
       draggable
-      onDragStart={onDragStart}
-      onDragLeave={onDragLeave}
+      onDrag={onDragStart}
       onDragEnd={onDragEnd}
       onDragOver={onDragOver}
       onDrop={onDrop}

@@ -50,7 +50,14 @@ import spades10 from '../images/cards/spades/10.png';
 import spades11 from '../images/cards/spades/v.png';
 import spades12 from '../images/cards/spades/q.png';
 import spades13 from '../images/cards/spades/k.png';
-import { TypeDataCardsState } from '../types';
+import { TypeDataCardsState, TypeResultStack } from '../types';
+
+export const dataResultStack: TypeResultStack = {
+  14: [],
+  15: [],
+  16: [],
+  17: [],
+};
 
 export const dataCardsState: TypeDataCardsState = {
   cards: [
@@ -108,4 +115,16 @@ export const dataCardsState: TypeDataCardsState = {
     { id: 52, nameCard: 13, suit: 'spades', img: spades13.src, open: false, color: 'black' },
   ],
   sortCards: [],
+  gameCards: [],
+  helperCards: [],
+  resultStack: dataResultStack,
+  counter: 1,
+  moveCounter: 0,
+  isReady: false,
+  onRules: false,
+  isWin: false,
+  dragItem: null,
+  dragOver: null,
+  gamePoints: 0,
+  theBestPoints: 0,
 };
