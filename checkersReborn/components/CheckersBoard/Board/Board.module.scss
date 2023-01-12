@@ -1,0 +1,8 @@
+@import '../../../styles/Variables.scss';
+
+.Board {
+  display: flex;
+  width: calc($cell-width * 8);
+  flex-wrap: wrap;
+}
+
