@@ -25,7 +25,7 @@ export const Kard = ({
       onDrop={onDrop}
       onDoubleClick={onDoubleClick}
     >
-      <Image src={img} alt={String(name)} width="120" height="165" />
+      <Image src={img} alt={String(name)} width="100" height="130" />
     </CardItem>
   </>
 );

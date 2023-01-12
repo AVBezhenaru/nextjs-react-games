@@ -22,14 +22,14 @@ export const SectionGame = styled.main`
 
 export const BodyGame = styled.section`
   display: grid;
-  margin: 70px auto;
+  margin: 50px auto;
   justify-content: center;
   gap: 20px;
 `;
 
 export const Stack = styled.div`
   position: relative;
-  height: 138px;
+  height: 130px;
   width: 100px;
   background-color: rgba(0, 0, 0, 0.4);
   box-shadow: -3px -3px 10px #000 inset;
@@ -38,7 +38,7 @@ export const Stack = styled.div`
 export const EmptyCard = styled.div`
   position: fixed;
   width: 100px;
-  height: 138px;
+  height: 130px;
 
   background-color: rgba(0, 0, 0, 0);
 `;

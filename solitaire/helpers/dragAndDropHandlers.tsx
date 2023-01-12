@@ -52,6 +52,8 @@ export const dropHandler = (
             }
             return arr;
           });
+          dispatch(setGamePointsAction(gamePoints + 15));
+          dispatch(setMoveCounterAction(moveCounter + 1));
           dispatch(gameCardsAction(newArr));
           if (items.idStack === 8) {
             const newHelperCards = helperCards.slice(0, helperCards.length - 1);
@@ -75,7 +77,8 @@ export const dropHandler = (
             }
             return arr;
           });
-
+          dispatch(setGamePointsAction(gamePoints + 15));
+          dispatch(setMoveCounterAction(moveCounter + 1));
           dispatch(gameCardsAction(newCardsOut));
           if (items.idStack === 8) {
             const newHelperCards = helperCards.slice(0, helperCards.length - 1);
@@ -83,8 +86,6 @@ export const dropHandler = (
           }
         }
       }
-      dispatch(setGamePointsAction(gamePoints + 25));
-      dispatch(setMoveCounterAction(moveCounter + 1));
     }
 
     if (idStack >= 14) {
