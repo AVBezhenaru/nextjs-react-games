@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'next/router';
+import { v4 as uuidv4 } from 'uuid';
 
 import Header from '../header/header';
 import SideBar from '../header/sideBar';
@@ -10,6 +11,7 @@ import chessIcon from '../img/chessIcon.png';
 import checkersIcon from '../img/checkersIcon.png';
 import hangmanIcon from '../img/hangmanIcon.png';
 import aerohokkeyIcon from '../img/aerohokkeyIcon.png';
+import solitairIcon from '../img/solitairIcon.png';
 
 import { GameLink } from './GameLink';
 import { Games, Page, HeaderGames, ListGames } from './listGamesStyle';
@@ -24,6 +26,7 @@ const ListGamesForm = () => {
     { src: checkersIcon.src, title: 'checkers' },
     { src: hangmanIcon.src, title: 'hangman' },
     { src: aerohokkeyIcon.src, title: 'airhockey' },
+    { src: solitairIcon.src, title: 'solitaire' },
   ];
   return (
     <>
@@ -35,8 +38,13 @@ const ListGamesForm = () => {
             <Games>
               <HeaderGames>GAMES</HeaderGames>
               <ListGames>
-                {gameLinksArr.map((item, index) => (
-                  <GameLink key={index} src={item.src} title={item.title} href={`${path}${item.title}`} />
+                {gameLinksArr.map((item) => (
+                  <GameLink
+                    key={uuidv4()}
+                    src={item.src}
+                    title={item.title}
+                    href={`${path}${item.title}`}
+                  />
                 ))}
               </ListGames>
             </Games>

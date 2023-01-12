@@ -8,7 +8,7 @@ export const Section = styled.section`
   position: relative;
   flex-direction: column;
   justify-content: space-between;
-  width: 100%;
+  width: 100vw;
   min-height: 100vh;
   height: auto;
   margin: 0 auto;
