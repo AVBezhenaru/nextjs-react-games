@@ -11,6 +11,8 @@ export const SectionLayout = styled.section`
 `;
 
 export const LayoutHeader = styled.div`
+  position: fixed;
+  top: 0;
   height: 45px;
   width: 100%;
   font-weight: 400;
@@ -19,7 +21,7 @@ export const LayoutHeader = styled.div`
   padding-left: 15px;
   color: rgba(247, 247, 247, 0.8);
   letter-spacing: 5px;
-  background-color: rgba(247, 247, 247, 0.3);
+  background-color: rgba(0, 0, 0, 0.6);
   z-index: 999;
 `;
 
