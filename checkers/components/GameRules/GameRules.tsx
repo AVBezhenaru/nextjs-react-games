@@ -1,7 +1,8 @@
 import { FC } from "react";
+import classes from "./GameRules.module.scss";
 
 const GameRules: FC = () => (
-  <>
+  <div className={classes.GameRules}>
     <p>
       В игре принимают участие 2 игрока. Игроки располагаются на противоположных
       сторонах доски.
@@ -42,7 +43,7 @@ const GameRules: FC = () => (
       и последующие шашки которые распологаются на одной клетке за ней, и если есть
       свободное пространство после взятой шашки.
     </p>
-  </>
+  </div>
 )
 
 export default GameRules;

@@ -27,7 +27,8 @@
   font-family: $decorated-font-family;
   font-size: 130px;
 
-  margin: 150px 0;
+  margin: 150px 0 100px 0;
+  padding-top: 50px;
 }
 
 .ButtonsContainer {
@@ -36,9 +37,12 @@
 }
 
 .MainPageButton {
+  display: flex;
+  align-items: center;
   text-align: center;
+  padding: 1em 1em;
 
-  width: 289px;
+  width: 300px;
   height: 75px;
   position: relative;
 

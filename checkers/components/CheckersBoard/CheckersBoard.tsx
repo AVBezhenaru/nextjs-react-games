@@ -14,6 +14,9 @@ interface IBoardProps {
   online: boolean,
 }
 
+const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+const numbers = ['1', '2', '3', '4', '5', '6', '7', '8'];
+
 const CheckersBoard: FC<IBoardProps> = () => {
   const [showRules, setShowRules] = useState(true);
   const [board, setBoard] = useState(new BoardModel());
@@ -64,47 +67,19 @@ const CheckersBoard: FC<IBoardProps> = () => {
             <Score white score={whiteScore} />
             <div className={classes.GameBoardContainer}>
               <ul className={classes.TopLetters}>
-                <li>A</li>
-                <li>B</li>
-                <li>C</li>
-                <li>D</li>
-                <li>E</li>
-                <li>F</li>
-                <li>G</li>
-                <li>H</li>
+                {letters.map((l) => (<li key={l}>{l}</li>))}
               </ul>
               <div className={classes.HorizontalContainer}>
                 <ul className={classes.LeftNumbers}>
-                  <li>1</li>
-                  <li>2</li>
-                  <li>3</li>
-                  <li>4</li>
-                  <li>5</li>
-                  <li>6</li>
-                  <li>7</li>
-                  <li>8</li>
+                  {numbers.map((n) => (<li key={n}>{n}</li>))}
                 </ul>
                 <Board board={board} setBoard={setBoard} />
                 <ul className={classes.RightNumbers}>
-                  <li>1</li>
-                  <li>2</li>
-                  <li>3</li>
-                  <li>4</li>
-                  <li>5</li>
-                  <li>6</li>
-                  <li>7</li>
-                  <li>8</li>
+                  {numbers.map((n) => (<li key={n}>{n}</li>))}
                 </ul>
               </div>
               <ul className={classes.BottomLetters}>
-                <li>A</li>
-                <li>B</li>
-                <li>C</li>
-                <li>D</li>
-                <li>E</li>
-                <li>F</li>
-                <li>G</li>
-                <li>H</li>
+                {letters.map((l) => (<li key={l}>{l}</li>))}
               </ul>
             </div>
             <Score white={false} score={blackScore} />

@@ -18,7 +18,6 @@
   flex-direction: column;
   align-items: center;
 
-  font-family: monospace;
   font-size: 18px;
   font-style: italic;
 
@@ -50,10 +49,11 @@
 .ModalBody {
   text-align: left;
   padding: 0;
+
+  font-family: $main-font-family;
 }
 
 .ModalButton {
-  font-family: monospace;
   font-size: 18px;
   color: $black-color;
   border: 1px solid $black-color;

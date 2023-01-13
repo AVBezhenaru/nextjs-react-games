@@ -4,6 +4,7 @@
   height: 120%;
   min-height: 900px;
   background-image: url('../../images/aaaa.jpg');
+  padding-top: 40px;
 }
 
 .ModalContainer {
@@ -35,8 +36,7 @@
       justify-content: space-around;
       align-items: center;
 
-      font-family: 'ljk_RoadRage';
-      padding: 0 0 0 0.5em;
+      padding: 0 .5em;
     }
   }
 
@@ -45,8 +45,7 @@
     display: flex;
     justify-content: space-around;
 
-    padding: 0 1.5em;
-    font-family: 'ljk_RoadRage';
+    padding: 5px 1.5em;
   }
 
 
