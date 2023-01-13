@@ -4,7 +4,25 @@ import Button from "../Button/Button";
 import Wrapper from "../Wrapper/Wrapper";
 import classes from "./Settings.module.scss";
 
+interface ISettingsItem {
+  title: string;
+  description: string;
+}
+
+const settingsItems: ISettingsItem[] = [
+  { title: 'Влево', description: 'Клавиша A, стрелка влево' },
+  { title: 'Вправо', description: 'Клавиша D, стрелка вправо' },
+  { title: 'Вниз', description: 'Клавиша S, стрелка вниз' },
+  { title: 'Поворот', description: 'Клавиша W, стрелка вверх' },
+];
+
 const Settings: FC = () => {
+  const settingsTableRows = settingsItems.map(({ title, description }) => (
+    <tr>
+      <td>{title}</td>
+      <td>{description}</td>
+    </tr>
+  ));
 
   return (
     <Wrapper>
@@ -14,30 +32,7 @@ const Settings: FC = () => {
         </Link>
         <h3 className={classes.SettingsHeader}>Навигация</h3>
         <table className={classes.SettingsTable}>
-          <tr>
-            <td>
-              Влево
-            </td>
-            <td>
-              Клавиша A, стрелка влево
-            </td>
-          </tr>
-          <tr>
-            <td>
-              Вправо
-            </td>
-            <td>
-              Клавиша D, стрелка вправо
-            </td>
-          </tr>
-          <tr>
-            <td>
-              Поворот
-            </td>
-            <td>
-              Клавиша W, стрелка вверх
-            </td>
-          </tr>
+          {settingsTableRows}
         </table>
       </div>
     </Wrapper>

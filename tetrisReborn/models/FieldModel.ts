@@ -2,7 +2,7 @@ import CellModel from "./CellModel";
 import FigureGenerator from "./FigureGenerator";
 import Figure from "./figures/Figure";
 import { MoveDirection } from "./figures/MoveDirection";
-import { Level, needToLevelUp } from "./Level";
+import { getFirstLevel, needToLevelUp } from "./Level";
 import { fieldHeight, fieldWidth } from "./static-data";
 
 export default class FieldModel {
@@ -13,7 +13,7 @@ export default class FieldModel {
   currentFigure: Figure | null = null;
 
   gameOver: boolean = false;
-  level: Level = Level.SUPER_EASY;
+  level = getFirstLevel();
   score: number = 0;
   gameId: number = 0;
 
@@ -65,7 +65,7 @@ export default class FieldModel {
   }
 
   private raiseScore(destructedRowsCount: number) {
-    this.score += destructedRowsCount * (this.level as number) * fieldWidth;
+    this.score += destructedRowsCount * (this.level.scoreCoefficient) * fieldWidth;
     const nextLevel = needToLevelUp(this.score, this.level);
     if (nextLevel) this.level = nextLevel;
   }
@@ -168,7 +168,7 @@ export default class FieldModel {
     this.nextFigure = null;
     this.currentFigure = null;
     this.gameOver = false;
-    this.level = Level.SUPER_EASY;
+    this.level = getFirstLevel();
     this.score = 0;
     this.gameId++;
     return this.initGame();

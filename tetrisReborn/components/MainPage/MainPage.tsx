@@ -1,9 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
 import Button from "../Button/Button";
 import Wrapper from "../Wrapper/Wrapper";
 import classes from './MainPage.module.scss';
-import SettingsButton from "./SettingsButton/SettingsButton";
+import gearLogo from '../../images/gear-svgrepo-com.svg';
 
 const MainPage: FC = () => {
 
@@ -12,7 +13,11 @@ const MainPage: FC = () => {
       <div className={classes.MainPage}>
         <div className={classes.ButtonsContainer}>
           <Link href="./tetrisReborn/settings">
-            <span><SettingsButton /></span>
+            <span>
+            <button className={classes.SettingsButton}>
+              <Image src={gearLogo} />
+            </button>
+            </span>
           </Link>
           <div className={classes.CenterButton}>
             <Link href="./tetrisReborn/game">

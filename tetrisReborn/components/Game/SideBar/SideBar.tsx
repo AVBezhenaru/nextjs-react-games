@@ -1,12 +1,12 @@
 import { FC } from "react";
 import Figure from "../../../models/figures/Figure";
-import { getLevelName, Level } from "../../../models/Level";
+import { ILevel } from "../../../models/Level";
 import NextFigure from "./NextFigure/NextFigure";
 import classes from "./SideBar.module.scss";
 
 interface ISideBarProps {
   nextFigure: Figure | null;
-  level: Level;
+  level: ILevel;
   points: number;
 }
 
@@ -17,7 +17,7 @@ const SideBar: FC<ISideBarProps> = ({ nextFigure, level, points }) => {
       <NextFigure figure={nextFigure} />
       <div className={classes.Info}>
         <label>Level</label>
-        <label className={classes.InfoValue}>{getLevelName(level)}</label>
+        <label className={classes.InfoValue}>{level.title}</label>
       </div>
       <div className={classes.Info}>
         <label>Points</label>

@@ -2,7 +2,6 @@ import Link from "next/link";
 import { BaseSyntheticEvent, FC, useCallback, useEffect, useRef, useState } from "react";
 import FieldModel from "../../models/FieldModel";
 import { MoveDirection } from "../../models/figures/MoveDirection";
-import { getTickTime } from "../../models/Level";
 import { KeyCodes, NativeEvent } from "../../types/NativeEvent";
 import Button from "../Button/Button";
 import Wrapper from "../Wrapper/Wrapper";
@@ -25,7 +24,7 @@ const Game: FC = () => {
     timer.current = setInterval(() => {
       field.moveCurrentFigure(MoveDirection.BOTTOM);
       setField(field.update());
-    }, getTickTime(level));
+    }, level.tickTime);
 
     return () => clearInterval(timer.current);
   }, [level, gameId]);

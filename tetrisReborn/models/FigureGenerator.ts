@@ -8,41 +8,17 @@ import T from "./figures/T";
 import Z from "./figures/Z";
 
 const getRandomInt = (max: number): number => Math.floor(Math.random() * max);
+const figures = [ I, J, L, Z, S, T, O ];
+
 
 export default class FigureGenerator {
-  private figuresCount: number = 7;
+  private figuresMaxIndex: number = 6; // 0 - 6
 
   next(): Figure {
-    const rnd = getRandomInt(this.figuresCount);
+    const rnd = getRandomInt(this.figuresMaxIndex);
     const rotate = getRandomInt(3);
     
-    let figure;
-    switch (rnd) {
-      case 1:
-        figure = new I();
-        break;
-      case 2:
-        figure = new J();
-        break;
-      case 3:
-        figure = new L();
-        break;
-      case 4:
-        figure = new Z();
-        break;
-      case 5:
-        figure = new S();
-        break;
-      case 6:
-        figure = new T();
-        break;
-      case 0:
-        figure = new O();
-        break;
-      default:
-        figure = new O();
-        break;
-    }
+    let figure = new figures[rnd]();
 
     for (let i = 0; i < rotate; i++) {
       figure = figure.nextRotate();

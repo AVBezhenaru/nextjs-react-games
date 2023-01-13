@@ -1,65 +1,21 @@
-export enum Level {
-  SUPER_EASY = 1,
-  EASY = 2,
-  MEDIUM = 3,
-  HARD = 4,
-  SUPER_HARD = 5,
-  TERMINATOR = 6,
+export interface ILevel {
+  title: string;
+  tickTime: number;
+  scoreToLvlup: number;
+  scoreCoefficient: number;
+  nextLevel: ILevel | false;
 }
 
-export const getLevelName = (level: Level): string => {
-  switch (level) {
-    case Level.SUPER_EASY:
-      return 'Super easy';
-    case Level.EASY:
-      return 'Easy';
-    case Level.MEDIUM:
-      return 'Medium';
-    case Level.HARD:
-      return 'Hard';
-    case Level.SUPER_HARD:
-      return 'Super hard';
-    case Level.TERMINATOR:
-      return 'Terminator';
-    default:
-      return 'Super easy';
-  }
-}
+const TERMINATOR: ILevel = { title: 'Terminator', tickTime: 150, scoreToLvlup: Infinity, scoreCoefficient: 6, nextLevel: false };
+const SUPER_HARD: ILevel = { title: 'Super hard', tickTime: 200, scoreToLvlup: 3000, scoreCoefficient: 5, nextLevel: TERMINATOR }
+const HARD: ILevel = { title: 'Hard', tickTime: 400, scoreToLvlup: 2000, scoreCoefficient: 4, nextLevel: SUPER_HARD };
+const MEDIUM: ILevel = { title: 'Medium', tickTime: 600, scoreToLvlup: 1200, scoreCoefficient: 3, nextLevel: HARD }
+const EASY: ILevel = { title: 'Easy', tickTime: 800, scoreToLvlup: 600, scoreCoefficient: 2, nextLevel: MEDIUM };
+const SUPER_EASY: ILevel = { title: 'Super easy', tickTime: 1000, scoreToLvlup: 20, scoreCoefficient: 1, nextLevel: EASY };
 
-export const getTickTime = (level: Level): number => {
-  switch (level) {
-    case Level.SUPER_EASY:
-      return 1000;
-    case Level.EASY:
-      return 800;
-    case Level.MEDIUM:
-      return 600;
-    case Level.HARD:
-      return 400;
-    case Level.SUPER_HARD:
-      return 200;
-    case Level.TERMINATOR:
-      return 160;
-    default:
-      return 1000;
-  }
-}
+export const getFirstLevel = () => SUPER_EASY;
 
-export const needToLevelUp = (score: number, level: Level): false | Level => {
-  switch (level) {
-    case Level.SUPER_EASY:
-      if (score > 200) return Level.EASY; 
-    case Level.EASY:
-      if (score > 600) return Level.MEDIUM; 
-    case Level.MEDIUM:
-      if (score > 1200) return Level.HARD; 
-    case Level.HARD:
-      if (score > 2000) return Level.SUPER_HARD; 
-    case Level.SUPER_HARD:
-      if (score > 3000) return Level.TERMINATOR; 
-    case Level.TERMINATOR:
-      return false; 
-    default:
-      return false;
-  }
+export const needToLevelUp = (score: number, level: ILevel): false | ILevel => {
+  if (score > level.scoreToLvlup) return level.nextLevel;
+  return false;
 }
