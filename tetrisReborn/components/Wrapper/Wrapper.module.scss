@@ -1,0 +1,14 @@
+@import "../../styles/Variables.scss";
+
+.Wrapper {
+  background-image: url("../../images/white_bg.jpg");
+  height: 100%;
+  min-height: 700px;
+
+  font-family: sans-serif;
+  color: $main-text-color;
+}
+
+.Wrapper:focus {
+  outline: none;
+}

@@ -1,0 +1,6 @@
+export enum Rotate {
+  ZERO_DEG = 0,
+  NINETY_DEG = 90,
+  ONE_HUNDRED_EIGHTY_DEG = 180,
+  TWO_HUNDRED_SEVENTY_DEG = 270,
+}

@@ -1,0 +1,35 @@
+@import "../../../styles/Variables.scss";
+
+.GameOver {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  background-color: $white-color;
+  padding: 20px;
+  border-radius: 20px;
+  border: 2px solid $game-over-color;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+
+  .Title {
+    font-size: 30px;
+    color: $game-over-color;
+  }
+
+  .Buttons {
+    display: flex;
+    gap: 50px;
+  }
+
+  .Score {
+    padding-left: 20px;
+
+    letter-spacing: .1em;
+    align-self: flex-start;
+  }
+}

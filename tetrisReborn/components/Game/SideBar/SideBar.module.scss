@@ -1,0 +1,21 @@
+@import "../../../styles/Variables.scss";
+
+.SideBar {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+
+  letter-spacing: 0.1em;
+  font-weight: 800;
+
+  padding-top: 25px;
+
+  .Info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .InfoValue {
+    color: $main-theme-color;
+  }
+}

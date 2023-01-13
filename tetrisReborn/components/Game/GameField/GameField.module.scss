@@ -1,0 +1,12 @@
+@import "../../../styles/Variables.scss";
+
+.GameField {
+  width: calc($cell-width * 10);
+  height: calc($cell-height * 20);
+
+  display: flex;
+  flex-wrap: wrap;
+
+  border: 3px solid gray;
+  box-sizing: content-box;
+}
