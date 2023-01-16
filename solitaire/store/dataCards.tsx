@@ -120,7 +120,6 @@ export const dataCardsState: TypeDataCardsState = {
   resultStack: dataResultStack,
   counter: 1,
   moveCounter: 0,
-  isReady: false,
   onRules: false,
   isWin: false,
   dragItem: null,

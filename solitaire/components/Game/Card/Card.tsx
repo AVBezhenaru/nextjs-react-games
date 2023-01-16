@@ -4,11 +4,9 @@ import { DragEventHandler, FC, MouseEventHandler } from 'react';
 import { CardItem, Corrector } from './CardStyle';
 
 interface ICardProps {
-  style?: object;
-  first?: boolean;
   img: string;
   name: number;
-  position: string;
+  stacked: boolean;
   draggable: boolean;
   onDragStart?: DragEventHandler;
   onDragEnd?: DragEventHandler;
@@ -19,10 +17,9 @@ interface ICardProps {
 }
 
 export const Card: FC<ICardProps> = ({
-  first,
   img,
   name,
-  position,
+  stacked,
   onDragStart,
   onDragEnd,
   onDragOver,
@@ -30,7 +27,7 @@ export const Card: FC<ICardProps> = ({
   onDoubleClick,
 }) => (
   <>
-    {position === 'bottom' && !first && <Corrector />}
+    {!stacked && <Corrector />}
     <CardItem
       draggable
       onDrag={onDragStart}

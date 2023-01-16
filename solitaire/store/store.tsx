@@ -19,11 +19,6 @@ export const storeSolitaire = (state = dataCardsState, action: TypeActions) => {
         ...state,
         helperCards: action.payload,
       };
-    case 'SET_IS_READY':
-      return {
-        ...state,
-        isReady: action.payload,
-      };
     case 'SET_RESULT_STACK':
       return {
         ...state,

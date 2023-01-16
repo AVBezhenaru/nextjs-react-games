@@ -1,12 +1,11 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuid } from 'uuid';
 
 import { useAppSelector, useAppDispatch } from '../../../hooks';
 import shirt from '../../images/cards/shirts/black.png';
 import { Rules } from '../Rules/Rules';
 import { changeHelperCards, getRandomCards, startNewGame } from '../../helpers/setGameCards';
 import {
-  setIsReadyAction,
   setCounterAction,
   setIsWinAction,
   setTheBestPoints,
@@ -29,7 +28,6 @@ export const GameMain: FC = () => {
     cards,
     gameCards,
     helperCards,
-    isReady,
     resultStack,
     counter,
     moveCounter,
@@ -41,6 +39,10 @@ export const GameMain: FC = () => {
 
   const [dragItem, setDragItem] = useState<TypeDragItem>();
   const [showRules, setShowRules] = useState<boolean>(true);
+
+  console.log(resultStack, 'result stack');
+  console.log(gameCards, 'game cards');
+  console.log(helperCards, 'helper cards');
 
   useEffect(() => {
     if (
@@ -61,10 +63,7 @@ export const GameMain: FC = () => {
       getRandomCards(sortCards, gameCards, counter, dispatch);
       dispatch(setCounterAction(counter + 1));
     }
-    if (counter === 8) {
-      dispatch(setIsReadyAction(true));
-    }
-  }, [counter, isReady]);
+  }, [counter]);
 
   const dragHandler = (item: TypeCardFull, idStack: number, gameCards: TypeCardFull[][]) => {
     if (idStack === 8 || idStack >= 14) {
@@ -123,7 +122,7 @@ export const GameMain: FC = () => {
     <Card
       img={item.open ? item.img : shirt.src}
       name={item.nameCard}
-      position="stack"
+      stacked
       key={item.id}
       draggable={false}
     />
@@ -133,7 +132,7 @@ export const GameMain: FC = () => {
     <Card
       img={item.img}
       name={item.nameCard}
-      position="stack"
+      stacked
       key={item.id}
       draggable
       onDragStart={() => dragHandler(item, 8, gameCards)}
@@ -144,45 +143,45 @@ export const GameMain: FC = () => {
 
   const resultsCards = results.map((el) => {
     const id = Number(el);
+    const stackCards = resultStack[id].map((item: TypeCardFull) => (
+      <Card
+        img={item.img}
+        name={item.nameCard}
+        stacked
+        key={item.id}
+        draggable
+        onDragStart={() => dragHandler(item, id, gameCards)}
+        onDrop={drop(id)}
+        onDragEnd={dragEnd(id)}
+      />
+    ));
+
     return (
       <Stack
-        key={uuidv4()}
+        key={uuid()}
         id={el}
         onDragOver={(e) => dragOverHandler(e, dispatch, id, dragOver)}
         onDrop={drop(id)}
       >
-        {resultStack[id].length > 0 &&
-          resultStack[id].map((item: TypeCardFull) => (
-            <Card
-              img={item.img}
-              name={item.nameCard}
-              position="stack"
-              key={item.id}
-              draggable
-              onDragStart={() => dragHandler(item, id, gameCards)}
-              onDrop={drop(id)}
-              onDragEnd={dragEnd(id)}
-            />
-          ))}
+        {stackCards}
       </Stack>
     );
   });
 
-  const stacksCards = stacks.map((id) => (
+  const stacksCards: any = stacks.map((id) => (
     <Stack
-      key={uuidv4()}
+      key={uuid()}
       id={String(id)}
       onDragOver={(e) => dragOverHandler(e, dispatch, id, dragOver)}
       onDrop={drop(id)}
       onDragEnd={dragEnd(id)}
     >
-      {isReady &&
-        gameCards[id].map((item: TypeCardFull, index: number) => (
+      {gameCards[id] &&
+        gameCards[id].map((item) => (
           <Card
-            first={index === 0}
             img={item.open ? item.img : shirt.src}
             name={item.nameCard}
-            position="bottom"
+            stacked={false}
             key={item.id}
             draggable
             onDragStart={() => dragHandler(item, id, gameCards)}
@@ -206,7 +205,7 @@ export const GameMain: FC = () => {
             changeHelperCards(dispatch, helperCards, sortCards, moveCounter, gamePoints)
           }
         >
-          {isReady && sortedCards}
+          {sortedCards}
         </Stack>
         <Stack id="helper">
           {helperCards.length > 0 && hpCards}

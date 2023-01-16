@@ -5,7 +5,6 @@ import {
   helperCardsAction,
   resultStackAction,
   setCounterAction,
-  setIsReadyAction,
   setIsWinAction,
   setMoveCounterAction,
   setGamePointsAction,
@@ -34,7 +33,6 @@ export const getRandomCards = (
 
 export const startNewGame = (dispatch: TypeDispatch, cards: TypeCardFull[]) => {
   dispatch(setMoveCounterAction(0));
-  dispatch(setIsReadyAction(false));
   dispatch(gameCardsAction([]));
   dispatch(helperCardsAction([]));
   dispatch(resultStackAction(dataResultStack));

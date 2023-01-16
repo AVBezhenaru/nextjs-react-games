@@ -20,11 +20,6 @@ export const resultStackAction = (data: { [key: number]: TypeCardFull[] }): Type
   payload: data,
 });
 
-export const setIsReadyAction = (status: boolean): TypeActions => ({
-  type: CardsActionTypes.SET_IS_READY,
-  payload: status,
-});
-
 export const setCounterAction = (num: number): TypeActions => ({
   type: CardsActionTypes.SET_COUNTER,
   payload: num,

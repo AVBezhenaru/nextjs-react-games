@@ -1,3 +1,8 @@
+export const hearts = 'hearts';
+export const spades = 'spades';
+export const diamonds = 'diamonds';
+export const clubs = 'clubs';
+
 export interface TypeCardFull {
   id: number;
   nameCard: number;
@@ -22,7 +27,6 @@ export interface TypeDataCardsState {
   resultStack: TypeResultStack;
   counter: number;
   moveCounter: number;
-  isReady: boolean;
   onRules: boolean;
   isWin: boolean;
   dragItem: TypeDragItem;
@@ -73,11 +77,6 @@ interface TypeSetResultStack {
   };
 }
 
-interface TypeActionSetIsReady {
-  type: CardsActionTypes.SET_IS_READY;
-  payload: boolean;
-}
-
 interface TypeSetCounter {
   type: CardsActionTypes.SET_COUNTER;
   payload: number;
@@ -111,7 +110,6 @@ interface TypeSetTheBestPoints {
 export type TypeActions =
   | TypeSortCards
   | TypeSetGameCards
-  | TypeActionSetIsReady
   | TypeSetHelperCards
   | TypeSetResultStack
   | TypeSetCounter
