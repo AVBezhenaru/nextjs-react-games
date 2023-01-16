@@ -17,6 +17,7 @@ export const putInResultStack = (
   moveCounter: number,
   gamePoints: number,
 ) => {
+  console.log('put in');
   let idResult;
   if (resultStack[14].length !== 0) {
     if (resultStack[14][0].suit === item.suit) {

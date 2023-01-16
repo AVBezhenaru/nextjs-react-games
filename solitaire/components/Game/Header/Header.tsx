@@ -1,19 +1,22 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import { useAppSelector, useAppDispatch } from '../../../../hooks';
 import { startNewGame } from '../../../helpers/setGameCards';
-import { setOnRulesAction } from '../../../store/actions/cards';
 
 import { HeaderGame } from './HeaderStyle';
 
-export const Header: React.FC = () => {
+interface IHeaderProps {
+  showRules: () => void;
+}
+
+export const Header: FC<IHeaderProps> = ({ showRules }) => {
   const { moveCounter, gamePoints, theBestPoints, cards } = useAppSelector(
     (state) => state.solitaire,
   );
   const dispatch = useAppDispatch();
   return (
     <HeaderGame>
-      <button type="button" onClick={() => dispatch(setOnRulesAction(true))}>
+      <button type="button" onClick={showRules}>
         Правила
       </button>
       <button type="button" onClick={() => startNewGame(dispatch, cards)}>

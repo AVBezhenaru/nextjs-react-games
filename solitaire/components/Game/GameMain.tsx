@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { useAppSelector, useAppDispatch } from '../../../hooks';
@@ -7,7 +7,6 @@ import { Rules } from '../Rules/Rules';
 import { changeHelperCards, getRandomCards, startNewGame } from '../../helpers/setGameCards';
 import {
   setIsReadyAction,
-  setOnRulesAction,
   setCounterAction,
   setIsWinAction,
   setTheBestPoints,
@@ -18,10 +17,12 @@ import { TypeCardFull, TypeDragItem } from '../../types';
 
 import { Win } from './Win/Win';
 import { Header } from './Header/Header';
-import { Kard } from './Kard/Kard';
+import { Card } from './Card/Card';
 import { SectionGame, BodyGame, Stack } from './GameMainStyle';
 
-export const GameMain = () => {
+const stacks = [0, 1, 2, 3, 4, 5, 6];
+
+export const GameMain: FC = () => {
   const dispatch = useAppDispatch();
   const {
     sortCards,
@@ -29,7 +30,6 @@ export const GameMain = () => {
     gameCards,
     helperCards,
     isReady,
-    onRules,
     resultStack,
     counter,
     moveCounter,
@@ -40,6 +40,7 @@ export const GameMain = () => {
   } = useAppSelector((state) => state.solitaire);
 
   const [dragItem, setDragItem] = useState<TypeDragItem>();
+  const [showRules, setShowRules] = useState<boolean>(true);
 
   useEffect(() => {
     if (
@@ -76,13 +77,128 @@ export const GameMain = () => {
   };
 
   const results = Object.keys(resultStack);
-  const stacks = [0, 1, 2, 3, 4, 5, 6];
+
+  const drop = useCallback((id: number) => {
+    return (e: React.DragEvent<Element>) => dropHandler(
+      e,
+      dispatch,
+      dragItem,
+      id,
+      gameCards,
+      helperCards,
+      moveCounter,
+      resultStack,
+      gamePoints
+    );
+  }, [dragItem, gameCards, helperCards, moveCounter, resultStack, gamePoints]);
+
+  const dragEnd = useCallback((id: number) => {
+    return (e: React.DragEvent<Element>) => dropHandler(
+      e,
+      dispatch,
+      dragItem,
+      id,
+      gameCards,
+      helperCards,
+      moveCounter,
+      resultStack,
+      gamePoints
+    );
+  }, [dragItem, gameCards, helperCards, moveCounter, resultStack, gamePoints])
+
+  const doubleClick = useCallback((item: TypeCardFull, number: number) => {
+    return () => putInResultStack(
+      dispatch,
+      item,
+      number,
+      resultStack,
+      helperCards,
+      gameCards,
+      moveCounter,
+      gamePoints
+    );
+  }, [resultStack, helperCards, gameCards, moveCounter, gamePoints]);
+
+  const sortedCards = sortCards.map((item) => (
+    <Card
+      img={item.open ? item.img : shirt.src}
+      name={item.nameCard}
+      position="stack"
+      key={item.id}
+      draggable={false}
+    />
+  ));
+
+  const hpCards = helperCards.map((item) => (
+    <Card
+      img={item.img}
+      name={item.nameCard}
+      position="stack"
+      key={item.id}
+      draggable
+      onDragStart={() => dragHandler(item, 8, gameCards)}
+      onDoubleClick={doubleClick(item, 8)}
+      onDragEnd={dragEnd(dragOver)}
+    />
+  ));
+
+  const resultsCards = results.map((el) => {
+    const id = Number(el);
+    return (
+      <Stack
+        key={uuidv4()}
+        id={el}
+        onDragOver={(e) => dragOverHandler(e, dispatch, id, dragOver)}
+        onDrop={drop(id)}
+      >
+        {resultStack[id].length > 0 &&
+          resultStack[id].map((item: TypeCardFull) => (
+            <Card
+              img={item.img}
+              name={item.nameCard}
+              position="stack"
+              key={item.id}
+              draggable
+              onDragStart={() => dragHandler(item, id, gameCards)}
+              onDrop={drop(id)}
+              onDragEnd={dragEnd(id)}
+            />
+          ))}
+      </Stack>
+    );
+  });
+
+  const stacksCards = stacks.map((id) => (
+    <Stack
+      key={uuidv4()}
+      id={String(id)}
+      onDragOver={(e) => dragOverHandler(e, dispatch, id, dragOver)}
+      onDrop={drop(id)}
+      onDragEnd={dragEnd(id)}
+    >
+      {isReady &&
+        gameCards[id].map((item: TypeCardFull, index: number) => (
+          <Card
+            first={index === 0}
+            img={item.open ? item.img : shirt.src}
+            name={item.nameCard}
+            position="bottom"
+            key={item.id}
+            draggable
+            onDragStart={() => dragHandler(item, id, gameCards)}
+            onDragEnd={dragEnd(id)}
+            onDrop={drop(id)}
+            onDoubleClick={doubleClick(item, id)}
+          />
+        ))}
+    </Stack>
+  ));
 
   return (
     <SectionGame>
-      <Header />
+      <Header showRules={() => setShowRules(true)} />
       <BodyGame>
-        {onRules && <Rules fn={() => dispatch(setOnRulesAction(false))} />}
+        {showRules && <Rules onClose={() => setShowRules(false)} />}
         {isWin && <Win newGame={() => startNewGame(dispatch, cards)} />}
         <Stack
           id="bank"
@@ -90,203 +206,15 @@ export const GameMain = () => {
             changeHelperCards(dispatch, helperCards, sortCards, moveCounter, gamePoints)
           }
         >
-          {isReady &&
-            sortCards.map((item) => (
-              <Kard
-                img={item.open ? item.img : shirt.src}
-                name={item.nameCard}
-                position="stack"
-                key={item.id}
-                draggable={false}
-              />
-            ))}
+          {isReady && sortedCards}
         </Stack>
         <Stack id="helper">
-          {helperCards.length > 0 &&
-            helperCards.map((item) => (
-              <Kard
-                img={item.img}
-                name={item.nameCard}
-                position="stack"
-                key={item.id}
-                draggable
-                onDragStart={() => dragHandler(item, 8, gameCards)}
-                onDoubleClick={() =>
-                  putInResultStack(
-                    dispatch,
-                    item,
-                    8,
-                    resultStack,
-                    helperCards,
-                    gameCards,
-                    moveCounter,
-                    gamePoints,
-                  )
-                }
-                onDragEnd={(e) =>
-                  dropHandler(
-                    e,
-                    dispatch,
-                    dragItem,
-                    dragOver,
-                    gameCards,
-                    helperCards,
-                    moveCounter,
-                    resultStack,
-                    gamePoints,
-                  )
-                }
-              />
-            ))}
+          {helperCards.length > 0 && hpCards}
         </Stack>
-        {results.map((el) => {
-          const id = Number(el);
-          return (
-            <Stack
-              key={uuidv4()}
-              id={el}
-              onDragOver={(e) => dragOverHandler(e, dispatch, id, dragOver)}
-              onDrop={(e) =>
-                dropHandler(
-                  e,
-                  dispatch,
-                  dragItem,
-                  id,
-                  gameCards,
-                  helperCards,
-                  moveCounter,
-                  resultStack,
-                  gamePoints,
-                )
-              }
-            >
-              {resultStack[id].length > 0 &&
-                resultStack[id].map((item: TypeCardFull) => (
-                  <Kard
-                    img={item.img}
-                    name={item.nameCard}
-                    position="stack"
-                    key={item.id}
-                    draggable
-                    onDragStart={() => dragHandler(item, id, gameCards)}
-                    onDrop={(e) =>
-                      dropHandler(
-                        e,
-                        dispatch,
-                        dragItem,
-                        id,
-                        gameCards,
-                        helperCards,
-                        moveCounter,
-                        resultStack,
-                        gamePoints,
-                      )
-                    }
-                    onDragEnd={(e) =>
-                      dropHandler(
-                        e,
-                        dispatch,
-                        dragItem,
-                        id,
-                        gameCards,
-                        helperCards,
-                        moveCounter,
-                        resultStack,
-                        gamePoints,
-                      )
-                    }
-                  />
-                ))}
-            </Stack>
-          );
-        })}
+        {resultsCards}
       </BodyGame>
-
       <BodyGame>
-        {stacks.map((id) => (
-          <Stack
-            key={uuidv4()}
-            id={String(id)}
-            onDragOver={(e) => dragOverHandler(e, dispatch, id, dragOver)}
-            onDrop={(e) =>
-              dropHandler(
-                e,
-                dispatch,
-                dragItem,
-                id,
-                gameCards,
-                helperCards,
-                moveCounter,
-                resultStack,
-                gamePoints,
-              )
-            }
-            onDragEnd={(e) =>
-              dropHandler(
-                e,
-                dispatch,
-                dragItem,
-                id,
-                gameCards,
-                helperCards,
-                moveCounter,
-                resultStack,
-                gamePoints,
-              )
-            }
-          >
-            {isReady &&
-              gameCards[id].map((item: TypeCardFull, index: number) => (
-                <Kard
-                  first={index === 0}
-                  img={item.open ? item.img : shirt.src}
-                  name={item.nameCard}
-                  position="bottom"
-                  key={item.id}
-                  draggable
-                  onDragStart={() => dragHandler(item, id, gameCards)}
-                  onDragEnd={(e) =>
-                    dropHandler(
-                      e,
-                      dispatch,
-                      dragItem,
-                      id,
-                      gameCards,
-                      helperCards,
-                      moveCounter,
-                      resultStack,
-                      gamePoints,
-                    )
-                  }
-                  onDrop={(e) =>
-                    dropHandler(
-                      e,
-                      dispatch,
-                      dragItem,
-                      id,
-                      gameCards,
-                      helperCards,
-                      moveCounter,
-                      resultStack,
-                      gamePoints,
-                    )
-                  }
-                  onDoubleClick={() =>
-                    putInResultStack(
-                      dispatch,
-                      item,
-                      id,
-                      resultStack,
-                      helperCards,
-                      gameCards,
-                      moveCounter,
-                      gamePoints,
-                    )
-                  }
-                />
-              ))}
-          </Stack>
-        ))}
+        {stacksCards}
       </BodyGame>
     </SectionGame>
   );

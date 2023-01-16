@@ -24,11 +24,6 @@ export const storeSolitaire = (state = dataCardsState, action: TypeActions) => {
         ...state,
         isReady: action.payload,
       };
-    case 'SET_ON_RULES':
-      return {
-        ...state,
-        onRules: action.payload,
-      };
     case 'SET_RESULT_STACK':
       return {
         ...state,

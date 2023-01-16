@@ -1,20 +1,3 @@
-import { DragEventHandler, MouseEventHandler } from 'react';
-
-export type TypeCard = {
-  style?: object;
-  first?: boolean;
-  img: string;
-  name: number;
-  position: string;
-  draggable: boolean;
-  onDragStart?: DragEventHandler;
-  onDragEnd?: DragEventHandler;
-  onDragOver?: DragEventHandler;
-  onDrop?: DragEventHandler;
-  onDrag?: DragEventHandler;
-  onDoubleClick?: MouseEventHandler;
-};
-
 export interface TypeCardFull {
   id: number;
   nameCard: number;
@@ -54,7 +37,6 @@ export enum CardsActionTypes {
   SET_IS_READY = 'SET_IS_READY',
   SET_HELPER_CARDS = 'SET_HELPER_CARDS',
   SET_RESULT_STACK = 'SET_RESULT_STACK',
-  SET_ON_RULES = 'SET_ON_RULES',
   SET_COUNTER = 'SET_COUNTER',
   SET_MOVE_COUNTER = 'SET_MOVE_COUNTER',
   SET_IS_WIN = 'SET_IS_WIN',
@@ -62,11 +44,6 @@ export enum CardsActionTypes {
   SET_DRAG_OVER = 'SET_DRAG_OVER',
   SET_GAME_POINTS = 'SET_GAME_POINTS',
   SET_THE_BEST_POINTS = 'SET_THE_BEST_POINTS',
-}
-
-interface TypeSetOnRules {
-  type: CardsActionTypes.SET_ON_RULES;
-  payload: boolean;
 }
 
 interface TypeSetIsWin {
@@ -132,7 +109,6 @@ interface TypeSetTheBestPoints {
 }
 
 export type TypeActions =
-  | TypeSetOnRules
   | TypeSortCards
   | TypeSetGameCards
   | TypeActionSetIsReady

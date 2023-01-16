@@ -1,10 +1,5 @@
 import { CardsActionTypes, TypeActions, TypeCardFull, TypeDragItem } from '../../types';
 
-export const setOnRulesAction = (status: boolean): TypeActions => ({
-  type: CardsActionTypes.SET_ON_RULES,
-  payload: status,
-});
-
 export const sortCardsAction = (data: TypeCardFull[]): TypeActions => ({
   type: CardsActionTypes.SORT_CARDS,
   payload: data,
