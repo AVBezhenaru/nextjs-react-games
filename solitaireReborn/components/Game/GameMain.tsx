@@ -62,7 +62,7 @@ export const GameMain: FC = () => {
         break;
       } 
       case stackedCardsName: {
-        dispatch(dragEndOnStacked({ endStackIndex: dragOverItem.current.index, dragged: dragged.current }));
+        dispatch(dragEndOnStacked({ dragged: dragged.current }));
         break;
       }
     }
@@ -90,7 +90,7 @@ export const GameMain: FC = () => {
       draggable
       onDragStart={() => dragStart([item], 0, openedCardsName)}
       onDragEnd={dragEnd}
-      onDoubleClick={() => dispatch(cardDoubleClick({ card: item }))}
+      onDoubleClick={() => dispatch(cardDoubleClick({ card: item, stackName: openedCardsName }))}
     />
   ));
   
@@ -128,7 +128,7 @@ export const GameMain: FC = () => {
         draggable={item.open}
         onDragStart={() => dragStart(stack.slice(cardIndex, stack.length), index, cardsInGameName)}
         onDragEnd={dragEnd}
-        onDoubleClick={() => dispatch(cardDoubleClick({ card: item }))}
+        onDoubleClick={() => dispatch(cardDoubleClick({ card: item, stackName: cardsInGameName, stackIndex: index }))}
       />
     ));
 

@@ -16,10 +16,12 @@ export type SolitaireState = {
 
 export type DoubleClickPayload = {
   card: CardModel;
+  stackIndex?: number;
+  stackName: string;
 }
 
 export type DragEndPayload = {
-  endStackIndex: number;
+  endStackIndex?: number;
   dragged: Dragged;
 }
 
