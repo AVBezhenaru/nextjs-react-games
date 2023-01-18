@@ -18,24 +18,16 @@ export const putInResultStack = (
   gamePoints: number,
 ) => {
   let idResult;
-  if (resultStack[14].length !== 0) {
-    if (resultStack[14][0].suit === item.suit) {
-      idResult = 14;
-    }
-  }
-  if (resultStack[15].length !== 0) {
-    if (resultStack[15][0].suit === item.suit) {
-      idResult = 15;
-    }
-  }
-  if (resultStack[16].length !== 0) {
-    if (resultStack[16][0].suit === item.suit) {
-      idResult = 16;
-    }
-  }
-  if (resultStack[17].length !== 0) {
-    if (resultStack[17][0].suit === item.suit) {
-      idResult = 17;
+
+  // keys of result array stacks (right top 4 stacks)
+  const resArrKeys = Object.keys(resultStack).map((key) => Number(key));
+
+  for (let i = 0; i < resArrKeys.length; i++) {
+    const key = resArrKeys[i];
+    if (resultStack[key].length !== 0) {
+      if (resultStack[key][0].suit === item.suit) {
+        idResult = key;
+      }
     }
   }
 
