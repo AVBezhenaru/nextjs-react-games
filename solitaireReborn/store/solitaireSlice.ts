@@ -1,6 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import CardModel from "../models/CardModel";
-import { openNextCard, startNewGame, popCardFromStack, openLast, moveCardToStacked, canMoveToIngameStack } from "./decomposedActionFunctions";
+import { 
+  openNextCard, 
+  startNewGame, 
+  popCardFromStack, 
+  openLast, 
+  moveCardToStacked, 
+  canMoveToIngameStack 
+} from "./decomposedActionFunctions";
 import {
   cardsInGameName,
   DoubleClickPayload, 

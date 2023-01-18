@@ -40,10 +40,6 @@ export const GameMain: FC = () => {
   const [dragItem, setDragItem] = useState<TypeDragItem>();
   const [showRules, setShowRules] = useState<boolean>(true);
 
-  console.log(resultStack, 'result stack');
-  console.log(gameCards, 'game cards');
-  console.log(helperCards, 'helper cards');
-
   useEffect(() => {
     if (
       resultStack[14].length === 13 &&

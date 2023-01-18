@@ -1,5 +1,5 @@
 import { WritableDraft } from "immer/dist/internal";
-import { cardsInGameName, openedCardsName, SolitaireState, stackedCardsName } from "./types";
+import { cardsInGameName, openedCardsName, SolitaireState } from "./types";
 import { cards } from "./cardsData";
 import { mixCards } from "../helpers/mixCards";
 import CardModel from "../models/CardModel";
@@ -20,17 +20,6 @@ export const popCardFromStack = (stack: WritableDraft<CardModel>[]) => stack.pop
 
 export const openLast = (stack: WritableDraft<CardModel>[]) => {
   if (stack.length) stack[stack.length - 1].open = true;
-}
-
-const popInGameCards = (
-  cardsInGameStack: WritableDraft<CardModel>[],
-  cards?: CardModel[]
-) => {
-  if (!cards) {
-    cardsInGameStack.pop();
-    openLast(cardsInGameStack);
-    return;
-  }
 }
 
 export const startNewGame = (state: WritableDraft<SolitaireState>) => {
@@ -115,45 +104,3 @@ export const moveCardToStacked = (
     openLast(cardsInGame[startStackIndex]);
   }
 }
-
-export const dragEndIngameCards = (
-  stackedCards: WritableDraft<CardModel>[][],
-  openedCards: WritableDraft<CardModel>[],
-  cardsInGame: WritableDraft<CardModel>[][],
-  endStackIndex: number,
-  startStackIndex: number,
-  startStackName: string,
-  cards: CardModel[]
-) => {
-  if (cards.length < 1) return;
-
-  const dropCards = () => {
-    cardsInGame[endStackIndex].push(...cards);
-    switch (startStackName) {
-      case openedCardsName:
-        openedCards = openedCards.filter((c) => c.id !== cards[0].id);
-        break;
-      case cardsInGameName:
-        cardsInGame[startStackIndex] = cardsInGame[startStackIndex]
-          .filter((startCard) => !cards.map((c) => c.id).includes(startCard.id));
-        if (cardsInGame[startStackIndex].length)
-          cardsInGame[startStackIndex][cardsInGame[startStackIndex].length - 1].open = true;
-        break;
-      case stackedCardsName:
-        stackedCards[startStackIndex] = stackedCards[startStackIndex].filter((c) => c.id !== cards[0].id);
-        break;
-    }
-  }
-
-  if (cardsInGame[endStackIndex].length === 0) { 
-    if (cards[0].name !== 13) return; // King
-
-    dropCards();
-  }
-
-  const lastStackCard = cardsInGame[endStackIndex][cardsInGame[endStackIndex].length - 1];
-  if (lastStackCard.color !== cards[0].color && lastStackCard.name === cards[0].name + 1) {
-    dropCards();
-  }
-}
-
