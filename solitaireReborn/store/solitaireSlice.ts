@@ -100,7 +100,36 @@ const solitaireReborn = createSlice({
       state.openedCards.push(card);
     },
     dragEndOnGameCards(state, { payload: { endStackIndex, dragged: { cards, startStackIndex, startStackName } } }: PayloadAction<DragEndPayload>) {
+      if (cards.length < 1) return;
 
+      const dropCards = () => {
+        state.cardsInGame[endStackIndex].push(...cards);
+        switch (startStackName) {
+          case openedCardsName:
+            state.openedCards = state.openedCards.filter((c) => c.id !== cards[0].id);
+            break;
+          case cardsInGameName:
+            state.cardsInGame[startStackIndex] = state.cardsInGame[startStackIndex]
+              .filter((startCard) => !cards.map((c) => c.id).includes(startCard.id));
+            if (state.cardsInGame[startStackIndex].length)
+              state.cardsInGame[startStackIndex][state.cardsInGame[startStackIndex].length - 1].open = true;
+            break;
+          case stackedCardsName:
+            state.stackedCards[startStackIndex] = state.stackedCards[startStackIndex].filter((c) => c.id !== cards[0].id);
+            break;
+        }
+      }
+
+      if (state.cardsInGame[endStackIndex].length === 0) { 
+        if (cards[0].name !== 13) return; // King
+
+        dropCards();
+      }
+
+      const lastStackCard = state.cardsInGame[endStackIndex][state.cardsInGame[endStackIndex].length - 1];
+      if (lastStackCard.color !== cards[0].color && lastStackCard.name === cards[0].name + 1) {
+        dropCards();
+      }
     },
     dragEndOnStacked(state, { payload: {  endStackIndex, dragged: { cards, startStackIndex, startStackName } } }: PayloadAction<DragEndPayload>) {
       if (cards.length !== 1) return;
@@ -114,7 +143,8 @@ const solitaireReborn = createSlice({
             break;
           case cardsInGameName:
             state.cardsInGame[startStackIndex] = state.cardsInGame[startStackIndex].filter((c) => c.id !== draggedCard.id);
-            state.cardsInGame[startStackIndex][state.cardsInGame[startStackIndex].length - 1].open = true;
+            if (state.cardsInGame[startStackIndex].length)
+              state.cardsInGame[startStackIndex][state.cardsInGame[startStackIndex].length - 1].open = true;
             break;
           case stackedCardsName:
             state.stackedCards[startStackIndex] = state.stackedCards[startStackIndex].filter((c) => c.id !== draggedCard.id);

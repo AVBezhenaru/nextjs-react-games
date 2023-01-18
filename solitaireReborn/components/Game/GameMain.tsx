@@ -55,13 +55,15 @@ export const GameMain: FC = () => {
 
   const dragEnd = () => {
     if (!dragOverItem.current) return;
-
+    console.log(dragOverItem.current);
     switch (dragOverItem.current.name) {
       case cardsInGameName: {
         dispatch(dragEndOnGameCards({ endStackIndex: dragOverItem.current.index, dragged: dragged.current }));
+        break;
       } 
       case stackedCardsName: {
         dispatch(dragEndOnStacked({ endStackIndex: dragOverItem.current.index, dragged: dragged.current }));
+        break;
       }
     }
 
