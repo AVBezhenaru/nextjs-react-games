@@ -1,7 +1,10 @@
 import styles from '../Cell/Cell.module.scss';
+import Number from '../Number/Number';
 
-const Cell = () => {
-  return <div className={styles.cell}>2048</div>;
+const Cell = (props?: { number: number }) => {
+  return (
+    <div className={styles.cell}>{props.number ? <Number number={props.number} /> : null}</div>
+  );
 };
 
 export default Cell;

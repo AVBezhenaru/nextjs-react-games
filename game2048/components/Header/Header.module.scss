@@ -1,1 +1,27 @@
-
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding-top: 50px;
+  margin-bottom: 30px;
+  // height: 100vmin;
+  // width: 65vmin;
+  color: black;
+}
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+.title {
+  padding-top: 10px;
+  font-size: 2.5em;
+}
+.description {
+  font-size: 0.9em;
+  letter-spacing: 1px;
+  line-height: 20px;
+  // padding-top: 20px;
+}
+.menu {
+  display: flex;
+  justify-content: space-around;
+}
