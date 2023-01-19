@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 import { useAppSelector, useAppDispatch } from '../../../../hooks';
-import { startNewGame } from '../../../helpers/setGameCards';
+import { startGame } from '../../../store/solitaireSlice';
 
 import { HeaderGame } from './HeaderStyle';
 
@@ -10,20 +10,23 @@ interface IHeaderProps {
 }
 
 export const Header: FC<IHeaderProps> = ({ showRules }) => {
-  const { moveCounter, gamePoints, theBestPoints, cards } = useAppSelector(
-    (state) => state.solitaire,
-  );
   const dispatch = useAppDispatch();
+  const {
+    moveCounter,
+    bestPoints,
+    gamePoints
+  } = useAppSelector((state) => state.solitaireReborn);
+
   return (
     <HeaderGame>
       <button type="button" onClick={showRules}>
         Правила
       </button>
-      <button type="button" onClick={() => startNewGame(dispatch, cards)}>
+      <button type="button" onClick={() => dispatch(startGame())}>
         Новая игра
       </button>
       <span>
-        Лучший счет<span>{theBestPoints}</span>
+        Лучший счет<span>{bestPoints}</span>
       </span>
       <span>
         Текущий счет<span>{gamePoints}</span>

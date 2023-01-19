@@ -14,6 +14,7 @@ interface ICardProps {
   onDrop?: DragEventHandler;
   onDrag?: DragEventHandler;
   onDoubleClick?: MouseEventHandler;
+  onDragLeave?: MouseEventHandler;
 }
 
 export const Card: FC<ICardProps> = ({
@@ -23,7 +24,6 @@ export const Card: FC<ICardProps> = ({
   onDragStart,
   onDragEnd,
   onDragOver,
-  onDrop,
   onDoubleClick,
 }) => (
   <>
@@ -33,7 +33,6 @@ export const Card: FC<ICardProps> = ({
       onDrag={onDragStart}
       onDragEnd={onDragEnd}
       onDragOver={onDragOver}
-      onDrop={onDrop}
       onDoubleClick={onDoubleClick}
     >
       <Image src={img} alt={String(name)} width="100" height="130" />

@@ -1,215 +1,181 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import { useAppSelector, useAppDispatch } from '../../../hooks';
 import shirt from '../../images/cards/shirts/black.png';
 import { Rules } from '../Rules/Rules';
-import { changeHelperCards, getRandomCards, startNewGame } from '../../helpers/setGameCards';
-import {
-  setCounterAction,
-  setIsWinAction,
-  setTheBestPoints,
-} from '../../store/actions/cards';
-import { dragOverHandler, dropHandler } from '../../helpers/dragAndDropHandlers';
-import { putInResultStack } from '../../helpers/doubleClickFunction';
-import { TypeCardFull, TypeDragItem } from '../../types';
 
 import { Win } from './Win/Win';
 import { Header } from './Header/Header';
-import { Card } from './Card/Card';
 import { SectionGame, BodyGame, Stack } from './GameMainStyle';
-
-const stacks = [0, 1, 2, 3, 4, 5, 6];
+import { 
+  cardDoubleClick, 
+  dragEndOnGameCards, 
+  dragEndOnStacked, 
+  gameOverWithWin, 
+  openCard, 
+  startGame 
+} from '../../store/solitaireSlice';
+import { Card } from './Card/Card';
+import { cardsInGameName, Dragged, DragOverItem, openedCardsName, stackedCardsName } from '../../store/types';
+import CardModel from '../../models/CardModel';
 
 export const GameMain: FC = () => {
-  const dispatch = useAppDispatch();
   const {
-    sortCards,
-    cards,
-    gameCards,
-    helperCards,
-    resultStack,
-    counter,
-    moveCounter,
-    isWin,
-    dragOver,
-    gamePoints,
-    theBestPoints,
-  } = useAppSelector((state) => state.solitaire);
+    closedCards,
+    cardsInGame,
+    openedCards,
+    stackedCards,
+  } = useAppSelector((state) => state.solitaireReborn);
 
-  const [dragItem, setDragItem] = useState<TypeDragItem>();
+  const dispatch = useAppDispatch();
+
   const [showRules, setShowRules] = useState<boolean>(true);
+  const [win, setWin] = useState(false);
+
+  const startNewGame = () => {
+    setWin(false);
+    dispatch(startGame());
+  }
 
   useEffect(() => {
+    dispatch(startGame())
+  }, []);
+
+  useEffect(() => {
+    if (!stackedCards.length) return;
+    
+    for (let i = 0; i < stackedCards.length; i++) {
+      if (stackedCards[i].length !== 13) return;
+    }
+
+    setWin(true);
+    dispatch(gameOverWithWin());
+  }, [stackedCards]);
+
+  const dragOverItem = useRef<DragOverItem>();
+  const dragged = useRef<Dragged>();
+
+  const dragStart = (cards: CardModel[], index: number, name: string) => {
+    dragged.current = { cards, startStackIndex: index, startStackName: name };
+  }
+
+  const dragOver = (index: number, name: string) => {
     if (
-      resultStack[14].length === 13 &&
-      resultStack[15].length === 13 &&
-      resultStack[16].length === 13 &&
-      resultStack[17].length === 13
+      !dragOverItem.current 
+      || dragOverItem.current.index !== index 
+      || dragOverItem.current.name !== name
     ) {
-      dispatch(setIsWinAction(true));
-      if (gamePoints > theBestPoints) {
-        dispatch(setTheBestPoints(gamePoints));
-      }
+      dragOverItem.current = { index, name };
     }
-  }, [resultStack]);
+  }
 
-  useEffect(() => {
-    if (counter < 8) {
-      getRandomCards(sortCards, gameCards, counter, dispatch);
-      dispatch(setCounterAction(counter + 1));
+  const dragEnd = () => {
+    if (!dragOverItem.current) return;
+    
+    if (dragOverItem.current.name === cardsInGameName) {
+      dispatch(dragEndOnGameCards({ endStackIndex: dragOverItem.current.index, dragged: dragged.current }));
     }
-  }, [counter]);
 
-  const dragHandler = (item: TypeCardFull, idStack: number, gameCards: TypeCardFull[][]) => {
-    if (idStack === 8 || idStack >= 14) {
-      setDragItem({ items: [item], idStack });
-    } else {
-      const index = gameCards[idStack].indexOf(item);
-      const items = [...gameCards[idStack]].splice(index);
-      setDragItem({ items: [...items], idStack });
+    if (dragOverItem.current.name === stackedCardsName) {
+      dispatch(dragEndOnStacked({ dragged: dragged.current }));
     }
-  };
 
-  const results = Object.keys(resultStack);
+    dragOverItem.current = null;
+    dragged.current = null;
+  }
 
-  const drop = useCallback((id: number) => {
-    return (e: React.DragEvent<Element>) => dropHandler(
-      e,
-      dispatch,
-      dragItem,
-      id,
-      gameCards,
-      helperCards,
-      moveCounter,
-      resultStack,
-      gamePoints
-    );
-  }, [dragItem, gameCards, helperCards, moveCounter, resultStack, gamePoints]);
-
-  const dragEnd = useCallback((id: number) => {
-    return (e: React.DragEvent<Element>) => dropHandler(
-      e,
-      dispatch,
-      dragItem,
-      id,
-      gameCards,
-      helperCards,
-      moveCounter,
-      resultStack,
-      gamePoints
-    );
-  }, [dragItem, gameCards, helperCards, moveCounter, resultStack, gamePoints])
-
-  const doubleClick = useCallback((item: TypeCardFull, number: number) => {
-    return () => putInResultStack(
-      dispatch,
-      item,
-      number,
-      resultStack,
-      helperCards,
-      gameCards,
-      moveCounter,
-      gamePoints
-    );
-  }, [resultStack, helperCards, gameCards, moveCounter, gamePoints]);
-
-  const sortedCards = sortCards.map((item) => (
+  const closedCardsList = closedCards.map((item) => (
     <Card
-      img={item.open ? item.img : shirt.src}
-      name={item.nameCard}
+      img={shirt.src}
+      name={item.name}
       stacked
       key={item.id}
       draggable={false}
     />
   ));
 
-  const hpCards = helperCards.map((item) => (
+  const openedCardsList = openedCards.map((item) => (
     <Card
       img={item.img}
-      name={item.nameCard}
+      name={item.name}
       stacked
       key={item.id}
       draggable
-      onDragStart={() => dragHandler(item, 8, gameCards)}
-      onDoubleClick={doubleClick(item, 8)}
-      onDragEnd={dragEnd(dragOver)}
+      onDragStart={() => dragStart([item], 0, openedCardsName)}
+      onDragEnd={dragEnd}
+      onDoubleClick={() => dispatch(cardDoubleClick({ card: item, stackName: openedCardsName }))}
     />
   ));
-
-  const resultsCards = results.map((el) => {
-    const id = Number(el);
-    const stackCards = resultStack[id].map((item: TypeCardFull) => (
+  
+  const stackedCardsList = stackedCards.map((stack, index) => {
+    const stackCards = stack.map((item) => (
       <Card
         img={item.img}
-        name={item.nameCard}
+        name={item.name}
         stacked
         key={item.id}
         draggable
-        onDragStart={() => dragHandler(item, id, gameCards)}
-        onDrop={drop(id)}
-        onDragEnd={dragEnd(id)}
+        onDragStart={() => dragStart([item], index, stackedCardsName)}
+        onDragEnd={dragEnd}
       />
     ));
 
     return (
       <Stack
         key={uuid()}
-        id={el}
-        onDragOver={(e) => dragOverHandler(e, dispatch, id, dragOver)}
-        onDrop={drop(id)}
+        id={String(index)}
+        onDragOver={() => dragOver(index, stackedCardsName)}
       >
         {stackCards}
       </Stack>
     );
   });
 
-  const stacksCards: any = stacks.map((id) => (
-    <Stack
-      key={uuid()}
-      id={String(id)}
-      onDragOver={(e) => dragOverHandler(e, dispatch, id, dragOver)}
-      onDrop={drop(id)}
-      onDragEnd={dragEnd(id)}
-    >
-      {gameCards[id] &&
-        gameCards[id].map((item) => (
-          <Card
-            img={item.open ? item.img : shirt.src}
-            name={item.nameCard}
-            stacked={false}
-            key={item.id}
-            draggable
-            onDragStart={() => dragHandler(item, id, gameCards)}
-            onDragEnd={dragEnd(id)}
-            onDrop={drop(id)}
-            onDoubleClick={doubleClick(item, id)}
-          />
-        ))}
-    </Stack>
-  ));
+  const cardsInGameList = cardsInGame.map((stack, index) => {
+    const stackCards = stack.map((item, cardIndex) => (
+      <Card
+        img={item.open ? item.img : shirt.src}
+        name={item.name}
+        stacked={false}
+        key={item.id}
+        draggable={item.open}
+        onDragStart={() => dragStart(stack.slice(cardIndex, stack.length), index, cardsInGameName)}
+        onDragEnd={dragEnd}
+        onDoubleClick={() => dispatch(cardDoubleClick({ card: item, stackName: cardsInGameName, stackIndex: index }))}
+      />
+    ));
+
+    return (
+      <Stack
+        key={uuid()}
+        id={String(index)}
+        onDragOver={() => dragOver(index, cardsInGameName)}
+      >
+        {stackCards}
+      </Stack>
+    );
+  });
 
   return (
     <SectionGame>
       <Header showRules={() => setShowRules(true)} />
       <BodyGame>
         {showRules && <Rules onClose={() => setShowRules(false)} />}
-        {isWin && <Win newGame={() => startNewGame(dispatch, cards)} />}
+        {win && <Win newGame={startNewGame} />}
         <Stack
           id="bank"
-          onClick={() =>
-            changeHelperCards(dispatch, helperCards, sortCards, moveCounter, gamePoints)
-          }
+          onClick={() => dispatch(openCard())}
         >
-          {sortedCards}
+          {closedCardsList}
         </Stack>
         <Stack id="helper">
-          {helperCards.length > 0 && hpCards}
+          {openedCardsList}
         </Stack>
-        {resultsCards}
+        {stackedCardsList}
       </BodyGame>
       <BodyGame>
-        {stacksCards}
+        {cardsInGameList}
       </BodyGame>
     </SectionGame>
   );

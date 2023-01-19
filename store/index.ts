@@ -2,8 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import hangmanReducer from '../hangman/store/HangmanSlice';
 import DataSlice from '../chess/dataSlice/DataSlice';
-import { storeSolitaire } from '../solitaire/store/store';
-import solitaireSlice from '../solitaireReborn/store/solitaireSlice';
+import solitaireSlice from '../solitaire/store/solitaireSlice';
 
 import user from './userSlice';
 
@@ -12,7 +11,6 @@ export const store = configureStore({
     user,
     hangman: hangmanReducer,
     rootSlice: DataSlice,
-    solitaire: storeSolitaire,
     solitaireReborn: solitaireSlice,
   },
   middleware(getDefaultMiddleware) {
