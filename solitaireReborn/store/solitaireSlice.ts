@@ -27,6 +27,12 @@ const initialState: SolitaireState = {
   gamePoints: 0,
 }
 
+const calcGamePoints = (points: number, pointsToAdd: number, condition?: boolean): number => {
+  if (condition) return points + pointsToAdd;
+  
+  return points > 0 ? points - 5 : 0;
+}
+
 const solitaireReborn = createSlice({
   name: 'solitaireReborn',
   initialState,
@@ -34,23 +40,28 @@ const solitaireReborn = createSlice({
     startGame(state)  {
       startNewGame(state);
     },
-    cardDoubleClick({ stackedCards, openedCards, cardsInGame }, { payload: { card, stackIndex, stackName } }: PayloadAction<DoubleClickPayload>) {
+    cardDoubleClick(state, { payload: { card, stackIndex, stackName } }: PayloadAction<DoubleClickPayload>) {
       if (!card.open) return;
 
-      moveCardToStacked(
+      state.moveCounter += 1;
+      const moved = moveCardToStacked(
         card,
-        stackedCards,
-        openedCards,
-        cardsInGame,
+        state.stackedCards,
+        state.openedCards,
+        state.cardsInGame,
         stackIndex,
         stackName
       );
+
+      state.gamePoints = calcGamePoints(state.gamePoints, 60, moved);
     },
-    openCard({ closedCards, openedCards }) {
-      openNextCard(closedCards, openedCards);
+    openCard(state) {
+      state.moveCounter += 1;
+      openNextCard(state.closedCards, state.openedCards);
+      state.gamePoints = calcGamePoints(state.gamePoints, 0);
     },
     dragEndOnGameCards(
-      { stackedCards, openedCards, cardsInGame }, 
+      state, 
       { payload: { 
         endStackIndex, 
         dragged: { 
@@ -63,18 +74,19 @@ const solitaireReborn = createSlice({
       if (!cards.length) return;
       const topCard = cards[0];
       let startStack;
-      const endStack = cardsInGame[endStackIndex];
-      if (canMoveToIngameStack(topCard, endStack)) {
+      const endStack = state.cardsInGame[endStackIndex];
+      const canMove = canMoveToIngameStack(topCard, endStack);
+      if (canMove) {
         if (startStackName === cardsInGameName) {
-          startStack = cardsInGame[startStackIndex];
+          startStack = state.cardsInGame[startStackIndex];
         }
 
         if (startStackName === openedCardsName) {
-          startStack = openedCards;
+          startStack = state.openedCards;
         }
 
         if (startStackName === stackedCardsName) {
-          startStack = stackedCards[startStackIndex];
+          startStack = state.stackedCards[startStackIndex];
         }
 
         const tempArr: CardModel[] = [];
@@ -84,9 +96,10 @@ const solitaireReborn = createSlice({
         endStack.push(...tempArr);
         openLast(startStack);
       }
+      state.gamePoints = calcGamePoints(state.gamePoints, 15, canMove);
     },
     dragEndOnStacked(
-      { cardsInGame, stackedCards, openedCards }, 
+      state, 
       { payload: { 
         dragged: { 
           cards, 
@@ -99,14 +112,19 @@ const solitaireReborn = createSlice({
       const card = cards[0];
       if (!card.open) return;
 
-      moveCardToStacked(
+      const moved = moveCardToStacked(
         card,
-        stackedCards,
-        openedCards,
-        cardsInGame,
+        state.stackedCards,
+        state.openedCards,
+        state.cardsInGame,
         startStackIndex,
         startStackName
       );
+
+      state.gamePoints = calcGamePoints(state.gamePoints, 60, moved);
+    },
+    gameOverWithWin(state) {
+      state.bestPoints = state.bestPoints > state.gamePoints ? state.bestPoints : state.gamePoints;
     }
   }
 });
@@ -117,6 +135,7 @@ export const {
   openCard,
   dragEndOnGameCards,
   dragEndOnStacked,
+  gameOverWithWin,
 } = solitaireReborn.actions;
 
 export default solitaireReborn.reducer;

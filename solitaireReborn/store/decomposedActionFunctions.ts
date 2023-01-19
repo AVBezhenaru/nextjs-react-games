@@ -91,9 +91,9 @@ export const moveCardToStacked = (
   cardsInGame: WritableDraft<CardModel>[][],
   startStackIndex: number,
   startStackName: string,
-) => {
+): boolean => {
   const stack = canMoveToStack(card, stackedCards);
-  if (stack === undefined) return;
+  if (stack === undefined) return false;
 
   if (startStackName === openedCardsName) {
     stackedCards[stack].push(popCardFromStack(openedCards));
@@ -103,4 +103,6 @@ export const moveCardToStacked = (
     stackedCards[stack].push(popCardFromStack(cardsInGame[startStackIndex]));
     openLast(cardsInGame[startStackIndex]);
   }
+
+  return true;
 }

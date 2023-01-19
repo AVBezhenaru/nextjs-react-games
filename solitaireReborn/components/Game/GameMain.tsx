@@ -8,7 +8,14 @@ import { Rules } from '../Rules/Rules';
 import { Win } from './Win/Win';
 import { Header } from './Header/Header';
 import { SectionGame, BodyGame, Stack } from './GameMainStyle';
-import { cardDoubleClick, dragEndOnGameCards, dragEndOnStacked, openCard, startGame } from '../../store/solitaireSlice';
+import { 
+  cardDoubleClick, 
+  dragEndOnGameCards, 
+  dragEndOnStacked, 
+  gameOverWithWin, 
+  openCard, 
+  startGame 
+} from '../../store/solitaireSlice';
 import { Card } from './Card/Card';
 import { cardsInGameName, Dragged, DragOverItem, openedCardsName, stackedCardsName } from '../../store/types';
 import CardModel from '../../models/CardModel';
@@ -35,6 +42,17 @@ export const GameMain: FC = () => {
     dispatch(startGame())
   }, []);
 
+  useEffect(() => {
+    if (!stackedCards.length) return;
+    
+    for (let i = 0; i < stackedCards.length; i++) {
+      if (stackedCards[i].length !== 13) return;
+    }
+
+    setWin(true);
+    dispatch(gameOverWithWin());
+  }, [stackedCards]);
+
   const dragOverItem = useRef<DragOverItem>();
   const dragged = useRef<Dragged>();
 
@@ -55,15 +73,12 @@ export const GameMain: FC = () => {
   const dragEnd = () => {
     if (!dragOverItem.current) return;
     
-    switch (dragOverItem.current.name) {
-      case cardsInGameName: {
-        dispatch(dragEndOnGameCards({ endStackIndex: dragOverItem.current.index, dragged: dragged.current }));
-        break;
-      } 
-      case stackedCardsName: {
-        dispatch(dragEndOnStacked({ dragged: dragged.current }));
-        break;
-      }
+    if (dragOverItem.current.name === cardsInGameName) {
+      dispatch(dragEndOnGameCards({ endStackIndex: dragOverItem.current.index, dragged: dragged.current }));
+    }
+
+    if (dragOverItem.current.name === stackedCardsName) {
+      dispatch(dragEndOnStacked({ dragged: dragged.current }));
     }
 
     dragOverItem.current = null;
