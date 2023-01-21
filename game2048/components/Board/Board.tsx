@@ -53,9 +53,7 @@ const Board = () => {
     });
   });
 
-  const moveUp = () => {};
-  const moveDown = () => {};
-  const moveX = (arr: number[]) => {
+  const swipeNumbers = (arr: number[]) => {
     let newArr = [...arr];
     newArr = newArr.filter((num) => num !== 0);
     for (let i = 0; i < newArr.length - 1; i++) {
@@ -79,6 +77,16 @@ const Board = () => {
     return reversedArr;
   };
 
+  const transposeArray = (arr: number[][]) => {
+    for (var d = arr.length, a = 0; a < d; a++)
+      for (var c = a + 1; c < d; c++) {
+        var e = arr[a][c];
+        arr[a][c] = arr[c][a];
+        arr[c][a] = e;
+      }
+    return arr;
+  };
+
   const onKeyDown = (e: KeyboardEvent) => {
     e.preventDefault();
     if (gameIsOver()) {
@@ -87,15 +95,33 @@ const Board = () => {
 
     switch (e.key) {
       case 'ArrowUp':
-        console.log('up');
+        let newNumbersUp = [...numbers];
+        newNumbersUp = transposeArray(newNumbersUp);
+        for (let i = 0; i < newNumbersUp.length; i++) {
+          let newLine = swipeNumbers(newNumbersUp[i]);
+          for (let j = 0; j < newNumbersUp[i].length; j++) {
+            newNumbersUp[i][j] = newLine[j];
+          }
+        }
+        newNumbersUp = generateNumber(newNumbersUp);
+        setNumbers(transposeArray(newNumbersUp));
         break;
       case 'ArrowDown':
-        console.log('down');
+        let newNumbersDown = [...numbers];
+        newNumbersDown = reflectArray(transposeArray(newNumbersDown));
+        for (let i = 0; i < newNumbersDown.length; i++) {
+          let newLine = swipeNumbers(newNumbersDown[i]);
+          for (let j = 0; j < newNumbersDown[i].length; j++) {
+            newNumbersDown[i][j] = newLine[j];
+          }
+        }
+        newNumbersDown = generateNumber(newNumbersDown);
+        setNumbers(transposeArray(reflectArray(newNumbersDown)));
         break;
       case 'ArrowLeft':
         let newNumbersLeft = [...numbers];
         for (let i = 0; i < newNumbersLeft.length; i++) {
-          let newLine = moveX(newNumbersLeft[i]);
+          let newLine = swipeNumbers(newNumbersLeft[i]);
           for (let j = 0; j < newNumbersLeft[i].length; j++) {
             newNumbersLeft[i][j] = newLine[j];
           }
@@ -108,7 +134,7 @@ const Board = () => {
         let newNumbersRight = [...numbers];
         newNumbersRight = reflectArray(newNumbersRight);
         for (let i = 0; i < newNumbersRight.length; i++) {
-          let newLine = moveX(newNumbersRight[i]);
+          let newLine = swipeNumbers(newNumbersRight[i]);
           for (let j = 0; j < newNumbersRight[i].length; j++) {
             newNumbersRight[i][j] = newLine[j];
           }
