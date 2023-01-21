@@ -31,7 +31,6 @@ const Board = () => {
     if (arr[x][y] === 0) {
       let copyNumbers = [...arr];
       copyNumbers[x][y] = Math.random() >= 0.5 ? 2 : 4;
-      console.log(arr);
       return copyNumbers;
     }
   };
@@ -56,7 +55,7 @@ const Board = () => {
 
   const moveUp = () => {};
   const moveDown = () => {};
-  const moveLeft = (arr: number[]) => {
+  const moveX = (arr: number[]) => {
     let newArr = [...arr];
     newArr = newArr.filter((num) => num !== 0);
     for (let i = 0; i < newArr.length - 1; i++) {
@@ -71,44 +70,56 @@ const Board = () => {
     }
     return newArr;
   };
-  const moveRight = () => {};
+
+  const reflectArray = (arr: number[][]) => {
+    let reversedArr = [];
+    for (let i = 0; i < arr.length; i++) {
+      reversedArr.push(arr[i].reverse());
+    }
+    return reversedArr;
+  };
 
   const onKeyDown = (e: KeyboardEvent) => {
     e.preventDefault();
+    if (gameIsOver()) {
+      return;
+    }
 
     switch (e.key) {
       case 'ArrowUp':
         console.log('up');
         break;
       case 'ArrowDown':
-        // generateNumber();
         console.log('down');
         break;
       case 'ArrowLeft':
-        let newNumbers = [...numbers];
-        for (let i = 0; i < newNumbers.length; i++) {
-          let newLine = moveLeft(newNumbers[i]);
-          for (let j = 0; j < newNumbers[i].length; j++) {
-            newNumbers[i][j] = newLine[j];
+        let newNumbersLeft = [...numbers];
+        for (let i = 0; i < newNumbersLeft.length; i++) {
+          let newLine = moveX(newNumbersLeft[i]);
+          for (let j = 0; j < newNumbersLeft[i].length; j++) {
+            newNumbersLeft[i][j] = newLine[j];
           }
         }
-        console.log('left', newNumbers);
-        if (gameIsOver()) {
-          return;
-        }
-        newNumbers = generateNumber(newNumbers);
-        setNumbers(newNumbers);
+
+        newNumbersLeft = generateNumber(newNumbersLeft);
+        setNumbers(newNumbersLeft);
         break;
       case 'ArrowRight':
-        // generateNumber();
-        console.log('right');
+        let newNumbersRight = [...numbers];
+        newNumbersRight = reflectArray(newNumbersRight);
+        for (let i = 0; i < newNumbersRight.length; i++) {
+          let newLine = moveX(newNumbersRight[i]);
+          for (let j = 0; j < newNumbersRight[i].length; j++) {
+            newNumbersRight[i][j] = newLine[j];
+          }
+        }
+        newNumbersRight = generateNumber(newNumbersRight);
+        setNumbers(reflectArray(newNumbersRight));
         break;
       default:
         return;
     }
   };
-
-  //   window.addEventListener('keydown', onKeyDown);
 
   return <div className={styles.field}>{tiles}</div>;
 };
