@@ -1,0 +1,70 @@
+@import '../../styles/Variables.scss';
+
+.MainPage {
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  background-image: url('../../images/back2.jpg');
+  background-size: cover;
+}
+
+.MainPageTitle {
+  position: relative;
+
+  font-family: $main-font-family;
+  font-size: 70px;
+
+  color: $white-color;
+}
+
+.MainPageGameTitle {
+  position: relative;
+
+  font-family: $decorated-font-family;
+  font-size: 130px;
+
+  margin: 150px 0 100px 0;
+  padding-top: 50px;
+}
+
+.ButtonsContainer {
+  display: flex;
+  gap: 15px;
+}
+
+.MainPageButton {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 1em 1em;
+
+  width: 300px;
+  height: 75px;
+  position: relative;
+
+  font-family: $main-font-family;
+  font-size: 39px;
+
+  border: 3px dotted $black-color;
+  outline: 3px dotted $white-color;
+  border-radius: 13px;
+  color: $white-color;
+  -webkit-backdrop-filter: blur(9px);
+  backdrop-filter: blur(9px);
+  cursor: pointer;
+}
+
+.MainPageButton:hover {
+  border: 3px dotted $white-color;
+  outline: 3px dotted $black-color;
+
+  color: $black-color;
+
+  transition: all 0.5s ease 0s;
+
+  cursor: pointer;
+}

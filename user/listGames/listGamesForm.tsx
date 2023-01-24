@@ -20,13 +20,11 @@ const ListGamesForm = () => {
   const path = 'games/';
 
   const gameLinksArr = [
-    { src: tetrisIcon.src, title: 'tetris' },
     { src: chessIcon.src, title: 'chess' },
-    { src: checkersIcon.src, title: 'checkersReborn' },
     { src: checkersIcon.src, title: 'checkers' },
     { src: hangmanIcon.src, title: 'hangman' },
     { src: aerohokkeyIcon.src, title: 'airhockey' },
-    { src: tetrisIcon.src, title: 'tetrisReborn' },
+    { src: tetrisIcon.src, title: 'tetris' },
     { src: solitairIcon.src, title: 'solitaire' },
   ];
   return (

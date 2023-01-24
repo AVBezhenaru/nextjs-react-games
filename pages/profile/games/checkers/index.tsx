@@ -1,27 +1,7 @@
-import { useDispatch } from 'react-redux';
-import Link from 'next/link';
+import { NextPage } from 'next';
 
-import { setPlayWithBoot } from '../../../../checkers/store/checkersReducer';
+import MainPage from '../../../../checkers/components/MainPage/MainPage';
 
-export default function Home() {
-  const dispatch = useDispatch();
-  return (
-    <div className="head__page">
-      <h2 className="head__page-title">Добро пожаловать в игру</h2>
-      <h1 className="head__page-title__head">
-        Ш<span>а</span>ш<span>к</span>и
-      </h1>
-      <div className="container___head__page">
-        <Link href="./checkers/ChoosePlayer">
-          <span className="head__page-play">Играть онлайн</span>
-        </Link>
+const Checkers: NextPage = () => <MainPage />;
 
-        {dispatch(setPlayWithBoot(true)) && (
-          <Link href="./checkers/Play">
-            <span className="head__page-play">Играть с ботом</span>
-          </Link>
-        )}
-      </div>
-    </div>
-  );
-}
+export default Checkers;

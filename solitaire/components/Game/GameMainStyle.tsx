@@ -1,15 +1,12 @@
 import styled from 'styled-components';
 
-import back from '../../images/gameFones/green.jpg';
-// import shirt from '../../images/cards/shirts/shirt.png';
-
 export const SectionGame = styled.main`
   position: fixed;
   top: 45px;
   bottom: 0;
   width: 100%;
   height: 100%;
-  background: url(${back.src}) no-repeat;
+  background-image: url(${`/green.png`});
   background-size: cover;
   overflow: hidden;
   && section:nth-of-type(1) {

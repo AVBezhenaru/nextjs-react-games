@@ -1,20 +1,7 @@
-import Link from 'next/link';
+import { NextPage } from 'next';
 
-import Settings from '../../../../tetris2/components/settings/settings';
-import Button from '../../../../tetris2/components/button/button';
-import style from '../../../../tetris2/styles/index.module.scss';
+import Settings from '../../../../tetris/components/Settings/Settings';
 
-function GameSettings() {
-  return (
-    <div className={style.game_wrapper}>
-      <Link href="../tetris">
-        <a>
-          <Button theme="backToMenu">Back</Button>
-        </a>
-      </Link>
-      <Settings />
-    </div>
-  );
-}
+const SettingsPage: NextPage = () => <Settings />;
 
-export default GameSettings;
+export default SettingsPage;

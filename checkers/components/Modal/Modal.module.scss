@@ -1,0 +1,74 @@
+@import '../../styles/Variables.scss';
+
+.Modal {
+  position: absolute;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  letter-spacing: 0.1em;
+}
+
+.ModalContent {
+  width: 90%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  font-size: 18px;
+  font-style: italic;
+
+  padding: 5px 5px 5px 20px;
+
+  margin-bottom: 30px;
+  border: solid 1px $grey-color;
+
+  color: $black-color;
+  background-size: 100% 100%, 20px 20px, 20px 20px;
+  background-position: 0 0, -1px -1px, -1px 1px;
+  background-color: $white-color;
+
+  transition: all 0.3s ease-in-out;
+}
+
+.ModalHeader,
+.ModalFooter {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.ModalTitle {
+  font-size: 22px;
+  margin: 0;
+}
+
+.ModalBody {
+  text-align: left;
+  padding: 0;
+
+  font-family: $main-font-family;
+}
+
+.ModalButton {
+  font-size: 18px;
+  color: $black-color;
+  border: 1px solid $black-color;
+  border-radius: 10px;
+  padding: 5px 10px;
+
+  background-color: transparent;
+
+}
+
+.ModalButton:hover {
+  border: none;
+  cursor: pointer;
+
+  color: $white-color;
+  background-color: $black-color;
+  border: 1px solid $white-color;
+}
