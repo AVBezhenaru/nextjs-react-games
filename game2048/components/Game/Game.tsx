@@ -126,9 +126,17 @@ const Game = () => {
             newNumbersUp[i][j] = newLine[j];
           }
         }
-        newNumbersUp = generateNumber(newNumbersUp);
+
+        setTimeout(() => {
+          newNumbersUp = generateNumber(newNumbersUp);
+          setNumbers(newNumbersUp);
+        }, 200);
         setNumbers(transposeArray(newNumbersUp));
+
+        // newNumbersUp = generateNumber(newNumbersUp);
+        // setNumbers(transposeArray(newNumbersUp));
         break;
+
       case 'ArrowDown':
         let newNumbersDown = [...numbers];
         newNumbersDown = reflectArray(transposeArray(newNumbersDown));
@@ -138,9 +146,18 @@ const Game = () => {
             newNumbersDown[i][j] = newLine[j];
           }
         }
-        newNumbersDown = generateNumber(newNumbersDown);
+
+        setTimeout(() => {
+          newNumbersDown = generateNumber(newNumbersDown);
+          setNumbers(newNumbersDown);
+        }, 200);
         setNumbers(transposeArray(reflectArray(newNumbersDown)));
+
+        // newNumbersDown = generateNumber(newNumbersDown);
+        // setNumbers(transposeArray(reflectArray(newNumbersDown)));
+
         break;
+
       case 'ArrowLeft':
         let newNumbersLeft = [...numbers];
         for (let i = 0; i < newNumbersLeft.length; i++) {
@@ -150,9 +167,14 @@ const Game = () => {
           }
         }
 
-        newNumbersLeft = generateNumber(newNumbersLeft);
+        setTimeout(() => {
+          newNumbersLeft = generateNumber(newNumbersLeft);
+          setNumbers(newNumbersLeft);
+        }, 200);
         setNumbers(newNumbersLeft);
+
         break;
+
       case 'ArrowRight':
         let newNumbersRight = [...numbers];
         newNumbersRight = reflectArray(newNumbersRight);
@@ -162,15 +184,19 @@ const Game = () => {
             newNumbersRight[i][j] = newLine[j];
           }
         }
-        newNumbersRight = generateNumber(newNumbersRight);
+
+        setTimeout(() => {
+          newNumbersRight = generateNumber(newNumbersRight);
+          setNumbers(newNumbersRight);
+        }, 200);
         setNumbers(reflectArray(newNumbersRight));
+
         break;
       default:
         return;
     }
   };
 
-  console.log('game state', numbers);
   return (
     <div className={styles.wrapper}>
       <Header score={score} numbers={numbers} restart={() => restartGame()} />
