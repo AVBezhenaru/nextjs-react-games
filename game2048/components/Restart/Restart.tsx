@@ -1,9 +1,14 @@
 import styles from '../Restart/Restart.module.scss';
 
-const Restart = () => {
+interface RestartProps {
+  numbers: number[][];
+  restart: () => void;
+}
+
+const Restart = (props: RestartProps) => {
   return (
     <div>
-      <button className={styles.restart}></button>
+      <button className={styles.restart} onClick={() => props.restart()}></button>
     </div>
   );
 };
