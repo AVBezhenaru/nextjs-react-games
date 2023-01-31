@@ -1,4 +1,6 @@
 export default class Service {
+  isBlocked = false;
+
   generateNumber = (arr: number[][]) => {
     let x = Math.floor(Math.random() * 4);
     let y = Math.floor(Math.random() * 4);
@@ -40,6 +42,18 @@ export default class Service {
         }
       }
     }
+
+    for (let i = 0; i < numbers.length - 1; i++) {
+      for (let j = 0; j < numbers[i].length; j++) {
+        if (
+          (j < numbers[i].length - 1 && numbers[i][j] === numbers[i][j + 1]) ||
+          numbers[i][j] === numbers[i + 1][j]
+        ) {
+          return false;
+        }
+      }
+    }
+
     alert('Game is over');
     return true;
   };
@@ -92,6 +106,9 @@ export default class Service {
     if (this.gameIsOver(numbers)) {
       return;
     }
+    if (this.isBlocked) {
+      return;
+    }
 
     switch (e.key) {
       case 'ArrowUp':
@@ -103,10 +120,12 @@ export default class Service {
             newNumbersUp[i][j] = newLine[j];
           }
         }
+        this.isBlocked = true;
 
         setTimeout(() => {
           newNumbersUp = this.generateNumber(newNumbersUp);
           setNumbers(newNumbersUp);
+          this.isBlocked = false;
         }, 200);
         setNumbers(this.transposeArray(newNumbersUp));
 
@@ -121,10 +140,12 @@ export default class Service {
             newNumbersDown[i][j] = newLine[j];
           }
         }
+        this.isBlocked = true;
 
         setTimeout(() => {
           newNumbersDown = this.generateNumber(newNumbersDown);
           setNumbers(newNumbersDown);
+          this.isBlocked = false;
         }, 200);
         setNumbers(this.transposeArray(this.reflectArray(newNumbersDown)));
 
@@ -138,10 +159,12 @@ export default class Service {
             newNumbersLeft[i][j] = newLine[j];
           }
         }
+        this.isBlocked = true;
 
         setTimeout(() => {
           newNumbersLeft = this.generateNumber(newNumbersLeft);
           setNumbers(newNumbersLeft);
+          this.isBlocked = false;
         }, 200);
         setNumbers(newNumbersLeft);
 
@@ -156,10 +179,12 @@ export default class Service {
             newNumbersRight[i][j] = newLine[j];
           }
         }
+        this.isBlocked = true;
 
         setTimeout(() => {
           newNumbersRight = this.generateNumber(newNumbersRight);
           setNumbers(newNumbersRight);
+          this.isBlocked = false;
         }, 200);
         setNumbers(this.reflectArray(newNumbersRight));
 
