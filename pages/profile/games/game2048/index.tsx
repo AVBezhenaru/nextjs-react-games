@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 
-import MainPage from '../../../../game2048/components/Game/Game';
+import MainPage from '../../../../game2048/components/MainPage/MainPage';
 
 const Game2048: NextPage = () => <MainPage />;
 

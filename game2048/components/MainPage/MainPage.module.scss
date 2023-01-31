@@ -1,0 +1,40 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: grey;
+  height: 100vh;
+  flex-direction: column;
+}
+.heading {
+  text-align: center;
+  font-size: 5em;
+  padding-bottom: 0.5em;
+}
+.header {
+  text-align: center;
+  font-size: 1.5em;
+  padding-bottom: 0.5em;
+}
+.instructions {
+  width: 70vmin;
+  color: black;
+  font-size: 1em;
+  letter-spacing: 1px;
+  line-height: 20px;
+}
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.button {
+  width: 200px;
+  height: 80px;
+  margin-top: 20px;
+  border: 2px solid white;
+  background-color: black;
+  border-radius: 5%;
+  font-size: 1.5em;
+}
