@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 import Card from '../card/Card';
 import { getRandomPhotos } from '../../unsplashServiсe';
+import styles from '../../styles/index.module.scss';
 
 const Board = () => {
   const [photos, setPhotos] = useState([]);
@@ -33,20 +34,41 @@ const Board = () => {
     }
   }, [openCards, guesses]);
 
-  const click = (id: string, index: number) => {
+  const cardClickHandler = (id: string, index: number) => {
     setOpenCards((prevOpenCards) => prevOpenCards.set(index, id));
     setGuesses((state) => state + 1);
   };
 
+  const reset = () => {
+    getRandomPhotos('nature', 6).then((res) => {
+      setPhotos(() => [...res, ...res].sort(() => Math.random() - 0.5));
+    });
+    setOpenCards(new Map());
+    setGuesses(0);
+    setMatches(0);
+    setPercentage(0);
+  };
+
   return (
     <>
-      {photos.map((photo, i) => (
-        <Card click={click} photoId={photo} key={i} index={i} isActive={openCards.has(i)} />
-      ))}
-      <p>Guesses: {guesses}</p>
-      <p>Matches: {matches}</p>
-      <p>Percent: {percentage}%</p>
-      <p>Open cards!</p>
+      <div className={styles.board}>
+        {photos.map((photo, i) => (
+          <Card
+            cardClickHandler={cardClickHandler}
+            photoId={photo}
+            key={i}
+            index={i}
+            isActive={openCards.has(i)}
+          />
+        ))}
+        <p>Guesses: {guesses}</p>
+        <p>Matches: {matches}</p>
+        <p>Percent: {percentage}%</p>
+        <p>Open cards!</p>
+      </div>
+      <button className={styles.button} type="button" onClick={reset}>
+        Reset
+      </button>
     </>
   );
 };

@@ -11,25 +11,23 @@ type Props = {
       small: string;
     };
   };
-  click: (id: string, index: number) => void;
+  cardClickHandler: (id: string, index: number) => void;
   isActive: boolean;
   index: number;
 };
 
-const Card: React.FunctionComponent<Props> = ({ photoId, click, isActive, index }) => {
+const Card: React.FunctionComponent<Props> = ({ photoId, cardClickHandler, isActive, index }) => {
   const [active, setActive] = useState(isActive);
 
   useEffect(() => {
     setActive(isActive);
   }, [isActive]);
 
-  const cardClickHandler = () => {
-    // setActive(true);
-    click(photoId.id, index);
-  };
-
   return (
-    <div className={!active ? styles.card : styles.openCard} onClick={cardClickHandler}>
+    <div
+      className={!active ? styles.card : styles.openCard}
+      onClick={() => cardClickHandler(photoId.id, index)}
+    >
       <Image
         height={200}
         width={280}

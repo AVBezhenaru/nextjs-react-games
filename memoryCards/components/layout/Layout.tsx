@@ -1,7 +1,6 @@
 import { NextPage } from 'next';
 import { ReactNode } from 'react';
 
-// import Header from '../header/Header';
 import styles from '../../styles/index.module.scss';
 
 interface ILayoutProps {
@@ -11,7 +10,7 @@ interface ILayoutProps {
 const Layout: NextPage<ILayoutProps> = ({ children }) => (
   <div className={styles.layout}>
     <h1 className={styles.title}>Memory Cards</h1>
-    <main className={styles.board}>{children}</main>
+    <main>{children}</main>
   </div>
 );
 
