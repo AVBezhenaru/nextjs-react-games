@@ -18,29 +18,27 @@ const MainPage = () => {
         </div>
       </div>
       <div className={styles.buttons}>
-        <button className={classes.btn}>
-          <span className={classes.shadow}></span>
-          <span className={classes.depth}></span>
-          <span className={classes.content}>
-            <Link href="./game2048/game">PLAY</Link>
-          </span>
-        </button>
-
-        <button className={classes.btn}>
-          <span className={classes.shadow}></span>
-          <span className={classes.depth}></span>
-          <span className={classes.content}>
-            <Link href="./game2048/settings">SETTINGS</Link>
-          </span>
-        </button>
-
-        <button className={classes.btn}>
-          <span className={classes.shadow}></span>
-          <span className={classes.depth}></span>
-          <span className={classes.content}>
-            <Link href="./game2048/score-table">SCORES</Link>{' '}
-          </span>
-        </button>
+        <Link href="./game2048/game">
+          <button className={classes.btn}>
+            <span className={classes.shadow}></span>
+            <span className={classes.depth}></span>
+            <span className={classes.content}>PLAY</span>
+          </button>
+        </Link>
+        <Link href="./game2048/settings">
+          <button className={classes.btn}>
+            <span className={classes.shadow}></span>
+            <span className={classes.depth}></span>
+            <span className={classes.content}>SETTINGS</span>
+          </button>
+        </Link>
+        <Link href="./game2048/score-table">
+          <button className={classes.btn}>
+            <span className={classes.shadow}></span>
+            <span className={classes.depth}></span>
+            <span className={classes.content}>SCORES</span>
+          </button>
+        </Link>
       </div>
     </div>
   );

@@ -1,6 +1,32 @@
 .wrapper {
   display: flex;
   align-items: center;
-  justify-content: center;
+  // justify-content: center;
   flex-direction: column;
+  background-color: #293462;
+  height: 100vh;
+  padding-top: 10vmin;
+}
+.header {
+  text-align: center;
+  font-size: 2em;
+  padding-bottom: 3em;
+  text-transform: uppercase;
+}
+.table {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5em;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1em;
+  border-bottom: 0.1em solid white;
+}
+.place {
+  margin-right: 5em;
+}
+.name {
+  margin-right: 5em;
 }

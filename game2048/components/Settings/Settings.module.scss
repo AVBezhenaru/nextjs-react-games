@@ -1,6 +1,59 @@
 .wrapper {
   display: flex;
   align-items: center;
-  justify-content: center;
+  // justify-content: center;
   flex-direction: column;
+  background-color: #293462;
+  height: 100vh;
+  padding-top: 10vmin;
+}
+.header {
+  text-align: center;
+  font-size: 2em;
+  padding-bottom: 3em;
+  text-transform: uppercase;
+}
+.heading {
+  text-align: center;
+  font-size: 2em;
+  letter-spacing: 3px;
+  line-height: 20px;
+}
+.buttons {
+  margin-top: 5vmin;
+}
+
+.button {
+  font-family: sans-serif;
+  font-weight: 600;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 1em;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 50%);
+  transition: all 0.3s;
+  border-bottom: 4px solid #1e274a;
+}
+.button:hover {
+  box-shadow: 0px 15px 25px -5px rgba(0, 0, 0, 40%);
+  transform: scale(1.03);
+}
+.button:active {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 30%);
+  transform: scale(0.98);
+}
+.buttonRed {
+  background-color: rgb(168, 10, 10);
+}
+.buttonBlue {
+  background-color: rgb(72, 3, 182);
+}
+.buttonYellow {
+  background-color: rgb(220, 183, 17);
+}
+.buttonGreen {
+  background-color: rgb(9, 122, 5);
+}
+.buttonPurple {
+  background-color: rgb(137, 29, 96);
 }
