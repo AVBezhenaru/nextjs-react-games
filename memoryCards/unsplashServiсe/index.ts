@@ -13,7 +13,7 @@ const getRandomPhotos = async (query: string, count: number) => {
     });
     return res.data;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 };
 

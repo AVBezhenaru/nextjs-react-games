@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
+import { ThemeContext } from '../../../pages/profile/games/memoryCards';
 import Card from '../card/Card';
 import { getRandomPhotos } from '../../unsplashServiсe';
 import styles from '../../styles/index.module.scss';
@@ -11,8 +12,10 @@ const Board = () => {
   const [matches, setMatches] = useState(0);
   const [percentage, setPercentage] = useState(0);
 
+  const theme = useContext(ThemeContext);
+
   useEffect(() => {
-    getRandomPhotos('nature', 6).then((res) => {
+    getRandomPhotos(theme, 6).then((res) => {
       setPhotos(() => [...res, ...res].sort(() => Math.random() - 0.5));
     });
   }, []);
@@ -36,11 +39,11 @@ const Board = () => {
 
   const cardClickHandler = (id: string, index: number) => {
     setOpenCards((prevOpenCards) => prevOpenCards.set(index, id));
-    setGuesses((state) => state + 1);
+    if (matches < 6) setGuesses((state) => state + 1);
   };
 
   const reset = () => {
-    getRandomPhotos('nature', 6).then((res) => {
+    getRandomPhotos(theme, 6).then((res) => {
       setPhotos(() => [...res, ...res].sort(() => Math.random() - 0.5));
     });
     setOpenCards(new Map());
