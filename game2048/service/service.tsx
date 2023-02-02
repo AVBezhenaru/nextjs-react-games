@@ -34,7 +34,7 @@ export default class Service {
     setScore(0);
   };
 
-  gameIsOver = (numbers?: number[][]) => {
+  gameIsOver = (numbers?: number[][], setModal?: (modal: boolean) => void) => {
     for (let i = 0; i < numbers.length; i++) {
       for (let j = 0; j < numbers[i].length; j++) {
         if (numbers[i][j] === 0) {
@@ -43,18 +43,17 @@ export default class Service {
       }
     }
 
-    for (let i = 0; i < numbers.length - 1; i++) {
-      for (let j = 0; j < numbers[i].length; j++) {
-        if (
-          (j < numbers[i].length - 1 && numbers[i][j] === numbers[i][j + 1]) ||
-          numbers[i][j] === numbers[i + 1][j]
-        ) {
-          return false;
-        }
-      }
-    }
-
-    alert('Game is over');
+    // for (let i = 0; i < numbers.length - 1; i++) {
+    //   for (let j = 0; j < numbers[i].length; j++) {
+    //     if (
+    //       (j < numbers[i].length - 1 && numbers[i][j] === numbers[i][j + 1]) ||
+    //       numbers[i][j] === numbers[i + 1][j]
+    //     ) {
+    //       return false;
+    //     }
+    //   }
+    // }
+    setModal(true);
     return true;
   };
 
@@ -101,9 +100,10 @@ export default class Service {
     setNumbers?: (numbers: number[][]) => void,
     score?: number,
     setScore?: any,
+    setModal?: (modal: boolean) => void,
   ) => {
     e.preventDefault();
-    if (this.gameIsOver(numbers)) {
+    if (this.gameIsOver(numbers, setModal)) {
       return;
     }
     if (this.isBlocked) {

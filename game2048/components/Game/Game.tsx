@@ -1,5 +1,6 @@
 import Board from '../../components/Board/Board';
 import Header from '../../components/Header/Header';
+import GameOver from '../GameOver/GameOver';
 import styles from '../Game/Game.module.scss';
 import React, { useEffect, useState } from 'react';
 import Service from '../../service/service';
@@ -15,6 +16,7 @@ const Game = () => {
   ]);
 
   const [score, setScore] = useState(0);
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     window.addEventListener('keydown', onKeyDown);
@@ -28,7 +30,11 @@ const Game = () => {
 
   const onKeyDown = (e: KeyboardEvent) => {
     e.preventDefault();
-    service.onKeyDown(e, numbers, setNumbers, score, setScore);
+    service.onKeyDown(e, numbers, setNumbers, score, setScore, setModal);
+  };
+
+  const onClose = () => {
+    setModal(false);
   };
 
   return (
@@ -39,6 +45,13 @@ const Game = () => {
         restart={() => service.restartGame(numbers, setNumbers, setScore)}
       />
       <Board numbers={numbers} />
+      {modal ? (
+        <GameOver
+          score={score}
+          onClose={onClose}
+          restart={() => service.restartGame(numbers, setNumbers, setScore)}
+        />
+      ) : null}
     </div>
   );
 };
