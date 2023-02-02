@@ -1,26 +1,8 @@
-.btn,
-.btn *,
-.btn :after,
-.btn :before,
-.btn:after,
-.btn:before {
-  border: 0 solid;
-  box-sizing: border-box;
-}
-.btn,
-.btn:active,
-.btn:focus {
-  outline: none;
-}
-.btn:-moz-focusring {
-  outline: none;
-}
 .btn {
   width: 100px;
   padding: 1.8rem;
   padding-right: 20px;
   position: relative;
-  -webkit-tap-highlight-color: transparent;
 }
 .btn .content,
 .btn .depth,
@@ -29,7 +11,7 @@
 }
 .btn .content {
   background: #fff;
-  background-image: url('../../assets/img/restart.png');
+  background-image: url('../../assets/img/home.png');
   background-repeat: no-repeat;
   background-size: 40px 40px;
   background-position: 50%;

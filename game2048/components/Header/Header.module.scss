@@ -8,11 +8,14 @@
 }
 .container {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
 }
 .title {
+  text-align: center;
   padding-top: 10px;
-  font-size: 4em;
+  font-size: 5em;
+  color: #fff80a;
 }
 .description {
   font-size: 1.1em;
@@ -23,5 +26,14 @@
 }
 .menu {
   display: flex;
-  justify-content: space-around;
+  padding-top: 40px;
+  // flex-direction: column;
+  // justify-content: space-around;
+}
+.info {
+  display: flex;
+  justify-content: space-between;
+}
+.score {
+  margin-top: 40px;
 }

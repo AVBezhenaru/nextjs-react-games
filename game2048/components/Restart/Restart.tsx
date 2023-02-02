@@ -8,7 +8,11 @@ interface RestartProps {
 const Restart = (props: RestartProps) => {
   return (
     <div>
-      <button className={styles.restart} onClick={() => props.restart()}></button>
+      <button className={styles.btn} onClick={() => props.restart()}>
+        <span className={styles.shadow}></span>
+        <span className={styles.depth}></span>
+        <span className={styles.content}></span>
+      </button>
     </div>
   );
 };

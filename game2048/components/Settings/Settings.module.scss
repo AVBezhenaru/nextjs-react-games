@@ -9,15 +9,17 @@
 }
 .header {
   text-align: center;
-  font-size: 2em;
-  padding-bottom: 3em;
+  font-size: 3em;
+  padding-bottom: 2em;
   text-transform: uppercase;
+  color: #fff;
 }
 .heading {
   text-align: center;
   font-size: 2em;
   letter-spacing: 3px;
   line-height: 20px;
+  color: #fff;
 }
 .buttons {
   margin-top: 5vmin;
@@ -58,4 +60,9 @@
 }
 .buttonPurple {
   background-color: rgb(137, 29, 96);
+}
+.homeButton {
+  position: absolute;
+  left: 1.5em;
+  top: 3em;
 }

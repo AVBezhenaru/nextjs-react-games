@@ -1,9 +1,13 @@
 import styles from '../Settings/Settings.module.scss';
 import React from 'react';
+import HomeButton from '../HomeButton/HomeButton';
 
 const Settings = () => {
   return (
     <div className={styles.wrapper}>
+      <div className={styles.homeButton}>
+        <HomeButton />
+      </div>
       <div className={styles.header}>Settings</div>
       <div className={styles.settings}>
         <div className={styles.setting}>
