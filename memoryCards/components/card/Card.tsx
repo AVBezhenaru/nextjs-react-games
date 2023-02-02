@@ -5,7 +5,7 @@ import styles from '../../styles/index.module.scss';
 import background from '../../images/background.jpg';
 
 type Props = {
-  photoId: {
+  photo: {
     id: string;
     urls: {
       small: string;
@@ -16,7 +16,7 @@ type Props = {
   index: number;
 };
 
-const Card: React.FunctionComponent<Props> = ({ photoId, cardClickHandler, isActive, index }) => {
+const Card: React.FunctionComponent<Props> = ({ photo, cardClickHandler, isActive, index }) => {
   const [active, setActive] = useState(isActive);
 
   useEffect(() => {
@@ -26,12 +26,12 @@ const Card: React.FunctionComponent<Props> = ({ photoId, cardClickHandler, isAct
   return (
     <div
       className={!active ? styles.card : styles.openCard}
-      onClick={() => cardClickHandler(photoId.id, index)}
+      onClick={() => cardClickHandler(photo.id, index)}
     >
       <Image
         height={200}
         width={280}
-        src={!active ? background : photoId.urls.small}
+        src={!active ? background : photo.urls.small}
         className={styles.image}
       />
     </div>

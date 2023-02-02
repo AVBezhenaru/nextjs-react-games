@@ -14,13 +14,13 @@ const Board = () => {
 
   const theme = useContext(ThemeContext);
 
-  useEffect(() => {
+  const saveJumbledPhotos = () => {
     getRandomPhotos(theme, 6).then((res) => {
       setPhotos(() => [...res, ...res].sort(() => Math.random() - 0.5));
     });
-  }, []);
+  };
 
-  useEffect(() => {
+  const matchCheck = () => {
     if (openCards.size % 2 === 0) {
       const cardIds = Array.from(openCards.values());
       for (const [key, value] of Array.from(openCards.entries())) {
@@ -31,10 +31,17 @@ const Board = () => {
           });
         }
       }
-
       setMatches(openCards.size / 2);
       setPercentage(guesses !== 0 ? Math.round((matches * 100) / guesses) : 0);
     }
+  };
+
+  useEffect(() => {
+    saveJumbledPhotos();
+  }, []);
+
+  useEffect(() => {
+    matchCheck();
   }, [openCards, guesses]);
 
   const cardClickHandler = (id: string, index: number) => {
@@ -43,9 +50,7 @@ const Board = () => {
   };
 
   const reset = () => {
-    getRandomPhotos(theme, 6).then((res) => {
-      setPhotos(() => [...res, ...res].sort(() => Math.random() - 0.5));
-    });
+    saveJumbledPhotos();
     setOpenCards(new Map());
     setGuesses(0);
     setMatches(0);
@@ -58,7 +63,7 @@ const Board = () => {
         {photos.map((photo, i) => (
           <Card
             cardClickHandler={cardClickHandler}
-            photoId={photo}
+            photo={photo}
             key={i}
             index={i}
             isActive={openCards.has(i)}
