@@ -1,11 +1,8 @@
 import styles from '../Number/Number.module.scss';
+import { useAppSelector } from '../../../hooks';
 
 const Number = (props?: { number: number }) => {
-  const red = [168, 10, 10];
-  const blue = [72, 3, 182];
-  const yellow = [220, 183, 17];
-  const green = [9, 122, 5];
-  const purple = [61, 23, 102];
+  const { numberColor } = useAppSelector((state) => state.game2048);
 
   function setOpacity(number: number) {
     if (number > 8000) {
@@ -48,7 +45,7 @@ const Number = (props?: { number: number }) => {
     <div
       className={styles.number}
       style={{
-        backgroundColor: `rgba(${[...blue]}, ${setOpacity(props.number)}%)`,
+        backgroundColor: `rgba(${[...numberColor]}, ${setOpacity(props.number)}%)`,
         color: `${setColor(props.number)}`,
       }}
     >

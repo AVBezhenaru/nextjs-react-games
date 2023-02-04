@@ -6,9 +6,9 @@ interface IState {
   numberColor: number[];
 }
 
-const reducer: Reducer = (
+const game2048Reducer: Reducer = (
   state: IState = {
-    numberColor: [72, 3, 182],
+    numberColor: [57, 75, 144],
   },
   action: { type?: string; payload?: any } = {},
 ) => {
@@ -20,4 +20,4 @@ const reducer: Reducer = (
       return state;
   }
 };
-export default reducer;
+export default game2048Reducer;

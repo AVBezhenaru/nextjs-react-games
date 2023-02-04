@@ -2,6 +2,7 @@ import styles from '../Header/Header.module.scss';
 import HomeButton from '../HomeButton/HomeButton';
 import Restart from '../Restart/Restart';
 import Score from '../Score/Score';
+import SettingsButton from '../SettingsButton/SettingsButton';
 
 interface HeaderProps {
   score: number;
@@ -18,6 +19,7 @@ const Header = (props: HeaderProps) => {
           <div className={styles.menu}>
             <Restart restart={() => props.restart()} numbers={props.numbers} />
             <HomeButton />
+            <SettingsButton />
           </div>
           <div className={styles.score}>
             <Score score={props.score} />
