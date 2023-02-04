@@ -1,6 +1,12 @@
 import styles from '../Number/Number.module.scss';
 
 const Number = (props?: { number: number }) => {
+  const red = [168, 10, 10];
+  const blue = [72, 3, 182];
+  const yellow = [220, 183, 17];
+  const green = [9, 122, 5];
+  const purple = [61, 23, 102];
+
   function setOpacity(number: number) {
     if (number > 8000) {
       return 100;
@@ -42,7 +48,7 @@ const Number = (props?: { number: number }) => {
     <div
       className={styles.number}
       style={{
-        backgroundColor: `rgba(61, 23, 102, ${setOpacity(props.number)}%)`,
+        backgroundColor: `rgba(${[...blue]}, ${setOpacity(props.number)}%)`,
         color: `${setColor(props.number)}`,
       }}
     >
