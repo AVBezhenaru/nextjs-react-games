@@ -1,8 +1,9 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
-import { ThemeContext } from '../../../pages/profile/games/memoryCards';
 import Card from '../card/Card';
 import { getRandomPhotos } from '../../unsplashServiсe';
+import { RootState } from '../../../store';
 import styles from '../../styles/index.module.scss';
 
 const Board = () => {
@@ -12,7 +13,7 @@ const Board = () => {
   const [matches, setMatches] = useState(0);
   const [percentage, setPercentage] = useState(0);
 
-  const theme = useContext(ThemeContext);
+  const { theme } = useSelector((store: RootState) => store.memoryCards);
 
   const saveJumbledPhotos = () => {
     getRandomPhotos(theme, 6).then((res) => {

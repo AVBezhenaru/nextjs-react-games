@@ -1,15 +1,17 @@
 import Link from 'next/link';
-import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { setTheme } from '../../../../memoryCards/store/memorySlice';
+import { RootState } from '../../../../store';
 
 import styles from './index.module.scss';
 
-export const ThemeContext = React.createContext('nature');
-
 const Home = () => {
-  const [theme, setTheme] = useState('nature');
+  const { theme } = useSelector((state: RootState) => state.memoryCards);
+  const dispatch = useDispatch();
 
   const changeTheme = (value: string) => {
-    setTheme(value);
+    dispatch(setTheme(value));
   };
 
   return (

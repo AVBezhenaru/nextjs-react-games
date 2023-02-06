@@ -20,7 +20,7 @@ const Card: React.FunctionComponent<Props> = ({ photo, cardClickHandler, isActiv
   const [active, setActive] = useState(isActive);
 
   useEffect(() => {
-    setActive(isActive);
+    setActive(() => isActive);
   }, [isActive]);
 
   return (
