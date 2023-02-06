@@ -2,18 +2,33 @@ export default class Service {
   isBlocked = false;
 
   generateNumber = (arr: number[][]) => {
-    let x = Math.floor(Math.random() * 4);
-    let y = Math.floor(Math.random() * 4);
-
-    while (arr[x][y] !== 0) {
-      x = Math.floor(Math.random() * 4);
-      y = Math.floor(Math.random() * 4);
+    let copyNumbers: number[][] = [...arr];
+    let emptyCells = 0;
+    for (let i = 0; i < 4; i++) {
+      for (let j = 0; j < 4; j++) {
+        if (copyNumbers[i][j] === 0) {
+          emptyCells += 1;
+        }
+      }
     }
-    if (arr[x][y] === 0) {
-      let copyNumbers = [...arr];
-      copyNumbers[x][y] = Math.random() >= 0.5 ? 2 : 4;
-      return copyNumbers;
+    if (emptyCells === 0) {
+      return arr;
     }
+    let randomCell = 1 + Math.floor(Math.random() * emptyCells);
+    let randomNumber = Math.random() >= 0.5 ? 2 : 4;
+    let emptyCell = 0;
+    for (let i = 0; i < 4; i++) {
+      for (let j = 0; j < 4; j++) {
+        if (copyNumbers[i][j] === 0) {
+          emptyCell += 1;
+        }
+        if (emptyCell === randomCell) {
+          copyNumbers[i][j] = randomNumber;
+          return copyNumbers;
+        }
+      }
+    }
+    return copyNumbers;
   };
 
   restartGame = (
@@ -43,16 +58,16 @@ export default class Service {
       }
     }
 
-    // for (let i = 0; i < numbers.length - 1; i++) {
-    //   for (let j = 0; j < numbers[i].length; j++) {
-    //     if (
-    //       (j < numbers[i].length - 1 && numbers[i][j] === numbers[i][j + 1]) ||
-    //       numbers[i][j] === numbers[i + 1][j]
-    //     ) {
-    //       return false;
-    //     }
-    //   }
-    // }
+    for (let i = 0; i < numbers.length; i++) {
+      for (let j = 0; j < numbers[i].length; j++) {
+        if (
+          (j < numbers[i].length - 1 && numbers[i][j] === numbers[i][j + 1]) ||
+          (i < numbers.length - 1 && numbers[i][j] === numbers[i + 1][j])
+        ) {
+          return false;
+        }
+      }
+    }
     setModal(true);
     return true;
   };
@@ -84,6 +99,17 @@ export default class Service {
     return reversedArr;
   };
 
+  compareArrays = (arr1: number[][], arr2: number[][]) => {
+    for (let i = 0; i < 4; i++) {
+      for (let j = 0; j < 4; j++) {
+        if (arr1[i][j] !== arr2[i][j]) {
+          return false;
+        }
+      }
+    }
+    return true;
+  };
+
   transposeArray = (arr: number[][]) => {
     for (var d = arr.length, a = 0; a < d; a++)
       for (var c = a + 1; c < d; c++) {
@@ -103,15 +129,14 @@ export default class Service {
     setModal?: (modal: boolean) => void,
   ) => {
     e.preventDefault();
-    if (this.gameIsOver(numbers, setModal)) {
-      return;
-    }
+
     if (this.isBlocked) {
       return;
     }
 
     switch (e.key) {
       case 'ArrowUp':
+        let oldNumbersUp = JSON.parse(JSON.stringify(numbers));
         let newNumbersUp = [...numbers];
         newNumbersUp = this.transposeArray(newNumbersUp);
         for (let i = 0; i < newNumbersUp.length; i++) {
@@ -120,18 +145,21 @@ export default class Service {
             newNumbersUp[i][j] = newLine[j];
           }
         }
-        this.isBlocked = true;
 
-        setTimeout(() => {
-          newNumbersUp = this.generateNumber(newNumbersUp);
+        newNumbersUp = this.transposeArray(newNumbersUp);
+        if (!this.compareArrays(newNumbersUp, oldNumbersUp)) {
+          this.isBlocked = true;
+          setTimeout(() => {
+            newNumbersUp = this.generateNumber(newNumbersUp);
+            setNumbers(newNumbersUp);
+            this.isBlocked = false;
+          }, 200);
           setNumbers(newNumbersUp);
-          this.isBlocked = false;
-        }, 200);
-        setNumbers(this.transposeArray(newNumbersUp));
-
+        }
         break;
 
       case 'ArrowDown':
+        let oldNumbersDown = JSON.parse(JSON.stringify(numbers));
         let newNumbersDown = [...numbers];
         newNumbersDown = this.reflectArray(this.transposeArray(newNumbersDown));
         for (let i = 0; i < newNumbersDown.length; i++) {
@@ -140,18 +168,20 @@ export default class Service {
             newNumbersDown[i][j] = newLine[j];
           }
         }
-        this.isBlocked = true;
-
-        setTimeout(() => {
-          newNumbersDown = this.generateNumber(newNumbersDown);
+        newNumbersDown = this.transposeArray(this.reflectArray(newNumbersDown));
+        if (!this.compareArrays(newNumbersDown, oldNumbersDown)) {
+          this.isBlocked = true;
+          setTimeout(() => {
+            newNumbersDown = this.generateNumber(newNumbersDown);
+            setNumbers(newNumbersDown);
+            this.isBlocked = false;
+          }, 200);
           setNumbers(newNumbersDown);
-          this.isBlocked = false;
-        }, 200);
-        setNumbers(this.transposeArray(this.reflectArray(newNumbersDown)));
-
+        }
         break;
 
       case 'ArrowLeft':
+        let oldNumbersLeft = JSON.parse(JSON.stringify(numbers));
         let newNumbersLeft = [...numbers];
         for (let i = 0; i < newNumbersLeft.length; i++) {
           let newLine = this.swipeNumbers(newNumbersLeft[i], score, setScore);
@@ -159,18 +189,19 @@ export default class Service {
             newNumbersLeft[i][j] = newLine[j];
           }
         }
-        this.isBlocked = true;
-
-        setTimeout(() => {
-          newNumbersLeft = this.generateNumber(newNumbersLeft);
+        if (!this.compareArrays(newNumbersLeft, oldNumbersLeft)) {
+          this.isBlocked = true;
+          setTimeout(() => {
+            newNumbersLeft = this.generateNumber(newNumbersLeft);
+            setNumbers(newNumbersLeft);
+            this.isBlocked = false;
+          }, 200);
           setNumbers(newNumbersLeft);
-          this.isBlocked = false;
-        }, 200);
-        setNumbers(newNumbersLeft);
-
+        }
         break;
 
       case 'ArrowRight':
+        let oldNumbersRight = JSON.parse(JSON.stringify(numbers));
         let newNumbersRight = [...numbers];
         newNumbersRight = this.reflectArray(newNumbersRight);
         for (let i = 0; i < newNumbersRight.length; i++) {
@@ -179,18 +210,23 @@ export default class Service {
             newNumbersRight[i][j] = newLine[j];
           }
         }
-        this.isBlocked = true;
-
-        setTimeout(() => {
-          newNumbersRight = this.generateNumber(newNumbersRight);
+        newNumbersRight = this.reflectArray(newNumbersRight);
+        if (!this.compareArrays(newNumbersRight, oldNumbersRight)) {
+          this.isBlocked = true;
+          setTimeout(() => {
+            newNumbersRight = this.generateNumber(newNumbersRight);
+            setNumbers(newNumbersRight);
+            this.isBlocked = false;
+          }, 200);
           setNumbers(newNumbersRight);
-          this.isBlocked = false;
-        }, 200);
-        setNumbers(this.reflectArray(newNumbersRight));
-
+        }
         break;
-      default:
-        return;
+
+      // default:
+      //   return;
+    }
+    if (this.gameIsOver(numbers, setModal)) {
+      return;
     }
   };
 }
