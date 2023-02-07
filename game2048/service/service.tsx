@@ -111,9 +111,9 @@ export default class Service {
   };
 
   transposeArray = (arr: number[][]) => {
-    for (var d = arr.length, a = 0; a < d; a++)
-      for (var c = a + 1; c < d; c++) {
-        var e = arr[a][c];
+    for (let d = arr.length, a = 0; a < d; a++)
+      for (let c = a + 1; c < d; c++) {
+        let e = arr[a][c];
         arr[a][c] = arr[c][a];
         arr[c][a] = e;
       }
