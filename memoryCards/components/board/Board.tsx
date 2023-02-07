@@ -8,10 +8,13 @@ import styles from '../../styles/index.module.scss';
 
 const Board = () => {
   const [photos, setPhotos] = useState([]);
-  const [openCards, setOpenCards] = useState(new Map());
+  const [openCards, setOpenCards] = useState([]);
   const [guesses, setGuesses] = useState(0);
   const [matches, setMatches] = useState(0);
   const [percentage, setPercentage] = useState(0);
+  const [firstCard, setFirstCard] = useState({ id: '', index: null });
+  const [secondCard, setSecondCard] = useState({ id: '', index: null });
+  const [count, setCount] = useState(0);
 
   const { theme } = useSelector((store: RootState) => store.memoryCards);
 
@@ -21,41 +24,60 @@ const Board = () => {
     });
   };
 
-  const matchCheck = () => {
-    if (openCards.size % 2 === 0) {
-      const cardIds = Array.from(openCards.values());
-      for (const [key, value] of Array.from(openCards.entries())) {
-        if (cardIds.reduce((acc, val) => (val === value ? ++acc : acc), 0) < 2) {
-          setOpenCards((prevOpenCards) => {
-            prevOpenCards.delete(key);
-            return prevOpenCards;
-          });
-        }
-      }
-      setMatches(openCards.size / 2);
-      setPercentage(guesses !== 0 ? Math.round((matches * 100) / guesses) : 0);
-    }
-  };
-
   useEffect(() => {
     saveJumbledPhotos();
   }, []);
 
+  const resetBoard = () => {
+    setFirstCard({ id: '', index: null });
+    setSecondCard({ id: '', index: null });
+    setCount(0);
+  };
+
+  const unflipCards = () => {
+    setTimeout(() => {
+      setOpenCards(openCards.slice(0, -2));
+      resetBoard();
+    }, 800);
+  };
+
+  const checkForMatch = () => {
+    if (firstCard.id === secondCard.id) {
+      setMatches(matches + 1);
+      resetBoard();
+      return;
+    }
+    unflipCards();
+  };
+
   useEffect(() => {
-    matchCheck();
-  }, [openCards, guesses]);
+    if (secondCard.id) {
+      checkForMatch();
+      setGuesses(guesses + 1);
+      setPercentage(guesses !== 0 ? Math.round((matches * 100) / guesses) : 0);
+    }
+  }, [secondCard]);
 
   const cardClickHandler = (id: string, index: number) => {
-    setOpenCards((prevOpenCards) => prevOpenCards.set(index, id));
-    if (matches < 6) setGuesses((state) => state + 1);
+    if (firstCard.index === index) return;
+    if (matches >= 6) return;
+    setOpenCards((state) => [...state, index]);
+    if (count === 0) {
+      setFirstCard({ id, index });
+      setCount((count) => count + 1);
+      return;
+    }
+    setSecondCard({ id, index });
+    setCount((count) => count + 1);
   };
 
   const reset = () => {
     saveJumbledPhotos();
-    setOpenCards(new Map());
+    setOpenCards([]);
     setGuesses(0);
     setMatches(0);
     setPercentage(0);
+    resetBoard();
   };
 
   return (
@@ -67,7 +89,7 @@ const Board = () => {
             photo={photo}
             key={i}
             index={i}
-            isActive={openCards.has(i)}
+            isActive={openCards.some((index) => index === i)}
           />
         ))}
         <p>Guesses: {guesses}</p>
