@@ -1,20 +1,7 @@
-import Link from 'next/link';
+import { NextPage } from 'next';
 
-import Button from '../../../../tetris2/components/button/button';
-import TetrisPlay from '../../../../tetris2/components/tetris-play/TetrisPlay';
-import style from '../../../../tetris2/styles/index.module.scss';
+import Game from '../../../../tetris/components/Game/Game';
 
-function TetrisGame() {
-  return (
-    <div className={style.game_wrapper}>
-      <Link href="../tetris">
-        <a>
-          <Button theme="backToMenu">Back</Button>
-        </a>
-      </Link>
-      <TetrisPlay />
-    </div>
-  );
-}
+const GamePage: NextPage = () => <Game />;
 
-export default TetrisGame;
+export default GamePage;

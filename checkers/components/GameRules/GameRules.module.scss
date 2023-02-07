@@ -1,0 +1,10 @@
+@import "../../styles/Variables.scss";
+
+.GameRules {
+  p {
+    font-family: $main-font-family;
+    line-height: 1.5em;
+
+    padding: 0.5em 0;
+  }
+}

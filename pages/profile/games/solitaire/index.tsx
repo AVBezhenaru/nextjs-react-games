@@ -1,5 +1,5 @@
-import { HomeSolitaire } from '../../../../solitaire/store/actions';
+import { Main } from '../../../../solitaire/components/Main/Main';
 
-const Home = () => <HomeSolitaire />;
+const Home = () => <Main />;
 
 export default Home;
