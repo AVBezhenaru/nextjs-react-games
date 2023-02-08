@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import Card from '../card/Card';
 import { getRandomPhotos } from '../../unsplashServiсe';
 import { RootState } from '../../../store';
+import ModalDialog from '../modalWindow/ModalWindow';
 import styles from '../../styles/index.module.scss';
 
 const Board = () => {
@@ -80,8 +81,11 @@ const Board = () => {
     resetBoard();
   };
 
+  const modal = matches === 6 ? <ModalDialog reset={reset} /> : null;
+
   return (
     <>
+      {modal}
       <div className={styles.board}>
         {photos.map((photo, i) => (
           <Card

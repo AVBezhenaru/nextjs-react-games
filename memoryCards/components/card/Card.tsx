@@ -16,7 +16,7 @@ type Props = {
   index: number;
 };
 
-const Card: React.FunctionComponent<Props> = ({ photo, cardClickHandler, isActive, index }) => {
+const Card: React.FC<Props> = ({ photo, cardClickHandler, isActive, index }) => {
   const [active, setActive] = useState(isActive);
 
   useEffect(() => {
