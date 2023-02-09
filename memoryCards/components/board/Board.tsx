@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import Card from '../card/Card';
@@ -7,7 +7,7 @@ import { RootState } from '../../../store';
 import ModalDialog from '../modalWindow/ModalWindow';
 import styles from '../../styles/index.module.scss';
 
-const Board = () => {
+const Board: React.FC = () => {
   const [photos, setPhotos] = useState([]);
   const [openCards, setOpenCards] = useState([]);
   const [guesses, setGuesses] = useState(0);

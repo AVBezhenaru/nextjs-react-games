@@ -1,3 +1,4 @@
+import React from 'react';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -6,7 +7,7 @@ import { RootState } from '../../../../store';
 
 import styles from './index.module.scss';
 
-const Home = () => {
+const Home: React.FC = () => {
   const { theme } = useSelector((state: RootState) => state.memoryCards);
   const dispatch = useDispatch();
 

@@ -12,6 +12,7 @@ import checkersIcon from '../img/checkersIcon.png';
 import hangmanIcon from '../img/hangmanIcon.png';
 import aerohokkeyIcon from '../img/aerohokkeyIcon.png';
 import solitairIcon from '../img/solitairIcon.png';
+import memoryCards from '../img/memoryCards.png';
 
 import { GameLink } from './GameLink';
 import { Games, Page, HeaderGames, ListGames } from './listGamesStyle';
@@ -28,6 +29,7 @@ const ListGamesForm = () => {
     { src: aerohokkeyIcon.src, title: 'airhockey' },
     { src: tetrisIcon.src, title: 'tetrisReborn' },
     { src: solitairIcon.src, title: 'solitaire' },
+    { src: memoryCards.src, title: 'memoryCards' },
   ];
   return (
     <>
