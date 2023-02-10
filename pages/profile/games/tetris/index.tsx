@@ -1,46 +1,7 @@
-import Link from 'next/link';
-import Head from 'next/head';
-import Image from 'next/image';
+import { NextPage } from 'next';
 
-import style from '../../../../tetris2/styles/index.module.scss';
-import Button from '../../../../tetris2/components/button/button';
-import { startGame } from '../../../../tetris2/store/tetrisSlice';
-import { useAppDispatch } from '../../../../hooks/useAppDispatch';
-import SettingPic from '../../../../public/gear-svgrepo-com.svg';
+import MainPage from '../../../../tetris/components/MainPage/MainPage';
 
-function HelloTetris() {
-  const dispatch = useAppDispatch();
-  return (
-    <div className={style.container}>
-      <Head>
-        <meta name="keywords" content="tetris, online-games" />
-      </Head>
-      <main>
-        <Link href="./tetris/settings">
-          <a>
-            <Button theme="settings">
-              <Image src={SettingPic} alt="" />
-            </Button>
-          </a>
-        </Link>
-        <Link href="./tetris/game">
-          <a onClick={() => dispatch(startGame())}>
-            <Button theme="play">Play</Button>
-          </a>
-        </Link>
-        <Link href="./tetris/score-table">
-          <a>
-            <Button theme="score">Score</Button>
-          </a>
-        </Link>
-        <Link href="../games">
-          <a>
-            <Button theme="back">Back</Button>
-          </a>
-        </Link>
-      </main>
-    </div>
-  );
-}
+const Tetris: NextPage = () => <MainPage />;
 
-export default HelloTetris;
+export default Tetris;

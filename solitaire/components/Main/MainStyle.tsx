@@ -1,15 +1,12 @@
 import styled from 'styled-components';
 
-import backg from '../../images/desk1.jpg';
-import centerImg from '../../images/fone1.png';
-
 export const MainSection = styled.div`
   position: fixed;
   top: 45px;
   bottom: 0;
   width: 100%;
   height: 100%;
-  background: url(${centerImg.src}) no-repeat center 70px, url(${backg.src}) no-repeat;
+  background: url(${`/fone1.png`}) no-repeat center 70px, url(${`/desk1.png`}) no-repeat;
   background-size: 65vh, cover;
   overflow: hidden;
 `;

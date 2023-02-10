@@ -3,12 +3,12 @@ import React from 'react';
 import { RulesWrap } from './rulesStyle';
 
 interface TypeFn {
-  fn: () => void;
+  onClose: () => void;
 }
 
-export const Rules: React.FC<TypeFn> = ({ fn }) => (
+export const Rules: React.FC<TypeFn> = ({ onClose }) => (
   <RulesWrap>
-    <button type="button" onClick={fn}>
+    <button type="button" onClick={onClose}>
       Закрыть
     </button>
     <div>

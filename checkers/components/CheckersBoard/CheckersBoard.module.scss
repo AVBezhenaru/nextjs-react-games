@@ -1,0 +1,93 @@
+@import '../../styles/Variables.scss';
+
+.CheckersBoard {
+  height: 120%;
+  min-height: 900px;
+  background-image: url('../../images/aaaa.jpg');
+  padding-top: 40px;
+}
+
+.ModalContainer {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  padding-top: 20px;
+}
+
+.ScoreAndGameContainer {
+  display: flex;
+  align-items: center;
+}
+
+.GameBoardContainer {
+  background-color: rgba(255, 255, 255, 0.4);
+  margin-top: 2em;
+
+  .HorizontalContainer {
+    display: flex;
+
+    .LeftNumbers,
+    .RightNumbers {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+
+      padding: 0 .5em;
+    }
+  }
+
+  .TopLetters,
+  .BottomLetters {
+    display: flex;
+    justify-content: space-around;
+
+    padding: 5px 1.5em;
+  }
+
+
+}
+
+.GameBoard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.WinnerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 2em 0;
+
+  .WinnerHeader {
+    font-size: 30px;
+  }
+
+  .ButtonsContainer {
+    display: flex;
+    gap: 300px;
+    padding: 15em;
+
+    .GameOverButton {
+      width: 130px;
+      height: 130px;
+      font-family: 'Yahfie Heavy';
+      font-size: 24px;
+      border-radius: 50%;
+      background-color: white;
+    }
+
+    .GameOverButton:hover {
+      outline: 2px solid white;
+      color: white;
+      background-color: black;
+      transition: all 0.5s ease 0s;
+      cursor: pointer;
+    }
+  }
+}
