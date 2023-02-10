@@ -24,7 +24,7 @@ const ModalDialog: React.FC<Props> = ({ reset }) => {
         </button>
         <Link href="../memoryCards">
           <button className={styles.modalButton} type="button" onClick={clickHandler}>
-            Choose a theme
+            Choose theme
           </button>
         </Link>
       </div>
