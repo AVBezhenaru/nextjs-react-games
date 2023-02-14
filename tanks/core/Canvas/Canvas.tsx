@@ -1,14 +1,10 @@
 import React, { useRef, useEffect } from 'react';
 
-import { CANVAS_HEIGHT, CANVAS_WIDTH } from '../../config';
-// import { playerPrimary } from '../tileMap';
+import { FIELD_SIZE } from '../../config';
 import World from '../World/World';
 import image from '../../assents/graphics/sprite.png';
-// import controllTank from '../World/controllTank';
 import drawTank from '../drraw/drawTank';
-
-// import frameRenderer from './frameRenderer';
-// import { Direction } from '../Models/Tank';
+import { drawLand } from '../drraw/drawLand';
 
 import styles from './canvas.module.scss';
 
@@ -16,7 +12,7 @@ const Canvas = ({ ...props }) => {
   const canvasRef = useRef(null);
   const requestIdRef = useRef(null);
   const activeKeys = useRef(new Set());
-  const size = { width: CANVAS_WIDTH, height: CANVAS_HEIGHT };
+  const size = { width: FIELD_SIZE, height: FIELD_SIZE };
   const gameWorld = useRef(new World()).current;
 
   const img = new Image();
@@ -24,8 +20,9 @@ const Canvas = ({ ...props }) => {
 
   const renderFrame = () => {
     const ctx: CanvasRenderingContext2D = canvasRef.current.getContext('2d');
-    ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    ctx.clearRect(0, 0, FIELD_SIZE, FIELD_SIZE);
     drawTank(img, ctx, gameWorld.playerTank_1, activeKeys.current);
+    // drawLand(img, ctx, gameWorld.land);
   };
 
   const tick = () => {
@@ -35,6 +32,7 @@ const Canvas = ({ ...props }) => {
   };
 
   useEffect(() => {
+    canvasRef.current.focus();
     requestIdRef.current = requestAnimationFrame(tick);
     return () => {
       cancelAnimationFrame(requestIdRef.current);

@@ -1,4 +1,5 @@
 import { Tank } from '../Models/Tank';
+import { Land } from '../Models/Land';
 
 // interface IWorld {
 //   playerTank_1: Tank;
@@ -14,7 +15,9 @@ class World {
 
   enemyTanks: any = [];
 
-  grid: any = [];
+  currentLevel = 1;
+
+  land: any = new Land(this.currentLevel);
 }
 
 export default World;
