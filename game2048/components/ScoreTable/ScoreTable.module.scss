@@ -1,0 +1,38 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #293462;
+  height: 100vh;
+  padding-top: 10vmin;
+}
+.header {
+  text-align: center;
+  font-size: 3em;
+  padding-bottom: 2em;
+  text-transform: uppercase;
+  color: #fff;
+}
+.table {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5em;
+  color: #fff;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1em;
+  border-bottom: 0.1em solid white;
+}
+.place {
+  margin-right: 5em;
+}
+.name {
+  margin-right: 5em;
+}
+.homeButton {
+  position: absolute;
+  left: 1.5em;
+  top: 3em;
+}
