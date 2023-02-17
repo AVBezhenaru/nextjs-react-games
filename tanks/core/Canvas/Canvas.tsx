@@ -22,7 +22,7 @@ const Canvas = ({ ...props }) => {
     const ctx: CanvasRenderingContext2D = canvasRef.current.getContext('2d');
     ctx.clearRect(0, 0, FIELD_SIZE, FIELD_SIZE);
     drawTank(img, ctx, gameWorld.playerTank_1, activeKeys.current);
-    // drawLand(img, ctx, gameWorld.land);
+    drawLand(img, ctx, gameWorld.land);
   };
 
   const tick = () => {

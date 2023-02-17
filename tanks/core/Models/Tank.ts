@@ -1,8 +1,7 @@
 /* eslint-disable lines-between-class-members */
 import { playerPrimary } from '../tileMap';
 import { switchFrame } from '../utils/switchFrame';
-import { FIELD_SIZE } from '../../config';
-import { PLAYER_DEFAULT_SPAWN_POSITIONS } from '../../config';
+import { FIELD_SIZE, PLAYER_DEFAULT_SPAWN_POSITIONS } from '../../config';
 
 export enum ControlKey {
   up = 'ArrowUp',
@@ -43,7 +42,8 @@ export class Tank implements ITank {
   rank: Rank;
   frames: number[][];
   type: Type;
-  tank_size: number[];
+  tank_width: number;
+  tank_height: number;
 
   constructor() {
     this.x = PLAYER_DEFAULT_SPAWN_POSITIONS[0].x;
@@ -54,7 +54,7 @@ export class Tank implements ITank {
     this.rank = Rank.LEVEL1;
     this.type = Type.PLAYER1;
     this.frames = playerPrimary.rank_1.up;
-    this.tank_size = [this.view[2], this.view[3]];
+    [this.tank_width, this.tank_height] = [this.view[2], this.view[3]];
   }
 
   moveTank(key: Set<unknown>) {
@@ -66,13 +66,13 @@ export class Tank implements ITank {
         }
         break;
       case key.has(ControlKey.right):
-        if (this.x < FIELD_SIZE - this.tank_size[0]) {
+        if (this.x < FIELD_SIZE - this.tank_width) {
           this.x += this.speed;
           this.view = switchFrame(playerPrimary[this.rank].right, this.view);
         }
         break;
       case key.has(ControlKey.down):
-        if (this.y < FIELD_SIZE - this.tank_size[1]) {
+        if (this.y < FIELD_SIZE - this.tank_height) {
           this.y += this.speed;
           this.view = switchFrame(playerPrimary[this.rank].down, this.view);
         }
@@ -86,4 +86,3 @@ export class Tank implements ITank {
     }
   }
 }
-

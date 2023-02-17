@@ -13,11 +13,11 @@ class World {
 
   playerTank_2: any = null;
 
-  enemyTanks: any = [];
-
   currentLevel = 1;
 
   land: any = new Land(this.currentLevel);
+
+  enemyTanks: any = [];
 }
 
 export default World;

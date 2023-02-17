@@ -1,11 +1,10 @@
 .game {
   display: flex;
+  box-sizing: border-box;
   padding-top: 45px;
   justify-content: center;
   align-items: stretch;
   flex: 1;
-  margin: 0;
-  background-color: #000;
-  // background-color: #fff;
   outline: none;
+  width: 100%;
 }
