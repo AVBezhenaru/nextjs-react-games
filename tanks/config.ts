@@ -1,7 +1,3 @@
-// export const TILE_SIZE_SMALL = 16;
-// export const TILE_SIZE_MEDIUM = 32;
-// export const TILE_SIZE_LARGE = 64;
-
 export const TILE_SIZE = 32;
 
 export const FIELD_TILE_COUNT = 26;
@@ -10,6 +6,7 @@ export const FIELD_SIZE = FIELD_TILE_COUNT * TILE_SIZE;
 export const BORDER_LEFT_WIDTH = 64;
 export const BORDER_RIGHT_WIDTH = 128;
 export const BORDER_TOP_BOTTOM_HEIGHT = 32;
+
 export const BORDER_RECTS = [
   // Top
   {

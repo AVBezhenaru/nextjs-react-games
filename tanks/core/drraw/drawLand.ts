@@ -1,6 +1,6 @@
 import { Land } from '../Models/Land';
 // import { landTiles } from '../tileMap';
-import { TILE_SIZE_LARGE } from '../../config';
+import { TILE_SIZE } from '../../config';
 
 // const mapLand = landTiles;
 export const drawLand = (img: HTMLImageElement, ctx: CanvasRenderingContext2D, land: Land) => {
@@ -15,8 +15,8 @@ export const drawLand = (img: HTMLImageElement, ctx: CanvasRenderingContext2D, l
           elem[1],
           elem[2],
           elem[3],
-          j * TILE_SIZE_LARGE,
-          i * TILE_SIZE_LARGE,
+          j * TILE_SIZE,
+          i * TILE_SIZE,
           elem[2],
           elem[3],
         );
