@@ -3,8 +3,8 @@ import React, { useRef, useEffect } from 'react';
 import { FIELD_SIZE } from '../../config';
 import World from '../World/World';
 import image from '../../assents/graphics/sprite.png';
-import drawTank from '../drraw/drawTank';
-import { drawLand } from '../drraw/drawLand';
+// import drawTank from '../draw/drawTank';
+// import { drawLand } from '../draw/drawLand';
 
 import styles from './canvas.module.scss';
 
@@ -13,31 +13,34 @@ const Canvas = ({ ...props }) => {
   const requestIdRef = useRef(null);
   const activeKeys = useRef(new Set());
   const size = { width: FIELD_SIZE, height: FIELD_SIZE };
-  const gameWorld = useRef(new World()).current;
+  let gameWorld = useRef(null).current;
 
-  const img = new Image();
-  img.src = image.src;
+  // const img = new Image();
+  // img.src = image.src;
 
-  const renderFrame = () => {
-    const ctx: CanvasRenderingContext2D = canvasRef.current.getContext('2d');
-    ctx.clearRect(0, 0, FIELD_SIZE, FIELD_SIZE);
-    drawTank(img, ctx, gameWorld.playerTank_1, activeKeys.current);
-    drawLand(img, ctx, gameWorld.land);
-  };
+  const loop = (ctx: CanvasRenderingContext2D) => {
+    // if (!canvasRef.current) return;
+    // ctx.clearRect(0, 0, FIELD_SIZE, FIELD_SIZE);
 
-  const tick = () => {
-    if (!canvasRef.current) return;
-    renderFrame();
-    requestIdRef.current = requestAnimationFrame(tick);
+    // drawTank(img, ctx, gameWorld.playerTank_1, activeKeys.current);
+    gameWorld.renderPlayer_1(activeKeys.current);
+    requestIdRef.current = requestAnimationFrame(() => loop(ctx));
   };
 
   useEffect(() => {
+    const ctx: CanvasRenderingContext2D = canvasRef.current.getContext('2d');
     canvasRef.current.focus();
-    requestIdRef.current = requestAnimationFrame(tick);
+    const img = new Image();
+    img.src = image.src;
+    img.onload = async () => {
+      gameWorld = new World(ctx, img);
+      await gameWorld.renderOnce();
+      requestIdRef.current = requestAnimationFrame(() => loop(ctx));
+    };
     return () => {
       cancelAnimationFrame(requestIdRef.current);
     };
-  }, []);
+  }, [image]);
 
   const onKeyDown = (event: React.KeyboardEvent) => {
     activeKeys.current.add(event.code);
@@ -46,6 +49,8 @@ const Canvas = ({ ...props }) => {
   const onKeyUp = (event: React.KeyboardEvent) => {
     activeKeys.current.delete(event.code);
   };
+
+  console.log('render');
 
   return (
     <canvas

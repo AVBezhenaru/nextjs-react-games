@@ -36,14 +36,12 @@ const map = [
 ];
 
 export class Land implements ILand {
+
   level: number;
 
   curLevel: number[][];
 
-  // renderMap: number[][];
-  context: any;
-
-  landTiles: any;
+  landTiles;
 
   constructor(level: number) {
     this.level = level;
@@ -53,8 +51,8 @@ export class Land implements ILand {
 
   lavel: number;
 
-  getRenderMap() {
-    const context: number[][] = [];
+  getRenderMap(): number[][] {
+    const context = [];
     for (let i = 0; i < this.curLevel.length; i++) {
       context.push([]);
       for (let j = 0; j < this.curLevel[i].length; j++) {
@@ -62,7 +60,6 @@ export class Land implements ILand {
         context[i][j] = this.landTiles[ind];
       }
     }
-    // console.log(context);
     return context;
   }
 }

@@ -85,7 +85,7 @@ export const points = {
 };
 
 // eslint-disable-next-line no-undef
-export const landTiles =  {
+export const landTiles: {[key: number]: number[]} =  {
   1: [1052, 256, 32, 32], // brick whole
   2: [1084, 256, 32, 32], // brick right
   3: [1116, 256, 32, 32], // brick bottom
@@ -93,10 +93,10 @@ export const landTiles =  {
   5: [1180, 256, 32, 32], // brick top
   
   6: [1052, 288, 32, 32], // steel
-  7: [1084, 288, 32, 32], // forest
-  8: [1116, 288, 32, 32], // ice
+  7: [1052, 320, 32, 32], // water-1
+  8: [1084, 320, 32, 32], // water-2
+  9: [1116, 320, 32, 32], // water-3
 
-  9: [1052, 320, 32, 32], // water-1
-  10: [1084, 320, 32, 32], // water-2
-  11: [1116, 320, 32, 32], // water-3
+  10: [1084, 288, 32, 32], // forest
+  11: [1116, 288, 32, 32], // ice
 };

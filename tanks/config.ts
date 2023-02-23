@@ -1,4 +1,5 @@
 export const TILE_SIZE = 32;
+export const TILE_SIZE_BIG = 64;
 
 export const FIELD_TILE_COUNT = 26;
 export const FIELD_SIZE = FIELD_TILE_COUNT * TILE_SIZE;

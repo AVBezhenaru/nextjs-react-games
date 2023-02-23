@@ -1,12 +1,10 @@
 /* eslint-disable lines-between-class-members */
+/* eslint-disable no-case-declarations */
+/* eslint-disable no-const-assign */
+
 import { playerPrimary } from '../tileMap';
 import { switchFrame } from '../utils/switchFrame';
-import {
-  FIELD_SIZE,
-  TILE_SIZE,
-  FIELD_TILE_COUNT,
-  PLAYER_DEFAULT_SPAWN_POSITIONS,
-} from '../../config';
+import { TILE_SIZE, FIELD_TILE_COUNT, PLAYER_DEFAULT_SPAWN_POSITIONS } from '../../config';
 import { shiftTile } from '../utils/shiftTile';
 
 // import { Land } from './Land';
@@ -66,93 +64,72 @@ export class Tank implements ITank {
   tank_height: number;
 
   constructor(land: number[][]) {
-    [this.view] = [...playerPrimary.rank_1.up];
-    [this.tank_width, this.tank_height] = [this.view[2], this.view[3]];
+    [this.view] = [...playerPrimary.rank_2.up];
+    [this.tank_width, this.tank_height] = this.getSizeTank();
     this.x = PLAYER_DEFAULT_SPAWN_POSITIONS[0].x + shiftTile(this.tank_width, this.tank_height)[0];
     this.y = PLAYER_DEFAULT_SPAWN_POSITIONS[0].y + shiftTile(this.tank_width, this.tank_height)[1];
     this.direction = Direction.up;
     this.speed = 3;
-    this.rank = Rank.LEVEL1;
+    this.rank = Rank.LEVEL2;
     this.type = Type.PLAYER1;
-    this.frames = playerPrimary.rank_1.up;
+    this.frames = playerPrimary.rank_2.up;
     this.land = land;
   }
 
-  private isCanMove(direction: Direction) {
-    const firstCol = Math.round(this.x / TILE_SIZE);
-    const firstRow = Math.round(this.y / TILE_SIZE);
-    const secondCol = Math.round((this.x + this.tank_width) / TILE_SIZE);
-    const secondRow = Math.round((this.y + this.tank_height) / TILE_SIZE);
+  private getSizeTank(): [width: number, height: number] {
+    return [this.view[2], this.view[3]];
+  }
 
-    const [stopFirstRow, stopFirstCol] = this.findBarrier(firstRow, firstCol);
-    console.log(stopFirstRow, stopFirstCol);
-    // const [stopSecondRow, stopSecondCol] = this.findBarrier(secondRow, secondCol);
-    // console.log(this.y, stopSecondRow * TILE_SIZE + TILE_SIZE);
+  private isCanMove(direction: Direction) {
+    let stopPos1 = 0;
+    let stopPos2 = 0;
+    const [stopRow1, stopCol1] = this.findBarrier(
+      this.y / TILE_SIZE,
+      this.x / TILE_SIZE,
+      direction,
+    );
+    const [stopRow2, stopCol2] = this.findBarrier(
+      (this.y + TILE_SIZE) / TILE_SIZE,
+      (this.x + TILE_SIZE) / TILE_SIZE,
+      direction,
+    );
+
     switch (true) {
       case direction === Direction.up:
-        return (
-          this.y >= 0 &&
-          this.y > stopFirstRow * TILE_SIZE + TILE_SIZE &&
-          this.y + this.tank_width > stopFirstRow * TILE_SIZE + TILE_SIZE
-        );
+        stopPos1 = stopRow1 === 0 ? stopRow1 * TILE_SIZE : stopRow1 * TILE_SIZE + TILE_SIZE;
+        stopPos2 = stopRow2 === 0 ? stopRow2 * TILE_SIZE : stopRow2 * TILE_SIZE + TILE_SIZE;
+        return this.y > stopPos1 && this.y > stopPos2;
+
       case direction === Direction.right:
-        return this.x <= FIELD_SIZE - this.tank_width;
+        stopPos1 = stopCol1 * TILE_SIZE;
+        stopPos2 = stopCol2 * TILE_SIZE;
+        return this.x + this.tank_width < stopPos1 && this.x + this.tank_width < stopPos2;
+
       case direction === Direction.down:
-        return this.y <= FIELD_SIZE - this.tank_height;
+        stopPos1 = stopRow1 * TILE_SIZE;
+        stopPos2 = stopRow2 * TILE_SIZE;
+        return this.y + this.tank_height < stopPos1 && this.y + this.tank_height < stopPos2;
+
       case direction === Direction.left:
-        return this.x >= 0;
+        stopPos1 = stopCol1 === 0 ? stopCol1 * TILE_SIZE : stopCol1 * TILE_SIZE + TILE_SIZE;
+        stopPos2 = stopCol2 === 0 ? stopCol2 * TILE_SIZE : stopCol2 * TILE_SIZE + TILE_SIZE;
+        return this.x > stopPos1 && this.x > stopPos2;
     }
   }
 
-  private findBarrier(row: number, col: number) {
-    while (row > 0 && col > 0) {
-      if (this.land[row][col]) {
+  private findBarrier(row: number, col: number, direction: Direction) {
+    row = Math.round(row);
+    col = Math.round(col);
+    while (row >= 0 && col >= 0 && row <= FIELD_TILE_COUNT - 1 && col <= FIELD_TILE_COUNT - 1) {
+      if (this.land[row][col] > 0 && this.land[row][col] < 10) {
         return [row, col];
       }
-      row -= 1;
+      if (direction === Direction.up) row -= 1;
+      if (direction === Direction.down) row += 1;
+      if (direction === Direction.right) col += 1;
+      if (direction === Direction.left) col -= 1;
     }
     return [row, col];
-  }
-
-  moveTank(key: Set<unknown>) {
-    switch (true) {
-      case key.has(Direction.up):
-        this.view = switchFrame(playerPrimary[this.rank].up, this.view);
-        this.shiftWhenTurn(Direction.up);
-        if (this.y > 0) {
-          this.y -= this.speed;
-        } else {
-          this.y = 0;
-        }
-        break;
-      case key.has(Direction.right):
-        this.view = switchFrame(playerPrimary[this.rank].right, this.view);
-        this.shiftWhenTurn(Direction.right);
-        if (this.x + this.speed + this.tank_width < FIELD_SIZE) {
-          this.x += this.speed;
-        } else {
-          this.x = FIELD_SIZE - this.tank_width;
-        }
-        break;
-      case key.has(Direction.down):
-        this.view = switchFrame(playerPrimary[this.rank].down, this.view);
-        this.shiftWhenTurn(Direction.down);
-        if (this.y + this.speed + this.tank_height < FIELD_SIZE) {
-          this.y += this.speed;
-        } else {
-          this.y = FIELD_SIZE - this.tank_height;
-        }
-        break;
-      case key.has(Direction.left):
-        this.view = switchFrame(playerPrimary[this.rank].left, this.view);
-        this.shiftWhenTurn(Direction.left);
-        if (this.x > 0) {
-          this.x -= this.speed;
-        } else {
-          this.x = 0;
-        }
-        break;
-    }
   }
 
   private shiftWhenTurn(direction: Direction) {
@@ -164,5 +141,56 @@ export class Tank implements ITank {
       this.y = y + dy;
     }
     this.direction = direction;
+  }
+
+  getPosition() {
+    const x = this.x - shiftTile(this.tank_width, this.tank_height)[0];
+    const y = this.y - shiftTile(this.tank_width, this.tank_height)[1];
+    return [x, y];
+  }
+
+  moveTank(key: Set<unknown>) {
+    switch (true) {
+      case key.has(Direction.up):
+        this.view = switchFrame(playerPrimary[this.rank].up, this.view);
+        [this.tank_width, this.tank_height] = this.getSizeTank();
+        this.shiftWhenTurn(Direction.up);
+        if (this.isCanMove(Direction.up)) {
+          this.y -= this.speed;
+        } else {
+          this.y -= 0;
+        }
+        break;
+      case key.has(Direction.right):
+        this.view = switchFrame(playerPrimary[this.rank].right, this.view);
+        [this.tank_width, this.tank_height] = this.getSizeTank();
+        this.shiftWhenTurn(Direction.right);
+        if (this.isCanMove(Direction.right)) {
+          this.x += this.speed;
+        } else {
+          this.x += 0;
+        }
+        break;
+      case key.has(Direction.down):
+        this.view = switchFrame(playerPrimary[this.rank].down, this.view);
+        [this.tank_width, this.tank_height] = this.getSizeTank();
+        this.shiftWhenTurn(Direction.down);
+        if (this.isCanMove(Direction.down)) {
+          this.y += this.speed;
+        } else {
+          this.y += 0;
+        }
+        break;
+      case key.has(Direction.left):
+        this.view = switchFrame(playerPrimary[this.rank].left, this.view);
+        [this.tank_width, this.tank_height] = this.getSizeTank();
+        this.shiftWhenTurn(Direction.left);
+        if (this.isCanMove(Direction.left)) {
+          this.x -= this.speed;
+        } else {
+          this.x -= 0;
+        }
+        break;
+    }
   }
 }
