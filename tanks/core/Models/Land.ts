@@ -6,6 +6,8 @@ interface ILand {
   curLevel: number[][];
 }
 
+export type TLand = number[][];
+
 const map = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -36,10 +38,9 @@ const map = [
 ];
 
 export class Land implements ILand {
-
   level: number;
 
-  curLevel: number[][];
+  curLevel: TLand;
 
   landTiles;
 

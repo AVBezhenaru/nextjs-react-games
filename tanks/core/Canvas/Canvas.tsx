@@ -1,10 +1,9 @@
+/* eslint-disable array-callback-return */
 import React, { useRef, useEffect } from 'react';
 
 import { FIELD_SIZE } from '../../config';
 import World from '../World/World';
 import image from '../../assents/graphics/sprite.png';
-// import drawTank from '../draw/drawTank';
-// import { drawLand } from '../draw/drawLand';
 
 import styles from './canvas.module.scss';
 
@@ -15,15 +14,9 @@ const Canvas = ({ ...props }) => {
   const size = { width: FIELD_SIZE, height: FIELD_SIZE };
   let gameWorld = useRef(null).current;
 
-  // const img = new Image();
-  // img.src = image.src;
-
   const loop = (ctx: CanvasRenderingContext2D) => {
-    // if (!canvasRef.current) return;
-    // ctx.clearRect(0, 0, FIELD_SIZE, FIELD_SIZE);
-
-    // drawTank(img, ctx, gameWorld.playerTank_1, activeKeys.current);
-    gameWorld.renderPlayer_1(activeKeys.current);
+    if (!canvasRef.current) return;
+    gameWorld.render();
     requestIdRef.current = requestAnimationFrame(() => loop(ctx));
   };
 
@@ -32,25 +25,25 @@ const Canvas = ({ ...props }) => {
     canvasRef.current.focus();
     const img = new Image();
     img.src = image.src;
-    img.onload = async () => {
+    img.onload = () => {
       gameWorld = new World(ctx, img);
-      await gameWorld.renderOnce();
+      gameWorld.renderOnce();
       requestIdRef.current = requestAnimationFrame(() => loop(ctx));
     };
     return () => {
       cancelAnimationFrame(requestIdRef.current);
     };
-  }, [image]);
+  }, []);
 
   const onKeyDown = (event: React.KeyboardEvent) => {
     activeKeys.current.add(event.code);
+    gameWorld.controll(activeKeys.current);
   };
 
   const onKeyUp = (event: React.KeyboardEvent) => {
     activeKeys.current.delete(event.code);
+    gameWorld.controll(activeKeys.current);
   };
-
-  console.log('render');
 
   return (
     <canvas
