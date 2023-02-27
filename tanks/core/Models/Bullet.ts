@@ -2,7 +2,7 @@
 import { TILE_SIZE } from '../../config';
 import { bullet } from '../tileMap';
 import { getStopPoints } from '../utils/getStopPoints';
-import { isCanMove } from '../utils/isCanMove';
+import { stopPosition } from '../utils/stopPosition';
 
 import { TLand } from './Land';
 import { Direction, Tank } from './Tank';
@@ -18,7 +18,7 @@ export class Bullet {
   view: number[];
   land: TLand;
   direction: Direction;
-  shot: boolean;
+  isExplose: boolean;
 
   constructor(tank: Tank, land: TLand) {
     this.tank = tank;
@@ -26,19 +26,10 @@ export class Bullet {
     [this.x, this.y] = this.getPosition(this.tank.direction);
     this.view = bullet.up;
     this.land = land;
-    this.shot = true;
+    this.isExplose = false;
     this.speed = 5;
   }
 
-  get bulletParams() {
-    return {
-      x: this.x,
-      y: this.y,
-      width: this.width,
-      height: this.height,
-      direction: this.direction,
-    };
-  }
   private getPosition(direction: Direction) {
     switch (true) {
       case direction === Direction.up:
@@ -75,50 +66,57 @@ export class Bullet {
     }
   }
 
-  run() {
+  fire() {
     const opt = {
       x: this.x - TILE_SIZE,
       y: this.y - TILE_SIZE,
       land: this.land,
       direction: this.direction,
     };
-    const isMoveOpt = { ...getStopPoints({ ...opt }) };
-
+    let stopPos = 0;
     switch (this.direction) {
       case Direction.up:
         this.view = bullet.up;
-        if (isCanMove({ ...isMoveOpt, ...this.bulletParams })) {
+        stopPos = stopPosition({ ...getStopPoints({ ...opt }), direction: this.direction });
+        if (this.y > stopPos) {
           this.y -= this.speed;
         } else {
           this.y -= 0;
-          this.shot = false;
+          this.tank.isShot = false;
+          this.isExplose = true;
         }
         break;
       case Direction.right:
         this.view = bullet.right;
-        if (isCanMove({ ...isMoveOpt, ...this.bulletParams })) {
+        stopPos = stopPosition({ ...getStopPoints({ ...opt }), direction: this.direction });
+        if (this.x + this.width < stopPos) {
           this.x += this.speed;
         } else {
           this.x += 0;
-          this.shot = false;
+          this.tank.isShot = false;
+          this.isExplose = true;
         }
         break;
       case Direction.down:
         this.view = bullet.down;
-        if (isCanMove({ ...isMoveOpt, ...this.bulletParams })) {
+        stopPos = stopPosition({ ...getStopPoints({ ...opt }), direction: this.direction });
+        if (this.y + this.height < stopPos) {
           this.y += this.speed;
         } else {
           this.y += 0;
-          this.shot = false;
+          this.tank.isShot = false;
+          this.isExplose = true;
         }
         break;
       case Direction.left:
         this.view = bullet.left;
-        if (isCanMove({ ...isMoveOpt, ...this.bulletParams })) {
+        stopPos = stopPosition({ ...getStopPoints({ ...opt }), direction: this.direction });
+        if (this.x > stopPos) {
           this.x -= this.speed;
         } else {
           this.x -= 0;
-          this.shot = false;
+          this.tank.isShot = false;
+          this.isExplose = true;
         }
         break;
     }
