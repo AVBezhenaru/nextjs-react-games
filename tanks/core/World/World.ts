@@ -5,7 +5,12 @@
 import { ControlKey, Tank } from '../Models/Tank';
 import { Land } from '../Models/Land';
 import { Bullet } from '../Models/Bullet';
-import { TILE_SIZE, TILE_SIZE_BIG } from '../../config';
+import {
+  BORDER_LEFT_WIDTH,
+  BORDER_TOP_BOTTOM_HEIGHT,
+  TILE_SIZE,
+  TILE_SIZE_BIG,
+} from '../../config';
 import { explosion, landTiles } from '../tileMap';
 
 interface IWorld {
@@ -117,10 +122,16 @@ class World implements IWorld {
         frame: landTiles[frame],
       };
     });
+    console.log(prepareWalls);
     prepareWalls
       .filter((item) => !item.frame)
       .forEach((item) => {
-        this.ctx.clearRect(item.x, item.y, TILE_SIZE, TILE_SIZE);
+        this.ctx.clearRect(
+          item.x,
+          item.y,
+          TILE_SIZE,
+          TILE_SIZE,
+        );
       });
     this.renderLand(prepareWalls.filter((item) => item.frame)).forEach((item) => {
       const { clear, draw } = { ...item };
@@ -129,17 +140,14 @@ class World implements IWorld {
     });
   }
 
-  private clearBlock(col: number, row: number) {
-    this.ctx.clearRect(col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE);
-  }
-
   animation({ x, y, frames }: { x: number; y: number; frames: number[][] }, delay: number) {
     let n = 0;
     const self = this;
     setTimeout(function tick() {
       if (n < frames.length) {
-        const coordX = Math.ceil(x / TILE_SIZE) * TILE_SIZE - frames[n][2] / 2;
-        const coordY = Math.ceil(y / TILE_SIZE) * TILE_SIZE - frames[n][3] / 2;
+        const coordX = Math.ceil(x / TILE_SIZE) * TILE_SIZE - frames[n][2] / 2 + BORDER_LEFT_WIDTH;
+        const coordY =
+          Math.ceil(y / TILE_SIZE) * TILE_SIZE - frames[n][3] / 2 + BORDER_TOP_BOTTOM_HEIGHT;
         self.ctx2.clearRect(coordX, coordY, frames[n][2], frames[n][3]);
         self.ctx2.drawImage(
           self.img,
@@ -156,8 +164,10 @@ class World implements IWorld {
         setTimeout(tick, delay);
       } else {
         setTimeout(() => {
-          const coordX = Math.ceil(x / TILE_SIZE) * TILE_SIZE - frames[2][2] / 2;
-          const coordY = Math.ceil(y / TILE_SIZE) * TILE_SIZE - frames[2][3] / 2;
+          const coordX =
+            Math.ceil(x / TILE_SIZE) * TILE_SIZE - frames[2][2] / 2 + BORDER_LEFT_WIDTH;
+          const coordY =
+            Math.ceil(y / TILE_SIZE) * TILE_SIZE - frames[2][3] / 2 + BORDER_TOP_BOTTOM_HEIGHT;
           self.ctx2.clearRect(coordX, coordY, frames[2][2], frames[2][3]);
         }, 0);
       }
@@ -180,15 +190,20 @@ class World implements IWorld {
 
   private renderBullet(bullet: Bullet): TRender {
     return {
-      clear: [bullet.x, bullet.y, bullet.width, bullet.height],
+      clear: [
+        bullet.x + BORDER_LEFT_WIDTH,
+        bullet.y + BORDER_TOP_BOTTOM_HEIGHT,
+        bullet.width,
+        bullet.height,
+      ],
       draw: [
         this.img,
         bullet.view[0],
         bullet.view[1],
         bullet.view[2],
         bullet.view[3],
-        bullet.x,
-        bullet.y,
+        bullet.x + BORDER_LEFT_WIDTH,
+        bullet.y + BORDER_TOP_BOTTOM_HEIGHT,
         bullet.view[2],
         bullet.view[3],
       ],
@@ -203,15 +218,15 @@ class World implements IWorld {
     }[],
   ): TRender[] {
     return map.map((item) => ({
-      clear: [item.x, item.y, TILE_SIZE, TILE_SIZE],
+      clear: [item.x + BORDER_LEFT_WIDTH, item.y + BORDER_TOP_BOTTOM_HEIGHT, TILE_SIZE, TILE_SIZE],
       draw: [
         this.img,
         item.frame[0],
         item.frame[1],
         item.frame[2],
         item.frame[3],
-        item.x,
-        item.y,
+        item.x + BORDER_LEFT_WIDTH,
+        item.y + BORDER_TOP_BOTTOM_HEIGHT,
         item.frame[2],
         item.frame[3],
       ],
@@ -222,15 +237,15 @@ class World implements IWorld {
     const [x, y] = tank.getPosition();
     tank.controlTank(key);
     return {
-      clear: [x, y, TILE_SIZE_BIG, TILE_SIZE_BIG],
+      clear: [x + BORDER_LEFT_WIDTH, y + BORDER_TOP_BOTTOM_HEIGHT, TILE_SIZE_BIG, TILE_SIZE_BIG],
       draw: [
         this.img,
         tank.view[0],
         tank.view[1],
         tank.view[2],
         tank.view[3],
-        tank.x,
-        tank.y,
+        tank.x + BORDER_LEFT_WIDTH,
+        tank.y + BORDER_TOP_BOTTOM_HEIGHT,
         tank.view[2],
         tank.view[3],
       ],

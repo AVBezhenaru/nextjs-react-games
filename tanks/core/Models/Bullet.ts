@@ -30,7 +30,10 @@ export class Bullet {
     this.isExplose = false;
     this.speed = 10;
     this.stopBlocks = { stopCol1: 0, stopCol2: 0, stopRow1: 0, stopRow2: 0 };
+    this.init();
   }
+
+  init() {}
 
   private getPosition(direction: Direction) {
     switch (true) {

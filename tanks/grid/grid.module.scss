@@ -1,6 +1,8 @@
 .table {
-  position: absolute;
+  position: relative;
   border-collapse: collapse;
+  top: 30px;
+  left: -30px;
 }
 
 .row {
