@@ -54,20 +54,32 @@ export class Tank {
   type: Type;
   tank_width: number;
   tank_height: number;
-  isShot: boolean;
+  countShot: number;
 
   constructor(land: TLand) {
-    [this.view] = [...playerPrimary.rank_2.up];
+    [this.view] = [...playerPrimary.rank_3.up];
     [this.tank_width, this.tank_height] = this.getSizeTank();
     this.x = PLAYER_DEFAULT_SPAWN_POSITIONS[0].x + shiftTile(this.tank_width, this.tank_height)[0];
     this.y = PLAYER_DEFAULT_SPAWN_POSITIONS[0].y + shiftTile(this.tank_width, this.tank_height)[1];
     this.direction = Direction.up;
     this.speed = 3;
-    this.rank = Rank.LEVEL2;
+    this.rank = Rank.LEVEL3;
     this.type = Type.PLAYER1;
     this.frames = playerPrimary.rank_2.up;
     this.land = land;
-    this.isShot = false;
+    this.countShot = 2;
+  }
+
+  get isShot() {
+    return this.countShot > 0;
+  }
+
+  fire() {
+    this.countShot -= 1;
+  }
+
+  reloadWeapon() {
+    this.countShot = 2;
   }
 
   private getSizeTank(): [width: number, height: number] {
@@ -105,45 +117,28 @@ export class Tank {
         [this.tank_width, this.tank_height] = this.getSizeTank();
         this.shiftWhenTurn(Direction.up);
         stopPos = stopPosition({ ...getStopPoints({ ...opt }), direction: this.direction });
-        if (this.y > stopPos) {
-          this.y -= this.speed;
-        } else {
-          this.y -= 0;
-        }
+        this.y -= this.y - this.speed > stopPos ? this.speed : 0;
         break;
       case key.has(Direction.right):
         this.view = switchFrame(playerPrimary[this.rank].right, this.view);
         [this.tank_width, this.tank_height] = this.getSizeTank();
         this.shiftWhenTurn(Direction.right);
         stopPos = stopPosition({ ...getStopPoints({ ...opt }), direction: this.direction });
-        if (this.x + this.tank_width < stopPos) {
-          this.x += this.speed;
-        } else {
-          this.x += 0;
-        }
+        this.x += this.x + this.tank_width + this.speed < stopPos ? this.speed : 0;
         break;
       case key.has(Direction.down):
         this.view = switchFrame(playerPrimary[this.rank].down, this.view);
         [this.tank_width, this.tank_height] = this.getSizeTank();
         this.shiftWhenTurn(Direction.down);
         stopPos = stopPosition({ ...getStopPoints({ ...opt }), direction: this.direction });
-        if (this.y + this.tank_height < stopPos) {
-          this.y += this.speed;
-        } else {
-          this.y += 0;
-          this.isShot = false;
-        }
+        this.y += this.y + this.tank_height + this.speed < stopPos ? this.speed : 0;
         break;
       case key.has(Direction.left):
         this.view = switchFrame(playerPrimary[this.rank].left, this.view);
         [this.tank_width, this.tank_height] = this.getSizeTank();
         this.shiftWhenTurn(Direction.left);
         stopPos = stopPosition({ ...getStopPoints({ ...opt }), direction: this.direction });
-        if (this.x > stopPos) {
-          this.x -= this.speed;
-        } else {
-          this.x -= 0;
-        }
+        this.x -= this.x - this.speed > stopPos ? this.speed : 0;
         break;
     }
   }

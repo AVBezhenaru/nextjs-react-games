@@ -19,6 +19,7 @@ export class Bullet {
   land: TLand;
   direction: Direction;
   isExplose: boolean;
+  stopBlocks: { stopRow1: number; stopCol1: number; stopRow2: number; stopCol2: number };
 
   constructor(tank: Tank, land: TLand) {
     this.tank = tank;
@@ -27,7 +28,8 @@ export class Bullet {
     this.view = bullet.up;
     this.land = land;
     this.isExplose = false;
-    this.speed = 5;
+    this.speed = 10;
+    this.stopBlocks = { stopCol1: 0, stopCol2: 0, stopRow1: 0, stopRow2: 0 };
   }
 
   private getPosition(direction: Direction) {
@@ -74,49 +76,50 @@ export class Bullet {
       direction: this.direction,
     };
     let stopPos = 0;
+    this.stopBlocks = getStopPoints({ ...opt });
     switch (this.direction) {
       case Direction.up:
         this.view = bullet.up;
-        stopPos = stopPosition({ ...getStopPoints({ ...opt }), direction: this.direction });
+        stopPos = stopPosition({ ...this.stopBlocks, direction: this.direction });
         if (this.y > stopPos) {
           this.y -= this.speed;
         } else {
           this.y -= 0;
-          this.tank.isShot = false;
           this.isExplose = true;
+          if (!this.tank.isShot) this.tank.reloadWeapon();
         }
         break;
       case Direction.right:
         this.view = bullet.right;
-        stopPos = stopPosition({ ...getStopPoints({ ...opt }), direction: this.direction });
-        if (this.x + this.width < stopPos) {
+        stopPos = stopPosition({ ...this.stopBlocks, direction: this.direction }) - this.width;
+        if (this.x < stopPos) {
           this.x += this.speed;
         } else {
           this.x += 0;
-          this.tank.isShot = false;
           this.isExplose = true;
+          if (!this.tank.isShot) this.tank.reloadWeapon();
         }
         break;
       case Direction.down:
         this.view = bullet.down;
-        stopPos = stopPosition({ ...getStopPoints({ ...opt }), direction: this.direction });
-        if (this.y + this.height < stopPos) {
+        stopPos = stopPosition({ ...this.stopBlocks, direction: this.direction }) - this.height;
+        if (this.y < stopPos) {
           this.y += this.speed;
         } else {
           this.y += 0;
-          this.tank.isShot = false;
           this.isExplose = true;
+          if (!this.tank.isShot) this.tank.reloadWeapon();
         }
         break;
       case Direction.left:
         this.view = bullet.left;
-        stopPos = stopPosition({ ...getStopPoints({ ...opt }), direction: this.direction });
+        stopPos = stopPosition({ ...this.stopBlocks, direction: this.direction });
         if (this.x > stopPos) {
           this.x -= this.speed;
         } else {
           this.x -= 0;
-          this.tank.isShot = false;
           this.isExplose = true;
+          if (!this.tank.isShot) this.tank.reloadWeapon();
         }
         break;
     }

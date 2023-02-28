@@ -6,10 +6,11 @@ import { ControlKey, Tank } from '../Models/Tank';
 import { Land } from '../Models/Land';
 import { Bullet } from '../Models/Bullet';
 import { TILE_SIZE, TILE_SIZE_BIG } from '../../config';
-import { explosion } from '../tileMap';
+import { explosion, landTiles } from '../tileMap';
 
 interface IWorld {
   ctx: CanvasRenderingContext2D;
+  ctx2: CanvasRenderingContext2D;
   currentLevel: number;
   land: Land;
   playerTank_1: Tank;
@@ -33,12 +34,13 @@ export type TRenderDraw = [
 ];
 
 export type TRender = {
-  clear: TRenderClear;
+  clear?: TRenderClear;
   draw: TRenderDraw;
 };
 
 class World implements IWorld {
   ctx: CanvasRenderingContext2D;
+  ctx2: CanvasRenderingContext2D;
   currentLevel: number;
   land: Land;
   playerTank_1: Tank;
@@ -48,8 +50,13 @@ class World implements IWorld {
   img: HTMLImageElement;
   activeKeys: Set<unknown>;
 
-  constructor(ctx: CanvasRenderingContext2D, img: HTMLImageElement) {
+  constructor(
+    ctx: CanvasRenderingContext2D,
+    ctx2: CanvasRenderingContext2D,
+    img: HTMLImageElement,
+  ) {
     this.ctx = ctx;
+    this.ctx2 = ctx2;
     this.img = img;
     this.init();
   }
@@ -65,7 +72,6 @@ class World implements IWorld {
   }
 
   render() {
-    
     const { clear: clPlayerTank1, draw: drPlayerTank1 } = this.renderTank(
       this.playerTank_1,
       this.activeKeys,
@@ -85,24 +91,57 @@ class World implements IWorld {
           const { clear: clBullet } = { ...this.renderBullet(bullet) };
           this.ctx.clearRect(...clBullet);
           this.bullets = this.bullets.filter((item) => item !== bullet);
-
-          this.animation({ x: bullet.x, y: bullet.y, frames: explosion.small }, 60);
+          this.animation({ x: bullet.x, y: bullet.y, frames: explosion.small }, 30);
+          const walls = this.land.destroyWall(bullet.stopBlocks, bullet.direction, 0);
+          this.renderWalls(walls);
         }
       }
     }
   }
 
-  //   y = Math.ceil(y / TILE_SIZE) * TILE_SIZE - TILE_SIZE;
-  animation({ x, y, frames }: { x: number; y: number; frames: number[][] }, delay: number) {    
+  renderStart() {
+    const curLand = this.land.prepareMap(this.land.curLevel);
+    this.renderLand(curLand).forEach((item) => {
+      const { draw } = { ...item };
+      this.ctx.drawImage(...draw);
+    });
+  }
+
+  private renderWalls(walls: { col: number; row: number }[]) {
+    const prepareWalls = walls.map((item: { row: number; col: number }) => {
+      const { row, col } = item;
+      const frame = this.land.curLevel[row][col];
+      return {
+        x: col * TILE_SIZE,
+        y: row * TILE_SIZE,
+        frame: landTiles[frame],
+      };
+    });
+    prepareWalls
+      .filter((item) => !item.frame)
+      .forEach((item) => {
+        this.ctx.clearRect(item.x, item.y, TILE_SIZE, TILE_SIZE);
+      });
+    this.renderLand(prepareWalls.filter((item) => item.frame)).forEach((item) => {
+      const { clear, draw } = { ...item };
+      this.ctx.clearRect(...clear);
+      this.ctx.drawImage(...draw);
+    });
+  }
+
+  private clearBlock(col: number, row: number) {
+    this.ctx.clearRect(col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+  }
+
+  animation({ x, y, frames }: { x: number; y: number; frames: number[][] }, delay: number) {
     let n = 0;
     const self = this;
     setTimeout(function tick() {
       if (n < frames.length) {
         const coordX = Math.ceil(x / TILE_SIZE) * TILE_SIZE - frames[n][2] / 2;
         const coordY = Math.ceil(y / TILE_SIZE) * TILE_SIZE - frames[n][3] / 2;
-        // self.ctx.clearRect(coordX, coordY, frames[n][2], frames[n][3]);
-        self.ctx.globalCompositeOperation = 'destination-over';
-        self.ctx.drawImage(
+        self.ctx2.clearRect(coordX, coordY, frames[n][2], frames[n][3]);
+        self.ctx2.drawImage(
           self.img,
           frames[n][0],
           frames[n][1],
@@ -115,12 +154,14 @@ class World implements IWorld {
         );
         n++;
         setTimeout(tick, delay);
+      } else {
+        setTimeout(() => {
+          const coordX = Math.ceil(x / TILE_SIZE) * TILE_SIZE - frames[2][2] / 2;
+          const coordY = Math.ceil(y / TILE_SIZE) * TILE_SIZE - frames[2][3] / 2;
+          self.ctx2.clearRect(coordX, coordY, frames[2][2], frames[2][3]);
+        }, 0);
       }
     }, 0);
-  }
-
-  renderOnce() {
-    this.renderLand();
   }
 
   controll(key: Set<unknown>) {
@@ -131,9 +172,9 @@ class World implements IWorld {
   }
 
   private shot(tank: Tank) {
-    if (!tank.isShot) {
+    if (tank.isShot) {
       this.bullets.push(new Bullet(tank, this.land.curLevel));
-      tank.isShot = true;
+      tank.fire();
     }
   }
 
@@ -154,26 +195,27 @@ class World implements IWorld {
     };
   }
 
-  private renderLand() {
-    const curLand: number[][] = this.land.getRenderMap();
-    for (let i = 0; i < curLand.length; i++) {
-      for (let j = 0; j < curLand[i].length; j++) {
-        const elem = curLand[i][j];
-        if (Array.isArray(elem)) {
-          this.ctx.drawImage(
-            this.img,
-            elem[0],
-            elem[1],
-            elem[2],
-            elem[3],
-            j * TILE_SIZE,
-            i * TILE_SIZE,
-            elem[2],
-            elem[3],
-          );
-        }
-      }
-    }
+  private renderLand(
+    map: {
+      x: number;
+      y: number;
+      frame: number[];
+    }[],
+  ): TRender[] {
+    return map.map((item) => ({
+      clear: [item.x, item.y, TILE_SIZE, TILE_SIZE],
+      draw: [
+        this.img,
+        item.frame[0],
+        item.frame[1],
+        item.frame[2],
+        item.frame[3],
+        item.x,
+        item.y,
+        item.frame[2],
+        item.frame[3],
+      ],
+    }));
   }
 
   private renderTank(tank: Tank, key: Set<unknown>): TRender {
@@ -194,12 +236,6 @@ class World implements IWorld {
       ],
     };
   }
-
-  // private renderExplose(x: number, y: number, type: any) {
-  //   x = Math.ceil(x / explosion.small[2]) * TILE_SIZE - TILE_SIZE;
-  //   y = Math.ceil(y / TILE_SIZE) * TILE_SIZE - TILE_SIZE;
-  //   return { x, y, frames: explosion[type] };
-  // }
 }
 
 export default World;
