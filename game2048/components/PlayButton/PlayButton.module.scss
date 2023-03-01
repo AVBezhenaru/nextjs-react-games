@@ -1,0 +1,54 @@
+.btn {
+  width: 90px;
+  padding: 1.8rem;
+  padding-right: 20px;
+  position: relative;
+}
+.btn .content,
+.btn .depth,
+.btn .shadow {
+  transition: transform 0.2s;
+}
+.btn .content {
+  background: #fff;
+  background-image: url('../../assets/img/play.png');
+  background-repeat: no-repeat;
+  background-size: 40px 40px;
+  background-position: 50%;
+  color: #000;
+  height: 84%;
+  left: 0;
+  place-items: center;
+  position: absolute;
+  top: 0;
+  width: 70px;
+}
+.btn .depth {
+  background: #ccc;
+  height: 10%;
+  top: 84%;
+}
+.btn .depth,
+.btn .shadow {
+  display: block;
+  left: 0;
+  position: absolute;
+  width: 70px;
+}
+.btn .shadow {
+  background: #777;
+  height: 6%;
+  top: 94%;
+}
+.btn:hover .content {
+  transform: translateY(4%);
+}
+.btn:hover .shadow {
+  transform: translateY(-20%);
+}
+.btn:active .content {
+  transform: translateY(8%);
+}
+.btn:active .shadow {
+  transform: translateY(-30%);
+}

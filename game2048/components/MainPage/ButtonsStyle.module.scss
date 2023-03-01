@@ -1,0 +1,90 @@
+.btn,
+.btn *,
+.btn :after,
+.btn :before,
+.btn:after,
+.btn:before {
+  border: 0 solid;
+  box-sizing: border-box;
+}
+.btn {
+  -webkit-tap-highlight-color: transparent;
+  background-color: #000;
+  background-image: none;
+  color: #fff;
+  font-size: 100%;
+  font-family: sans-serif;
+  font-weight: 600;
+  line-height: 1.5;
+  margin: 0;
+  margin-top: 1em;
+  -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
+  padding: 0;
+}
+.btn:disabled {
+  cursor: default;
+}
+.btn:-moz-focusring {
+  outline: auto;
+}
+.btn svg {
+  display: block;
+  vertical-align: middle;
+}
+.btn [hidden] {
+  display: none;
+}
+.btn {
+  box-sizing: border-box;
+  display: block;
+  font-weight: 900;
+  padding: 1.8rem 5rem;
+  position: relative;
+  text-transform: uppercase;
+  background: none;
+}
+.btn .content,
+.btn .depth,
+.btn .shadow {
+  transition: transform 0.2s;
+}
+.btn .content {
+  background: #fff;
+  color: #000;
+  display: grid;
+  height: 84%;
+  left: 0;
+  place-items: center;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.btn .depth {
+  background: #ccc;
+  height: 10%;
+  top: 84%;
+}
+.btn .depth,
+.btn .shadow {
+  display: block;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}
+.btn .shadow {
+  background: #777;
+  height: 6%;
+  top: 94%;
+}
+.btn:hover .content {
+  transform: translateY(4%);
+}
+.btn:hover .shadow {
+  transform: translateY(-20%);
+}
+.btn:active .content {
+  transform: translateY(8%);
+}
+.btn:active .shadow {
+  transform: translateY(-30%);
+}

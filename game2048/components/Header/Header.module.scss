@@ -1,0 +1,39 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding-top: 50px;
+  margin-bottom: 30px;
+  width: 65vmin;
+  color: white;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.title {
+  text-align: center;
+  padding-top: 10px;
+  font-size: 5em;
+  color: #fff80a;
+}
+.description {
+  font-size: 1.1em;
+  letter-spacing: 1px;
+  line-height: 20px;
+  text-align: center;
+  padding-top: 20px;
+}
+.menu {
+  display: flex;
+  padding-top: 40px;
+}
+.info {
+  display: flex;
+  justify-content: space-between;
+}
+.score {
+  width: 120px;
+  margin-top: 40px;
+  text-align: center;
+}
