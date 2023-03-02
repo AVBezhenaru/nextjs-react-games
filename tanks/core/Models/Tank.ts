@@ -4,10 +4,17 @@
 
 import { playerPrimary } from '../tileMap';
 import { switchFrame } from '../utils/switchFrame';
-import { TILE_SIZE, PLAYER_DEFAULT_SPAWN_POSITIONS } from '../../config';
+import {
+  TILE_SIZE,
+  PLAYER_DEFAULT_SPAWN_POSITIONS,
+  BORDER_LEFT_WIDTH,
+  BORDER_TOP_BOTTOM_HEIGHT,
+  TILE_SIZE_BIG,
+} from '../../config';
 import { shiftTile } from '../utils/shiftTile';
 import { getStopPoints } from '../utils/getStopPoints';
 import { stopPosition } from '../utils/stopPosition';
+import { TRender } from '../World/World';
 
 import { TLand } from './Land';
 
@@ -68,6 +75,11 @@ export class Tank {
     this.frames = playerPrimary.rank_2.up;
     this.land = land;
     this.countShot = 2;
+    this.init();
+  }
+
+  init() {
+    this.countShot = this.rank > Rank.LEVEL2 ? 2 : 1;
   }
 
   get isShot() {
@@ -141,5 +153,24 @@ export class Tank {
         this.x -= this.x - this.speed > stopPos ? this.speed : 0;
         break;
     }
+  }
+
+  prepareRenderTank(key: Set<unknown>, img: HTMLImageElement): TRender {
+    const [x, y] = this.getPosition();
+    this.controlTank(key);
+    return {
+      clear: [x + BORDER_LEFT_WIDTH, y + BORDER_TOP_BOTTOM_HEIGHT, TILE_SIZE_BIG, TILE_SIZE_BIG],
+      draw: [
+        img,
+        this.view[0],
+        this.view[1],
+        this.view[2],
+        this.view[3],
+        this.x + BORDER_LEFT_WIDTH,
+        this.y + BORDER_TOP_BOTTOM_HEIGHT,
+        this.view[2],
+        this.view[3],
+      ],
+    };
   }
 }

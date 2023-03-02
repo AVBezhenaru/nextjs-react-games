@@ -1,6 +1,7 @@
 // import { level_1 } from '../../assents/maps/01';
-import { TILE_SIZE } from '../../config';
+import { BORDER_LEFT_WIDTH, BORDER_TOP_BOTTOM_HEIGHT, TILE_SIZE } from '../../config';
 import { landTiles } from '../tileMap';
+import { TRender } from '../World/World';
 
 import { Direction } from './Tank';
 
@@ -72,7 +73,11 @@ export class Land implements ILand {
       for (let j = 0; j < map[i].length; j++) {
         const ind = map[i][j];
         if (this.landTiles[ind])
-          context.push({ x: j * TILE_SIZE, y: i * TILE_SIZE, frame: this.landTiles[ind] });
+          context.push({
+            x: j * TILE_SIZE + BORDER_LEFT_WIDTH,
+            y: i * TILE_SIZE + BORDER_TOP_BOTTOM_HEIGHT,
+            frame: this.landTiles[ind],
+          });
       }
     }
     return context;
@@ -159,5 +164,41 @@ export class Land implements ILand {
         }
         break;
     }
+  }
+
+  prepareRenderLand(
+    map: {
+      x: number;
+      y: number;
+      frame: number[];
+    }[],
+    img: HTMLImageElement,
+  ): TRender[] {
+    return map.map((item) => ({
+      clear: [item.x, item.y, TILE_SIZE, TILE_SIZE],
+      draw: [
+        img,
+        item.frame[0],
+        item.frame[1],
+        item.frame[2],
+        item.frame[3],
+        item.x,
+        item.y,
+        item.frame[2],
+        item.frame[3],
+      ],
+    }));
+  }
+
+  prepareRenderWalls(walls: { col: number; row: number }[]) {
+    return walls.map((item: { row: number; col: number }) => {
+      const { row, col } = item;
+      const frame = this.curLevel[row][col];
+      return {
+        x: col * TILE_SIZE + BORDER_LEFT_WIDTH,
+        y: row * TILE_SIZE + BORDER_TOP_BOTTOM_HEIGHT,
+        frame: landTiles[frame],
+      };
+    });
   }
 }
