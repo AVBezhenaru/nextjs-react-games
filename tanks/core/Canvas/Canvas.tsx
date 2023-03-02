@@ -1,9 +1,9 @@
 /* eslint-disable array-callback-return */
 import React, { useRef, useEffect } from 'react';
 
-import { FIELD_SIZE } from '../../config';
-import World from '../World/World';
+import { CANVAS_WIDTH, CANVAS_HEIGHT } from '../../config';
 import image from '../../assents/graphics/sprite.png';
+import World from '../World/World';
 
 import styles from './canvas.module.scss';
 
@@ -13,7 +13,7 @@ const Canvas = ({ ...props }) => {
 
   const requestIdRef = useRef(null);
   const activeKeys = useRef(new Set());
-  const size = { width: FIELD_SIZE, height: FIELD_SIZE };
+  const size = { width: CANVAS_WIDTH, height: CANVAS_HEIGHT };
   let gameWorld = useRef(null).current;
 
   const loop = (ctx: CanvasRenderingContext2D, ctx2: CanvasRenderingContext2D) => {

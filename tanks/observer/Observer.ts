@@ -1,39 +1,36 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+interface Listener {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  [x: string]: Function[];
+}
+export interface IObserver {
+  listeners: Listener;
+  emit(): boolean;
+  subscribe(): string[];
+}
+export class Observer {
+  listeners: Listener;
 
-export class Observer<T> {
-  private listeners: ((event: T) => any)[] = [];
-
-  public addListener(listenerToAdd: (event: T) => any): () => void {
-    this.listeners.push(listenerToAdd);
-
-    const unsubscribe = (): void => {
-      this.removeListener(listenerToAdd);
-    };
-
-    return unsubscribe;
+  constructor() {
+    this.listeners = {};
   }
 
-  public addListenerOnce(listenerToAdd: (event: T) => any): () => void {
-    const wrappedListener = (event: T): void => {
-      this.removeListener(wrappedListener);
-      listenerToAdd(event);
-    };
-
-    const unsubscribe = this.addListener(wrappedListener);
-
-    return unsubscribe;
-  }
-
-  public removeListener(listenerToRemove: (event: T) => any): this {
-    this.listeners = this.listeners.filter((listener) => listener !== listenerToRemove);
-    return this;
-  }
-
-  public notify = (event: T): this => {
-    this.listeners.forEach((listener) => {
-      listener(event);
+  // Уведомляем слушателей
+  emit(event: string, ...args: { [x: string]: string }[]) {
+    if (!Array.isArray(this.listeners[event])) {
+      return false;
+    }
+    this.listeners[event].forEach((listener) => {
+      listener(...args);
     });
+    return true;
+  }
 
-    return this;
-  };
+  // Подписываемся на уведомления или добавляем новго слушателя
+  subscribe(event: string, fn: () => void) {
+    this.listeners[event] = this.listeners[event] || [];
+    this.listeners[event].push(fn);
+    return () => {
+      this.listeners[event] = this.listeners[event].filter((listener) => listener !== fn);
+    };
+  }
 }
