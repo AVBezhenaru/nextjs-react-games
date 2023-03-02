@@ -7,7 +7,7 @@ import { Grid } from './grid/Grid';
 const Game: FC = (): ReactElement => (
   <div className={styles.game}>
     <Canvas />
-    <Grid />
+    {/* <Grid /> */}
   </div>
 );
 

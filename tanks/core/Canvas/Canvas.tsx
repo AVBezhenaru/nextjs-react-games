@@ -2,8 +2,8 @@
 import React, { useRef, useEffect } from 'react';
 
 import { CANVAS_WIDTH, CANVAS_HEIGHT } from '../../config';
-import World from '../World/World';
 import image from '../../assents/graphics/sprite.png';
+import World from '../World/World';
 
 import styles from './canvas.module.scss';
 

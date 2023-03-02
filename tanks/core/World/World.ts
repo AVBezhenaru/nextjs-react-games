@@ -5,13 +5,9 @@
 import { ControlKey, Tank } from '../Models/Tank';
 import { Land } from '../Models/Land';
 import { Bullet } from '../Models/Bullet';
-import {
-  BORDER_LEFT_WIDTH,
-  BORDER_TOP_BOTTOM_HEIGHT,
-  TILE_SIZE,
-  TILE_SIZE_BIG,
-} from '../../config';
-import { explosion, landTiles } from '../tileMap';
+import { BORDER_RECTS, COLOR_GRAY, TILE_SIZE } from '../../config';
+import { explosion } from '../tileMap';
+import { Interface } from '../Models/Interface';
 
 interface IWorld {
   ctx: CanvasRenderingContext2D;
@@ -54,6 +50,7 @@ class World implements IWorld {
   bullets: Bullet[];
   img: HTMLImageElement;
   activeKeys: Set<unknown>;
+  interface: Interface;
 
   constructor(
     ctx: CanvasRenderingContext2D,
@@ -71,15 +68,16 @@ class World implements IWorld {
     this.land = new Land(this.currentLevel);
     this.playerTank_1 = new Tank(this.land.curLevel);
     this.playerTank_2 = null;
+    this.interface = new Interface();
     this.enemyTanks = [];
     this.bullets = [];
     this.activeKeys = new Set();
   }
 
   render() {
-    const { clear: clPlayerTank1, draw: drPlayerTank1 } = this.renderTank(
-      this.playerTank_1,
+    const { clear: clPlayerTank1, draw: drPlayerTank1 } = this.playerTank_1.prepareRenderTank(
       this.activeKeys,
+      this.img,
     );
     this.ctx.clearRect(...clPlayerTank1);
     this.ctx.drawImage(...drPlayerTank1);
@@ -87,16 +85,16 @@ class World implements IWorld {
     if (this.bullets.length > 0) {
       for (const bullet of this.bullets) {
         if (!bullet.isExplose) {
-          const { clear: clBullet } = { ...this.renderBullet(bullet) };
+          const { clear: clBullet } = { ...bullet.prepareRenderBullet(this.img) };
           this.ctx.clearRect(...clBullet);
           bullet.fire();
-          const { draw: drBullet } = { ...this.renderBullet(bullet) };
+          const { draw: drBullet } = { ...bullet.prepareRenderBullet(this.img) };
           this.ctx.drawImage(...drBullet);
         } else {
-          const { clear: clBullet } = { ...this.renderBullet(bullet) };
+          const { clear: clBullet } = { ...bullet.prepareRenderBullet(this.img) };
           this.ctx.clearRect(...clBullet);
           this.bullets = this.bullets.filter((item) => item !== bullet);
-          this.animation({ x: bullet.x, y: bullet.y, frames: explosion.small }, 30);
+          bullet.animationExploseBullet(explosion.small, 30, this.ctx2, this.img);
           const walls = this.land.destroyWall(bullet.stopBlocks, bullet.direction, 0);
           this.renderWalls(walls);
         }
@@ -106,72 +104,38 @@ class World implements IWorld {
 
   renderStart() {
     const curLand = this.land.prepareMap(this.land.curLevel);
-    this.renderLand(curLand).forEach((item) => {
+    this.land.prepareRenderLand(curLand, this.img).forEach((item) => {
       const { draw } = { ...item };
       this.ctx.drawImage(...draw);
     });
+    this.renderBorders();
+    this.interface.prepareRender(this.img).map((item) => this.ctx.drawImage(...item));
   }
 
   private renderWalls(walls: { col: number; row: number }[]) {
-    const prepareWalls = walls.map((item: { row: number; col: number }) => {
-      const { row, col } = item;
-      const frame = this.land.curLevel[row][col];
-      return {
-        x: col * TILE_SIZE,
-        y: row * TILE_SIZE,
-        frame: landTiles[frame],
-      };
-    });
-    console.log(prepareWalls);
-    prepareWalls
+    this.land
+      .prepareRenderWalls(walls)
       .filter((item) => !item.frame)
       .forEach((item) => {
-        this.ctx.clearRect(
-          item.x,
-          item.y,
-          TILE_SIZE,
-          TILE_SIZE,
-        );
+        this.ctx.clearRect(item.x, item.y, TILE_SIZE, TILE_SIZE);
       });
-    this.renderLand(prepareWalls.filter((item) => item.frame)).forEach((item) => {
-      const { clear, draw } = { ...item };
-      this.ctx.clearRect(...clear);
-      this.ctx.drawImage(...draw);
-    });
+    this.land
+      .prepareRenderLand(
+        this.land.prepareRenderWalls(walls).filter((item) => item.frame),
+        this.img,
+      )
+      .forEach((item) => {
+        const { clear, draw } = { ...item };
+        this.ctx.clearRect(...clear);
+        this.ctx.drawImage(...draw);
+      });
   }
 
-  animation({ x, y, frames }: { x: number; y: number; frames: number[][] }, delay: number) {
-    let n = 0;
-    const self = this;
-    setTimeout(function tick() {
-      if (n < frames.length) {
-        const coordX = Math.ceil(x / TILE_SIZE) * TILE_SIZE - frames[n][2] / 2 + BORDER_LEFT_WIDTH;
-        const coordY =
-          Math.ceil(y / TILE_SIZE) * TILE_SIZE - frames[n][3] / 2 + BORDER_TOP_BOTTOM_HEIGHT;
-        self.ctx2.clearRect(coordX, coordY, frames[n][2], frames[n][3]);
-        self.ctx2.drawImage(
-          self.img,
-          frames[n][0],
-          frames[n][1],
-          frames[n][2],
-          frames[n][3],
-          coordX,
-          coordY,
-          frames[n][2],
-          frames[n][3],
-        );
-        n++;
-        setTimeout(tick, delay);
-      } else {
-        setTimeout(() => {
-          const coordX =
-            Math.ceil(x / TILE_SIZE) * TILE_SIZE - frames[2][2] / 2 + BORDER_LEFT_WIDTH;
-          const coordY =
-            Math.ceil(y / TILE_SIZE) * TILE_SIZE - frames[2][3] / 2 + BORDER_TOP_BOTTOM_HEIGHT;
-          self.ctx2.clearRect(coordX, coordY, frames[2][2], frames[2][3]);
-        }, 0);
-      }
-    }, 0);
+  private renderBorders() {
+    this.ctx.fillStyle = COLOR_GRAY;
+    BORDER_RECTS.map((border) =>
+      this.ctx.fillRect(border.x, border.y, border.width, border.height),
+    );
   }
 
   controll(key: Set<unknown>) {
@@ -186,70 +150,6 @@ class World implements IWorld {
       this.bullets.push(new Bullet(tank, this.land.curLevel));
       tank.fire();
     }
-  }
-
-  private renderBullet(bullet: Bullet): TRender {
-    return {
-      clear: [
-        bullet.x + BORDER_LEFT_WIDTH,
-        bullet.y + BORDER_TOP_BOTTOM_HEIGHT,
-        bullet.width,
-        bullet.height,
-      ],
-      draw: [
-        this.img,
-        bullet.view[0],
-        bullet.view[1],
-        bullet.view[2],
-        bullet.view[3],
-        bullet.x + BORDER_LEFT_WIDTH,
-        bullet.y + BORDER_TOP_BOTTOM_HEIGHT,
-        bullet.view[2],
-        bullet.view[3],
-      ],
-    };
-  }
-
-  private renderLand(
-    map: {
-      x: number;
-      y: number;
-      frame: number[];
-    }[],
-  ): TRender[] {
-    return map.map((item) => ({
-      clear: [item.x + BORDER_LEFT_WIDTH, item.y + BORDER_TOP_BOTTOM_HEIGHT, TILE_SIZE, TILE_SIZE],
-      draw: [
-        this.img,
-        item.frame[0],
-        item.frame[1],
-        item.frame[2],
-        item.frame[3],
-        item.x + BORDER_LEFT_WIDTH,
-        item.y + BORDER_TOP_BOTTOM_HEIGHT,
-        item.frame[2],
-        item.frame[3],
-      ],
-    }));
-  }
-
-  private renderTank(tank: Tank, key: Set<unknown>): TRender {
-    const [x, y] = tank.getPosition();
-    tank.controlTank(key);
-    return {
-      clear: [x + BORDER_LEFT_WIDTH, y + BORDER_TOP_BOTTOM_HEIGHT, TILE_SIZE_BIG, TILE_SIZE_BIG],
-      draw: [
-        this.img,
-        tank.view[0],
-        tank.view[1],
-        tank.view[2],
-        tank.view[3],
-        tank.x + BORDER_LEFT_WIDTH,
-        tank.y + BORDER_TOP_BOTTOM_HEIGHT,
-        tank.view[2],
-        tank.view[3],
-      ],
-    };
   }
 }
 
