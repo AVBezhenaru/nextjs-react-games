@@ -3,20 +3,15 @@ import { nanoid } from 'nanoid';
 
 import Fruits from '../Fruits/Fruits';
 import GameOver from '../GameOver/GameOver';
-import { Fruit, GameProps } from '../../types/types';
+import { allFruits } from '../../utils/common';
+import { Fruit, GameProps, BoardDimensions } from '../../types/types';
 
 import styles from './Board.module.scss';
 
 const Board = ({ onFruitSliced, score }: GameProps) => {
   const [fruitsScreen, setFruitsScreen] = useState<Fruit[]>([]);
-  const allFruits = ['apple', 'banana', 'boom', 'peach', 'strawberry', 'watermelon'];
   const boardRef = useRef<HTMLDivElement>(null);
-  const [boardDimensions, setBoardDimensions] = useState<{
-    width: number;
-    height: number;
-    left: number;
-    top: number;
-  }>({
+  const [boardDimensions, setBoardDimensions] = useState<BoardDimensions>({
     width: 0,
     height: 0,
     left: 0,
@@ -109,7 +104,7 @@ const Board = ({ onFruitSliced, score }: GameProps) => {
                   const stopPoint = boardRef.current.clientHeight - 130;
                   return { ...fruit, y: stopPoint, speed: Math.random() * -5 };
                 }
-                if (x + 50 > boardRef.current.clientWidth) {
+                if (x + 100 > boardRef.current.clientWidth) {
                   const stopPoint = boardRef.current.clientHeight;
                   return { ...fruit, y: stopPoint, speed: 0 };
                 }

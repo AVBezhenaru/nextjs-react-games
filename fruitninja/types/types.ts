@@ -12,11 +12,9 @@ export interface GameProps {
   score: number;
 }
 
-export interface BoardProps {
-  type: string;
-  x: number;
-  y: number;
-  isSliced: boolean;
-  onMouseMove: () => void;
-  score: number;
+export interface BoardDimensions {
+  width: number;
+  height: number;
+  left: number;
+  top: number;
 }
