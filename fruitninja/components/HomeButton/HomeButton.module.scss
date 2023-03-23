@@ -1,0 +1,29 @@
+.btn {
+  width: 90px;
+  padding: 1.8rem;
+  padding-right: 20px;
+  position: relative;
+}
+.btn .content {
+  transition: transform 0.2s;
+}
+.btn .content {
+  background-image: url('../../assets/img/house.png');
+  background-repeat: no-repeat;
+  background-size: 70px 70px;
+  background-position: 50%;
+  color: #000;
+  height: 84%;
+  left: 0;
+  place-items: center;
+  position: absolute;
+  top: 0;
+  width: 70px;
+}
+
+.btn:hover .content {
+  transform: translateY(4%);
+}
+.btn:active .content {
+  transform: translateY(8%);
+}
