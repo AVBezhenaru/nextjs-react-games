@@ -12,30 +12,30 @@ export const BORDER_RECTS = [
   // Top
   {
     x: 0,
-    y: 0,
+    y: -4,
     width: BORDER_LEFT_WIDTH + FIELD_SIZE + BORDER_RIGHT_WIDTH,
-    height: BORDER_TOP_BOTTOM_HEIGHT,
+    height: BORDER_TOP_BOTTOM_HEIGHT - 4,
   },
   // Bottom
   {
     x: 0,
-    y: FIELD_SIZE + BORDER_TOP_BOTTOM_HEIGHT,
+    y: FIELD_SIZE + BORDER_TOP_BOTTOM_HEIGHT + 4,
     width: BORDER_LEFT_WIDTH + FIELD_SIZE + BORDER_RIGHT_WIDTH,
     height: BORDER_TOP_BOTTOM_HEIGHT,
   },
   // Left
   {
-    x: 0,
-    y: BORDER_TOP_BOTTOM_HEIGHT,
+    x: -4,
+    y: BORDER_TOP_BOTTOM_HEIGHT - 8,
     width: BORDER_LEFT_WIDTH,
-    height: FIELD_SIZE,
+    height: FIELD_SIZE + 20,
   },
   // Right
   {
-    x: BORDER_LEFT_WIDTH + FIELD_SIZE,
-    y: BORDER_TOP_BOTTOM_HEIGHT,
+    x: BORDER_LEFT_WIDTH + FIELD_SIZE + 4,
+    y: BORDER_TOP_BOTTOM_HEIGHT - 8,
     width: BORDER_RIGHT_WIDTH,
-    height: FIELD_SIZE,
+    height: FIELD_SIZE + 20,
   },
 ];
 
@@ -82,12 +82,13 @@ export const PLAYER_DEFAULT_SPAWN_POSITIONS = [
   { x: 256, y: 768 },
   { x: 512, y: 768 },
 ];
+
 export const ENEMY_DEFAULT_SPAWN_POSITIONS = [
-  { x: 384, y: 0 },
+  { x: 490, y: 0 },
   { x: 768, y: 0 },
   { x: 0, y: 0 },
 ];
-export const BASE_DEFAULT_POSITION = { x: 352, y: 736 };
+export const BASE_DEFAULT_POSITION = { x: 385, y: 770 };
 export const BASE_DEFAULT_SIZE = { width: 128, height: 96 };
 
 export const MENU_TITLE_DEFAULT_POSITION = {

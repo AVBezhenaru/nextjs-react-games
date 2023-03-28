@@ -3,11 +3,17 @@
 /* eslint-disable lines-between-class-members */
 
 import { ControlKey, Tank } from '../Models/Tank';
+import { Enemy } from '../Models/Enemy';
 import { Land } from '../Models/Land';
 import { Bullet } from '../Models/Bullet';
+import { Base } from '../Models/Base';
 import { BORDER_RECTS, COLOR_GRAY, TILE_SIZE } from '../../config';
 import { explosion } from '../tileMap';
 import { Interface } from '../Models/Interface';
+
+const enemyCounter: { LEVEL_1: number } = {
+  LEVEL_1: 3,
+};
 
 interface IWorld {
   ctx: CanvasRenderingContext2D;
@@ -16,8 +22,11 @@ interface IWorld {
   land: Land;
   playerTank_1: Tank;
   playerTank_2: Tank;
-  enemyTanks: Tank[];
+  enemyTanks: Enemy[];
   bullets: Bullet[];
+  base: Base;
+  interval: NodeJS.Timer;
+  gameOver: boolean;
   img: HTMLImageElement;
 }
 
@@ -46,8 +55,11 @@ class World implements IWorld {
   land: Land;
   playerTank_1: Tank;
   playerTank_2: Tank;
-  enemyTanks: Tank[];
+  enemyTanks: Enemy[];
   bullets: Bullet[];
+  base: Base;
+  gameOver: boolean;
+  interval: NodeJS.Timer;
   img: HTMLImageElement;
   activeKeys: Set<unknown>;
   interface: Interface;
@@ -56,10 +68,12 @@ class World implements IWorld {
     ctx: CanvasRenderingContext2D,
     ctx2: CanvasRenderingContext2D,
     img: HTMLImageElement,
+    gameOver: boolean,
   ) {
     this.ctx = ctx;
     this.ctx2 = ctx2;
     this.img = img;
+    this.gameOver = gameOver;
     this.init();
   }
 
@@ -68,13 +82,28 @@ class World implements IWorld {
     this.land = new Land(this.currentLevel);
     this.playerTank_1 = new Tank(this.land.curLevel);
     this.playerTank_2 = null;
-    this.interface = new Interface();
     this.enemyTanks = [];
+    this.interface = new Interface();
     this.bullets = [];
+    this.base = new Base(this.land.curLevel);
     this.activeKeys = new Set();
+
+    for (let i = 0; i < enemyCounter.LEVEL_1; i++) {
+      this.enemyTanks.push(new Enemy(this.land.curLevel, i, i + 1));
+    }
+
+    for (let i = 0; i < enemyCounter.LEVEL_1; i++) {
+      this.interval = setInterval(() => {
+        this.enemyFire(this.enemyTanks[i]);
+      }, 1500);
+    }
   }
 
   render() {
+    if (this.base.health === 0) {
+      this.setGameOver();
+    }
+
     const { clear: clPlayerTank1, draw: drPlayerTank1 } = this.playerTank_1.prepareRenderTank(
       this.activeKeys,
       this.img,
@@ -100,6 +129,53 @@ class World implements IWorld {
         }
       }
     }
+
+    if (!this.base.isDead) {
+      const { clear: clearBase, draw: drawBase } = this.base.render(this.img);
+      this.ctx.drawImage(...drawBase);
+
+      if (this.bullets.length > 0) {
+        for (const bullet of this.bullets) {
+          const getHit = this.base.calculateDeadZone(bullet.x, bullet.y, bullet.direction);
+
+          if (getHit) {
+            bullet.isExplose = true;
+            this.playerTank_1.reloadWeapon();
+          }
+
+          if (this.base.isDead) {
+            this.ctx.clearRect(...clearBase);
+          }
+        }
+      }
+    }
+
+    this.enemyTanks = this.enemyTanks.filter((enemy: Enemy) => !enemy.isDead);
+    for (let i = 0; i < enemyCounter.LEVEL_1; i++) {
+      if (this.enemyTanks[i] !== undefined) {
+        const { clear: clEnemy, draw: drEnemy } = this.enemyTanks[i].prepareRenderEnemy(this.img);
+        this.ctx.clearRect(...clEnemy);
+        this.ctx.drawImage(...drEnemy);
+        if (this.bullets.length > 0) {
+          for (const bullet of this.bullets) {
+            const shouted = this.enemyTanks[i].calculateDeadZone(
+              bullet.x,
+              bullet.y,
+              bullet.direction,
+              bullet.tank.title,
+            );
+
+            if (shouted) {
+              bullet.isExplose = true;
+              this.playerTank_1.reloadWeapon();
+              this.enemyTanks[i].enemyDestroyed();
+              clearInterval(this.interval);
+              this.ctx.clearRect(...clEnemy);
+            }
+          }
+        }
+      }
+    }
   }
 
   renderStart() {
@@ -110,6 +186,12 @@ class World implements IWorld {
     });
     this.renderBorders();
     this.interface.prepareRender(this.img).map((item) => this.ctx.drawImage(...item));
+  }
+
+  // store.dispatch
+  setGameOver() {
+    this.gameOver = true;
+    return this.gameOver;
   }
 
   private renderWalls(walls: { col: number; row: number }[]) {
@@ -142,6 +224,13 @@ class World implements IWorld {
     this.activeKeys = key;
     if (key.has(ControlKey.space)) {
       this.shot(this.playerTank_1);
+    }
+  }
+
+  private enemyFire(enemy: Enemy) {
+    if (enemy !== undefined) {
+      this.bullets.push(new Bullet(enemy, this.land.curLevel));
+      enemy.fire();
     }
   }
 

@@ -44,7 +44,7 @@ export enum Rank {
   LEVEL4 = 'rank_4',
 }
 
-enum Type {
+export enum Type {
   PLAYER1 = 'playerPrimary',
   PLAYER2 = 'playerSecondary',
   ENEMY = 'enemy',
@@ -59,6 +59,7 @@ export class Tank {
   rank: Rank;
   frames: number[][];
   type: Type;
+  title: string;
   tank_width: number;
   tank_height: number;
   countShot: number;
@@ -72,6 +73,7 @@ export class Tank {
     this.speed = 3;
     this.rank = Rank.LEVEL3;
     this.type = Type.PLAYER1;
+    this.title = 'Tank';
     this.frames = playerPrimary.rank_2.up;
     this.land = land;
     this.countShot = 2;
@@ -94,11 +96,11 @@ export class Tank {
     this.countShot = 2;
   }
 
-  private getSizeTank(): [width: number, height: number] {
+  public getSizeTank(): [width: number, height: number] {
     return [this.view[2], this.view[3]];
   }
 
-  private shiftWhenTurn(direction: Direction) {
+  public shiftWhenTurn(direction: Direction) {
     if (direction !== this.direction && direction !== ReverseDirection[this.direction]) {
       const x = Math.round(this.x / TILE_SIZE) * TILE_SIZE;
       const y = Math.round(this.y / TILE_SIZE) * TILE_SIZE;

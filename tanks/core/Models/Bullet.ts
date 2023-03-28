@@ -7,13 +7,12 @@ import { TRender } from '../World/World';
 
 import { TLand } from './Land';
 import { Direction, Tank } from './Tank';
+import { Enemy } from './Enemy';
 
 export class Bullet {
-  tank: Tank;
+  tank: Tank | Enemy;
   x: number;
   y: number;
-  private _x: number;
-  private _y: number;
   width: number;
   height: number;
   speed: number;
@@ -24,19 +23,18 @@ export class Bullet {
   stopBlocks: { stopRow1: number; stopCol1: number; stopRow2: number; stopCol2: number };
   // ctx: any;
 
-  constructor(tank: Tank, land: TLand) {
-    this.tank = tank;
-    this.direction = tank.direction;
-    [this.x, this.y] = this.getPosition(this.tank.direction);
-    this.view = bullet.up;
-    this.land = land;
-    this.isExplose = false;
-    this.speed = 10;
-    this.stopBlocks = { stopCol1: 0, stopCol2: 0, stopRow1: 0, stopRow2: 0 };
-    // this.init();
+  constructor(tank: Tank | Enemy, land: TLand) {
+    if (tank !== undefined) {
+      this.tank = tank;
+      this.direction = tank.direction;
+      [this.x, this.y] = this.getPosition(this.tank.direction);
+      this.view = bullet.up;
+      this.land = land;
+      this.isExplose = false;
+      this.speed = 10;
+      this.stopBlocks = { stopCol1: 0, stopCol2: 0, stopRow1: 0, stopRow2: 0 };
+    }
   }
-
-  // init() {}
 
   private getPosition(direction: Direction) {
     switch (true) {
