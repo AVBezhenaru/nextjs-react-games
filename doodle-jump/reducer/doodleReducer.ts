@@ -5,7 +5,7 @@ const initialState = {
   doodlerX: 200,
   doodlerXSpeed: 0,
   doodlerYSpeed: 10,
-  blocks: [],
+  blocks: [] as BlockInterface[],
   isFirstRender: true,
   score: 0,
   isDead: true,
