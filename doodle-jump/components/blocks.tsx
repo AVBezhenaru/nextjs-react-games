@@ -51,5 +51,5 @@ export default function Blocks() {
     setPrevBlocksLength(blocks.length);
   }, [blocks.length]);
 
-  return elements;
+  return <div>{elements}</div>;
 }

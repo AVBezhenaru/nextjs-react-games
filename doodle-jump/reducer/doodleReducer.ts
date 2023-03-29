@@ -8,7 +8,7 @@ const initialState = {
   blocks: [],
   isFirstRender: true,
   score: 0,
-  isDead: false,
+  isDead: true,
 };
 
 function doodlerReducer(state = initialState, action: ActionInterface) {
@@ -32,7 +32,7 @@ function doodlerReducer(state = initialState, action: ActionInterface) {
     case 'CHANGE_IS_DEAD':
       return { ...state, isDead: action.payload };
     case 'PLAY_AGAIN':
-      return { ...initialState, blocks: state.blocks };
+      return { ...initialState, blocks: state.blocks, isDead: false };
     default:
       return { ...state };
   }

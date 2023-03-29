@@ -115,8 +115,6 @@ export default function DoodleJumpGame() {
     return () => window.removeEventListener('keyup', restoreResistanceX);
   }, []);
 
-  Blocks();
-
   function again() {
     dispatch(playAgain());
   }
