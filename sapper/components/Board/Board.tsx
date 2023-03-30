@@ -87,6 +87,7 @@ const Board: React.FC = () => {
               e.preventDefault();
               onClickRButton(x, y, cell);
             }}
+            disabled={cell.mask > 0}
           />
         )),
       )}
