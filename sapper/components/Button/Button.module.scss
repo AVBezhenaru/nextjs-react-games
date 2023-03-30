@@ -1,0 +1,17 @@
+.Button {
+  padding: 10px;
+  font-family:cursive;
+  font-size: 20px;
+  font-weight: 500;
+  color: black;
+  border-top: 5px solid #dddddd;
+  border-left: 5px solid #dddddd;
+  border-right: 5px solid #5c5c5c;
+  border-bottom: 5px solid #5c5c5c;
+  background-color: rgb(135, 135, 135);
+
+  &:hover {
+	background-color: rgb(116, 114, 114);
+	text-decoration: underline;
+ }
+}

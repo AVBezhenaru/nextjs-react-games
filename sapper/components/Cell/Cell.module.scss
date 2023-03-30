@@ -1,0 +1,133 @@
+$size-num-icon: 60%;
+
+.cell{
+	width: 50px;
+	height: 50px;
+	border-top: 5px solid #dddddd;
+	border-left: 5px solid #dddddd;
+	border-right: 5px solid #5c5c5c;
+	border-bottom: 5px solid #5c5c5c;
+	background-color: rgb(135, 135, 135);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&-empty{
+		cursor: auto;
+		background-size: 70%;
+		background-position: center;
+		background-repeat: no-repeat;
+		border: 2px solid #5c5c5c;
+	}
+
+	&-bomb{
+		cursor: auto;
+		background-image: url("../../assets/image/sapperIcon.png");
+		background-size: 70%;
+		background-position: center;
+		background-repeat: no-repeat;
+		border: 2px solid #5c5c5c;
+	}
+
+	&-bomb-detonation{
+		cursor: auto;
+		background-image: url("../../assets/image/boom.png");
+		background-size: 95%;
+		background-position: center;
+		background-repeat: no-repeat;
+		border: 2px solid #5c5c5c;
+	}
+
+	&-flag{
+		background-image: url("../../assets/image/flag.png");
+		background-size: 70%;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+
+	&-question{
+		background-image: url("../../assets/image/question.png");
+		background-size: 80%;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+
+	&-number{
+		&-1{
+			cursor: auto;
+			background-image: url("../../assets/image/1.png");
+			background-size: $size-num-icon;
+			background-position: center;
+			background-repeat: no-repeat;
+			border: 2px solid #5c5c5c;
+		}
+		&-2{
+			cursor: auto;
+			background-image: url("../../assets/image/2.png");
+			background-size: $size-num-icon;
+			background-position: center;
+			background-repeat: no-repeat;
+			border: 2px solid #5c5c5c;
+		}
+		&-3{
+			cursor: auto;
+			background-image: url("../../assets/image/3.png");
+			background-size: $size-num-icon;
+			background-position: center;
+			background-repeat: no-repeat;
+			border: 2px solid #5c5c5c;
+		}
+		&-4{
+			cursor: auto;
+			background-image: url("../../assets/image/4.png");
+			background-size: $size-num-icon;
+			background-position: center;
+			background-repeat: no-repeat;
+			border: 2px solid #5c5c5c;
+		}
+		&-5{
+			cursor: auto;
+			background-image: url("../../assets/image/5.png");
+			background-size: $size-num-icon;
+			background-position: center;
+			background-repeat: no-repeat;
+			border: 2px solid #5c5c5c;
+		}
+		&-6{
+			cursor: auto;
+			background-image: url("../../assets/image/6.png");
+			background-size: $size-num-icon;
+			background-position: center;
+			background-repeat: no-repeat;
+			border: 2px solid #5c5c5c;
+		}
+		&-7{
+			cursor: auto;
+			background-image: url("../../assets/image/7.png");
+			background-size: $size-num-icon;
+			background-position: center;
+			background-repeat: no-repeat;
+			border: 2px solid #5c5c5c;
+		}
+		&-8{
+			cursor: auto;
+			background-image: url("../../assets/image/8.png");
+			background-size: $size-num-icon;
+			background-position: center;
+			background-repeat: no-repeat;
+			border: 2px solid #5c5c5c;
+		}
+	}
+
+	&:hover{
+		background-color: rgb(116, 114, 114);
+	}
+
+	// &:active{
+	// 	border-top: 5px solid #5c5c5c;
+	// 	border-left: 5px solid #5c5c5c;
+	// 	border-right: 5px solid #dddddd;
+	// 	border-bottom: 5px solid #dddddd;
+	// }
+}
+

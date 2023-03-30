@@ -14,6 +14,7 @@ import aerohokkeyIcon from '../img/aerohokkeyIcon.png';
 import solitairIcon from '../img/solitairIcon.png';
 import game2048Icon from '../img/2048Icon.png';
 import fruitNinjaIcon from '../img/fruitNinjaIcon.png';
+import sapperIcon from '../img/sapperIcon.png';
 
 import { GameLink } from './GameLink';
 import { Games, Page, HeaderGames, ListGames } from './listGamesStyle';
@@ -30,6 +31,7 @@ const ListGamesForm = () => {
     { src: solitairIcon.src, title: 'solitaire' },
     { src: game2048Icon.src, title: 'game2048' },
     { src: fruitNinjaIcon.src, title: 'fruitninja' },
+	 { src: sapperIcon.src, title: 'sapper' },
   ];
   return (
     <>
