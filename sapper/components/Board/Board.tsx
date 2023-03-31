@@ -9,7 +9,7 @@ import { ICell } from '../../assets/types/types';
 import classes from './Board.module.scss';
 
 const Board: React.FC = () => {
-  const { settingsValue } = useAppSelector(getSapperState);
+  const { settingsValue, settingsModal } = useAppSelector(getSapperState);
   const board = useMemo(
     () => initialGameBoard(settingsValue.width, settingsValue.height, settingsValue.mins),
     [settingsValue],
@@ -87,7 +87,7 @@ const Board: React.FC = () => {
               e.preventDefault();
               onClickRButton(x, y, cell);
             }}
-            disabled={cell.mask > 0}
+            disabled={cell.mask > 0 || settingsModal}
           />
         )),
       )}
