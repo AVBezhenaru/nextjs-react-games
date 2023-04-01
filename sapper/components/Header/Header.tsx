@@ -5,7 +5,9 @@ import {
   setSettingsModal,
   setSettingsModalFalse,
   setSettingsValue,
+  setGameIndicator,
   getSapperState,
+  setGameModalFalse,
 } from '../../store/sapperSlice';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 
@@ -20,7 +22,9 @@ const Header: React.FC = () => {
       <Button
         text="New game"
         onClick={() => {
+          dispatch(setGameIndicator('New game'));
           dispatch(setSettingsModalFalse());
+          dispatch(setGameModalFalse());
           dispatch(setSettingsValue(settingsValue));
         }}
       />
@@ -28,6 +32,7 @@ const Header: React.FC = () => {
         text="Settings"
         onClick={() => {
           dispatch(setSettingsModal());
+          dispatch(setGameModalFalse());
         }}
       />
     </div>

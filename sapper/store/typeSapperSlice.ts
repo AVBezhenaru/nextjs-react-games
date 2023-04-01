@@ -7,5 +7,7 @@ export type TsettingsValue = {
 
 export type IinitialState = {
   settingsModal: boolean;
+  gameIndicator: string;
+  gameModal: boolean;
   settingsValue: TsettingsValue;
 };

@@ -6,6 +6,8 @@ import { IinitialState, TsettingsValue } from './typeSapperSlice';
 
 const initialState: IinitialState = {
   settingsModal: false,
+  gameIndicator: 'New game',
+  gameModal: false,
   settingsValue: {
     level: 'Beginner: field 9x9 cells, 10 mins',
     width: 9,
@@ -25,6 +27,15 @@ const sapper = createSlice({
     },
     setSettingsModal(state) {
       state.settingsModal = !state.settingsModal;
+    },
+    setGameModal(state) {
+      state.gameModal = !state.gameModal;
+    },
+    setGameModalFalse(state) {
+      state.gameModal = false;
+    },
+    setGameIndicator(state, { payload }: PayloadAction<string>) {
+      state.gameIndicator = payload;
     },
     setSettingsValue(state, { payload }: PayloadAction<TsettingsValue>) {
       switch (payload.level) {
@@ -67,6 +78,13 @@ const sapper = createSlice({
   },
 });
 
-export const { setSettingsModal, setSettingsModalFalse, setSettingsValue } = sapper.actions;
+export const {
+  setSettingsModal,
+  setSettingsModalFalse,
+  setSettingsValue,
+  setGameIndicator,
+  setGameModal,
+  setGameModalFalse,
+} = sapper.actions;
 
 export default sapper.reducer;

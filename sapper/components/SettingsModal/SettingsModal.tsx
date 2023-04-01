@@ -1,7 +1,12 @@
 import React, { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { setSettingsModal, setSettingsValue, getSapperState } from '../../store/sapperSlice';
+import {
+  setSettingsModal,
+  setSettingsValue,
+  setGameIndicator,
+  getSapperState,
+} from '../../store/sapperSlice';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 
 import { Beginner, Intermediate, Expert, Special } from './levels';
@@ -44,6 +49,7 @@ const SettingsModal: React.FC = () => {
 
   const onSubmit = (data) => {
     const activeLabel = radioBoxsData.find((box) => box.checked);
+    dispatch(setGameIndicator('New game'));
     dispatch(setSettingsModal());
     dispatch(
       setSettingsValue({

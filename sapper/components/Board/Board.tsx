@@ -1,15 +1,21 @@
 import React, { useMemo, useState, useEffect } from 'react';
 
-import { getSapperState } from '../../store/sapperSlice';
-import { useAppSelector } from '../../../hooks';
+import { setGameIndicator, getSapperState, setGameModal } from '../../store/sapperSlice';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
 import Cell from '../Cell/Cell';
-import { getClassByNumber, initialGameBoard, openEmtyCells } from '../../assets/utils/util';
+import {
+  getClassByNumber,
+  initialGameBoard,
+  openEmtyCells,
+  getClassByGameIndicator,
+} from '../../assets/utils/util';
 import { ICell } from '../../assets/types/types';
 
 import classes from './Board.module.scss';
 
 const Board: React.FC = () => {
-  const { settingsValue, settingsModal } = useAppSelector(getSapperState);
+  const dispatch = useAppDispatch();
+  const { settingsValue, settingsModal, gameIndicator } = useAppSelector(getSapperState);
   const board = useMemo(
     () => initialGameBoard(settingsValue.width, settingsValue.height, settingsValue.mins),
     [settingsValue],
@@ -75,8 +81,29 @@ const Board: React.FC = () => {
     setBoardData(board);
   }, [settingsValue, setBoardData]);
 
+  useEffect(() => {
+    let winIndicator = true;
+    boardData.forEach((row: ICell[]) => {
+      row.forEach((cell: ICell) => {
+        // проверяем что остались только закрытые бомбы на поле - Победа!
+        if (cell.mask !== -1 && cell.backing !== -1 && winIndicator) {
+          winIndicator = false;
+        }
+        // проверяем что бомба взорвана - Проигрыш!
+        if (cell.backing === -2) {
+          dispatch(setGameIndicator('Game over'));
+          dispatch(setGameModal());
+        }
+      });
+    });
+    if (winIndicator) {
+      dispatch(setGameIndicator('Win'));
+      dispatch(setGameModal());
+    }
+  }, [boardData]);
+
   return (
-    <div className={classes.board} style={boardStyle}>
+    <div className={classes[getClassByGameIndicator(gameIndicator)]} style={boardStyle}>
       {boardData.map((row: { mask: number; backing: number }[], y: number) =>
         row.map((cell: { mask: number; backing: number }, x: number) => (
           <Cell
@@ -87,7 +114,7 @@ const Board: React.FC = () => {
               e.preventDefault();
               onClickRButton(x, y, cell);
             }}
-            disabled={cell.mask > 0 || settingsModal}
+            disabled={cell.mask > 0 || settingsModal || gameIndicator !== 'New game'}
           />
         )),
       )}

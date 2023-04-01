@@ -56,6 +56,19 @@ export const putNumNearBomb = (board: ICell[][]) => {
 export const initialGameBoard = (x: number, y: number, mins: number): ICell[][] =>
   putNumNearBomb(placeBombsRandomly(mins, initialEmptyBoard(x, y)));
 
+export const getClassByGameIndicator = (gameIndicator: string): string => {
+  switch (gameIndicator) {
+    case 'New game':
+      return 'board';
+    case 'Game over':
+      return 'board-bomb-detonation';
+    case 'Win':
+      return 'board-win';
+    default:
+      return 'board';
+  }
+};
+
 export const getClassByNumber = (cell: ICell): string => {
   if (cell.mask >= 0) {
     switch (cell.mask) {

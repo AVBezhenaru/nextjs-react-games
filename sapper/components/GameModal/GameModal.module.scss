@@ -1,85 +1,27 @@
-.settingsModal{
+.gameModal{
 	position: absolute;
-	right: calc(50% - 200px);;
-	margin-top: -40px;
+	right: calc(50% - 200px);
+	top: calc(50% - 200px);;
 	width: 400px;
-	height: 400px;
+	height: 200px;
 	border-top: 5px solid #dddddd;
-  border-left: 5px solid #dddddd;
-  border-right: 5px solid #5c5c5c;
-  border-bottom: 5px solid #5c5c5c;
-  background-color: rgba(135, 135, 135);
-  padding: 20px;
+	border-left: 5px solid #dddddd;
+	border-right: 5px solid #5c5c5c;
+	border-bottom: 5px solid #5c5c5c;
+	background-color: rgba(135, 135, 135);
+	padding: 20px;
 }
-
-// .hidden{
-// 	visibility: hidden;
-// }
 
 .title{
-  font-family:cursive;
-  font-size: 25px;
-  font-weight: 500;
-  color: black;
-  text-align: center;
-  text-decoration: underline;
-  margin-bottom: 25px;
+	font-family:cursive;
+	font-size: 25px;
+	font-weight: 500;
+	color: black;
+	text-align: center;
+	margin-bottom: 25px;
 }
 
-.radioBoxs-list{
-  font-size: 17px;
-  font-weight: 500;
-  color: black;
-
-  &__item{
-	  margin-top: 15px;
-    margin-bottom: 10px;
-  }
-}
-
-.radioBoxs-label{
-	margin-left: 10px;
-}
-
-.setting-special-wraper{
-  margin-bottom: 5px;
-}
-
-.settings-special{
-  font-size: 15px;
-  font-weight: 400;
-  color: rgb(0, 0, 0);
-  display: flex;
-  flex-direction: column;
-}
-
-.settings-label-special{
-  margin-right: 10px;
-  margin-left: 60px;
-}
-
-.settings-height,
-.settings-width,
-.settings-mins{
-  width: 60px;
-  color: rgb(0, 0, 0);
-  background: #fff;
-
-  &:disabled {
-    cursor: default;
-    background: #969696;
-  }
-}
-
-.settings-height{
-  margin-left: 4px;
-}
-
-.settings-width{
-  margin-left: 8px;
-}
-
-.setting-btn {
+.gameModal-btn {
   margin-top: 20px;
   margin-right: 20px;
   padding: 10px;
@@ -105,7 +47,7 @@
     border-right: 5px solid #5c5c5c;
     border-bottom: 5px solid #5c5c5c;
 	}
-
+	
 	&:active{
 		border-top: 5px solid #5c5c5c;
 		border-left: 5px solid #5c5c5c;
@@ -114,7 +56,7 @@
 	}
 }
 
-.setting-btn-close {
+.gameModal-btn-close {
   top: 10px;
   right: 10px;
   position: absolute;
@@ -129,12 +71,12 @@
   border-bottom: 5px solid #5c5c5c;
   background-color: rgb(135, 135, 135);
 
-   &:hover {
+  &:hover {
 	  background-color: rgb(116, 114, 114);
 	  color: black;
-   }
-	
-   &:active{
+  }
+
+  &:active{
 		border-top: 5px solid #5c5c5c;
 		border-left: 5px solid #5c5c5c;
 		border-right: 5px solid #dddddd;
