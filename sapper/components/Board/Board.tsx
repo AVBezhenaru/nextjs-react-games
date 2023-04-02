@@ -22,8 +22,9 @@ const Board: React.FC = () => {
   );
   const [boardData, setBoardData] = useState(board);
 
+  const cellSize = boardData.length > 15 ? 750 / boardData.length : 50;
   const boardStyle = {
-    width: `${settingsValue.width * 50}px`,
+    width: `${settingsValue.width * cellSize}px`,
   };
 
   const onClickLButton = (x: number, y: number, cell: ICell) => {
@@ -109,6 +110,7 @@ const Board: React.FC = () => {
           <Cell
             key={`${x}${y}`}
             classAdd={`${getClassByNumber(cell)}`}
+            cellSize={cellSize}
             onClickLButton={() => onClickLButton(x, y, cell)}
             onClickRButton={(e: React.MouseEvent<HTMLButtonElement>): void => {
               e.preventDefault();
