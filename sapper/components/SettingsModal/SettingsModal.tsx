@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, SubmitHandler } from 'react-hook-form';
 
 import {
   setSettingsModal,
@@ -11,6 +11,13 @@ import { useAppDispatch, useAppSelector } from '../../../hooks';
 
 import { Beginner, Intermediate, Expert, Special } from './levels';
 import classes from './SettingsModal.module.scss';
+
+type FormValues = {
+  height: string;
+  width: string;
+  mins: string;
+  settingsValue: { level: string; height: number; width: number; mins: number };
+};
 
 const SettingsModal: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -42,12 +49,12 @@ const SettingsModal: React.FC = () => {
   );
   const [radioBoxsData, setRadioBoxsData] = useState(initialRadioBoxs);
 
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit } = useForm<FormValues>({
     mode: 'onChange',
     defaultValues: { settingsValue },
   });
 
-  const onSubmit = (data) => {
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
     const activeLabel = radioBoxsData.find((box) => box.checked);
     dispatch(setGameIndicator('New game'));
     dispatch(setSettingsModal());
