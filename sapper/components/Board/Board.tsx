@@ -1,6 +1,11 @@
 import React, { useMemo, useState, useEffect } from 'react';
 
-import { setGameIndicator, getSapperState, setGameModal } from '../../store/sapperSlice';
+import {
+  setGameIndicator,
+  getSapperState,
+  setGameModal,
+  setBombCount,
+} from '../../store/sapperSlice';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import Cell from '../Cell/Cell';
 import {
@@ -22,7 +27,7 @@ const Board: React.FC = () => {
   );
   const [boardData, setBoardData] = useState(board);
 
-  const cellSize = boardData.length > 15 ? 750 / boardData.length : 50;
+  const cellSize = boardData.length > 15 ? 770 / boardData.length : 50;
   const boardStyle = {
     width: `${settingsValue.width * cellSize}px`,
   };
@@ -84,6 +89,8 @@ const Board: React.FC = () => {
 
   useEffect(() => {
     let winIndicator = true;
+    let bombCount = settingsValue.mins;
+
     boardData.forEach((row: ICell[]) => {
       row.forEach((cell: ICell) => {
         // проверяем что остались только закрытые бомбы на поле - Победа!
@@ -95,12 +102,17 @@ const Board: React.FC = () => {
           dispatch(setGameIndicator('Game over'));
           dispatch(setGameModal());
         }
+        // Счетчик оставшихся бомб
+        if (cell.mask === 1) {
+          bombCount -= 1;
+        }
       });
     });
     if (winIndicator) {
       dispatch(setGameIndicator('Win'));
       dispatch(setGameModal());
     }
+    dispatch(setBombCount(bombCount));
   }, [boardData]);
 
   return (

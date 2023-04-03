@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Button from '../Button/Button';
+import BombCount from '../BombCount/BombCount';
 import {
   setSettingsModal,
   setSettingsModalFalse,
@@ -35,6 +36,7 @@ const Header: React.FC = () => {
           dispatch(setGameModalFalse());
         }}
       />
+      <BombCount />
     </div>
   );
 };

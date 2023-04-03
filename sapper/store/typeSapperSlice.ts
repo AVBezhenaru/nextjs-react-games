@@ -9,5 +9,6 @@ export type IinitialState = {
   settingsModal: boolean;
   gameIndicator: string;
   gameModal: boolean;
+  bombCount: number;
   settingsValue: TsettingsValue;
 };

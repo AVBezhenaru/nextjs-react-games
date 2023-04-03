@@ -1,0 +1,35 @@
+@font-face {
+	font-family: 'digital-7';
+	src: url('../../assets/fonts/digital-7/digital-7.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+}
+
+.wrapper{
+	display: flex;
+	margin-left: 20px;
+	border-top: 5px solid #dddddd;
+	border-left: 5px solid #dddddd;
+	border-right: 5px solid #5c5c5c;
+	border-bottom: 5px solid #5c5c5c;
+	background-color: rgb(135, 135, 135);
+}
+
+.BombCount{
+	padding: 0 5px;
+	font-family: 'digital-7';
+	font-size: 40px;
+	font-weight: 500;
+	color: rgb(0, 0, 0);
+	text-align: end;
+}
+
+.icon{
+	align-self: center;
+	width: 40px;
+	height: 40px;
+	background-image: url("../../assets/image/sapperIcon.png");
+	background-size: 60%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
