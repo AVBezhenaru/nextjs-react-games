@@ -28,7 +28,7 @@ const TimerGame: React.FC = () => {
 
   return (
     <div className={classes.wrapper}>
-      <p className={classes.title}>TIME</p>
+      <p className={classes.title}>TIME:</p>
       <p className={classes.TimerGame}>{timerData}</p>
     </div>
   );

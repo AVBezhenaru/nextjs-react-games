@@ -63,7 +63,7 @@ const Board: React.FC = () => {
   const onClickRButton = (x: number, y: number, cell: ICell) => {
     // если ячейка не открыта
     if (cell.mask !== -1 && gameIndicator === 'New game') {
-      dispatch(setTimerIndicator(true));
+      // dispatch(setTimerIndicator(true));
       setBoardData((actualBoardData) => {
         const NewBoard = JSON.parse(JSON.stringify(actualBoardData));
 
