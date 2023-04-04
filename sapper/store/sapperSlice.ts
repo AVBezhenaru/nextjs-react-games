@@ -9,6 +9,7 @@ const initialState: IinitialState = {
   gameIndicator: 'New game',
   gameModal: false,
   bombCount: 0,
+  timerIndicator: false,
   settingsValue: {
     level: 'Beginner: field 9x9 cells, 10 mins',
     width: 9,
@@ -40,6 +41,9 @@ const sapper = createSlice({
     },
     setBombCount(state, { payload }: PayloadAction<number>) {
       state.bombCount = payload;
+    },
+    setTimerIndicator(state, { payload }: PayloadAction<boolean>) {
+      state.timerIndicator = payload;
     },
     setSettingsValue(state, { payload }: PayloadAction<TsettingsValue>) {
       switch (payload.level) {
@@ -90,6 +94,7 @@ export const {
   setGameModal,
   setGameModalFalse,
   setBombCount,
+  setTimerIndicator,
 } = sapper.actions;
 
 export default sapper.reducer;

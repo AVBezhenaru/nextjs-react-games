@@ -2,6 +2,7 @@ import React from 'react';
 
 import Button from '../Button/Button';
 import BombCount from '../BombCount/BombCount';
+import TimerGame from '../TimerGame/TimerGame';
 import {
   setSettingsModal,
   setSettingsModalFalse,
@@ -9,6 +10,7 @@ import {
   setGameIndicator,
   getSapperState,
   setGameModalFalse,
+  setTimerIndicator,
 } from '../../store/sapperSlice';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 
@@ -20,6 +22,7 @@ const Header: React.FC = () => {
 
   return (
     <div className={classes.header}>
+      <TimerGame />
       <Button
         text="New game"
         onClick={() => {
@@ -27,6 +30,7 @@ const Header: React.FC = () => {
           dispatch(setSettingsModalFalse());
           dispatch(setGameModalFalse());
           dispatch(setSettingsValue(settingsValue));
+          dispatch(setTimerIndicator(false));
         }}
       />
       <Button

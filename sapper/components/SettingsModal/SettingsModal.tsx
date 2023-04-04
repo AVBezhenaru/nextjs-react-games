@@ -6,6 +6,7 @@ import {
   setSettingsValue,
   setGameIndicator,
   getSapperState,
+  setTimerIndicator,
 } from '../../store/sapperSlice';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 
@@ -58,6 +59,7 @@ const SettingsModal: React.FC = () => {
     const activeLabel = radioBoxsData.find((box) => box.checked);
     dispatch(setGameIndicator('New game'));
     dispatch(setSettingsModal());
+    dispatch(setTimerIndicator(false));
     dispatch(
       setSettingsValue({
         level: activeLabel.label ? activeLabel.label : settingsValue.level,

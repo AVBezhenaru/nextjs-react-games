@@ -5,6 +5,7 @@ import {
   getSapperState,
   setGameModal,
   setBombCount,
+  setTimerIndicator,
 } from '../../store/sapperSlice';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import Cell from '../Cell/Cell';
@@ -35,6 +36,7 @@ const Board: React.FC = () => {
   const onClickLButton = (x: number, y: number, cell: ICell) => {
     // если ячейка не открыта
     if (cell.mask !== -1) {
+      dispatch(setTimerIndicator(true));
       setBoardData((actualBoardData) => {
         const NewBoard = JSON.parse(JSON.stringify(actualBoardData));
         NewBoard[y][x].mask = -1; // открываем ячейку
@@ -61,6 +63,7 @@ const Board: React.FC = () => {
   const onClickRButton = (x: number, y: number, cell: ICell) => {
     // если ячейка не открыта
     if (cell.mask !== -1 && gameIndicator === 'New game') {
+      dispatch(setTimerIndicator(true));
       setBoardData((actualBoardData) => {
         const NewBoard = JSON.parse(JSON.stringify(actualBoardData));
 
@@ -101,6 +104,7 @@ const Board: React.FC = () => {
         if (cell.backing === -2) {
           dispatch(setGameIndicator('Game over'));
           dispatch(setGameModal());
+          dispatch(setTimerIndicator(false));
         }
         // Счетчик оставшихся бомб
         if (cell.mask === 1) {
@@ -111,6 +115,7 @@ const Board: React.FC = () => {
     if (winIndicator) {
       dispatch(setGameIndicator('Win'));
       dispatch(setGameModal());
+      dispatch(setTimerIndicator(false));
     }
     dispatch(setBombCount(bombCount));
   }, [boardData]);
