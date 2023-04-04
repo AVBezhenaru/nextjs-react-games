@@ -3,7 +3,7 @@
 	right: calc(50% - 200px);
 	top: calc(50% - 200px);;
 	width: 400px;
-	height: 200px;
+	height: 220px;
 	border-top: 5px solid #dddddd;
 	border-left: 5px solid #dddddd;
 	border-right: 5px solid #5c5c5c;
@@ -22,7 +22,10 @@
 }
 
 .gameModal-btn {
-  margin-top: 20px;
+	bottom: 20px;
+  left: 20px;
+  position: absolute;
+  margin-top: 10px;
   margin-right: 20px;
   padding: 10px;
   font-family:cursive;
@@ -82,4 +85,13 @@
 		border-right: 5px solid #dddddd;
 		border-bottom: 5px solid #dddddd;
 	}
+}
+
+.statistics{
+	font-family:cursive;
+	font-size: 20px;
+	font-weight: 500;
+	color: black;
+	margin-left: 10px;
+	margin-bottom: 10px;
 }

@@ -17,11 +17,12 @@ interface IGameModalProps {
 
 const GameModal: React.FC<IGameModalProps> = ({ title }) => {
   const dispatch = useAppDispatch();
-  const { settingsValue } = useAppSelector(getSapperState);
+  const { settingsValue, finishTime } = useAppSelector(getSapperState);
 
   return (
     <div className={classes.gameModal}>
       <h2 className={classes.title}>{title}</h2>
+      <p className={classes.statistics}>Time: {finishTime} sec</p>
       <button
         type="button"
         className={classes['gameModal-btn']}

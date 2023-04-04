@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-import { getSapperState } from '../../store/sapperSlice';
-import { useAppSelector } from '../../../hooks';
+import { getSapperState, setFinishTime } from '../../store/sapperSlice';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
 
 import classes from './TimerGame.module.scss';
 
 const TimerGame: React.FC = () => {
+  const dispatch = useAppDispatch();
   const { timerIndicator } = useAppSelector(getSapperState);
   const [timerData, setTimerData] = useState(0);
 
@@ -16,6 +17,7 @@ const TimerGame: React.FC = () => {
         setTimerData((timerDataNow) => timerDataNow + 1);
       }, 1000);
     } else {
+      dispatch(setFinishTime(timerData));
       setTimerData(0);
     }
 

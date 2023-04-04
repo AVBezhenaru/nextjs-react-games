@@ -11,5 +11,6 @@ export type IinitialState = {
   gameModal: boolean;
   bombCount: number;
   timerIndicator: boolean;
+  finishTime: number;
   settingsValue: TsettingsValue;
 };
