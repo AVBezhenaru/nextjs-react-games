@@ -5,6 +5,7 @@ import DataSlice from '../chess/dataSlice/DataSlice';
 import solitaireSlice from '../solitaire/store/solitaireSlice';
 import game2048Reducer from '../game2048/reducers';
 import sapperReducer from '../sapper/store/sapperSlice';
+import doodlerReducer from '../doodle-jump/reducer/doodleReducer';
 
 import user from './userSlice';
 
@@ -15,7 +16,8 @@ export const store = configureStore({
     rootSlice: DataSlice,
     solitaireReborn: solitaireSlice,
     game2048: game2048Reducer,
-	 sapper: sapperReducer,
+    sapper: sapperReducer,
+    doodler: doodlerReducer,
   },
   middleware(getDefaultMiddleware) {
     return getDefaultMiddleware({

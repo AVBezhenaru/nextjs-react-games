@@ -15,6 +15,7 @@ import solitairIcon from '../img/solitairIcon.png';
 import game2048Icon from '../img/2048Icon.png';
 import fruitNinjaIcon from '../img/fruitNinjaIcon.png';
 import sapperIcon from '../img/sapperIcon.png';
+import doodler from '../img/doodler-guy.png';
 
 import { GameLink } from './GameLink';
 import { Games, Page, HeaderGames, ListGames } from './listGamesStyle';
@@ -31,7 +32,8 @@ const ListGamesForm = () => {
     { src: solitairIcon.src, title: 'solitaire' },
     { src: game2048Icon.src, title: 'game2048' },
     { src: fruitNinjaIcon.src, title: 'fruitninja' },
-	 { src: sapperIcon.src, title: 'sapper' },
+    { src: sapperIcon.src, title: 'sapper' },
+    { src: doodler.src, title: 'doodle-jump' },
   ];
   return (
     <>
