@@ -1,0 +1,15 @@
+.field {
+  position: relative;
+  width: 1500px;
+  height: 700px;
+  border-radius: 1%;
+  background-image: url('../../assets/img/board.jpg');
+}
+
+.time {
+  font-size: 30px;
+  display: flex;
+  justify-content: end;
+  color: greenyellow;
+}
+

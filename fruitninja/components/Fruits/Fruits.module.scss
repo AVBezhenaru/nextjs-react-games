@@ -1,0 +1,190 @@
+.apple {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-size: contain;
+  background-image: url('../../assets/img/fruits/apple.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.banana {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background-size: contain;
+  background-image: url('../../assets/img/fruits/banana.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.peach {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-size: contain;
+  background-image: url('../../assets/img/fruits/peach.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.strawberry {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-size: contain;
+  background-image: url('../../assets/img/fruits/strawberry.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.watermelon {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-size: contain;
+  background-image: url('../../assets/img/fruits/watermelon.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.boom {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-size: contain;
+  background-image: url('../../assets/img/fruits/boom.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+.slicedApple1 {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-size: contain;
+  background-image: url('../../assets/img/fruits/apple1.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.slicedApple2 {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-size: contain;
+  background-image: url('../../assets/img/fruits/apple2.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.slicedBanana1 {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background-size: contain;
+  background-image: url('../../assets/img/fruits/banana1.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.slicedBanana2 {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background-size: contain;
+  background-image: url('../../assets/img/fruits/banana2.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.slicedPeach1 {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-size: contain;
+  background-image: url('../../assets/img/fruits/peach1.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.slicedPeach2 {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-size: contain;
+  background-image: url('../../assets/img/fruits/peach2.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.slicedStrawberry1 {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-size: contain;
+  background-image: url('../../assets/img/fruits/strawberry1.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.slicedStrawberry2 {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-size: contain;
+  background-image: url('../../assets/img/fruits/strawberry2.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.slicedWatermelon1 {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-size: contain;
+  background-image: url('../../assets/img/fruits/watermelon1.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.slicedWatermelon2 {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-size: contain;
+  background-image: url('../../assets/img/fruits/watermelon2.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.slice1Anim {
+  animation: slice1 3s ease forwards;
+}
+
+.slice2Anim {
+  animation: slice2 3s ease forwards;
+}
+
+@keyframes slice1 {
+  0% {
+    transform: translate(0, 0) rotate(-50deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-100px, -200px) rotate(-100deg);
+    opacity: 0.8;
+  }
+}
+
+@keyframes slice2 {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(100px, 200px) rotate(100deg);
+    opacity: 0.8;
+  }
+}

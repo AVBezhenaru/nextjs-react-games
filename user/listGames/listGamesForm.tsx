@@ -13,7 +13,8 @@ import hangmanIcon from '../img/hangmanIcon.png';
 import aerohokkeyIcon from '../img/aerohokkeyIcon.png';
 import solitairIcon from '../img/solitairIcon.png';
 import game2048Icon from '../img/2048Icon.png';
-import tanksIcon from '../img/tanksIcon.png';
+import tanksIcon from '../img/tanksIcon.png'
+import doodler from '../img/doodler-guy.png';
 
 import { GameLink } from './GameLink';
 import { Games, Page, HeaderGames, ListGames } from './listGamesStyle';
@@ -30,6 +31,7 @@ const ListGamesForm = () => {
     { src: solitairIcon.src, title: 'solitaire' },
     { src: game2048Icon.src, title: 'game2048' },
     { src: tanksIcon.src, title: 'tanks' },
+    { src: doodler.src, title: 'doodle-jump' },
   ];
   return (
     <>
