@@ -2,20 +2,50 @@
 /* eslint-disable no-undef */
 /* eslint-disable lines-between-class-members */
 
-import { ControlKey, Tank } from '../Models/Tank';
+import { ControlKey, Direction, Tank } from '../Models/Tank';
 import { Enemy } from '../Models/Enemy';
 import { Land } from '../Models/Land';
 import { Bullet } from '../Models/Bullet';
 import { Base } from '../Models/Base';
-import { BORDER_RECTS, COLOR_GRAY, TILE_SIZE } from '../../config';
-import { explosion } from '../tileMap';
+import {
+  BORDER_RECTS,
+  COLOR_GRAY,
+  ENEMY_DEFAULT_SPAWN_POSITIONS,
+  PLAYER_DEFAULT_SPAWN_POSITIONS,
+  TILE_SIZE,
+} from '../../config';
+import { enemy, explosion, playerPrimary } from '../tileMap';
 import { Interface } from '../Models/Interface';
+import { store } from '../../../store/index';
+import {
+  tanksGameOverAction,
+  tanksGameVictoryAction,
+  tanksGameCountScoresAction,
+} from '../../reducers/tanksGameAction';
+import { RespawnSprite } from '../Models/RespawnSprite';
 
 const enemyCounter: { LEVEL_1: number } = {
   LEVEL_1: 3,
 };
 
+// Audio assets
+let gameOver: HTMLAudioElement;
+let gameVictory: HTMLAudioElement;
+let fire: HTMLAudioElement;
+const enemyFire: HTMLAudioElement[] = [];
+let hitEnemy: HTMLAudioElement;
+if (typeof Audio !== 'undefined') {
+  gameOver = new Audio('/audio/tanks/game-over.mp3');
+  gameVictory = new Audio('/audio/tanks/victory.mp3');
+  fire = new Audio('/audio/tanks/fire.mp3');
+  for (let i = 0; i < enemyCounter.LEVEL_1; i++) {
+    enemyFire.push(new Audio('/audio/tanks/fire.mp3'));
+  }
+  hitEnemy = new Audio('/audio/tanks/hit-enemy.mp3');
+}
+
 interface IWorld {
+  isWin: number;
   ctx: CanvasRenderingContext2D;
   ctx2: CanvasRenderingContext2D;
   currentLevel: number;
@@ -25,8 +55,10 @@ interface IWorld {
   enemyTanks: Enemy[];
   bullets: Bullet[];
   base: Base;
-  interval: NodeJS.Timer;
-  gameOver: boolean;
+  respawn: boolean[];
+  respawnEnemySprite: RespawnSprite[];
+  respawnSprite: RespawnSprite;
+  interval: NodeJS.Timer[];
   img: HTMLImageElement;
 }
 
@@ -49,6 +81,7 @@ export type TRender = {
 };
 
 class World implements IWorld {
+  isWin: number;
   ctx: CanvasRenderingContext2D;
   ctx2: CanvasRenderingContext2D;
   currentLevel: number;
@@ -58,8 +91,10 @@ class World implements IWorld {
   enemyTanks: Enemy[];
   bullets: Bullet[];
   base: Base;
-  gameOver: boolean;
-  interval: NodeJS.Timer;
+  respawn: boolean[];
+  respawnEnemySprite: RespawnSprite[];
+  respawnSprite: RespawnSprite;
+  interval: NodeJS.Timer[];
   img: HTMLImageElement;
   activeKeys: Set<unknown>;
   interface: Interface;
@@ -68,12 +103,10 @@ class World implements IWorld {
     ctx: CanvasRenderingContext2D,
     ctx2: CanvasRenderingContext2D,
     img: HTMLImageElement,
-    gameOver: boolean,
   ) {
     this.ctx = ctx;
     this.ctx2 = ctx2;
     this.img = img;
-    this.gameOver = gameOver;
     this.init();
   }
 
@@ -87,32 +120,84 @@ class World implements IWorld {
     this.bullets = [];
     this.base = new Base(this.land.curLevel);
     this.activeKeys = new Set();
+    this.respawn = [];
+    this.interval = [];
+    this.respawnEnemySprite = [];
+    this.respawnSprite = new RespawnSprite(
+      this.land.curLevel,
+      this.playerTank_1.x,
+      this.playerTank_1.y,
+    );
 
     for (let i = 0; i < enemyCounter.LEVEL_1; i++) {
       this.enemyTanks.push(new Enemy(this.land.curLevel, i, i + 1));
+      this.respawnEnemySprite.push(
+        new RespawnSprite(this.land.curLevel, this.enemyTanks[i].x, this.enemyTanks[i].y),
+      );
     }
+    this.isWin = this.enemyTanks.length * 2;
 
     for (let i = 0; i < enemyCounter.LEVEL_1; i++) {
-      this.interval = setInterval(() => {
+      const interval = setInterval(() => {
+        enemyFire[i].play();
         this.enemyFire(this.enemyTanks[i]);
       }, 1500);
+      this.interval[i] = interval;
+      this.respawn[i] = false;
     }
   }
 
   render() {
-    if (this.base.health === 0) {
+    if (this.base.health === 0 || this.playerTank_1.lives === 0) {
       this.setGameOver();
     }
 
-    const { clear: clPlayerTank1, draw: drPlayerTank1 } = this.playerTank_1.prepareRenderTank(
-      this.activeKeys,
-      this.img,
-    );
-    this.ctx.clearRect(...clPlayerTank1);
-    this.ctx.drawImage(...drPlayerTank1);
+    if (this.isWin <= 0) {
+      this.setGameWin();
+    }
+
+    const { clear: clSprite, draw: drSprite } = this.respawnSprite.render(this.img);
+    if (!this.playerTank_1.isDead) {
+      const { clear: clPlayerTank1, draw: drPlayerTank1 } = this.playerTank_1.prepareRenderTank(
+        this.activeKeys,
+        this.img,
+      );
+      this.ctx.clearRect(...clPlayerTank1);
+      this.ctx.drawImage(...drPlayerTank1);
+    } else {
+      this.ctx.clearRect(...clSprite);
+      this.ctx.drawImage(...drSprite);
+    }
 
     if (this.bullets.length > 0) {
       for (const bullet of this.bullets) {
+        const shouted = this.playerTank_1.calculateDeadZone(
+          bullet.x,
+          bullet.y,
+          bullet.direction,
+          bullet.tank.title,
+        );
+
+        if (shouted) {
+          bullet.isExplose = true;
+          this.playerTank_1.isDead = true;
+          this.playerTank_1.lives -= 1;
+          const { clear: clPlayerTank1 } = this.playerTank_1.prepareRenderTank(
+            this.activeKeys,
+            this.img,
+          );
+          this.ctx.clearRect(...clPlayerTank1);
+          this.respawnSprite.vision = true;
+
+          setTimeout(() => {
+            this.playerTank_1.isDead = false;
+            this.playerTank_1.x = PLAYER_DEFAULT_SPAWN_POSITIONS[0].x + 6;
+            this.playerTank_1.y = PLAYER_DEFAULT_SPAWN_POSITIONS[0].y + 2;
+            this.playerTank_1.direction = Direction.up;
+            [this.playerTank_1.view] = [...playerPrimary.rank_3.up];
+          }, 2000);
+        }
+
         if (!bullet.isExplose) {
           const { clear: clBullet } = { ...bullet.prepareRenderBullet(this.img) };
           this.ctx.clearRect(...clBullet);
@@ -150,9 +235,8 @@ class World implements IWorld {
       }
     }
 
-    this.enemyTanks = this.enemyTanks.filter((enemy: Enemy) => !enemy.isDead);
     for (let i = 0; i < enemyCounter.LEVEL_1; i++) {
-      if (this.enemyTanks[i] !== undefined) {
+      if (!this.enemyTanks[i].isDead) {
         const { clear: clEnemy, draw: drEnemy } = this.enemyTanks[i].prepareRenderEnemy(this.img);
         this.ctx.clearRect(...clEnemy);
         this.ctx.drawImage(...drEnemy);
@@ -167,12 +251,42 @@ class World implements IWorld {
 
             if (shouted) {
               bullet.isExplose = true;
+              hitEnemy.play();
+              this.enemyTanks[i].lives -= 1;
+              this.isWin -= 1;
               this.playerTank_1.reloadWeapon();
               this.enemyTanks[i].enemyDestroyed();
-              clearInterval(this.interval);
+              clearInterval(this.interval[i]);
               this.ctx.clearRect(...clEnemy);
+              this.respawn[i] = true;
             }
           }
+        }
+      } else {
+        this.respawnEnemySprite[i].vision = true;
+        const { clear: clSprite, draw: drSprite } = this.respawnEnemySprite[i].render(this.img);
+
+        if (this.enemyTanks[i].lives !== 0) {
+          this.ctx.clearRect(...clSprite);
+          this.ctx.drawImage(...drSprite);
+
+          setTimeout(() => {
+            if (this.respawn[i]) {
+              this.enemyTanks[i].isDead = false;
+              this.enemyTanks[i].x = ENEMY_DEFAULT_SPAWN_POSITIONS[i].x + 2;
+              this.enemyTanks[i].y = ENEMY_DEFAULT_SPAWN_POSITIONS[i].y;
+              [this.enemyTanks[i].view] = [...enemy.a.down];
+              const interval = setInterval(() => {
+                enemyFire[i].play();
+                this.enemyFire(this.enemyTanks[i]);
+              }, 1500);
+              this.interval[i] = interval;
+              this.enemyTanks[i].direction = Direction.down;
+              this.respawn[i] = false;
+              this.respawnEnemySprite[i].vision = false;
+              this.ctx.clearRect(...clSprite);
+            }
+          }, 2000);
         }
       }
     }
@@ -188,10 +302,21 @@ class World implements IWorld {
     this.interface.prepareRender(this.img).map((item) => this.ctx.drawImage(...item));
   }
 
-  // store.dispatch
+  setGameWin() {
+    gameVictory.play();
+    setTimeout(() => {
+      store.dispatch(
+        tanksGameCountScoresAction([enemyCounter.LEVEL_1 * 2, 3 - this.playerTank_1.lives]),
+      );
+      store.dispatch(tanksGameVictoryAction());
+    }, 500);
+  }
+
   setGameOver() {
-    this.gameOver = true;
-    return this.gameOver;
+    gameOver.play();
+    setTimeout(() => {
+      store.dispatch(tanksGameOverAction(true));
+    }, 500);
   }
 
   private renderWalls(walls: { col: number; row: number }[]) {
@@ -236,6 +361,7 @@ class World implements IWorld {
 
   private shot(tank: Tank) {
     if (tank.isShot) {
+      fire.play();
       this.bullets.push(new Bullet(tank, this.land.curLevel));
       tank.fire();
     }

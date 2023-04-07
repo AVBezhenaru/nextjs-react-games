@@ -31,7 +31,7 @@ export class Base {
     this.y = BASE_DEFAULT_POSITION.y;
     this.base_width = BASE_DEFAULT_SIZE.width;
     this.base_height = BASE_DEFAULT_SIZE.height;
-    this.health = 2;
+    this.health = 3;
     this.isDead = false;
   }
 

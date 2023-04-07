@@ -28,14 +28,15 @@ export enum EnemyRank {
 
 export class Enemy extends Tank {
   id: number;
-  isDead: boolean;
   enemyRank: EnemyRank;
   title: string;
+  lives: number;
   private readonly enemySpeed: number;
 
   constructor(land: TLand, _pos: number, id: number) {
     super(land);
     this.id = id;
+    this.lives = 2;
     [this.view] = [...enemy.a.down];
     [this.tank_width, this.tank_height] = this.getSizeTank();
     this.x =
@@ -55,56 +56,6 @@ export class Enemy extends Tank {
 
   enemyDestroyed() {
     this.isDead = true;
-  }
-
-  calculateDeadZone(dx: number, dy: number, _direction: string, tank: string): boolean {
-    if (tank === this.title) return false;
-    let result = false;
-    switch (_direction) {
-      case 'ArrowUp':
-        if (
-          dx > this.x &&
-          dx < this.x + this.tank_width &&
-          dy < this.y + this.tank_height &&
-          dy > this.y
-        ) {
-          result = true;
-        }
-        break;
-      case 'ArrowDown':
-        if (
-          dx > this.x &&
-          dx < this.x + this.tank_width &&
-          dy > this.y &&
-          dy < this.y + this.tank_height
-        ) {
-          result = true;
-        }
-        break;
-      case 'ArrowRight':
-        if (
-          dx > this.x &&
-          dx < this.x + this.tank_width &&
-          dy > this.y &&
-          dy < this.y + this.tank_height
-        ) {
-          result = true;
-        }
-        break;
-      case 'ArrowLeft':
-        if (
-          dx < this.x + this.tank_width &&
-          dx > this.x &&
-          dy > this.y &&
-          dy < this.y + this.tank_height
-        ) {
-          result = true;
-        }
-        break;
-      default:
-        break;
-    }
-    return result;
   }
 
   private enemyMovement() {

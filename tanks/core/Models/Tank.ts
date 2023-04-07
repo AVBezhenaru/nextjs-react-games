@@ -18,6 +18,13 @@ import { TRender } from '../World/World';
 
 import { TLand } from './Land';
 
+/*
+let tankMove: HTMLAudioElement;
+if (typeof Audio !== 'undefined') {
+  tankMove = new Audio('/audio/tanks/tank-move.mp3');
+}
+ */
+
 export enum Direction {
   up = 'ArrowUp',
   down = 'ArrowDown',
@@ -63,6 +70,8 @@ export class Tank {
   tank_width: number;
   tank_height: number;
   countShot: number;
+  isDead: boolean;
+  lives: number;
 
   constructor(land: TLand) {
     [this.view] = [...playerPrimary.rank_3.up];
@@ -77,6 +86,8 @@ export class Tank {
     this.frames = playerPrimary.rank_2.up;
     this.land = land;
     this.countShot = 2;
+    this.isDead = false;
+    this.lives = 3;
     this.init();
   }
 
@@ -115,6 +126,56 @@ export class Tank {
     const x = this.x - shiftTile(this.tank_width, this.tank_height)[0];
     const y = this.y - shiftTile(this.tank_width, this.tank_height)[1];
     return [x, y];
+  }
+
+  calculateDeadZone(dx: number, dy: number, _direction: string, tank: string): boolean {
+    if (tank === this.title) return false;
+    let result = false;
+    switch (_direction) {
+      case 'ArrowUp':
+        if (
+          dx > this.x &&
+          dx < this.x + this.tank_width &&
+          dy < this.y + this.tank_height &&
+          dy > this.y
+        ) {
+          result = true;
+        }
+        break;
+      case 'ArrowDown':
+        if (
+          dx > this.x &&
+          dx < this.x + this.tank_width &&
+          dy > this.y &&
+          dy < this.y + this.tank_height
+        ) {
+          result = true;
+        }
+        break;
+      case 'ArrowRight':
+        if (
+          dx > this.x &&
+          dx < this.x + this.tank_width &&
+          dy > this.y &&
+          dy < this.y + this.tank_height
+        ) {
+          result = true;
+        }
+        break;
+      case 'ArrowLeft':
+        if (
+          dx < this.x + this.tank_width &&
+          dx > this.x &&
+          dy > this.y &&
+          dy < this.y + this.tank_height
+        ) {
+          result = true;
+        }
+        break;
+      default:
+        break;
+    }
+    return result;
   }
 
   controlTank(key: Set<unknown>) {

@@ -84,7 +84,7 @@ export const PLAYER_DEFAULT_SPAWN_POSITIONS = [
 ];
 
 export const ENEMY_DEFAULT_SPAWN_POSITIONS = [
-  { x: 490, y: 0 },
+  { x: 368, y: 0 },
   { x: 768, y: 0 },
   { x: 0, y: 0 },
 ];

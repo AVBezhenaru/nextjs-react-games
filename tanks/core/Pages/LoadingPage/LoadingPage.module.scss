@@ -1,0 +1,40 @@
+.loading__page {
+  width: 1000px;
+  height: 700px;
+  margin: 100px auto 0;
+
+  background-color: #8a8a8a;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  opacity: 0;
+  animation: render 4s ease-in-out;
+
+  .loading__pageTitle {
+    color: #000000;
+    text-transform: uppercase;
+    font-size: 30px;
+    letter-spacing: 20px;
+  }
+}
+
+@keyframes render {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 1;
+  }
+}

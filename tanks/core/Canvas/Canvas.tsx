@@ -1,5 +1,5 @@
 /* eslint-disable array-callback-return */
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 
 import { CANVAS_WIDTH, CANVAS_HEIGHT } from '../../config';
 import image from '../../assents/graphics/sprite.png';
@@ -8,8 +8,6 @@ import World from '../World/World';
 import styles from './canvas.module.scss';
 
 const Canvas = ({ ...props }) => {
-  const [gameOver, setIsGameOver] = useState(false);
-
   const canvasRef = useRef(null);
   const canvasRef2 = useRef(null);
 
