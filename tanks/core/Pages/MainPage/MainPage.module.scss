@@ -1,0 +1,29 @@
+.main__page {
+  width: 1000px;
+  height: 700px;
+  margin: 100px auto 0;
+
+  background-color: #000000;
+}
+
+.main__pageContainer {
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main__pageImage {
+  width: 600px;
+  height: 200px;
+}
+
+.main__pageButtons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 70px;
+}
