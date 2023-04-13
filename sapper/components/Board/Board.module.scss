@@ -5,23 +5,23 @@
 					-15px 0 30px #403e3e,
 					0 15px 30px #403e3e,
 					0 -15px 30px #403e3e;
-					
+
 	&-bomb-detonation{
 		display: flex;
 		flex-wrap: wrap;
 		box-shadow: 10px 0 30px red,
-					  -10px 0 30px red,
-					   0 10px 30px red,
-					   0 -10px 30px red;
+						-10px 0 30px red,
+						0 10px 30px red,
+						0 -10px 30px red;
 	}
 
 	&-win{
 		display: flex;
 		flex-wrap: wrap;
 		box-shadow: 10px 0 30px green,
-					  -10px 0 30px green,
-					   0 10px 30px green,
-					   0 -10px 30px green;
+						-10px 0 30px green,
+						0 10px 30px green,
+						0 -10px 30px green;
 	}
 }
 
