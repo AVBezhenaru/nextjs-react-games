@@ -1,20 +1,20 @@
 .settingsModal{
-	position: absolute;
-	right: calc(50% - 200px);;
-	margin-top: -40px;
-	width: 400px;
-	height: 400px;
-	border-top: 5px solid #dddddd;
-	border-left: 5px solid #dddddd;
-	border-right: 5px solid #5c5c5c;
-	border-bottom: 5px solid #5c5c5c;
-	background-color: rgba(135, 135, 135);
-	padding: 20px;
+  position: absolute;
+  right: calc(50% - 200px);;
+  margin-top: -40px;
+  width: 400px;
+  height: 400px;
+  border-top: 5px solid #dddddd;
+  border-left: 5px solid #dddddd;
+  border-right: 5px solid #5c5c5c;
+  border-bottom: 5px solid #5c5c5c;
+  background-color: rgba(135, 135, 135);
+  padding: 20px;
 }
 
-// .hidden{
-// 	visibility: hidden;
-// }
+//  .hidden{
+//    visibility: hidden;
+//  }
 
 .title{
   font-family:cursive;
@@ -32,13 +32,13 @@
   color: black;
 
   &__item{
-	  margin-top: 15px;
+    margin-top: 15px;
     margin-bottom: 10px;
   }
 }
 
 .radioBoxs-label{
-	margin-left: 10px;
+  margin-left: 10px;
 }
 
 .setting-special-wraper{
@@ -94,24 +94,24 @@
   background-color: rgb(135, 135, 135);
 
   &:hover {
-	  background-color: rgb(116, 114, 114);
-	  text-decoration: underline;
+    background-color: rgb(116, 114, 114);
+    text-decoration: underline;
   }
 
   &:disabled {
-		cursor: default;
+    cursor: default;
     border-top: 5px solid #5c5c5c;
     border-left: 5px solid #5c5c5c;
     border-right: 5px solid #5c5c5c;
     border-bottom: 5px solid #5c5c5c;
-	}
+  }
 
-	&:active{
-		border-top: 5px solid #5c5c5c;
-		border-left: 5px solid #5c5c5c;
-		border-right: 5px solid #dddddd;
-		border-bottom: 5px solid #dddddd;
-	}
+  &:active{
+    border-top: 5px solid #5c5c5c;
+    border-left: 5px solid #5c5c5c;
+    border-right: 5px solid #dddddd;
+    border-bottom: 5px solid #dddddd;
+  }
 }
 
 .setting-btn-close {
@@ -129,15 +129,15 @@
   border-bottom: 5px solid #5c5c5c;
   background-color: rgb(135, 135, 135);
 
-   &:hover {
-	  background-color: rgb(116, 114, 114);
-	  color: black;
-   }
-	
-   &:active{
-		border-top: 5px solid #5c5c5c;
-		border-left: 5px solid #5c5c5c;
-		border-right: 5px solid #dddddd;
-		border-bottom: 5px solid #dddddd;
-	}
+  &:hover {
+    background-color: rgb(116, 114, 114);
+    color: black;
+  }
+  
+  &:active{
+    border-top: 5px solid #5c5c5c;
+    border-left: 5px solid #5c5c5c;
+    border-right: 5px solid #dddddd;
+    border-bottom: 5px solid #dddddd;
+  }
 }

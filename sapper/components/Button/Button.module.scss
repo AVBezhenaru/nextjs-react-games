@@ -10,15 +10,15 @@
   border-bottom: 5px solid #5c5c5c;
   background-color: rgb(135, 135, 135);
 
-	&:hover {
-		background-color: rgb(116, 114, 114);
-		text-decoration: underline;
-	}
+  &:hover {
+    background-color: rgb(116, 114, 114);
+    text-decoration: underline;
+  }
 
-	&:active{
-		border-top: 5px solid #5c5c5c;
-		border-left: 5px solid #5c5c5c;
-		border-right: 5px solid #dddddd;
-		border-bottom: 5px solid #dddddd;
-	}
+  &:active{
+    border-top: 5px solid #5c5c5c;
+    border-left: 5px solid #5c5c5c;
+    border-right: 5px solid #dddddd;
+    border-bottom: 5px solid #dddddd;
+  }
 }
