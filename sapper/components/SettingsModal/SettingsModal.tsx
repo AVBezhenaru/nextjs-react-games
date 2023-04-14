@@ -81,6 +81,10 @@ const SettingsModal: React.FC = () => {
     );
   };
 
+  const onClickClose = () => {
+    dispatch(setSettingsModal());
+  };
+
   return (
     <div className={classes.settingsModal}>
       <h2 className={classes.title}>Settings:</h2>
@@ -159,22 +163,10 @@ const SettingsModal: React.FC = () => {
         <button type="submit" className={classes['setting-btn']}>
           Ok
         </button>
-        <button
-          type="button"
-          className={classes['setting-btn']}
-          onClick={() => {
-            dispatch(setSettingsModal());
-          }}
-        >
+        <button type="button" className={classes['setting-btn']} onClick={onClickClose}>
           Back
         </button>
-        <button
-          type="button"
-          className={classes['setting-btn-close']}
-          onClick={() => {
-            dispatch(setSettingsModal());
-          }}
-        >
+        <button type="button" className={classes['setting-btn-close']} onClick={onClickClose}>
           X
         </button>
       </form>
