@@ -1,5 +1,24 @@
 import { ICell } from '../types/types';
 
+const mapClassByNumber = new Map();
+mapClassByNumber.set(-2, 'cell-bomb-detonation');
+mapClassByNumber.set(-1, 'cell-bomb');
+mapClassByNumber.set(0, 'cell-empty');
+for (let i = 1; i <= 8; i++) {
+  mapClassByNumber.set(i, `cell-number-${i}`);
+}
+
+const getArrXYaround = (x: number, y: number) => [
+  [y - 1, x - 1],
+  [y - 1, x],
+  [y - 1, x + 1],
+  [y, x + 1],
+  [y + 1, x + 1],
+  [y + 1, x],
+  [y + 1, x - 1],
+  [y, x - 1],
+];
+
 const randomRange = (Min: number, Max: number): number =>
   Math.floor(Math.random() * (Max - Min) + Min);
 
@@ -27,23 +46,9 @@ export const putNumNearBomb = (board: ICell[][]) => {
   board.forEach((row, y) => {
     row.forEach((cell, x) => {
       if (cell.backing !== -1) {
-        const arrXYaround = [
-          [y - 1, x - 1],
-          [y - 1, x],
-          [y - 1, x + 1],
-          [y, x + 1],
-          [y + 1, x + 1],
-          [y + 1, x],
-          [y + 1, x - 1],
-          [y, x - 1],
-        ];
-        cell.backing = arrXYaround.reduce((countBomb: number, item) => {
-          if (board[item[0]] !== undefined) {
-            if (board[item[0]][item[1]] !== undefined) {
-              if (board[item[0]][item[1]].backing === -1) {
-                countBomb += 1;
-              }
-            }
+        cell.backing = getArrXYaround(x, y).reduce((countBomb: number, item) => {
+          if (board?.[item[0]]?.[item[1]]?.backing === -1) {
+            countBomb += 1;
           }
           return countBomb;
         }, 0);
@@ -82,81 +87,30 @@ export const getClassByNumber = (cell: ICell): string => {
         return '';
     }
   }
-
-  switch (cell.backing) {
-    case -2:
-      return 'cell-bomb-detonation';
-    case -1:
-      return 'cell-bomb';
-    case 0:
-      return 'cell-empty';
-    case 1:
-      return 'cell-number-1';
-    case 2:
-      return 'cell-number-2';
-    case 3:
-      return 'cell-number-3';
-    case 4:
-      return 'cell-number-4';
-    case 5:
-      return 'cell-number-5';
-    case 6:
-      return 'cell-number-6';
-    case 7:
-      return 'cell-number-7';
-    case 8:
-      return 'cell-number-8';
-    default:
-      return 'cell-empty';
-  }
+  return mapClassByNumber.get(cell.backing) || 'cell-empty';
 };
 
 export const openEmtyCells = (x: number, y: number, NewBoard: ICell[][]) => {
-  const arrXYaround = [
-    [y - 1, x - 1],
-    [y - 1, x],
-    [y - 1, x + 1],
-    [y, x + 1],
-    [y + 1, x + 1],
-    [y + 1, x],
-    [y + 1, x - 1],
-    [y, x - 1],
-  ];
-  arrXYaround.forEach((y0x1) => {
-    if (NewBoard[y0x1[0]] !== undefined) {
-      if (NewBoard[y0x1[0]][y0x1[1]] !== undefined) {
-        // если ячейка закрыта и она пустая
-        if (NewBoard[y0x1[0]][y0x1[1]].mask !== -1 && NewBoard[y0x1[0]][y0x1[1]].backing === 0) {
-          NewBoard[y0x1[0]][y0x1[1]].mask = -1; // открываем ячейку
+  getArrXYaround(x, y).forEach((y0x1) => {
+    // если ячейка закрыта и она пустая
+    if (
+      NewBoard?.[y0x1[0]]?.[y0x1[1]]?.mask !== -1 &&
+      NewBoard?.[y0x1[0]]?.[y0x1[1]]?.backing === 0
+    ) {
+      NewBoard[y0x1[0]][y0x1[1]].mask = -1; // открываем ячейку
 
-          openEmtyCells(y0x1[1], y0x1[0], NewBoard);
+      openEmtyCells(y0x1[1], y0x1[0], NewBoard);
 
-          const arrXYaroundOpen = [
-            [y0x1[0] - 1, y0x1[1] - 1],
-            [y0x1[0] - 1, y0x1[1]],
-            [y0x1[0] - 1, y0x1[1] + 1],
-            [y0x1[0], y0x1[1] + 1],
-            [y0x1[0] + 1, y0x1[1] + 1],
-            [y0x1[0] + 1, y0x1[1]],
-            [y0x1[0] + 1, y0x1[1] - 1],
-            [y0x1[0], y0x1[1] - 1],
-          ];
-          arrXYaroundOpen.forEach((item) => {
-            if (NewBoard[item[0]] !== undefined) {
-              if (NewBoard[item[0]][item[1]] !== undefined) {
-                NewBoard[item[0]][item[1]].mask = -1;
-              }
-            }
-          });
+      getArrXYaround(y0x1[1], y0x1[0]).forEach((item) => {
+        if (NewBoard?.[item[0]]?.[item[1]] !== undefined) {
+          NewBoard[item[0]][item[1]].mask = -1;
         }
-      }
+      });
     }
   });
-  arrXYaround.forEach((item) => {
-    if (NewBoard[item[0]] !== undefined) {
-      if (NewBoard[item[0]][item[1]] !== undefined) {
-        NewBoard[item[0]][item[1]].mask = -1;
-      }
+  getArrXYaround(x, y).forEach((item) => {
+    if (NewBoard?.[item[0]]?.[item[1]] !== undefined) {
+      NewBoard[item[0]][item[1]].mask = -1;
     }
   });
 };
