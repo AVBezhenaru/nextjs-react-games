@@ -23,6 +23,7 @@ const Cell: React.FC<ICellProps> = ({
   };
 
   return (
+    // eslint-disable-next-line jsx-a11y/control-has-associated-label
     <button
       type="button"
       className={`${classes.cell} ${classes[classAdd]}`}
@@ -30,9 +31,7 @@ const Cell: React.FC<ICellProps> = ({
       onClick={onClickLButton}
       onContextMenu={onClickRButton}
       disabled={disabled}
-    >
-      {' '}
-    </button>
+    />
   );
 };
 
