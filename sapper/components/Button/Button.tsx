@@ -7,7 +7,8 @@ interface IButtonProps {
   onClick?: () => void;
 }
 
-const Button: FC<IButtonProps> = ({ text, onClick }) => (
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+const Button: FC<IButtonProps> = ({ text, onClick = () => {} }) => (
   <button type="button" className={classes.Button} onClick={onClick}>
     {text}
   </button>
