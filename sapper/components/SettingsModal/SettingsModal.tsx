@@ -10,6 +10,7 @@ import {
 } from '../../store/sapperSlice';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { checkedRadioBoxs } from '../../assets/utils/util';
+import SettingsSpecialBox from '../SettingsSpecialBox/SettingsSpecialBox';
 
 import classes from './SettingsModal.module.scss';
 
@@ -83,57 +84,33 @@ const SettingsModal: React.FC = () => {
           ))}
         </ul>
         <div className={classes['settings-special']}>
-          <div className={classes['setting-special-wraper']}>
-            <label htmlFor="height" className={classes['settings-label-special']}>
-              Height (9-24):
-            </label>
-            <input
-              id="height"
-              name="height"
-              className={classes['settings-height']}
-              type="number"
-              min="9"
-              max="24"
-              required
-              disabled={!radioBoxsData[3].checked}
-              defaultValue={radioBoxsData[3].checked ? `${settingsValue?.height}` : null}
-              {...register('height')}
-            />
-          </div>
-          <div className={classes['setting-special-wraper']}>
-            <label htmlFor="height" className={classes['settings-label-special']}>
-              Width (9-30):
-            </label>
-            <input
-              id="width"
-              name="width"
-              className={classes['settings-width']}
-              type="number"
-              min="9"
-              max="30"
-              required
-              disabled={!radioBoxsData[3].checked}
-              defaultValue={radioBoxsData[3].checked ? `${settingsValue?.width}` : null}
-              {...register('width')}
-            />
-          </div>
-          <div className={classes['setting-special-wraper']}>
-            <label htmlFor="mins" className={classes['settings-label-special']}>
-              Mins (10-668):
-            </label>
-            <input
-              id="mins"
-              name="mins"
-              className={classes['settings-mins']}
-              type="number"
-              min="10"
-              max="668"
-              required
-              disabled={!radioBoxsData[3].checked}
-              defaultValue={radioBoxsData[3].checked ? `${settingsValue?.mins}` : null}
-              {...register('mins')}
-            />
-          </div>
+          <SettingsSpecialBox
+            name="height"
+            min={9}
+            max={24}
+            disabled={!radioBoxsData[3].checked}
+            defaultValue={radioBoxsData[3].checked ? `${settingsValue?.height}` : null}
+            register={register}
+            className={classes['settings-height']}
+          />
+          <SettingsSpecialBox
+            name="width"
+            min={9}
+            max={30}
+            disabled={!radioBoxsData[3].checked}
+            defaultValue={radioBoxsData[3].checked ? `${settingsValue?.width}` : null}
+            register={register}
+            className={classes['settings-width']}
+          />
+          <SettingsSpecialBox
+            name="mins"
+            min={10}
+            max={668}
+            disabled={!radioBoxsData[3].checked}
+            defaultValue={radioBoxsData[3].checked ? `${settingsValue?.mins}` : null}
+            register={register}
+            className={classes['settings-mins']}
+          />
         </div>
         <button type="submit" className={classes['setting-btn']}>
           Ok
