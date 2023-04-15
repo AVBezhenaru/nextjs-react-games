@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 import {
@@ -9,8 +9,8 @@ import {
   setTimerIndicator,
 } from '../../store/sapperSlice';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { checkedRadioBoxs } from '../../assets/utils/util';
 
-import { Beginner, Intermediate, Expert, Special } from './levels';
 import classes from './SettingsModal.module.scss';
 
 type FormValues = {
@@ -23,32 +23,7 @@ type FormValues = {
 const SettingsModal: React.FC = () => {
   const dispatch = useAppDispatch();
   const { settingsValue } = useAppSelector(getSapperState);
-  const initialRadioBoxs = useMemo(
-    () => [
-      {
-        id: 1,
-        label: Beginner,
-        checked: settingsValue.level === Beginner,
-      },
-      {
-        id: 2,
-        label: Intermediate,
-        checked: settingsValue.level === Intermediate,
-      },
-      {
-        id: 3,
-        label: Expert,
-        checked: settingsValue.level === Expert,
-      },
-      {
-        id: 4,
-        label: Special,
-        checked: settingsValue.level === Special,
-      },
-    ],
-    [],
-  );
-  const [radioBoxsData, setRadioBoxsData] = useState(initialRadioBoxs);
+  const [radioBoxsData, setRadioBoxsData] = useState(checkedRadioBoxs(settingsValue));
 
   const { register, handleSubmit } = useForm<FormValues>({
     mode: 'onChange',

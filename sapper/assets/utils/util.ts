@@ -1,4 +1,5 @@
 import { ICell } from '../types/types';
+import { TsettingsValue } from '../../store/typeSapperSlice';
 
 const mapClassByNumber = new Map();
 mapClassByNumber.set(-2, 'cell-bomb-detonation');
@@ -21,6 +22,38 @@ const getArrXYaround = (x: number, y: number) => [
 
 const randomRange = (Min: number, Max: number): number =>
   Math.floor(Math.random() * (Max - Min) + Min);
+
+const Beginner = 'Beginner: field 9x9 cells, 10 mins';
+const Intermediate = 'Intermediate: field 16x16 cells, 40 mins';
+const Expert = 'Expert: field 16x30 cells, 99 mins';
+const Special = 'Special:';
+
+export const checkedRadioBoxs = (settingsValue: TsettingsValue) => {
+  const initialRadioBoxs = [
+    {
+      id: 1,
+      label: Beginner,
+      checked: settingsValue.level === Beginner,
+    },
+    {
+      id: 2,
+      label: Intermediate,
+      checked: settingsValue.level === Intermediate,
+    },
+    {
+      id: 3,
+      label: Expert,
+      checked: settingsValue.level === Expert,
+    },
+    {
+      id: 4,
+      label: Special,
+      checked: settingsValue.level === Special,
+    },
+  ];
+
+  return initialRadioBoxs;
+};
 
 export const initialEmptyBoard = (x: number, y: number): ICell[][] => {
   const board: ICell[][] = new Array(y).fill(new Array(x).fill({ mask: 0, backing: 0 }));
