@@ -1,0 +1,97 @@
+.gameModal{
+  position: absolute;
+  right: calc(50% - 200px);
+  top: calc(50% - 200px);;
+  width: 400px;
+  height: 220px;
+  border-top: 5px solid #dddddd;
+  border-right: 5px solid #5c5c5c;
+  border-left: 5px solid #dddddd;
+  border-bottom: 5px solid #5c5c5c;
+  background-color: rgba(135, 135, 135);
+  padding: 20px;
+}
+
+.title{
+  font-family:cursive;
+  font-size: 25px;
+  font-weight: 500;
+  color: black;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.gameModal-btn {
+  bottom: 20px;
+  left: 20px;
+  position: absolute;
+  margin-top: 10px;
+  margin-right: 20px;
+  padding: 10px;
+  font-family:cursive;
+  font-size: 20px;
+  font-weight: 400;
+  color: black;
+  border-top: 5px solid #dddddd;
+  border-left: 5px solid #dddddd;
+  border-right: 5px solid #5c5c5c;
+  border-bottom: 5px solid #5c5c5c;
+  background-color: rgb(135, 135, 135);
+  
+  &:hover {
+    background-color: rgb(116, 114, 114);
+    text-decoration: underline;
+  }
+  
+  &:disabled {
+    cursor: default;
+    border-top: 5px solid #5c5c5c;
+    border-left: 5px solid #5c5c5c;
+    border-right: 5px solid #5c5c5c;
+    border-bottom: 5px solid #5c5c5c;
+  }
+
+  &:active{
+    border-top: 5px solid #5c5c5c;
+    border-left: 5px solid #5c5c5c;
+    border-right: 5px solid #dddddd;
+    border-bottom: 5px solid #dddddd;
+  }
+}
+
+.gameModal-btn-close {
+  top: 10px;
+  right: 10px;
+  position: absolute;
+  padding: 5px 10px;
+  font-family:cursive;
+  font-size: 20px;
+  font-weight: 400;
+  color: rgb(255, 255, 255);
+  border-top: 5px solid #dddddd;
+  border-left: 5px solid #dddddd;
+  border-right: 5px solid #5c5c5c;
+  border-bottom: 5px solid #5c5c5c;
+  background-color: rgb(135, 135, 135);
+
+  &:hover {
+    background-color: rgb(116, 114, 114);
+    color: black;
+  }
+  
+  &:active{
+    border-top: 5px solid #5c5c5c;
+    border-left: 5px solid #5c5c5c;
+    border-right: 5px solid #dddddd;
+    border-bottom: 5px solid #dddddd;
+  }
+}
+
+.statistics{
+  font-family:cursive;
+  font-size: 20px;
+  font-weight: 500;
+  color: black;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}

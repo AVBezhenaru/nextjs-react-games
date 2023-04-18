@@ -13,7 +13,9 @@ import hangmanIcon from '../img/hangmanIcon.png';
 import aerohokkeyIcon from '../img/aerohokkeyIcon.png';
 import solitairIcon from '../img/solitairIcon.png';
 import game2048Icon from '../img/2048Icon.png';
-import tanksIcon from '../img/tanksIcon.png'
+import fruitNinjaIcon from '../img/fruitNinjaIcon.png';
+import sapperIcon from '../img/sapperIcon.png';
+import tanksIcon from '../img/tanksIcon.png';
 import doodler from '../img/doodler-guy.png';
 
 import { GameLink } from './GameLink';
@@ -30,6 +32,8 @@ const ListGamesForm = () => {
     { src: tetrisIcon.src, title: 'tetris' },
     { src: solitairIcon.src, title: 'solitaire' },
     { src: game2048Icon.src, title: 'game2048' },
+    { src: fruitNinjaIcon.src, title: 'fruitninja' },
+    { src: sapperIcon.src, title: 'sapper' },
     { src: tanksIcon.src, title: 'tanks' },
     { src: doodler.src, title: 'doodle-jump' },
   ];
