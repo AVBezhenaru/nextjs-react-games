@@ -1,16 +1,16 @@
-import React, { ReactNode, useMemo } from 'react';
 import { useRouter } from 'next/router';
+import { useMemo } from 'react';
+
+import { gameModesData } from './game-modes-data';
+import { StyledGame } from './game.styles';
 
 export const Game = () => {
   const { query } = useRouter();
-  const gameComponent = useMemo<ReactNode>(() => {
-    switch (query.game) {
-      case 'challenge':
-        return;
-      default:
-        return <>game is not fined</>;
-    }
+  const selectedGame = useMemo(() => {
+    const data = gameModesData.find((el) => el.path === query.game);
+
+    return data?.component;
   }, [query]);
 
-  return <div>{gameComponent}</div>;
+  return <StyledGame>{selectedGame}</StyledGame>;
 };

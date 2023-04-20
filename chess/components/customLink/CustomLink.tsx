@@ -16,7 +16,7 @@ const CustomLink: FC<PropsCustomLinkInterface> = ({ text }) => {
   const checkLink = router.split('/');
 
   return (
-    <Link href={checkLink[checkLink.length - 1] === 'game' ? '../chess' : '/chess'}>
+    <Link href={checkLink[checkLink.length - 1] === 'lobby' ? '../chess' : '/chess'}>
       <button
         type="submit"
         onClick={() => {

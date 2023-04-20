@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 
-import { WallKickersGame } from '../../../../aim-trainer';
+import { AimTrainerGame } from '../../../../aim-trainer';
 
-const WallKickersLobby: NextPage = () => <WallKickersGame />;
+const AimTrainerLobby: NextPage = () => <AimTrainerGame />;
 
-export default WallKickersLobby;
+export default AimTrainerLobby;
