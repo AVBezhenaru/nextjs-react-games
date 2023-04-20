@@ -4,7 +4,7 @@ import View from './view';
 import Game from './game';
 import Input from './input';
 
-export default class World {
+export class World {
   ctx: CanvasRenderingContext2D;
   img: HTMLImageElement;
 

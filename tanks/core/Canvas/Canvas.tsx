@@ -7,7 +7,7 @@ import { store } from '../../../store';
 import { tanksGamePause } from '../../reducers/tanksGameAction';
 import { CANVAS_WIDTH, CANVAS_HEIGHT } from '../../constants';
 import image from '../../assets/images/sprite.png';
-import World from '../World/world';
+import { World } from '../World/World';
 
 import styles from './canvas.module.scss';
 
