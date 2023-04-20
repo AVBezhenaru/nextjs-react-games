@@ -9,7 +9,7 @@ import {
   NUMBS,
   UI,
 } from '../../constants';
-import { EnemyTank } from '../Models/tanks/Enemy-tank';
+import { EnemyTank } from '../Models/Tanks/Enemy-tank';
 
 import { Stage } from './Stage';
 

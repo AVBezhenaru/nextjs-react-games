@@ -8,9 +8,9 @@ import {
   TANK_TURN_THRESHOLD,
 } from '../../../constants';
 import { GameObject } from '../Game-object';
-import { Bullet } from '../bullets/Bullet';
+import { Bullet } from '../Bullets/Bullet';
 import { IArgs } from '../../../interfaces';
-import { Explosion } from '../bullets/Explosion';
+import { Explosion } from '../Bullets/Explosion';
 
 import { TankExplosion } from './Tank-explosion';
 

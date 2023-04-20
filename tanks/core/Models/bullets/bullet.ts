@@ -3,7 +3,7 @@ import { BULLET_WIDTH, BULLET_HEIGHT, BULLET_SPRITES, Direction } from '../../..
 import { Stage } from '../../World/Stage';
 import { getAxisForDirection, getValueForDirection } from '../../utils';
 import { GameObject } from '../Game-object';
-import { Tank } from '../tanks/Tank';
+import { Tank } from '../Tanks/Tank';
 
 import { BulletExplosion } from './Bullet-explosion';
 

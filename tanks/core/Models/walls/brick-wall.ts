@@ -3,7 +3,7 @@
 import { Direction, BRICK_WALL_SPRITES, BRICK_WALL_SPRITE_MAP } from '../../../constants';
 import { IArgs } from '../../../interfaces';
 import { Stage } from '../../World/Stage';
-import { Bullet } from '../bullets/Bullet';
+import { Bullet } from '../Bullets/Bullet';
 
 import { Wall } from './Wall';
 

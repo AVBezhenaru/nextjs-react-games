@@ -9,24 +9,24 @@ import {
 } from '../../reducers/tanksGameAction';
 import { EventManager } from '../../observer/Observer';
 import { Base } from '../Models/Base';
-import { BrickWall } from '../Models/walls/Brick-wall';
-import { SteelWall } from '../Models/walls/Steel-wall';
-import { PlayerTank } from '../Models/tanks/Player-tank';
-import { EnemyTank } from '../Models/tanks/Enemy-tank';
-import { TreeWall } from '../Models/walls/Tree-wall';
-import { WaterWall } from '../Models/walls/Water-wall';
+import { BrickWall } from '../Models/Walls/Brick-wall';
+import { SteelWall } from '../Models/Walls/Steel-wall';
+import { PlayerTank } from '../Models/Tanks/Player-tank';
+import { EnemyTank } from '../Models/Tanks/Enemy-tank';
+import { TreeWall } from '../Models/Walls/Tree-wall';
+import { WaterWall } from '../Models/Walls/Water-wall';
 import { Shovel } from '../Models/bonus/Shovel';
 import { Clock } from '../Models/bonus/Clock';
 import { Grenade } from '../Models/bonus/Grenade';
 import { Live } from '../Models/bonus/Live';
 import { Star } from '../Models/bonus/Star';
-import { Respawn } from '../Models/tanks/Respawn';
+import { Respawn } from '../Models/Tanks/Respawn';
 import { Gun } from '../Models/bonus/Gun';
 import { Helmet } from '../Models/bonus/Helmet';
 import { IArgs, IDataMap } from '../../interfaces';
 import { Sheild } from '../Models/Sheild';
-import { Explosion } from '../Models/bullets/Explosion';
-import { Bullet } from '../Models/bullets/Bullet';
+import { Explosion } from '../Models/Bullets/Explosion';
+import { Bullet } from '../Models/Bullets/Bullet';
 
 import { Input } from './Input';
 

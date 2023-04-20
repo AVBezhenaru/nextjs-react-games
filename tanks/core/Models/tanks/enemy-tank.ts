@@ -10,7 +10,7 @@ import {
 import { IEnemyArgs } from '../../../interfaces';
 import { Stage } from '../../World/Stage';
 import { getAxisForDirection, getValueForDirection } from '../../utils';
-import { Bullet } from '../bullets/Bullet';
+import { Bullet } from '../Bullets/Bullet';
 
 import { Tank } from './Tank';
 

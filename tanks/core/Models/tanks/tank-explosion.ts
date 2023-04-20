@@ -5,7 +5,7 @@ import {
   TANK_EXPLOSION_SPRITES,
 } from '../../../constants';
 import { IArgs } from '../../../interfaces';
-import { Explosion } from '../bullets/Explosion';
+import { Explosion } from '../Bullets/Explosion';
 
 export class TankExplosion extends Explosion {
   speed: number;
