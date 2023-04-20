@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { BULLET_WIDTH, BULLET_HEIGHT, BULLET_SPRITES, Direction } from '../../../constants';
-import { Stage } from '../../World/stage';
+import { Stage } from '../../World/Stage';
 import { getAxisForDirection, getValueForDirection } from '../../utils';
-import { GameObject } from '../game-object';
-import { Tank } from '../tanks/tank';
+import { GameObject } from '../Game-object';
+import { Tank } from '../tanks/Tank';
 
-import { BulletExplosion } from './bullet-explosion';
+import { BulletExplosion } from './Bullet-explosion';
 
 export class Bullet extends GameObject {
   constructor({

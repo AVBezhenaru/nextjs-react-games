@@ -1,7 +1,7 @@
 import { WATER_WALL_SPRITES } from '../../../constants';
 import { IArgs } from '../../../interfaces';
 
-import { Wall } from './wall';
+import { Wall } from './Wall';
 
 export class WaterWall extends Wall {
   type: string;

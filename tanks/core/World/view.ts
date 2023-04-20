@@ -9,9 +9,9 @@ import {
   NUMBS,
   UI,
 } from '../../constants';
-import { EnemyTank } from '../Models/tanks/enemy-tank';
+import { EnemyTank } from '../Models/tanks/Enemy-tank';
 
-import { Stage } from './stage';
+import { Stage } from './Stage';
 
 const PLAYFIELD_X = UNIT_SIZE;
 const PLAYFIELD_Y = UNIT_SIZE;

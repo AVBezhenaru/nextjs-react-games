@@ -2,7 +2,7 @@
 import { BASE_POSITION, BASE_WIDTH, BASE_HEIGHT, BASE_SPRITES } from '../../constants';
 import { IArgs } from '../../interfaces';
 
-import { GameObject } from './game-object';
+import { GameObject } from './Game-object';
 
 export class Base extends GameObject {
   constructor(args?: IArgs) {

@@ -2,10 +2,10 @@
 /* eslint-disable lines-between-class-members */
 import { Direction, BRICK_WALL_SPRITES, BRICK_WALL_SPRITE_MAP } from '../../../constants';
 import { IArgs } from '../../../interfaces';
-import { Stage } from '../../World/stage';
-import { Bullet } from '../bullets/bullet';
+import { Stage } from '../../World/Stage';
+import { Bullet } from '../bullets/Bullet';
 
-import { Wall } from './wall';
+import { Wall } from './Wall';
 
 export class BrickWall extends Wall {
   state: number;

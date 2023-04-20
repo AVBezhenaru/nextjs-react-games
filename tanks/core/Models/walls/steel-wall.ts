@@ -2,7 +2,7 @@
 import { STEEL_WALL_SPRITES } from '../../../constants';
 import { IArgs } from '../../../interfaces';
 
-import { Wall } from './wall';
+import { Wall } from './Wall';
 
 export class SteelWall extends Wall {
   type: string;

@@ -1,5 +1,5 @@
 import { IArgs } from '../../../interfaces';
-import { GameObject } from '../game-object';
+import { GameObject } from '../Game-object';
 
 export class Explosion extends GameObject {
   type: string;

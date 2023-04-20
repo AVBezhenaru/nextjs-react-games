@@ -8,27 +8,27 @@ import {
   tanksLevel,
 } from '../../reducers/tanksGameAction';
 import { EventManager } from '../../observer/Observer';
-import { Base } from '../Models/base';
-import { BrickWall } from '../Models/walls/brick-wall';
-import { SteelWall } from '../Models/walls/steel-wall';
-import { PlayerTank } from '../Models/tanks/player-tank';
-import { EnemyTank } from '../Models/tanks/enemy-tank';
-import { TreeWall } from '../Models/walls/tree-wall';
-import { WaterWall } from '../Models/walls/water-wall';
-import { Shovel } from '../Models/bonus/shovel';
-import { Clock } from '../Models/bonus/clock';
-import { Grenade } from '../Models/bonus/grenade';
-import { Live } from '../Models/bonus/live';
-import { Star } from '../Models/bonus/star';
-import { Respawn } from '../Models/tanks/respawn';
-import { Gun } from '../Models/bonus/gun';
-import { Helmet } from '../Models/bonus/helmet';
+import { Base } from '../Models/Base';
+import { BrickWall } from '../Models/walls/Brick-wall';
+import { SteelWall } from '../Models/walls/Steel-wall';
+import { PlayerTank } from '../Models/tanks/Player-tank';
+import { EnemyTank } from '../Models/tanks/Enemy-tank';
+import { TreeWall } from '../Models/walls/Tree-wall';
+import { WaterWall } from '../Models/walls/Water-wall';
+import { Shovel } from '../Models/bonus/Shovel';
+import { Clock } from '../Models/bonus/Clock';
+import { Grenade } from '../Models/bonus/Grenade';
+import { Live } from '../Models/bonus/Live';
+import { Star } from '../Models/bonus/Star';
+import { Respawn } from '../Models/tanks/Respawn';
+import { Gun } from '../Models/bonus/Gun';
+import { Helmet } from '../Models/bonus/Helmet';
 import { IArgs, IDataMap } from '../../interfaces';
-import { Sheild } from '../Models/sheild';
-import { Explosion } from '../Models/bullets/explosion';
-import { Bullet } from '../Models/bullets/bullet';
+import { Sheild } from '../Models/Sheild';
+import { Explosion } from '../Models/bullets/Explosion';
+import { Bullet } from '../Models/bullets/Bullet';
 
-import { Input } from './input';
+import { Input } from './Input';
 
 export class Stage extends EventManager {
   base: Base;

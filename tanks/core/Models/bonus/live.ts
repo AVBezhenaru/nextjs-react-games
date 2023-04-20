@@ -1,7 +1,7 @@
 import { BONUS } from '../../../constants';
 import { IArgs } from '../../../interfaces';
 
-import { Bonus } from './bonus';
+import { Bonus } from './Bonus';
 
 export class Live extends Bonus {
   typeUniq: string;

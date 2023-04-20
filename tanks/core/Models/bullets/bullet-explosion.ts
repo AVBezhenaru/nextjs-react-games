@@ -6,7 +6,7 @@ import {
 } from '../../../constants';
 import { IArgs } from '../../../interfaces';
 
-import { Explosion } from './explosion';
+import { Explosion } from './Explosion';
 
 export class BulletExplosion extends Explosion {
   speed: number;

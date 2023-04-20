@@ -9,10 +9,10 @@ import {
   tanksGameVictoryAction,
 } from '../../reducers/tanksGameAction';
 
-import { Input } from './input';
-import { Stage } from './stage';
-import { stages } from './stages';
-import { View } from './view';
+import { Input } from './Input';
+import { Stage } from './Stage';
+import { stages } from './Stages';
+import { View } from './View';
 
 export class Game {
   input: Input;

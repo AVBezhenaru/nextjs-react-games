@@ -1,8 +1,8 @@
 /* eslint-disable lines-between-class-members */
 
-import { View } from './view';
-import { Game } from './game';
-import { Input } from './input';
+import { View } from './View';
+import { Game } from './Game';
+import { Input } from './Input';
 
 export class World {
   ctx: CanvasRenderingContext2D;

@@ -8,11 +8,11 @@ import {
   ENEMY_TANK_TURN_TIMER_THRESHOLD,
 } from '../../../constants';
 import { IEnemyArgs } from '../../../interfaces';
-import { Stage } from '../../World/stage';
+import { Stage } from '../../World/Stage';
 import { getAxisForDirection, getValueForDirection } from '../../utils';
-import { Bullet } from '../bullets/bullet';
+import { Bullet } from '../bullets/Bullet';
 
-import { Tank } from './tank';
+import { Tank } from './Tank';
 
 export class EnemyTank extends Tank {
   turnTimer: number;

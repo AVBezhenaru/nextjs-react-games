@@ -3,7 +3,7 @@
 /* eslint-disable lines-between-class-members */
 import { IArgs } from '../../interfaces';
 import { EventManager } from '../../observer/Observer';
-import { Stage } from '../World/stage';
+import { Stage } from '../World/Stage';
 
 export class GameObject extends EventManager {
   _x: number;
