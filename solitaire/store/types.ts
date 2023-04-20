@@ -1,7 +1,7 @@
-import CardModel from "../models/CardModel"
+import CardModel from '../models/CardModel';
 
 export const stackedCardsName = 'stacked';
-export const cardsInGameName = 'in-game';
+export const cardsInGameName = 'in-lobby';
 export const openedCardsName = 'opened';
 
 export type SolitaireState = {
@@ -12,27 +12,26 @@ export type SolitaireState = {
   moveCounter: number;
   bestPoints: number;
   gamePoints: number;
-}
+};
 
 export type DoubleClickPayload = {
   card: CardModel;
   stackIndex?: number;
   stackName: string;
-}
+};
 
 export type DragEndPayload = {
   endStackIndex?: number;
   dragged: Dragged;
-}
+};
 
 export type DragOverItem = {
   index: number;
   name: string;
-}
+};
 
 export type Dragged = {
   cards: CardModel[];
   startStackIndex: number;
   startStackName: string;
-}
-
+};

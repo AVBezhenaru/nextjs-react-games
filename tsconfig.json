@@ -14,7 +14,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "strictNullChecks":false
+    "strictNullChecks":false,
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/_document.tsx", "pages/_app.tsx", "async-pages/_app.jsx",
     "src/store/userSlice",

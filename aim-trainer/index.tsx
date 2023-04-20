@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { Game } from './components/game/game';
-import { StyledWallKickers } from './index.styles';
+import { Lobby } from './components/lobby/lobby';
+import { StyledAimTrainer } from './index.styles';
 
-export const WallKickersGame = () => (
-  <StyledWallKickers>
-    <Game />
-  </StyledWallKickers>
+export const AimTrainerGame = () => (
+  <StyledAimTrainer>
+    <Lobby />
+  </StyledAimTrainer>
 );

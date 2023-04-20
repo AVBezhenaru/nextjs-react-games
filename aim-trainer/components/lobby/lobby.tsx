@@ -1,7 +1,12 @@
-import React from 'react';
+import { gameModesData } from '../../modes/game-modes-data';
+import { LinkToMode } from '../link-to-mode/link-to-mode';
 
-import { StyledGame } from './game.styles';
+import { StyledGame } from './lobby.styles';
 
-export const Game = () => {
-  return <StyledGame></StyledGame>;
+export const Lobby = () => {
+  const modeCards = gameModesData.map((data, i) => (
+    <LinkToMode {...data} key={`${data.path}_${i}`} />
+  ));
+
+  return <StyledGame>{modeCards}</StyledGame>;
 };

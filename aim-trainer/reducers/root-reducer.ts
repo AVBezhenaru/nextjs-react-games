@@ -1,9 +1,13 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from '@reduxjs/toolkit';
 
-import { scoreReducer } from './score-slice';
-import { playerReducer } from './player-slice';
+import { boardReducer } from './board-slice';
+import { targetsReducer } from './targets-slice';
+import { gameReducer } from './game-slice';
+import { statisticsReducer } from './statistics-slice';
 
-export const wallKickerRootReducer = combineReducers({
-  score: scoreReducer,
-  player: playerReducer,
+export const aimTrainerRootReducer = combineReducers({
+  board: boardReducer,
+  targets: targetsReducer,
+  game: gameReducer,
+  statistics: statisticsReducer,
 });
