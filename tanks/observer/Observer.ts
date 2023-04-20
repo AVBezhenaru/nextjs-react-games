@@ -1,4 +1,4 @@
-export default class EventManager {
+export class EventManager {
   events = new Map();
 
   on(event: string, handler: any) {

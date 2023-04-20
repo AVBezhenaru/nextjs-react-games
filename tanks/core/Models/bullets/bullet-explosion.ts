@@ -6,9 +6,9 @@ import {
 } from '../../../constants';
 import { IArgs } from '../../../interfaces';
 
-import Explosion from './explosion';
+import { Explosion } from './explosion';
 
-export default class BulletExplosion extends Explosion {
+export class BulletExplosion extends Explosion {
   speed: number;
 
   constructor(args: IArgs) {

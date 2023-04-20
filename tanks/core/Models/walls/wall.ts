@@ -1,8 +1,8 @@
 /* eslint-disable lines-between-class-members */
 import { TILE_SIZE } from '../../../constants';
-import GameObject from '../game-object';
+import { GameObject } from '../game-object';
 
-export default class Wall extends GameObject {
+export class Wall extends GameObject {
   spriteIndex: number;
   damage: number;
 

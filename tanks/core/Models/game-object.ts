@@ -2,10 +2,10 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable lines-between-class-members */
 import { IArgs } from '../../interfaces';
-import EventManager from '../../observer/Observer';
-import Stage from '../World/stage';
+import { EventManager } from '../../observer/Observer';
+import { Stage } from '../World/stage';
 
-export default class GameObject extends EventManager {
+export class GameObject extends EventManager {
   _x: number;
   _y: number;
   _width: number;

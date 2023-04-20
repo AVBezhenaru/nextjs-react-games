@@ -2,9 +2,9 @@
 import { SHEILD, UNIT_SIZE } from '../../constants';
 import { IArgs } from '../../interfaces';
 
-import GameObject from './game-object';
+import { GameObject } from './game-object';
 
-export default class Sheild extends GameObject {
+export class Sheild extends GameObject {
   spriteBonus: number;
   type: string;
 

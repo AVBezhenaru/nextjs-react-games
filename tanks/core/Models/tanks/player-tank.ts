@@ -11,14 +11,14 @@ import {
   BULLET_SPEED,
 } from '../../../constants';
 import { IArgs } from '../../../interfaces';
-import Input from '../../World/input';
-import Stage from '../../World/stage';
+import { Input } from '../../World/input';
+import { Stage } from '../../World/stage';
 import { getDirectionForKeys, getAxisForDirection, getValueForDirection } from '../../utils';
-import Sheild from '../sheild';
+import { Sheild } from '../sheild';
 
-import Tank from './tank';
+import { Tank } from './tank';
 
-export default class PlayerTank extends Tank {
+export class PlayerTank extends Tank {
   type: string;
   levelTank: number;
   sheild: Sheild;

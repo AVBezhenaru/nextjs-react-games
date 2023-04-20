@@ -7,14 +7,14 @@ import {
   TANK_SPEED,
   TANK_TURN_THRESHOLD,
 } from '../../../constants';
-import GameObject from '../game-object';
-import Bullet from '../bullets/bullet';
+import { GameObject } from '../game-object';
+import { Bullet } from '../bullets/bullet';
 import { IArgs } from '../../../interfaces';
-import Explosion from '../bullets/explosion';
+import { Explosion } from '../bullets/explosion';
 
-import TankExplosion from './tank-explosion';
+import { TankExplosion } from './tank-explosion';
 
-export default class Tank extends GameObject {
+export class Tank extends GameObject {
   speed: number;
   bulletSpeed: number;
   bullet: Bullet;

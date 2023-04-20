@@ -1,7 +1,7 @@
 import { IArgs } from '../../../interfaces';
-import GameObject from '../game-object';
+import { GameObject } from '../game-object';
 
-export default class Explosion extends GameObject {
+export class Explosion extends GameObject {
   type: string;
 
   constructor(args: IArgs) {

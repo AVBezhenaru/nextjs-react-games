@@ -1,5 +1,5 @@
 /* eslint-disable no-sparse-arrays */
-export default [
+export const stages = [
   {
     map: [
       [

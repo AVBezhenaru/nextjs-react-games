@@ -1,5 +1,5 @@
 /* eslint-disable lines-between-class-members */
-export default class Input {
+export class Input {
   keys: Set<string>;
   drive: HTMLAudioElement;
 

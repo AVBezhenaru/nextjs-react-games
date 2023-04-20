@@ -2,9 +2,9 @@
 /* eslint-disable lines-between-class-members */
 import { ENEMY_TANK_START_POSITIONS, SPAWN, UNIT_SIZE } from '../../../constants';
 import { IArgs } from '../../../interfaces';
-import GameObject from '../game-object';
+import { GameObject } from '../game-object';
 
-export default class Respawn extends GameObject {
+export class Respawn extends GameObject {
   spriteBonus: number;
   type: string;
 

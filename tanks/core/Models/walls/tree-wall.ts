@@ -1,9 +1,9 @@
 import { TREE_WALL_SPRITES } from '../../../constants';
 import { IArgs } from '../../../interfaces';
 
-import Wall from './wall';
+import { Wall } from './wall';
 
-export default class TreeWall extends Wall {
+export class TreeWall extends Wall {
   type: string;
 
   constructor(args: IArgs) {

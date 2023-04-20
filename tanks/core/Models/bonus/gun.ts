@@ -1,9 +1,9 @@
 import { BONUS } from '../../../constants';
 import { IArgs } from '../../../interfaces';
 
-import Bonus from './bonus';
+import { Bonus } from './bonus';
 
-export default class Gun extends Bonus {
+export class Gun extends Bonus {
   typeUniq: string;
 
   constructor(args: IArgs) {

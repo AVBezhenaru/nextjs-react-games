@@ -9,9 +9,9 @@ import {
   NUMBS,
   UI,
 } from '../../constants';
-import EnemyTank from '../Models/tanks/enemy-tank';
+import { EnemyTank } from '../Models/tanks/enemy-tank';
 
-import Stage from './stage';
+import { Stage } from './stage';
 
 const PLAYFIELD_X = UNIT_SIZE;
 const PLAYFIELD_Y = UNIT_SIZE;
@@ -21,7 +21,7 @@ const PANEL_X = PLAYFIELD_X + PLAYFIELD_WIDTH;
 const PANEL_Y = PLAYFIELD_Y;
 const PANEL_HEIGHT = PANEL_Y + PLAYFIELD_HEIGHT;
 
-export default class View {
+export class View {
   canvas: any;
   sprite: HTMLImageElement;
 

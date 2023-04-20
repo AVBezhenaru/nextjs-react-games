@@ -7,30 +7,30 @@ import {
   tanksGameCountPoints,
   tanksLevel,
 } from '../../reducers/tanksGameAction';
-import EventEmitter from '../../observer/Observer';
-import Base from '../Models/base';
-import BrickWall from '../Models/walls/brick-wall';
-import SteelWall from '../Models/walls/steel-wall';
-import PlayerTank from '../Models/tanks/player-tank';
-import EnemyTank from '../Models/tanks/enemy-tank';
-import TreeWall from '../Models/walls/tree-wall';
-import WaterWall from '../Models/walls/water-wall';
-import Shovel from '../Models/bonus/shovel';
-import Clock from '../Models/bonus/clock';
-import Grenade from '../Models/bonus/grenade';
-import Live from '../Models/bonus/live';
-import Star from '../Models/bonus/star';
-import Respawn from '../Models/tanks/respawn';
-import Gun from '../Models/bonus/gun';
-import Helmet from '../Models/bonus/helmet';
+import { EventManager } from '../../observer/Observer';
+import { Base } from '../Models/base';
+import { BrickWall } from '../Models/walls/brick-wall';
+import { SteelWall } from '../Models/walls/steel-wall';
+import { PlayerTank } from '../Models/tanks/player-tank';
+import { EnemyTank } from '../Models/tanks/enemy-tank';
+import { TreeWall } from '../Models/walls/tree-wall';
+import { WaterWall } from '../Models/walls/water-wall';
+import { Shovel } from '../Models/bonus/shovel';
+import { Clock } from '../Models/bonus/clock';
+import { Grenade } from '../Models/bonus/grenade';
+import { Live } from '../Models/bonus/live';
+import { Star } from '../Models/bonus/star';
+import { Respawn } from '../Models/tanks/respawn';
+import { Gun } from '../Models/bonus/gun';
+import { Helmet } from '../Models/bonus/helmet';
 import { IArgs, IDataMap } from '../../interfaces';
-import Sheild from '../Models/sheild';
-import Explosion from '../Models/bullets/explosion';
-import Bullet from '../Models/bullets/bullet';
+import { Sheild } from '../Models/sheild';
+import { Explosion } from '../Models/bullets/explosion';
+import { Bullet } from '../Models/bullets/bullet';
 
-import Input from './input';
+import { Input } from './input';
 
-export default class Stage extends EventEmitter {
+export class Stage extends EventManager {
   base: Base;
   playerTank: PlayerTank;
   enemyTanks: EnemyTank[];

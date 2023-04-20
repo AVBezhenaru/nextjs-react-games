@@ -1,9 +1,9 @@
 import { BONUS } from '../../../constants';
 import { IArgs } from '../../../interfaces';
 
-import Bonus from './bonus';
+import { Bonus } from './bonus';
 
-export default class Clock extends Bonus {
+export class Clock extends Bonus {
   typeUniq: string;
 
   constructor(args: IArgs) {

@@ -9,12 +9,12 @@ import {
   tanksGameVictoryAction,
 } from '../../reducers/tanksGameAction';
 
-import Input from './input';
-import Stage from './stage';
-import stages from './stages';
-import View from './view';
+import { Input } from './input';
+import { Stage } from './stage';
+import { stages } from './stages';
+import { View } from './view';
 
-export default class Game {
+export class Game {
   input: Input;
   view: View;
   stages: IDataMap[];
