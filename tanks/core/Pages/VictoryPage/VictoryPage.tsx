@@ -8,9 +8,9 @@ import {
   tanksGameStartAction,
 } from '../../../reducers/tanksGameAction';
 import { useAppSelector } from '../../../../hooks';
-import LoadingPage from '../LoadingPage/LoadingPage';
+import { LoadingPage } from '../LoadingPage/LoadingPage';
 import enemy from '../../../assets/images/enemy.png';
-import MainButton from '../MainPage/MainButton/MainButton';
+import { MainButton } from '../MainPage/MainButton/MainButton';
 
 import cl from './VictoryPage.module.scss';
 
@@ -56,4 +56,4 @@ const VictoryPage: FC = (): ReactElement => {
   );
 };
 
-export default VictoryPage;
+export { VictoryPage };

@@ -12,4 +12,4 @@ const LoadingPage: FC<IProps> = ({ title }): ReactElement => (
   </div>
 );
 
-export default LoadingPage;
+export { LoadingPage };

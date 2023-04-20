@@ -5,10 +5,10 @@ import { AppDispatch, store } from '../../../../store';
 import mainImage from '../../../assets/images/background.png';
 import { tanksGameStartAction, tanksGameLoadingAction } from '../../../reducers/tanksGameAction';
 import { useAppSelector } from '../../../../hooks';
-import LoadingPage from '../LoadingPage/LoadingPage';
+import { LoadingPage } from '../LoadingPage/LoadingPage';
 
 import cl from './MainPage.module.scss';
-import MainButton from './MainButton/MainButton';
+import { MainButton } from './MainButton/MainButton';
 
 const MainPage: FC = (): ReactElement => {
   const game = useAppSelector((state) => state.tanks);
@@ -40,4 +40,4 @@ const MainPage: FC = (): ReactElement => {
   );
 };
 
-export default MainPage;
+export { MainPage };

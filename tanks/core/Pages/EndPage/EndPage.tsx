@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 
 import background from '../../../assets/images/battle-city-game-over-dendy.jpg';
-import MainButton from '../MainPage/MainButton/MainButton';
+import { MainButton } from '../MainPage/MainButton/MainButton';
 
 import cl from './EndPage.module.scss';
 
@@ -18,4 +18,4 @@ const EndPage: FC = (): ReactElement => {
   );
 };
 
-export default EndPage;
+export { EndPage };
