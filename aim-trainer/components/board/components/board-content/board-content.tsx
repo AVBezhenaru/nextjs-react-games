@@ -15,12 +15,13 @@ import { BoardStatistics } from '../board-statistics/board-statistics';
 import { GameStatus } from '../../../../utils/enums/game-status';
 
 import { StyledBoardContent } from './board-content.styles';
+import { selectBoardSizes } from '../../../../reducers/board-slice';
 
 type BoardContentProps = {
   missHandler: () => void;
 };
 
-export const BoardContent = forwardRef<HTMLDivElement, BoardContentProps>((props, ref) => {
+export const BoardContent = (props: BoardContentProps) => {
   const { missHandler } = props;
 
   const dispatch = useAppDispatch();
@@ -28,6 +29,7 @@ export const BoardContent = forwardRef<HTMLDivElement, BoardContentProps>((props
   const gameIsIdle = useAppSelector(selectGameIsIdle);
   const gameIsStarted = useAppSelector(selectGameIsStarted);
   const gameIsPending = useAppSelector(selectGameIsPending);
+  const boardSize = useAppSelector(selectBoardSizes);
 
   const [secondsToStart, setSecondsToStart] = useState<number>(3);
 
@@ -80,8 +82,8 @@ export const BoardContent = forwardRef<HTMLDivElement, BoardContentProps>((props
   }, [missHandler, gameIsStarted]);
 
   return (
-    <StyledBoardContent ref={ref} onClick={onMissHandler}>
+    <StyledBoardContent onClick={onMissHandler} size={boardSize}>
       {screen}
     </StyledBoardContent>
   );
-});
+};

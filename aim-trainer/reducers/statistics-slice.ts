@@ -16,7 +16,7 @@ const initialState: StatisticsState = {
   statItems: [],
   score: 0,
   misses: 0,
-  speed: 2,
+  speed: 4,
   timeFromStart: 0,
 };
 

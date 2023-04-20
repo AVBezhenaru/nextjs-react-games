@@ -19,11 +19,10 @@ import { useChallengeMode } from './use-challenge-mode';
 
 export const Challenge = () => {
   const dispatch = useAppDispatch();
-  const boardSizes = useAppSelector(selectBoardSizes);
   const lives = useAppSelector(selectLives);
   const death = useAppSelector(selectDeathCount);
 
-  const targetCreator = useChallengeTargets(boardSizes);
+  const targetCreator = useChallengeTargets();
   useChallengeMode();
 
   useEffect(() => {
@@ -49,10 +48,7 @@ export const Challenge = () => {
     [removeTarget],
   );
 
-  const missHandler = useCallback(() => {
-    console.log('miss');
-    dispatch(addMiss());
-  }, []);
+  const missHandler = useCallback(() => dispatch(addMiss()), []);
 
   return (
     <div>

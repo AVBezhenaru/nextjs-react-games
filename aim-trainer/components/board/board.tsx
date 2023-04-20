@@ -1,7 +1,6 @@
-import { useLayoutEffect, useMemo, useRef } from 'react';
+import { useLayoutEffect, useMemo } from 'react';
 
 import { useAppDispatch } from '../../../hooks';
-import { SizeType } from '../../utils/types/sizes';
 import { setBoardSizes } from '../../reducers/board-slice';
 import { TargetCreator, TargetHitHandler } from '../../utils/types/target';
 
@@ -19,17 +18,15 @@ type Props = {
 export const Board = (props: Props) => {
   const { targetCreator, hitHandler, missHandler } = props;
   const dispatch = useAppDispatch();
-  const boardRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-    const { clientWidth, clientHeight } = boardRef.current;
-    const boardSizes: SizeType = {
-      w: clientWidth,
-      h: clientHeight,
-    };
-
-    dispatch(setBoardSizes(boardSizes));
-  }, [boardRef]);
+    dispatch(
+      setBoardSizes({
+        w: 800,
+        h: 500,
+      }),
+    );
+  }, []);
 
   const contextValue = useMemo(() => ({ targetCreator, hitHandler }), [targetCreator, hitHandler]);
 
@@ -37,7 +34,7 @@ export const Board = (props: Props) => {
     <BoardContext.Provider value={contextValue}>
       <BoardWrapper>
         <BoardInfo />
-        <BoardContent ref={boardRef} missHandler={missHandler} />
+        <BoardContent missHandler={missHandler} />
       </BoardWrapper>
     </BoardContext.Provider>
   );

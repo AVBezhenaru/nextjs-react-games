@@ -22,6 +22,7 @@ const boardSlice = createSlice({
   initialState,
   reducers: {
     setBoardSizes: (state, { payload }: PayloadAction<SizeType>) => {
+      console.log('board size');
       state.size = payload;
     },
     setModeInfoArray: (state, { payload }: PayloadAction<ModeInfoObject[]>) => {
