@@ -22,11 +22,9 @@ export const useChallengeMode: UseChallengeMode = () => {
   const hitsObj = useHitsCounter();
 
   useEffect(() => {
-    console.log(gameIsOver);
     if (gameIsStarted) {
       dispatch(setModeInfoArray([timeFromStartObj, hitsObj, targetSpeedObj]));
     } else if (gameIsOver) {
-      console.log('game is over');
       dispatch(
         setStatItems([
           { label: 'Hit Targets', value: hitsObj.value },

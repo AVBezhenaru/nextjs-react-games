@@ -1,8 +1,13 @@
 import styled from 'styled-components';
+import { SizeType } from '../../../../utils/types/sizes';
 
-export const StyledBoardContent = styled.div`
-  width: 100%;
-  height: 500px;
+type BoardContentStyles = {
+  size: SizeType;
+};
+
+export const StyledBoardContent = styled.div<BoardContentStyles>`
+  width: ${({ size }) => size.w}px;
+  height: ${({ size }) => size.h}px;
   background: #f5f5f5;
 
   position: relative;
