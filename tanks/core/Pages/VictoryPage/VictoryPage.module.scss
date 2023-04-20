@@ -1,6 +1,6 @@
 .victory__page {
   width: 1000px;
-  height: 700px;
+  height: 80vh;
 
   display: flex;
   justify-content: center;
@@ -8,7 +8,7 @@
   flex-direction: column;
 
   opacity: 0;
-  animation: blur .3s ease-in-out forwards;
+  animation: blur 0.3s ease-in-out forwards;
 
   margin: 100px auto 0;
 
@@ -16,14 +16,14 @@
 
   .victory__pageTitle {
     text-transform: uppercase;
-    font-size: 50px;
+    font-size: 46px;
     letter-spacing: 20px;
-    padding: 0 0 60px 40px;
+    padding: 0 0 40px 40px;
   }
 
   .victory__pageContainer {
     padding-left: 40px;
-    padding-bottom: 160px;
+    padding-bottom: 80px;
 
     .victory__pageContainer__box {
       display: flex;
@@ -32,7 +32,7 @@
 
       .victory__pageSubtitle {
         text-transform: uppercase;
-        font-size: 30px;
+        font-size: 28px;
         letter-spacing: 10px;
       }
 
@@ -51,12 +51,12 @@
       height: 5px;
       margin-bottom: 20px;
       display: block;
-      background-color: #FFFFFF;
+      background-color: #ffffff;
     }
 
     .victory__pageTotal {
       text-transform: uppercase;
-      font-size: 40px;
+      font-size: 36px;
       letter-spacing: 10px;
     }
   }

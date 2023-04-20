@@ -1,6 +1,6 @@
 .main__page {
-  width: 1000px;
-  height: 700px;
+  max-width: 1000px;
+  height: 80vh;
   margin: 100px auto 0;
 
   background-color: #000000;
@@ -15,8 +15,8 @@
 }
 
 .main__pageImage {
-  width: 600px;
-  height: 200px;
+  max-width: 600px;
+  max-height: 200px;
 }
 
 .main__pageButtons {
@@ -26,4 +26,7 @@
   justify-content: center;
 
   margin-top: 70px;
+  @media (max-width: 1000px) {
+    margin-top: 15px;
+  }
 }

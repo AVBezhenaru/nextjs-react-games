@@ -15,7 +15,7 @@ const Router: FC = () => {
   ) : !game.gameVictory ? (
     <MainPage />
   ) : (
-    <VictoryPage countScores={game.countScores} />
+    <VictoryPage />
   );
 };
 

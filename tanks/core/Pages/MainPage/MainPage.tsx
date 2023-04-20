@@ -1,8 +1,8 @@
 import React, { type FC, ReactElement } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { AppDispatch } from '../../../../store';
-import mainImage from '../../../assents/images/background.png';
+import { AppDispatch, store } from '../../../../store';
+import mainImage from '../../../assets/images/background.png';
 import { tanksGameStartAction, tanksGameLoadingAction } from '../../../reducers/tanksGameAction';
 import { useAppSelector } from '../../../../hooks';
 import LoadingPage from '../LoadingPage/LoadingPage';
@@ -36,7 +36,7 @@ const MainPage: FC = (): ReactElement => {
       </div>
     </div>
   ) : (
-    <LoadingPage title="Уровень 1" />
+    <LoadingPage title={`Уровень ${store.getState().tanks.stage}`} />
   );
 };
 
