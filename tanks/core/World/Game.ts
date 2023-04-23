@@ -23,6 +23,7 @@ export class Game {
   stage: Stage;
   frames: number;
   lastFrame: number;
+  curId: number;
 
   constructor({ input, view }: { input: Input; view: View }) {
     this.input = input;
@@ -69,7 +70,7 @@ export class Game {
       );
     }
 
-    requestAnimationFrame(this.loop);
+    this.curId = requestAnimationFrame(this.loop);
   }
 
   onGameOver() {
@@ -78,6 +79,7 @@ export class Game {
 
   onGameVictory() {
     this.stage.playerTank.fireMusic.pause();
+    cancelAnimationFrame(this.curId);
     store.dispatch(tanksGameVictoryAction());
     store.dispatch(tanksGameStage());
     store.dispatch(tanksGameLoadingAction(false));

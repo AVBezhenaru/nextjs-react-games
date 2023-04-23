@@ -12,7 +12,14 @@ const EndPage: FC = (): ReactElement => {
 
   return (
     <div className={cl.end__page}>
-      <Image className={cl.end__image} src="/battle-city-game-over-dendy.jpg" alt="" />
+      <Image
+        className={cl.end__image}
+        src="/battle-city-game-over-dendy.jpg"
+        alt=""
+        width={912}
+        height={736}
+        priority
+      />
       <MainButton func={buttonFuncExit}>Назад</MainButton>
     </div>
   );

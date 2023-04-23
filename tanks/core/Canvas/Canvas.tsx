@@ -2,7 +2,6 @@
 /* eslint-disable array-callback-return */
 import React, { useRef, useEffect } from 'react';
 
-import { useAppSelector } from '../../../hooks';
 import { store } from '../../../store';
 import { tanksGamePause } from '../../reducers/tanksGameAction';
 import { CANVAS_WIDTH, CANVAS_HEIGHT } from '../../constants';
@@ -14,14 +13,7 @@ import styles from './canvas.module.scss';
 const Canvas = ({ ...props }) => {
   const canvasRef = useRef(null);
   let gameWorld = useRef(null).current;
-  const requestIdRef = useRef(null);
   const size = { width: CANVAS_WIDTH, height: CANVAS_HEIGHT };
-  const game = useAppSelector((state) => state.tanks);
-
-  const loop = (ctx: CanvasRenderingContext2D) => {
-    if (!canvasRef.current) return;
-    requestIdRef.current = requestAnimationFrame(() => loop(ctx));
-  };
 
   useEffect(() => {
     const ctx: CanvasRenderingContext2D = canvasRef.current.getContext('2d');
@@ -30,12 +22,9 @@ const Canvas = ({ ...props }) => {
     img.src = image.src;
     img.onload = () => {
       gameWorld = new World(ctx, img);
-      requestIdRef.current = requestAnimationFrame(() => loop(ctx));
     };
     return () => {
       gameWorld = null;
-      console.log(gameWorld);
-      cancelAnimationFrame(requestIdRef.current);
     };
   }, []);
 
