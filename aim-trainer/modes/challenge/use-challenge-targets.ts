@@ -8,12 +8,14 @@ import { selectGameIsStarted } from '../../reducers/game-slice';
 import { selectGameSpeed } from '../../reducers/statistics-slice';
 import { TargetConfiguration } from '../../utils/types/target';
 import { selectBoardSizes } from '../../reducers/board-slice';
+import { DifficultyLevel } from '../../utils/types/difficulty';
 
 type GetChallengeTargetConfig = (
   boardSize: SizeType,
   lifetime: number,
   targetSize: number,
 ) => TargetConfiguration;
+
 const getChallengeTargetConfig: GetChallengeTargetConfig = (boardSize, lifetime, targetSize) => ({
   position: {
     x: getRandomNumber(40, boardSize.w - targetSize - 40),
@@ -23,8 +25,13 @@ const getChallengeTargetConfig: GetChallengeTargetConfig = (boardSize, lifetime,
   lifetime,
 });
 
-type UseChallengeTargets = () => () => void;
-export const useChallengeTargets: UseChallengeTargets = () => {
+type UseChallengeTargets = (diff: DifficultyLevel) => () => void;
+
+export const useChallengeTargets: UseChallengeTargets = ({
+  lifetime,
+  targetSize,
+  maxTargetCount,
+}) => {
   const targets = useAppSelector(selectTargets);
   const gameIsStarted = useAppSelector(selectGameIsStarted);
   const speed = useAppSelector(selectGameSpeed);
@@ -33,16 +40,16 @@ export const useChallengeTargets: UseChallengeTargets = () => {
 
   const dispatch = useAppDispatch();
 
+  const createChallengeTarget = useCallback(() => {
+    dispatch(addTarget(getChallengeTargetConfig(currentBoardSize.current, lifetime, targetSize)));
+  }, [boardSize]);
+
   useEffect(() => {
     currentBoardSize.current = boardSize;
   }, [boardSize]);
 
-  const createChallengeTarget = useCallback(() => {
-    dispatch(addTarget(getChallengeTargetConfig(currentBoardSize.current, 10000, 50)));
-  }, [boardSize]);
-
   useEffect(() => {
-    if (gameIsStarted && targets.length < 10) {
+    if (gameIsStarted && targets.length < maxTargetCount) {
       if (!targets.length) {
         createChallengeTarget();
       }

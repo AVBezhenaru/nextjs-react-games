@@ -7,10 +7,11 @@ import { useSpawnSpeed } from '../../utils/hooks/use-spawn-speed';
 import { resetGameData, selectGameIsOver, selectGameIsStarted } from '../../reducers/game-slice';
 import { useHitsCounter } from '../../utils/hooks/use-hits-counter';
 import { resetGameStat, selectAccuracy, setStatItems } from '../../reducers/statistics-slice';
+import { DifficultyLevel } from '../../utils/types/difficulty';
 
-type UseChallengeMode = () => void;
+type UseChallengeMode = (diff: DifficultyLevel) => void;
 
-export const useChallengeMode: UseChallengeMode = () => {
+export const useChallengeMode: UseChallengeMode = ({ defaultSpeed, speedIncrementPerSecond }) => {
   const dispatch = useAppDispatch();
 
   const gameIsStarted = useAppSelector(selectGameIsStarted);
@@ -18,7 +19,7 @@ export const useChallengeMode: UseChallengeMode = () => {
   const accuracy = useAppSelector(selectAccuracy);
 
   const timeFromStartObj = useTimeInfo();
-  const targetSpeedObj = useSpawnSpeed(2, 0.01);
+  const targetSpeedObj = useSpawnSpeed(defaultSpeed, speedIncrementPerSecond);
   const hitsObj = useHitsCounter();
 
   useEffect(() => {

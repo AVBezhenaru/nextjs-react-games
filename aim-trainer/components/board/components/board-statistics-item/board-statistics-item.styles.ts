@@ -12,5 +12,5 @@ export const StyledBoardStatisticsItem = styled.div`
 export const BoardStatItemLabel = styled.span``;
 
 export const BoardStatItemValue = styled.span`
-  color: #c90707;
+  color: ${({ theme }) => theme.colors.accent};
 `;

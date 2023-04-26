@@ -13,9 +13,10 @@ import {
 import { clearTargets } from '../../../../reducers/targets-slice';
 import { BoardStatistics } from '../board-statistics/board-statistics';
 import { GameStatus } from '../../../../utils/enums/game-status';
+import { selectBoardSizes } from '../../../../reducers/board-slice';
 
 import { StyledBoardContent } from './board-content.styles';
-import { selectBoardSizes } from '../../../../reducers/board-slice';
+import { BoardStartScreen } from '../board-start-screen/board-start-screen';
 
 type BoardContentProps = {
   missHandler: () => void;
@@ -57,16 +58,12 @@ export const BoardContent = (props: BoardContentProps) => {
     }
   }, [secondsToStart]);
 
-  const startGameHandler = () => {
-    dispatch(setGameStatus(GameStatus.Pending));
-  };
-
   const screen = useMemo(() => {
     if (gameIsOver) {
       return <BoardStatistics />;
     }
     if (gameIsIdle) {
-      return <StartGameButton onClick={startGameHandler}>Start</StartGameButton>;
+      return <BoardStartScreen />;
     }
     if (gameIsPending) {
       return <SecondsToStart>{secondsToStart}</SecondsToStart>;

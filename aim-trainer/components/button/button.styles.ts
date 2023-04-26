@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Button = styled.button`
-  background-image: linear-gradient(to right, #f5ce62, #e43603, #fa7199, #e85a19);
+  background-image: ${({ theme }) => theme.gradients.main};
   background-size: 200% auto;
   padding: 14px 60px;
   font-size: 20px;
