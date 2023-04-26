@@ -6,5 +6,5 @@ export const BoardInfoItemLabel = styled.span``;
 
 export const BoardInfoItemValue = styled.span`
   font-family: monospace;
-  color: #f5ce62;
+  color: ${({ theme }) => theme.colors.primary};
 `;

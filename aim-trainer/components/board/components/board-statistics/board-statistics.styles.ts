@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledBoardStatistics = styled.div`
-  color: #000000;
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 export const BoardStatisticsTitle = styled.h2`

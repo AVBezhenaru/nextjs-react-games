@@ -17,7 +17,7 @@ export const StyledLive = styled.div<LiveStyles>`
   svg {
     width: 100%;
     height: 100%;
-    fill: #c90707;
+    fill: ${({ theme }) => theme.colors.accent};
 
     ${({ disable }) =>
       disable &&

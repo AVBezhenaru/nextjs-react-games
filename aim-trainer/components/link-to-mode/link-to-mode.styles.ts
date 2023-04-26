@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledLinkToMode = styled.div`
-  background: rgba(0, 0, 0, 0.3);
+  background: ${({ theme }) => theme.colors.darkTransparentBackground};
   cursor: pointer;
   border-radius: 10px;
   box-sizing: border-box;

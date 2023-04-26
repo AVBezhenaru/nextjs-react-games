@@ -1,11 +1,8 @@
 import styled from 'styled-components';
-import { Button } from '../button/button.styles';
-
-export const StartGameButton = Button;
 
 export const SecondsToStart = styled.span`
   font-size: 50px;
-  color: #000000;
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 export const BoardWrapper = styled.div`

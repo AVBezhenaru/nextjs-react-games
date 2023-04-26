@@ -19,7 +19,7 @@ export const StyledTarget = styled.div.attrs<TargetStyles>(
     },
   }),
 )<TargetStyles>`
-  background: #ff0000;
+  background: ${({ theme }) => theme.colors.accent};
 
   position: absolute;
   left: 0;
