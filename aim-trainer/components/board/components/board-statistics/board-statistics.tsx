@@ -6,6 +6,7 @@ import { BoardStatisticsItem } from '../board-statistics-item/board-statistics-i
 import { Button } from '../../../button/button.styles';
 import { resetGameData, setGameStatus } from '../../../../reducers/game-slice';
 import { GameStatus } from '../../../../utils/enums/game-status';
+import { SimpleButton, SimpleButtonTypes } from '../../../simple-button/simple-button.styles';
 
 import {
   BoardStatisticsItems,
@@ -31,12 +32,19 @@ export const BoardStatistics = () => {
     dispatch(setGameStatus(GameStatus.Pending));
   }, []);
 
+  const changeDifficultyHandler = useCallback(() => {
+    dispatch(setGameStatus(GameStatus.Idle));
+  }, []);
+
   return (
     <StyledBoardStatistics>
       <BoardStatisticsTitle>Stats: </BoardStatisticsTitle>
       <BoardStatisticsItems>{statElements}</BoardStatisticsItems>
 
       <Button onClick={restartGameHandler}>Restart</Button>
+      <SimpleButton buttonType={SimpleButtonTypes.Text} onClick={changeDifficultyHandler}>
+        Change Difficulty Level
+      </SimpleButton>
     </StyledBoardStatistics>
   );
 };

@@ -2,6 +2,10 @@ import styled from 'styled-components';
 
 export const StyledBoardStatistics = styled.div`
   color: ${({ theme }) => theme.colors.text};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 `;
 
 export const BoardStatisticsTitle = styled.h2`

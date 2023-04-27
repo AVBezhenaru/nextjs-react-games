@@ -42,7 +42,7 @@ export const useChallengeTargets: UseChallengeTargets = ({
 
   const createChallengeTarget = useCallback(() => {
     dispatch(addTarget(getChallengeTargetConfig(currentBoardSize.current, lifetime, targetSize)));
-  }, [boardSize]);
+  }, [boardSize, lifetime, targetSize]);
 
   useEffect(() => {
     currentBoardSize.current = boardSize;
