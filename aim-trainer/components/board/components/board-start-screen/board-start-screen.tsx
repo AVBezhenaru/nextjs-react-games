@@ -1,14 +1,11 @@
 import { useContext, useMemo } from 'react';
 
-import {
-  selectGameDifficulty,
-  setGameDifficulty,
-  setGameStatus,
-} from '../../../../reducers/game-slice';
+import { setGameStatus } from '../../../../reducers/game-slice';
 import { GameStatus } from '../../../../utils/enums/game-status';
 import { useAppDispatch, useAppSelector } from '../../../../../hooks';
 import { BoardContext } from '../../board-context';
 import { DifficultyModeInfoOnSelect } from '../../../../utils/types/difficulty';
+import { selectGameDifficulty, setGameDifficulty } from '../../../../reducers/difficulty-slice';
 
 import {
   SelectModeButton,

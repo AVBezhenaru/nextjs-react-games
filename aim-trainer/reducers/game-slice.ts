@@ -2,20 +2,17 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '../../store';
 import { GameStatus } from '../utils/enums/game-status';
-import { DifficultyLevels } from '../utils/enums/difficulty-levels';
 
 type GameState = {
   lives: number;
   deathCounter: number;
   status: GameStatus;
-  difficulty: DifficultyLevels;
 };
 
 const initialState: GameState = {
   lives: 3,
   deathCounter: 0,
   status: GameStatus.Idle,
-  difficulty: DifficultyLevels.Normal,
 };
 
 const gameSlice = createSlice({
@@ -34,14 +31,10 @@ const gameSlice = createSlice({
     setGameStatus: (state, { payload }: PayloadAction<GameStatus>) => {
       state.status = payload;
     },
-    setGameDifficulty: (state, { payload }: PayloadAction<DifficultyLevels>) => {
-      state.difficulty = payload;
-    },
   },
 });
 
-export const { setLives, addDeath, resetGameData, setGameStatus, setGameDifficulty } =
-  gameSlice.actions;
+export const { setLives, addDeath, resetGameData, setGameStatus } = gameSlice.actions;
 
 export const selectGameIsStarted = (state: RootState) =>
   state.aimTrainer.game.status === GameStatus.Start;
@@ -52,7 +45,6 @@ export const selectGameIsPending = (state: RootState) =>
 export const selectGameIsIdle = (state: RootState) =>
   state.aimTrainer.game.status === GameStatus.Idle;
 export const selectGameStatus = (state: RootState) => state.aimTrainer.game.status;
-export const selectGameDifficulty = (state: RootState) => state.aimTrainer.game.difficulty;
 
 export const selectLives = (state: RootState) => state.aimTrainer.game.lives;
 export const selectDeathCount = (state: RootState) => state.aimTrainer.game.deathCounter;
