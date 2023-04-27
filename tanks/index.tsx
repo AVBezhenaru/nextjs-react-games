@@ -10,4 +10,4 @@ const Game: FC = (): ReactElement => (
   </div>
 );
 
-export default Game;
+export { Game };

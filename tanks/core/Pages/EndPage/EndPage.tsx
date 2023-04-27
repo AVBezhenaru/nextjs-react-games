@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from 'react';
+import Image from 'next/image';
 
-import background from '../../../assents/images/battle-city-game-over-dendy.jpg';
-import MainButton from '../MainPage/MainButton/MainButton';
+import { MainButton } from '../MainPage/MainButton/MainButton';
 
 import cl from './EndPage.module.scss';
 
@@ -12,10 +12,17 @@ const EndPage: FC = (): ReactElement => {
 
   return (
     <div className={cl.end__page}>
-      <img className={cl.end__image} src={background.src} alt="" />
+      <Image
+        className={cl.end__image}
+        src="/battle-city-game-over-dendy.jpg"
+        alt=""
+        width={912}
+        height={736}
+        priority
+      />
       <MainButton func={buttonFuncExit}>Назад</MainButton>
     </div>
   );
 };
 
-export default EndPage;
+export { EndPage };

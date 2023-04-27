@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 
-import MainPage from '../../../../tanks';
+import { Game } from '../../../../tanks';
 
-const Index: NextPage = () => <MainPage />;
+const Index: NextPage = () => <Game />;
 
 export default Index;

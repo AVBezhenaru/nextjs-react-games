@@ -14,4 +14,4 @@ const MainButton: FC<IProps> = ({ children, func }): ReactElement => (
   </button>
 );
 
-export default MainButton;
+export { MainButton };

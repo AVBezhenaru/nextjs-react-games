@@ -1,14 +1,14 @@
 import React, { type FC, ReactElement } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { AppDispatch } from '../../../../store';
-import mainImage from '../../../assents/images/background.png';
+import { AppDispatch, store } from '../../../../store';
+import mainImage from '../../../assets/images/background.png';
 import { tanksGameStartAction, tanksGameLoadingAction } from '../../../reducers/tanksGameAction';
 import { useAppSelector } from '../../../../hooks';
-import LoadingPage from '../LoadingPage/LoadingPage';
+import { LoadingPage } from '../LoadingPage/LoadingPage';
 
 import cl from './MainPage.module.scss';
-import MainButton from './MainButton/MainButton';
+import { MainButton } from './MainButton/MainButton';
 
 const MainPage: FC = (): ReactElement => {
   const game = useAppSelector((state) => state.tanks);
@@ -36,8 +36,8 @@ const MainPage: FC = (): ReactElement => {
       </div>
     </div>
   ) : (
-    <LoadingPage title="Уровень 1" />
+    <LoadingPage title={`Уровень ${store.getState().tanks.stage}`} />
   );
 };
 
-export default MainPage;
+export { MainPage };
