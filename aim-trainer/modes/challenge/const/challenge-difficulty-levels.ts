@@ -1,24 +1,4 @@
-import { DifficultyLevel, DifficultyModeInfo } from '../../../utils/types/difficulty';
-import { DifficultyLevels } from '../../../utils/enums/difficulty-levels';
-
-export const CHALLENGE_DIFFICULTY_MODES_INFO: DifficultyModeInfo[] = [
-  {
-    label: 'Easy',
-    type: DifficultyLevels.Easy,
-  },
-  {
-    label: 'Normal',
-    type: DifficultyLevels.Normal,
-  },
-  {
-    label: 'Hard',
-    type: DifficultyLevels.Hard,
-  },
-  {
-    label: 'Custom',
-    type: DifficultyLevels.Custom,
-  },
-];
+import { DifficultyLevel } from '../../../utils/types/difficulty';
 
 export const normalChallengeDifficulty: DifficultyLevel = {
   lifetime: 9000,

@@ -9,5 +9,5 @@ export type GameModeData = {
 
 export type ModeInfoObject = {
   label: string;
-  value: string;
+  value: string | number;
 };

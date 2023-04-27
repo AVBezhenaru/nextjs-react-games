@@ -3,7 +3,11 @@ import { ReactElement, useMemo } from 'react';
 import { StyledBoardInfo, StyledBoardInfoItems } from '../../board.styles';
 import { BoardInfoItem } from '../board-info-item/board-info-item';
 import { useAppSelector } from '../../../../../hooks';
-import { selectDeathCount, selectLives } from '../../../../reducers/game-slice';
+import {
+  selectDeathCount,
+  selectGameIsStarted,
+  selectLives,
+} from '../../../../reducers/game-slice';
 import { LivesCounter } from '../../../lives-counter/lives-counter';
 import { selectModeInfo } from '../../../../reducers/board-slice';
 
@@ -16,10 +20,11 @@ export const BoardInfo = () => {
 
   const livesCount = useAppSelector(selectLives);
   const deathCount = useAppSelector(selectDeathCount);
+  const gameIsStarted = useAppSelector(selectGameIsStarted);
 
   return (
     <StyledBoardInfo>
-      <StyledBoardInfoItems>{modeInfoElements}</StyledBoardInfoItems>
+      <StyledBoardInfoItems>{gameIsStarted && modeInfoElements}</StyledBoardInfoItems>
       <LivesCounter deathCount={deathCount} totalCount={livesCount} />
     </StyledBoardInfo>
   );

@@ -1,23 +1,25 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 
 import { Board } from '../../components/board/board';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-import {
-  resetGameData,
-  selectDeathCount,
-  selectLives,
-  setGameStatus,
-} from '../../reducers/game-slice';
 import { removeTarget } from '../../reducers/targets-slice';
 import { TargetHitHandler } from '../../utils/types/target';
-import { addHit, addMiss, resetGameStat } from '../../reducers/statistics-slice';
-import { GameStatus } from '../../utils/enums/game-status';
-import { useDifficulty } from '../../utils/hooks/use-difficulty';
-
-import { useChallengeTargets } from './hooks/use-challenge-targets';
-import { useChallengeMode } from './hooks/use-challenge-mode';
 import {
-  CHALLENGE_DIFFICULTY_MODES_INFO,
+  addHit,
+  addMiss,
+  selectAccuracy,
+  selectGameSpeed,
+  selectScore,
+  selectTimeFromStart,
+} from '../../reducers/statistics-slice';
+import { useDifficulty } from '../../utils/hooks/use-difficulty';
+import { useBaseGameLogic } from '../../utils/hooks/use-base-game-logic';
+import { useDefaultTargets } from '../../utils/hooks/use-default-targets';
+import { useTopStatistics } from '../../utils/hooks/use-top-statistics';
+import { useGameStatistics } from '../../utils/hooks/use-game-statistics';
+import { DEFAULT_DIFFICULTY_MODES_INFO } from '../../utils/const/default-difficulty-modes-info';
+
+import {
   easyChallengeDifficulty,
   normalChallengeDifficulty,
   hardChallengeDifficulty,
@@ -26,29 +28,34 @@ import { ChallengeCustomDifficultyForm } from './components/challenge-custom-dif
 
 export const Challenge = () => {
   const dispatch = useAppDispatch();
-  const lives = useAppSelector(selectLives);
-  const death = useAppSelector(selectDeathCount);
 
-  const targetCreator = useChallengeTargets();
-  useChallengeMode();
+  const timeFromStart = useAppSelector(selectTimeFromStart);
+  const hits = useAppSelector(selectScore);
+  const speed = useAppSelector(selectGameSpeed);
+  const accuracy = useAppSelector(selectAccuracy);
+
+  const targetCreator = useDefaultTargets();
+  useBaseGameLogic();
   useDifficulty({
     easy: easyChallengeDifficulty,
     normal: normalChallengeDifficulty,
     hard: hardChallengeDifficulty,
   });
 
-  useEffect(() => {
-    if (lives <= death) {
-      dispatch(setGameStatus(GameStatus.Over));
-    }
-  }, [lives, death]);
-
-  useEffect(() => {
-    return () => {
-      dispatch(resetGameData());
-      dispatch(resetGameStat());
-    };
-  }, []);
+  useTopStatistics(
+    () => [
+      { label: 'Time', value: timeFromStart },
+      { label: 'Hits', value: hits },
+      { label: 'Speed', value: `${speed.toFixed(2)} t/s` },
+    ],
+    [timeFromStart, hits, speed],
+  );
+  useGameStatistics(() => [
+    { label: 'Hit Targets', value: hits },
+    { label: 'Accuracy', value: accuracy },
+    { label: 'Final Speed', value: `${speed.toFixed(2)} t/s` },
+    { label: 'Time', value: timeFromStart },
+  ]);
 
   const hitHandler = useCallback<TargetHitHandler>(
     (id) => {
@@ -56,7 +63,7 @@ export const Challenge = () => {
       targetCreator();
       dispatch(addHit());
     },
-    [removeTarget],
+    [targetCreator],
   );
 
   const missHandler = useCallback(() => dispatch(addMiss()), []);
@@ -68,7 +75,7 @@ export const Challenge = () => {
         targetCreator={targetCreator}
         hitHandler={hitHandler}
         missHandler={missHandler}
-        difficultyModes={CHALLENGE_DIFFICULTY_MODES_INFO}
+        difficultyModes={DEFAULT_DIFFICULTY_MODES_INFO}
       />
     </>
   );

@@ -8,8 +8,8 @@ import {
   setCurrentDifficulty,
 } from '../../reducers/difficulty-slice';
 import { DifficultyLevels } from '../enums/difficulty-levels';
-import { setSpeed } from '../../reducers/statistics-slice';
-import { setLives } from '../../reducers/game-slice';
+import { resetGameStat, setSpeed } from '../../reducers/statistics-slice';
+import { resetGameData, setLives } from '../../reducers/game-slice';
 import { DifficultyLevel } from '../types/difficulty';
 
 type UseDifficulty = (levels: {
@@ -42,6 +42,8 @@ export const useDifficulty: UseDifficulty = (levels) => {
 
   useEffect(() => {
     if (customDifficulty) {
+      dispatch(resetGameStat());
+      dispatch(resetGameData());
       dispatch(setCurrentDifficulty(customDifficulty));
     }
   }, [customDifficulty]);

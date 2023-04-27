@@ -19,10 +19,11 @@ export type InputData = {
 type Props = {
   defaultValues: DifficultyLevel;
   formData: InputData[];
+  onFinish?: (values: DifficultyLevel) => void;
 };
 
 export const DifficultyForm = (props: Props) => {
-  const { defaultValues, formData } = props;
+  const { defaultValues, formData, onFinish } = props;
 
   const dispatch = useAppDispatch();
   const gameDifficultyType = useAppSelector(selectGameDifficulty);
@@ -50,7 +51,11 @@ export const DifficultyForm = (props: Props) => {
   }, []);
 
   const onSubmitHandler = useCallback((values: DifficultyLevel) => {
-    dispatch(setCustomDifficulty(values));
+    if (onFinish) {
+      onFinish(values);
+    } else {
+      dispatch(setCustomDifficulty(values));
+    }
 
     setOpen(false);
   }, []);
