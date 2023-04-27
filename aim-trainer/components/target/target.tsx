@@ -11,7 +11,7 @@ import { StyledTarget } from './target.styles';
 export type TargetProps = TargetType;
 
 export const Target = (props: TargetProps) => {
-  const { id, position, size, lifetime } = props;
+  const { id, position, size, lifetime, animationType } = props;
   const { hitHandler } = useContext(BoardContext);
 
   const dispatch = useAppDispatch();
@@ -56,7 +56,8 @@ export const Target = (props: TargetProps) => {
       onMouseDown={targetHitHandler}
       lifetime={lifetime}
       position={position}
-      scale={scale}
+      lifecycle={scale}
+      animationType={animationType}
     />
   );
 };

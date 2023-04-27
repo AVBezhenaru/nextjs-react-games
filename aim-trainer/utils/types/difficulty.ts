@@ -5,7 +5,7 @@ export type DifficultyLevel = {
   lives: number;
   targetSize?: number;
   defaultSpeed: number;
-  speedIncrementPerSecond: number;
+  speedIncrementPerSecond?: number;
   maxTargetCount: number;
 };
 

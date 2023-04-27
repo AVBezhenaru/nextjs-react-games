@@ -16,7 +16,7 @@ const initialState: StatisticsState = {
   statItems: [],
   score: 0,
   misses: 0,
-  speed: 4,
+  speed: 2,
   timeFromStart: 0,
 };
 
@@ -45,9 +45,9 @@ export const statisticsSlice = createSlice({
     resetGameStat: (state) => {
       state.timeFromStart = 0;
       state.score = 0;
-      state.statItems = [];
       state.speed = 2;
       state.misses = 0;
+      state.statItems = [];
     },
   },
 });
