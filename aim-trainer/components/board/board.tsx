@@ -1,4 +1,4 @@
-import { useLayoutEffect, useMemo } from 'react';
+import { useLayoutEffect } from 'react';
 
 import { useAppDispatch } from '../../../hooks';
 import { setBoardSizes } from '../../reducers/board-slice';
@@ -13,7 +13,7 @@ type Props = BoardContextType & {
 };
 
 export const Board = (props: Props) => {
-  const { targetCreator, hitHandler, missHandler, difficultyModes } = props;
+  const { missHandler, ...contextValue } = props;
   const dispatch = useAppDispatch();
 
   useLayoutEffect(() => {
@@ -24,11 +24,6 @@ export const Board = (props: Props) => {
       }),
     );
   }, []);
-
-  const contextValue = useMemo<BoardContextType>(
-    () => ({ targetCreator, hitHandler, difficultyModes }),
-    [targetCreator, hitHandler, difficultyModes],
-  );
 
   return (
     <BoardContext.Provider value={contextValue}>

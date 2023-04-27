@@ -1,14 +1,14 @@
 import { useCallback, useEffect, useRef } from 'react';
 
-import { SizeType } from '../../utils/types/sizes';
-import { getRandomNumber } from '../../utils/lib/get-random-number';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { addTarget, selectTargets } from '../../reducers/targets-slice';
-import { selectGameIsStarted } from '../../reducers/game-slice';
-import { selectGameSpeed } from '../../reducers/statistics-slice';
-import { TargetConfiguration } from '../../utils/types/target';
-import { selectBoardSizes } from '../../reducers/board-slice';
-import { DifficultyLevel } from '../../utils/types/difficulty';
+import { SizeType } from '../../../utils/types/sizes';
+import { getRandomNumber } from '../../../utils/lib/get-random-number';
+import { useAppDispatch, useAppSelector } from '../../../../hooks';
+import { addTarget, selectTargets } from '../../../reducers/targets-slice';
+import { selectGameIsStarted } from '../../../reducers/game-slice';
+import { selectGameSpeed } from '../../../reducers/statistics-slice';
+import { TargetConfiguration } from '../../../utils/types/target';
+import { selectBoardSizes } from '../../../reducers/board-slice';
+import { DifficultyLevel } from '../../../utils/types/difficulty';
 
 type GetChallengeTargetConfig = (
   boardSize: SizeType,

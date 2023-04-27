@@ -15,7 +15,7 @@ const initialState: GameState = {
   lives: 3,
   deathCounter: 0,
   status: GameStatus.Idle,
-  difficulty: DifficultyLevels.Hard,
+  difficulty: DifficultyLevels.Normal,
 };
 
 const gameSlice = createSlice({
