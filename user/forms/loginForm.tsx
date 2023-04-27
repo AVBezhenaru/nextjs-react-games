@@ -64,7 +64,7 @@ const LoginForm = () => {
 
   return (
     <Section>
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form onSubmit={handleSubmit(onSubmit)} data-testid="login-form">
         <DivImgLogo>
           <a href="https://www.google.com">
             <ImgLogo src={google.src} alt="google" />

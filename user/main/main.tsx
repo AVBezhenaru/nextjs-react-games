@@ -6,7 +6,7 @@ import { DivForm, H1, InputBtn, P, Section } from './mainStyle';
 
 const Main = () => (
   <Section>
-    <DivForm>
+    <DivForm data-testid="form">
       <H1>Welcome</H1>
       <P>
         <Link href="/login">

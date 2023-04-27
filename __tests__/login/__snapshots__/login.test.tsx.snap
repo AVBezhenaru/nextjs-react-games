@@ -1,0 +1,210 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login form test Snapshot login form 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <section
+        class="sc-bcXHqe jqemYE"
+      >
+        <form
+          class="sc-jSUZER hOSZEZ"
+          data-testid="login-form"
+        >
+          <div
+            class="sc-gswNZR iLSRkP"
+          >
+            <a
+              href="https://www.google.com"
+            >
+              <img
+                alt="google"
+                class="sc-dkrFOg fgudp"
+              />
+            </a>
+            <a
+              href="https://www.facebook.com"
+            >
+              <img
+                alt="facebook"
+                class="sc-dkrFOg fgudp"
+              />
+            </a>
+            <a
+              href="https://www.twitter.com"
+            >
+              <img
+                alt="twitter"
+                class="sc-dkrFOg fgudp"
+              />
+            </a>
+          </div>
+          <h1
+            class="sc-eDvSVe kUwkqi"
+          >
+            <span
+              class="sc-hLBbgP iQYZFM"
+            >
+              or with Email
+            </span>
+          </h1>
+          <input
+            class="sc-gKPRtg ldvNAE"
+            name="username"
+            placeholder="User Name  or  email..."
+          />
+          <input
+            class="sc-gKPRtg ldvNAE"
+            name="password"
+            placeholder="Password"
+          />
+          <button
+            class="sc-iBYQkv hYjtfu"
+            type="submit"
+          >
+            Register
+          </button>
+          <p
+            class="sc-ftTHYK kQBTUj"
+          >
+            Don\`t have an account?
+            <a
+              href="/registration"
+              style="color: rgb(244, 97, 25);"
+            >
+              Sign Up
+            </a>
+          </p>
+        </form>
+      </section>
+    </div>
+  </body>,
+  "container": <div>
+    <section
+      class="sc-bcXHqe jqemYE"
+    >
+      <form
+        class="sc-jSUZER hOSZEZ"
+        data-testid="login-form"
+      >
+        <div
+          class="sc-gswNZR iLSRkP"
+        >
+          <a
+            href="https://www.google.com"
+          >
+            <img
+              alt="google"
+              class="sc-dkrFOg fgudp"
+            />
+          </a>
+          <a
+            href="https://www.facebook.com"
+          >
+            <img
+              alt="facebook"
+              class="sc-dkrFOg fgudp"
+            />
+          </a>
+          <a
+            href="https://www.twitter.com"
+          >
+            <img
+              alt="twitter"
+              class="sc-dkrFOg fgudp"
+            />
+          </a>
+        </div>
+        <h1
+          class="sc-eDvSVe kUwkqi"
+        >
+          <span
+            class="sc-hLBbgP iQYZFM"
+          >
+            or with Email
+          </span>
+        </h1>
+        <input
+          class="sc-gKPRtg ldvNAE"
+          name="username"
+          placeholder="User Name  or  email..."
+        />
+        <input
+          class="sc-gKPRtg ldvNAE"
+          name="password"
+          placeholder="Password"
+        />
+        <button
+          class="sc-iBYQkv hYjtfu"
+          type="submit"
+        >
+          Register
+        </button>
+        <p
+          class="sc-ftTHYK kQBTUj"
+        >
+          Don\`t have an account?
+          <a
+            href="/registration"
+            style="color: rgb(244, 97, 25);"
+          >
+            Sign Up
+          </a>
+        </p>
+      </form>
+    </section>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
