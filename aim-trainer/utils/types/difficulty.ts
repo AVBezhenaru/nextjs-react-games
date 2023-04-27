@@ -1,9 +1,9 @@
 import { DifficultyLevels } from '../enums/difficulty-levels';
 
 export type DifficultyLevel = {
-  lifetime: number;
+  lifetime?: number;
   lives: number;
-  targetSize: number;
+  targetSize?: number;
   defaultSpeed: number;
   speedIncrementPerSecond: number;
   maxTargetCount: number;
