@@ -1,5 +1,3 @@
-import { clearInterval } from 'timers';
-
 import { useEffect, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../hooks';
