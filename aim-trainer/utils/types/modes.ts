@@ -1,7 +1,9 @@
 import { ReactNode } from 'react';
 
+import { GameModesPaths } from '../enums/game-modes-paths';
+
 export type GameModeData = {
-  path: string;
+  path: GameModesPaths;
   component: ReactNode;
   label: string;
   img: string;

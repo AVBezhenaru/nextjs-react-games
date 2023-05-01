@@ -7,7 +7,7 @@ export const Button = styled.button`
   font-size: 20px;
 
   transition: background-position 0.4s ease-in-out;
-  border-radius: 40px;
+  border-radius: ${({ theme }) => theme.borders.baseRadius};
 
   &:hover {
     background-position: 100% 0;

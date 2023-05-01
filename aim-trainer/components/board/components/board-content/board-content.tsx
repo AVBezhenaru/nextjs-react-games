@@ -1,7 +1,7 @@
-import { forwardRef, useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { TargetField } from '../target-field/target-field';
-import { SecondsToStart, StartGameButton } from '../../board.styles';
+import { SecondsToStart } from '../../board.styles';
 import { useAppDispatch, useAppSelector } from '../../../../../hooks';
 import {
   selectGameIsIdle,
@@ -13,10 +13,10 @@ import {
 import { clearTargets } from '../../../../reducers/targets-slice';
 import { BoardStatistics } from '../board-statistics/board-statistics';
 import { GameStatus } from '../../../../utils/enums/game-status';
-import { selectBoardSizes } from '../../../../reducers/board-slice';
+import { setBoardSizes } from '../../../../reducers/board-slice';
+import { BoardStartScreen } from '../board-start-screen/board-start-screen';
 
 import { StyledBoardContent } from './board-content.styles';
-import { BoardStartScreen } from '../board-start-screen/board-start-screen';
 
 type BoardContentProps = {
   missHandler: () => void;
@@ -30,7 +30,8 @@ export const BoardContent = (props: BoardContentProps) => {
   const gameIsIdle = useAppSelector(selectGameIsIdle);
   const gameIsStarted = useAppSelector(selectGameIsStarted);
   const gameIsPending = useAppSelector(selectGameIsPending);
-  const boardSize = useAppSelector(selectBoardSizes);
+
+  const boardRef = useRef(null);
 
   const [secondsToStart, setSecondsToStart] = useState<number>(3);
 
@@ -41,6 +42,17 @@ export const BoardContent = (props: BoardContentProps) => {
     },
     [],
   );
+
+  useEffect(() => {
+    const { clientWidth, clientHeight } = boardRef.current;
+
+    dispatch(
+      setBoardSizes({
+        w: clientWidth,
+        h: clientHeight,
+      }),
+    );
+  }, [boardRef]);
 
   useEffect(() => {
     if (gameIsPending) {
@@ -79,7 +91,7 @@ export const BoardContent = (props: BoardContentProps) => {
   }, [missHandler, gameIsStarted]);
 
   return (
-    <StyledBoardContent onClick={onMissHandler} size={boardSize}>
+    <StyledBoardContent onClick={onMissHandler} ref={boardRef}>
       {screen}
     </StyledBoardContent>
   );

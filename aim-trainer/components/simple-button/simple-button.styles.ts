@@ -14,7 +14,7 @@ export const SimpleButton = styled.button<SimpleButtonProps>`
 
   padding: 8px 12px;
 
-  border-radius: 8px;
+  border-radius: ${({ theme }) => theme.borders.smallRadius};
 
   ${({ buttonType, theme }) => {
     switch (buttonType) {

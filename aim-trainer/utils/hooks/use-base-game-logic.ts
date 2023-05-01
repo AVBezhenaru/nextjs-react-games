@@ -58,7 +58,6 @@ export const useBaseGameLogic = () => {
   useEffect(() => {
     if (gameIsStarted) {
       const timerID = setTimeout(() => {
-        console.log(speed, speedIncrementPerSecond);
         dispatch(setSpeed(speed + (speedIncrementPerSecond || 0)));
       }, 1000);
 

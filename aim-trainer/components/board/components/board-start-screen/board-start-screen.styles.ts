@@ -11,7 +11,7 @@ type SelectModeButtonProps = {
 export const SelectModeButton = styled.button<SelectModeButtonProps>`
   color: ${({ theme }) => theme.colors.text};
   padding: 8px 20px;
-  border-radius: 5px;
+  border-radius: ${({ theme }) => theme.borders.smallRadius};
   background: ${({ theme }) => theme.colors.primary};
 
   ${({ active }) =>

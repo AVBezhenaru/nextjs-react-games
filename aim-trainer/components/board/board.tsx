@@ -1,8 +1,3 @@
-import { useLayoutEffect } from 'react';
-
-import { useAppDispatch } from '../../../hooks';
-import { setBoardSizes } from '../../reducers/board-slice';
-
 import { BoardWrapper } from './board.styles';
 import { BoardInfo } from './components/board-info/board-info';
 import { BoardContext, BoardContextType } from './board-context';
@@ -14,16 +9,6 @@ type Props = BoardContextType & {
 
 export const Board = (props: Props) => {
   const { missHandler, ...contextValue } = props;
-  const dispatch = useAppDispatch();
-
-  useLayoutEffect(() => {
-    dispatch(
-      setBoardSizes({
-        w: 800,
-        h: 500,
-      }),
-    );
-  }, []);
 
   return (
     <BoardContext.Provider value={contextValue}>
