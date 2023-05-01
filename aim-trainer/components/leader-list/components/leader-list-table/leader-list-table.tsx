@@ -12,8 +12,6 @@ type Props = {
 export const LeaderListTable = (props: Props) => {
   const { data } = props;
 
-  console.log('leader list table');
-
   const listItems = useMemo(() => {
     return data.map((el, i) => <LeaderListItem {...el} key={i} />);
   }, [data]);
