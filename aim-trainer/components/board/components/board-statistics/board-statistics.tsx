@@ -33,6 +33,8 @@ export const BoardStatistics = () => {
   }, []);
 
   const changeDifficultyHandler = useCallback(() => {
+    dispatch(resetGameData());
+    dispatch(resetGameStat());
     dispatch(setGameStatus(GameStatus.Idle));
   }, []);
 
