@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
-type IndexStyles = object;
-
-export const StyledAimTrainer = styled.div<IndexStyles>`
+export const StyledAimTrainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;

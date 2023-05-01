@@ -12,7 +12,7 @@ export type DifficultyLevel = {
 export type DifficultyModeInfoOnSelect = (type: DifficultyLevels) => void;
 
 export type DifficultyModeInfo = {
-  type: DifficultyLevels;
+  type: keyof typeof DifficultyLevels | DifficultyLevels;
   label: string;
   onSelect?: DifficultyModeInfoOnSelect;
 };

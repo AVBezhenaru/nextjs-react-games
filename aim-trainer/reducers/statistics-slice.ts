@@ -65,7 +65,11 @@ export const {
 export const selectStatItems = (state: RootState) => state.aimTrainer.statistics.statItems;
 export const selectTimeFromStart = (state: RootState) =>
   msToMinString(state.aimTrainer.statistics.timeFromStart);
+
 export const selectGameSpeed = (state: RootState) => state.aimTrainer.statistics.speed;
+export const selectGameSpeedStr = (state: RootState) =>
+  `${state.aimTrainer.statistics.speed.toFixed(2)} t/s`;
+
 export const selectScore = (state: RootState) => state.aimTrainer.statistics.score;
 export const selectAccuracy = (state: RootState) => {
   const { score, misses } = state.aimTrainer.statistics;

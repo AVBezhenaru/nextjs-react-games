@@ -1,17 +1,11 @@
+import { useCallback } from 'react';
+
 import { Board } from '../../components/board/board';
 import { useDefaultTargets } from '../../utils/hooks/use-default-targets';
 import { useBaseGameLogic } from '../../utils/hooks/use-base-game-logic';
 import { useDifficulty } from '../../utils/hooks/use-difficulty';
 import { DEFAULT_DIFFICULTY_MODES_INFO } from '../../utils/const/default-difficulty-modes-info';
 import { TargetAnimationTypes, TargetHitHandler } from '../../utils/types/target';
-
-import { PrecisionDifficultyForm } from './components/precision-difficulty-form/precision-difficulty-form';
-import {
-  easyPrecisionDifficulty,
-  hardPrecisionDifficulty,
-  normalPrecisionDifficulty,
-} from './const/precision-difficulty-levels';
-import { useCallback } from 'react';
 import { removeTarget } from '../../reducers/targets-slice';
 import {
   addHit,
@@ -24,6 +18,13 @@ import {
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { useTopStatistics } from '../../utils/hooks/use-top-statistics';
 import { useGameStatistics } from '../../utils/hooks/use-game-statistics';
+
+import { PrecisionDifficultyForm } from './components/precision-difficulty-form/precision-difficulty-form';
+import {
+  easyPrecisionDifficulty,
+  hardPrecisionDifficulty,
+  normalPrecisionDifficulty,
+} from './const/precision-difficulty-levels';
 
 export const Precision = () => {
   const dispatch = useAppDispatch();

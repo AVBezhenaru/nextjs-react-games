@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef } from 'react';
+import { useTheme } from 'styled-components';
 
 import { selectBoardSizes } from '../../reducers/board-slice';
 import { TargetAnimationTypes, TargetConfiguration, TargetCreator } from '../types/target';
@@ -10,22 +11,28 @@ import { selectCurrentGameDifficulty } from '../../reducers/difficulty-slice';
 import { selectGameIsStarted } from '../../reducers/game-slice';
 import { SizeType } from '../types/sizes';
 
-type GetTargetConfig = (
-  boardSize: SizeType,
-  lifetime: number,
-  targetSize: number,
-  animationType: TargetAnimationTypes,
-) => TargetConfiguration;
+type GetTargetConfigOptions = {
+  boardSize: SizeType;
+  lifetime: number;
+  targetSize: number;
+  animationType: TargetAnimationTypes;
+  offset: number;
+};
+type GetTargetConfig = (options: GetTargetConfigOptions) => TargetConfiguration;
 
-const getTargetConfig: GetTargetConfig = (boardSize, lifetime, targetSize, animationType) => ({
-  position: {
-    x: getRandomNumber(40, boardSize.w - targetSize - 40),
-    y: getRandomNumber(40, boardSize.h - targetSize - 40),
-  },
-  size: targetSize,
-  lifetime,
-  animationType,
-});
+const getTargetConfig: GetTargetConfig = (options) => {
+  const { boardSize, lifetime, targetSize, animationType, offset } = options;
+
+  return {
+    position: {
+      x: getRandomNumber(offset, boardSize.w - targetSize - offset),
+      y: getRandomNumber(offset, boardSize.h - targetSize - offset),
+    },
+    size: targetSize,
+    lifetime,
+    animationType,
+  };
+};
 
 type TargetConfig = {
   animationType?: TargetAnimationTypes;
@@ -41,6 +48,7 @@ export const useDefaultTargets: UseDefaultTargets = (
   const speed = useAppSelector(selectGameSpeed);
   const boardSize = useAppSelector(selectBoardSizes);
   const { lifetime, targetSize, maxTargetCount } = useAppSelector(selectCurrentGameDifficulty);
+  const theme = useTheme();
 
   const currentBoardSize = useRef<SizeType>(boardSize);
 
@@ -49,7 +57,13 @@ export const useDefaultTargets: UseDefaultTargets = (
   const createTarget = useCallback(() => {
     dispatch(
       addTarget(
-        getTargetConfig(currentBoardSize.current, lifetime, targetSize, config.animationType),
+        getTargetConfig({
+          boardSize: currentBoardSize.current,
+          lifetime,
+          targetSize,
+          animationType: config.animationType,
+          offset: parseInt(theme.borders.baseRadius, 10),
+        }),
       ),
     );
   }, [lifetime, targetSize, maxTargetCount]);

@@ -1,14 +1,8 @@
 import styled from 'styled-components';
 
-import { SizeType } from '../../../../utils/types/sizes';
-
-type BoardContentStyles = {
-  size: SizeType;
-};
-
-export const StyledBoardContent = styled.div<BoardContentStyles>`
-  width: ${({ size }) => size.w}px;
-  height: ${({ size }) => size.h}px;
+export const StyledBoardContent = styled.div`
+  width: 800px;
+  height: 500px;
   background: ${({ theme }) => theme.colors.mainBackground};
 
   position: relative;
@@ -16,5 +10,5 @@ export const StyledBoardContent = styled.div<BoardContentStyles>`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 40px;
+  border-radius: ${({ theme }) => theme.borders.baseRadius};
 `;

@@ -12,8 +12,6 @@ export type TargetStyles = {
 };
 
 const selectTargetTransform = (type: TargetAnimationTypes, value: number) => {
-  console.log(value);
-
   switch (type) {
     case TargetAnimationTypes.scale:
       return `scale(${value})`;

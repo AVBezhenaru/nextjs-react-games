@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StyledLinkToMode = styled.div`
   background: ${({ theme }) => theme.colors.darkTransparentBackground};
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: ${({ theme }) => theme.borders.smallRadius};
   box-sizing: border-box;
   padding: 20px;
 

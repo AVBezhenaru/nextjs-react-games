@@ -8,7 +8,7 @@ import {
   addHit,
   addMiss,
   selectAccuracy,
-  selectGameSpeed,
+  selectGameSpeedStr,
   selectScore,
   selectTimeFromStart,
 } from '../../reducers/statistics-slice';
@@ -18,11 +18,14 @@ import { useDefaultTargets } from '../../utils/hooks/use-default-targets';
 import { useTopStatistics } from '../../utils/hooks/use-top-statistics';
 import { useGameStatistics } from '../../utils/hooks/use-game-statistics';
 import { DEFAULT_DIFFICULTY_MODES_INFO } from '../../utils/const/default-difficulty-modes-info';
+import { LeaderList } from '../../components/leader-list/leader-list';
+import { GameModesPaths } from '../../utils/enums/game-modes-paths';
+import { useLeaderBoard } from '../../utils/hooks/use-leader-board';
 
 import {
   easyChallengeDifficulty,
-  normalChallengeDifficulty,
   hardChallengeDifficulty,
+  normalChallengeDifficulty,
 } from './const/challenge-difficulty-levels';
 import { ChallengeCustomDifficultyForm } from './components/challenge-custom-difficulty-form/challenge-custom-difficulty-form';
 
@@ -31,7 +34,7 @@ export const Challenge = () => {
 
   const timeFromStart = useAppSelector(selectTimeFromStart);
   const hits = useAppSelector(selectScore);
-  const speed = useAppSelector(selectGameSpeed);
+  const speedStr = useAppSelector(selectGameSpeedStr);
   const accuracy = useAppSelector(selectAccuracy);
 
   const targetCreator = useDefaultTargets();
@@ -46,16 +49,24 @@ export const Challenge = () => {
     () => [
       { label: 'Time', value: timeFromStart },
       { label: 'Hits', value: hits },
-      { label: 'Speed', value: `${speed.toFixed(2)} t/s` },
+      { label: 'Speed', value: speedStr },
     ],
-    [timeFromStart, hits, speed],
+    [timeFromStart, hits, speedStr],
   );
   useGameStatistics(() => [
     { label: 'Hit Targets', value: hits },
     { label: 'Accuracy', value: accuracy },
-    { label: 'Final Speed', value: `${speed.toFixed(2)} t/s` },
+    { label: 'Final Speed', value: speedStr },
     { label: 'Time', value: timeFromStart },
   ]);
+  useLeaderBoard(
+    () => [
+      { label: 'Hits', value: hits },
+      { label: 'Accuracy', value: accuracy },
+    ],
+    GameModesPaths.Challenge,
+    (a, b) => Number(b.statItems[0].value) - Number(a.statItems[0].value),
+  );
 
   const hitHandler = useCallback<TargetHitHandler>(
     (id) => {
@@ -77,6 +88,7 @@ export const Challenge = () => {
         missHandler={missHandler}
         difficultyModes={DEFAULT_DIFFICULTY_MODES_INFO}
       />
+      <LeaderList mode={GameModesPaths.Challenge} />
     </>
   );
 };

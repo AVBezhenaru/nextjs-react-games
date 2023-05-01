@@ -5,6 +5,7 @@ import { targetsReducer } from './targets-slice';
 import { gameReducer } from './game-slice';
 import { statisticsReducer } from './statistics-slice';
 import { difficultReducer } from './difficulty-slice';
+import { leaderListReducer } from './leader-list-slice';
 
 export const aimTrainerRootReducer = combineReducers({
   board: boardReducer,
@@ -12,4 +13,5 @@ export const aimTrainerRootReducer = combineReducers({
   game: gameReducer,
   statistics: statisticsReducer,
   difficulty: difficultReducer,
+  leaderList: leaderListReducer,
 });

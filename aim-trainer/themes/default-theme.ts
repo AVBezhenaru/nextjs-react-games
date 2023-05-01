@@ -6,9 +6,14 @@ export const AimTrainerTheme = {
     accent: '#c90707',
     darkTransparentBackground: 'rgba(0, 0, 0, 0.3)',
     lightColor: '#fff',
+    grayColor: '#6c6c6c',
   },
   gradients: {
     main: 'linear-gradient(to right, #f5ce62, #e43603, #fa7199, #e85a19)',
+  },
+  borders: {
+    baseRadius: '10px',
+    smallRadius: '5px',
   },
 };
 
