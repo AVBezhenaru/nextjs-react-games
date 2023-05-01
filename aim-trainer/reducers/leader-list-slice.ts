@@ -23,7 +23,9 @@ type LeaderListState = {
 
 const initialState: LeaderListState = {
   [GameModesPaths.Challenge]: {
-    global: {},
+    local: {},
+  },
+  [GameModesPaths.Precision]: {
     local: {},
   },
 };
@@ -50,6 +52,5 @@ export const { setModeData } = leaderListSlice.actions;
 
 export const selectLocalModeData = (mode: GameModesPaths) => (state: RootState) =>
   state.aimTrainer.leaderList[mode].local;
-export const selectLeaderList = (state: RootState) => state.aimTrainer.leaderList;
 
 export const leaderListReducer = leaderListSlice.reducer;

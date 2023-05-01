@@ -25,6 +25,9 @@ import {
   hardPrecisionDifficulty,
   normalPrecisionDifficulty,
 } from './const/precision-difficulty-levels';
+import { useLeaderBoard } from '../../utils/hooks/use-leader-board';
+import { GameModesPaths } from '../../utils/enums/game-modes-paths';
+import { LeaderList } from '../../components/leader-list/leader-list';
 
 export const Precision = () => {
   const dispatch = useAppDispatch();
@@ -55,6 +58,23 @@ export const Precision = () => {
     { label: 'Accuracy', value: accuracy },
     { label: 'Time', value: timeFromStart },
   ]);
+  useLeaderBoard(
+    () => [
+      { label: 'Accuracy', value: accuracy },
+      { label: 'Hits', value: hits },
+    ],
+    GameModesPaths.Precision,
+    (a, b) => {
+      const aValue = parseFloat(`${a.statItems[0].value}`);
+      const bValue = parseFloat(`${b.statItems[0].value}`);
+
+      if (aValue === bValue) {
+        return aValue + Number(b.statItems[0].value) - Number(a.statItems[0].value);
+      }
+
+      return bValue - aValue;
+    },
+  );
 
   const hitHandler = useCallback<TargetHitHandler>(
     (id) => {
@@ -76,6 +96,7 @@ export const Precision = () => {
         difficultyModes={DEFAULT_DIFFICULTY_MODES_INFO}
         missHandler={missHandler}
       />
+      <LeaderList mode={GameModesPaths.Precision} />
     </>
   );
 };
