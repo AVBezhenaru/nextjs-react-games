@@ -12,6 +12,7 @@ import { DifficultyModeInfoOnSelect } from '../../../../utils/types/difficulty';
 
 import {
   SelectModeButton,
+  SelectModeButtonWrapper,
   StartGameButton,
   StyledBoardStartScreen,
 } from './board-start-screen.styles';
@@ -50,7 +51,7 @@ export const BoardStartScreen = () => {
 
   return (
     <StyledBoardStartScreen>
-      <div>{difficultyButtons}</div>
+      <SelectModeButtonWrapper>{difficultyButtons}</SelectModeButtonWrapper>
       <StartGameButton onClick={startGameHandler}>Start</StartGameButton>
     </StyledBoardStartScreen>
   );

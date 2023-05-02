@@ -29,3 +29,8 @@ export const StyledBoardStartScreen = styled.div`
   flex-direction: column;
   gap: 20px;
 `;
+
+export const SelectModeButtonWrapper = styled.div`
+  display: flex;
+  gap: 10px;
+`;

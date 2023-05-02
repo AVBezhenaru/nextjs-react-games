@@ -1,5 +1,5 @@
-import { DifficultyLevel, DifficultyModeInfo } from '../../utils/types/difficulty';
-import { DifficultyLevels } from '../../utils/enums/difficulty-levels';
+import { DifficultyLevel, DifficultyModeInfo } from '../../../utils/types/difficulty';
+import { DifficultyLevels } from '../../../utils/enums/difficulty-levels';
 
 export const CHALLENGE_DIFFICULTY_MODES_INFO: DifficultyModeInfo[] = [
   {
@@ -13,6 +13,10 @@ export const CHALLENGE_DIFFICULTY_MODES_INFO: DifficultyModeInfo[] = [
   {
     label: 'Hard',
     type: DifficultyLevels.Hard,
+  },
+  {
+    label: 'Custom',
+    type: DifficultyLevels.Custom,
   },
 ];
 

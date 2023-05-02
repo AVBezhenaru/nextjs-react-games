@@ -7,6 +7,7 @@ export type BoardContextType = {
   targetCreator: TargetCreator;
   hitHandler: TargetHitHandler;
   difficultyModes: DifficultyModeInfo[];
+  customDifficultyForm?: Element;
 };
 
 export const BoardContext = createContext<BoardContextType>(null);

@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 
-import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { setModeInfoArray } from '../../reducers/board-slice';
-import { useTimeInfo } from '../../utils/hooks/use-time-info';
-import { useSpawnSpeed } from '../../utils/hooks/use-spawn-speed';
-import { resetGameData, selectGameIsOver, selectGameIsStarted } from '../../reducers/game-slice';
-import { useHitsCounter } from '../../utils/hooks/use-hits-counter';
-import { resetGameStat, selectAccuracy, setStatItems } from '../../reducers/statistics-slice';
-import { DifficultyLevel } from '../../utils/types/difficulty';
+import { useAppDispatch, useAppSelector } from '../../../../hooks';
+import { setModeInfoArray } from '../../../reducers/board-slice';
+import { useTimeInfo } from '../../../utils/hooks/use-time-info';
+import { useSpawnSpeed } from '../../../utils/hooks/use-spawn-speed';
+import { resetGameData, selectGameIsOver, selectGameIsStarted } from '../../../reducers/game-slice';
+import { useHitsCounter } from '../../../utils/hooks/use-hits-counter';
+import { resetGameStat, selectAccuracy, setStatItems } from '../../../reducers/statistics-slice';
+import { DifficultyLevel } from '../../../utils/types/difficulty';
 
 type UseChallengeMode = (diff: DifficultyLevel) => void;
 
