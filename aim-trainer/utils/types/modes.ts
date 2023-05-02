@@ -4,6 +4,7 @@ export type GameModeData = {
   path: string;
   component: ReactNode;
   label: string;
+  img: string;
 };
 
 export type ModeInfoObject = {

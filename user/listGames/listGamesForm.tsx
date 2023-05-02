@@ -13,11 +13,11 @@ import hangmanIcon from '../img/hangmanIcon.png';
 import aerohokkeyIcon from '../img/aerohokkeyIcon.png';
 import solitairIcon from '../img/solitairIcon.png';
 import game2048Icon from '../img/2048Icon.png';
-import wallKickersIcon from '../img/wall-kickers.png';
 import fruitNinjaIcon from '../img/fruitNinjaIcon.png';
 import sapperIcon from '../img/sapperIcon.png';
 import tanksIcon from '../img/tanksIcon.png';
 import doodler from '../img/doodler-guy.png';
+import aimTrainerIcon from '../img/aim-trainer.svg';
 
 import { GameLink } from './GameLink';
 import { Games, Page, HeaderGames, ListGames } from './listGamesStyle';
@@ -31,7 +31,7 @@ type GameLinkData = {
 const ListGamesForm = () => {
   const path = 'games/';
 
-  const gameLinksArr = [
+  const gameLinksArr: GameLinkData[] = [
     { src: chessIcon.src, title: 'chess' },
     { src: checkersIcon.src, title: 'checkers' },
     { src: hangmanIcon.src, title: 'hangman' },
@@ -39,11 +39,11 @@ const ListGamesForm = () => {
     { src: tetrisIcon.src, title: 'tetris' },
     { src: solitairIcon.src, title: 'solitaire' },
     { src: game2048Icon.src, title: 'game2048' },
-    { src: wallKickersIcon.src, title: 'aim trainer', href: 'aim-trainer' },
     { src: fruitNinjaIcon.src, title: 'fruitninja' },
     { src: sapperIcon.src, title: 'sapper' },
     { src: tanksIcon.src, title: 'tanks' },
     { src: doodler.src, title: 'doodle-jump' },
+    { src: aimTrainerIcon.src, title: 'aim trainer', href: 'aim-trainer' },
   ];
   return (
     <>
