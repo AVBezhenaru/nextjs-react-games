@@ -1,7 +1,7 @@
 import CardModel from '../models/CardModel';
 
 export const stackedCardsName = 'stacked';
-export const cardsInGameName = 'in-lobby';
+export const cardsInGameName = 'in-game';
 export const openedCardsName = 'opened';
 
 export type SolitaireState = {
