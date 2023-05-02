@@ -7,6 +7,7 @@ export const AimTrainerTheme = {
     darkTransparentBackground: 'rgba(0, 0, 0, 0.3)',
     lightColor: '#fff',
     grayColor: '#6c6c6c',
+    transparentGray: 'rgba(108, 108, 108, .2)',
   },
   gradients: {
     main: 'linear-gradient(to right, #f5ce62, #e43603, #fa7199, #e85a19)',

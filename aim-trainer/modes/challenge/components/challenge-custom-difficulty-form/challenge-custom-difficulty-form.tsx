@@ -1,18 +1,17 @@
-import { InputNumber, Slider } from 'antd';
-
 import { normalChallengeDifficulty } from '../../const/challenge-difficulty-levels';
 import { DifficultyForm, InputData } from '../../../../components/difficulty-form/difficulty-form';
+import { InputNumber } from '../../../../components/input-number/input-number';
 
 const formData: InputData[] = [
   {
     name: 'lifetime',
     label: 'Target lifetime (ms)',
-    component: <Slider max={20000} min={2000} step={100} />,
+    component: <InputNumber min={2000} max={20000} step={100} />,
   },
   {
     label: 'Target Size (px)',
     name: 'targetSize',
-    component: <Slider min={20} max={200} step={10} />,
+    component: <InputNumber min={20} max={200} step={10} />,
   },
   {
     label: 'Max Target Count',
