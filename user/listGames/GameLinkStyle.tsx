@@ -17,6 +17,7 @@ export const Game = styled.div`
 export const Icon = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100px;
   height: 100px;
   padding: 15px;
