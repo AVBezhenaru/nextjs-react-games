@@ -84,7 +84,7 @@ const TransformFigure: FC<TransformFigureProps> = ({ transformData, board, updat
   const elements = figuresArr.map((figuresArrItem: any, id: any) => (
     <TransformFigureImg
       key={id}
-      src={figuresArrItem.src}
+      src={figuresArrItem.src.src}
       onClick={() => createNewFigure(figuresArrItem.name, transformData.figure!)}
     />
   ));
