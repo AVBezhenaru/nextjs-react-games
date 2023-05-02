@@ -1,17 +1,17 @@
-import { InputNumber, Slider } from 'antd';
+import { useCallback } from 'react';
 
 import { DifficultyForm, InputData } from '../../../../components/difficulty-form/difficulty-form';
 import { normalPrecisionDifficulty } from '../../const/precision-difficulty-levels';
 import { DifficultyLevel } from '../../../../utils/types/difficulty';
 import { useAppDispatch } from '../../../../../hooks';
 import { setCustomDifficulty } from '../../../../reducers/difficulty-slice';
-import { useCallback } from 'react';
+import { InputNumber } from '../../../../components/input-number/input-number';
 
 const formData: InputData[] = [
   {
     label: 'Target Size (px)',
     name: 'targetSize',
-    component: <Slider min={8} max={30} step={1} />,
+    component: <InputNumber min={8} max={30} step={1} />,
   },
   {
     label: 'Max Target Count',

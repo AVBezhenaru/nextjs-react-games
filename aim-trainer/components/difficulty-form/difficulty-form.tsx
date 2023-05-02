@@ -1,5 +1,5 @@
 import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
-import { Button, Form, Modal } from 'antd';
+import { useForm } from 'react-hook-form';
 
 import { DifficultyLevel } from '../../utils/types/difficulty';
 import {
@@ -9,6 +9,9 @@ import {
 } from '../../reducers/difficulty-slice';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { DifficultyLevels } from '../../utils/enums/difficulty-levels';
+import { Modal } from '../modal/modal';
+import { Button, ButtonSizes, ButtonTypes } from '../button/button.styles';
+import { Form } from '../form/form';
 
 export type InputData = {
   name: string;
@@ -28,7 +31,10 @@ export const DifficultyForm = (props: Props) => {
   const dispatch = useAppDispatch();
   const gameDifficultyType = useAppSelector(selectGameDifficulty);
 
-  const [form] = Form.useForm();
+  const form = useForm<DifficultyLevel>({
+    defaultValues,
+  });
+
   const [open, setOpen] = useState<boolean>(false);
 
   useEffect(() => {
@@ -42,7 +48,7 @@ export const DifficultyForm = (props: Props) => {
   }, []);
 
   const onResetHandler = useCallback(() => {
-    form.setFieldsValue(defaultValues);
+    form.reset();
   }, []);
 
   const onCloseHandler = useCallback(() => {
@@ -70,29 +76,28 @@ export const DifficultyForm = (props: Props) => {
 
   return (
     <Modal
+      title="Custom Difficulty Settings"
       open={open}
       onCancel={onCloseHandler}
       footer={[
         <Button
-          type="primary"
-          size="large"
+          buttonType={ButtonTypes.Primary}
+          size={ButtonSizes.Small}
           form="challengeDifficulty"
-          key="submit"
-          htmlType="submit"
+          type="submit"
         >
           Save
         </Button>,
-        <Button type="text" size="large" onClick={onResetHandler}>
+        <Button buttonType={ButtonTypes.Text} size={ButtonSizes.Small} onClick={onResetHandler}>
           Reset
         </Button>,
       ]}
     >
       <Form
-        layout="vertical"
+        form={form}
         onFinish={onSubmitHandler}
         name="challengeCustomDifficultForm"
         initialValues={defaultValues}
-        form={form}
         id="challengeDifficulty"
       >
         {formItems}
