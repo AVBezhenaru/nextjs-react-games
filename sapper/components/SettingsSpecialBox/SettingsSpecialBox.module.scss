@@ -1,0 +1,29 @@
+.setting-special-wraper{
+  margin-bottom: 5px;
+}
+
+.settings-label-special{
+  margin-right: 10px;
+  margin-left: 60px;
+}
+
+.settings-height,
+.settings-width,
+.settings-mins{
+  width: 60px;
+  color: rgb(0, 0, 0);
+  background: #fff;
+
+  &:disabled {
+    cursor: default;
+    background: #969696;
+  }
+}
+
+.settings-height{
+  margin-left: 6px;
+}
+
+.settings-width{
+  margin-left: 10px;
+}

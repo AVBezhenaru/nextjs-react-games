@@ -184,6 +184,7 @@ export const TransformFigureOverlay = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  transform: rotate(180deg);
 `;
 
 export const TransformFigureImg = styled.img`

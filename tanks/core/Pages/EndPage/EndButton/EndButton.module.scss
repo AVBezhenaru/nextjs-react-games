@@ -1,0 +1,18 @@
+.end__button {
+  border: 1px solid #fe3d3d;
+  border-radius: 10px;
+  width: 100%;
+  padding: 20px;
+  max-width: 608px;
+  margin-top: 50px;
+  cursor: pointer;
+  font-size: 20px;
+  text-transform: uppercase;
+  background-color: transparent;
+
+  transition: all .3s ease;
+
+  &:hover {
+    background-color: #fe3d3d;
+  }
+}

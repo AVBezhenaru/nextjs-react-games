@@ -14,11 +14,18 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "strictNullChecks":false
+    "strictNullChecks": false
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/_document.tsx", "pages/_app.tsx", "async-pages/_app.jsx",
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "pages/_document.tsx",
+    "pages/_app.tsx",
+    "async-pages/_app.jsx",
     "src/store/userSlice",
-    "src/store/userSlice"
+    "src/store/userSlice",
+    "tanks/observer/Observer.ts"
   ],
   "exclude": ["node_modules"]
 }

@@ -1,0 +1,20 @@
+.number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #432c7a;
+  border-radius: 5%;
+  width: 15vmin;
+  height: 15vmin;
+  color: black;
+  animation: show 200ms ease-in-out;
+  letter-spacing: 1px;
+  font-size: 1.5em;
+}
+
+@keyframes show {
+  0% {
+    opacity: 50%;
+    transform: scale(0);
+  }
+}
