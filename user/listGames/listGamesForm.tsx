@@ -12,6 +12,7 @@ import checkersIcon from '../img/checkersIcon.png';
 import hangmanIcon from '../img/hangmanIcon.png';
 import aerohokkeyIcon from '../img/aerohokkeyIcon.png';
 import solitairIcon from '../img/solitairIcon.png';
+import memoryCards from '../img/memoryCards.png';
 import game2048Icon from '../img/2048Icon.png';
 import fruitNinjaIcon from '../img/fruitNinjaIcon.png';
 import sapperIcon from '../img/sapperIcon.png';
@@ -38,6 +39,7 @@ const ListGamesForm = () => {
     { src: aerohokkeyIcon.src, title: 'airhockey' },
     { src: tetrisIcon.src, title: 'tetris' },
     { src: solitairIcon.src, title: 'solitaire' },
+    { src: memoryCards.src, title: 'memoryCards' },
     { src: game2048Icon.src, title: 'game2048' },
     { src: fruitNinjaIcon.src, title: 'fruitninja' },
     { src: sapperIcon.src, title: 'sapper' },

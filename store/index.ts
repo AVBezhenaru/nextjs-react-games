@@ -3,6 +3,7 @@ import { persistStore } from 'redux-persist';
 
 import hangmanReducer from '../hangman/store/HangmanSlice';
 import DataSlice from '../chess/dataSlice/DataSlice';
+import memorySlice from '../memoryCards/store/memorySlice';
 import solitaireSlice from '../solitaire/store/solitaireSlice';
 import game2048Reducer from '../game2048/reducers';
 import { aimTrainerRootReducer } from '../aim-trainer/reducers/root-reducer';
@@ -17,6 +18,7 @@ export const store = configureStore({
     user,
     hangman: hangmanReducer,
     rootSlice: DataSlice,
+    memoryCards: memorySlice,
     solitaireReborn: solitaireSlice,
     aimTrainer: aimTrainerRootReducer,
     game2048: game2048Reducer,
