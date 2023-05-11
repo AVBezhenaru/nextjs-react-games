@@ -1,0 +1,10 @@
+.canvas {
+    position: absolute;
+    box-sizing: border-box;
+    outline: none;
+  }
+.repeat{
+    position: absolute;
+}
+
+
