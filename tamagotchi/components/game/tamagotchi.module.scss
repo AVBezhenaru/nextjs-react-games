@@ -1,0 +1,164 @@
+@font-face {
+  font-family: 'bonche-light';
+  src: url('../../fonts/bonche-light-webfont.woff2') format('woff2'),
+       url('../../fonts/bonche-light-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.tamagotchigame {
+  font-family: 'bonche-light';
+  padding-top: 90px;
+  padding-bottom: 5px;
+  display: flex;
+  justify-content: center;
+  background-color: #aaa2e5;
+}
+
+.points{
+  margin-right: 50px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-radius: 50px;
+  background-color: rgb(169, 255, 255);
+  width: 100px;
+  height: 600px;
+  box-shadow: -10px 10px 30px 10px #746bac,
+  inset 10px 10px 50px 5px #597176,
+  inset 5px -5px 10px 5px #597176;
+  overflow: hidden;
+}
+.points p{
+  text-align: center;
+  width: 100px;
+  font-family: 'bonche-light';
+  font-weight: 600;
+  font-size: xx-large;
+  color: #ccf6ff;
+  text-shadow: 0 0 3px #11262a;
+  border-bottom: 5px groove #afd9e2;
+  border-radius: 50%;
+}
+
+.health {
+  font-family: 'bonche-light';
+  display: flex;
+  font-size: xx-large;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+}
+
+.time {
+  display: flex;
+  font-size: xx-large;
+  justify-content: center;
+  width: 100px;
+  height: 50px;
+}
+
+.left_section{
+  display: flex;
+  flex-direction: column;
+}
+
+.time_health {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 50px;
+  width: 100px;
+  height: 150px;
+  border-radius: 10px 0 0 10px;
+  box-shadow: 0px 0px 10px 5px rgb(90, 91, 146),
+  0px 0px 10px 7px rgb(172, 173, 229),
+  0px 0px 20px 10px #7d72cc,
+  0px 0px 0px 26px #61599d;
+}
+
+.time_health p{
+  font-family: 'bonche-light';
+  font-size: xx-large;
+}
+
+.time{
+  margin-top: 20px;
+  font-family: 'bonche-light';
+  font-weight:200;
+}
+
+.right_section{
+  display: flex;
+  flex-direction: column;
+}
+
+.screen{
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 1100px;
+  height: 600px;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0px 0px 10px 5px rgb(90, 91, 146),
+  0px 0px 10px 7px rgb(172, 173, 229),
+  0px 0px 20px 10px #7d72cc,
+  0px 0px 0px 26px #61599d;
+  background-image: url('../../img/background-screen.png');
+}
+
+.askFoods{
+  background-color: aliceblue;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  height: 80px;
+  border-radius: 40px;
+  min-width: 500px;
+  box-shadow: 0px 0px 10px 10px aliceblue;
+  margin-top: 70px;
+  display: flex;
+}
+
+.askFoods::after{
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  box-shadow: 0px 0px 10px 10px aliceblue;
+  background-color: aliceblue;
+  height: 20px;
+  width: 100px;
+  margin-right:-200px;
+  margin-bottom:-120px ;
+}
+
+.askFoods::before{
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  box-shadow: 0px 0px 10px 10px aliceblue;
+  background-color: aliceblue;
+  height: 5px;
+  width: 30px;
+  margin-right:-100px;
+  margin-bottom:-160px;
+}
+
+.container{
+  margin-top: 50px;
+  margin-bottom: 30px;
+  box-sizing: border-box;
+  display: flex;
+  width: 1100px;
+  height: 150px;
+  flex-wrap: wrap;
+  box-shadow: 0px 0px 10px 5px rgb(90, 91, 146),
+  0px 0px 10px 7px rgb(172, 173, 229),
+  0px 0px 20px 10px #7d72cc,
+  0px 0px 0px 26px #61599d;
+  border-radius: 0 0 10px 0;
+}

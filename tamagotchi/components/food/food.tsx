@@ -1,10 +1,17 @@
-import sprite from '../../img/food-sprite.png';
-
 import classes from './foods.module.scss';
+import foodsItems from './foods-items';
 
-const nameFood = 'miniCake';
-const name = nameFood;
+type FoodItemType = {
+  item: string;
+};
 
-// eslint-disable-next-line @next/next/no-img-element
-const Food = () => <div className={classes.miniCake} />;
-export default Food;
+const Food = ({ item }: FoodItemType) => (
+  <div key={item} className={classes.foodicon} style={{ backgroundPosition: item }} />
+);
+
+const Foods = Object.values(foodsItems);
+const allFoods = Foods.map((el: string) => <Food key={el} item={el} />);
+
+export const getAskFoods = (arr: number[]) => arr.map((el) => <Food key={el} item={Foods[el]} />);
+
+export default allFoods;
