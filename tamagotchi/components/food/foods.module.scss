@@ -5,3 +5,31 @@
   cursor: pointer;
   background-color: aliceblue; 
 }
+
+@font-face {
+  font-family: 'bonche-light';
+  src: url('../../fonts/bonche-light-webfont.woff2') format('woff2'),
+       url('../../fonts/bonche-light-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.ready_pannel_text {
+  font-family: 'bonche-light';
+  font-weight: 200;
+  font-size: x-large;
+  color: black;
+  margin-top: -30px;
+}
+
+.ready_pannel_button {
+  font-family: 'bonche-light';
+  margin-left: -77px;
+  font-weight: normal;
+  width: 145px;
+  height: 30px;
+  background-color: darkslateblue;
+  margin-top: -10px;
+  position: absolute;
+  border-radius: 15px;
+}

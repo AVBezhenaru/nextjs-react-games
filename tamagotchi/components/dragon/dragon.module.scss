@@ -1,20 +1,19 @@
 .dragon_set {
   flex-direction: row;
-  justify-content: end;
+  justify-content: flex-end;
   display: flex;
   align-items: flex-end;
-  animation: moveDragon 20s ease-in-out 1s infinite;
+  animation: moveDragon 26s ease-in-out 1s infinite;
 }
 
 @keyframes moveDragon {
   from {
-    transform: scale(-1, 1);
-    margin-left: -800px;
-    // transform: scale(1, 1)
+    
+    margin-left: 0px;
   }
 
-  3% {
-    margin-left: -800px;
+  1% {
+    margin-left: 0px;
   }
 
   12% {
@@ -26,53 +25,55 @@
   }
 
   27% {
-    margin-left: 0px;
+    margin-left: -800px;
+    transform: scale(1, 1);
   }
 
   28% {
-    margin-left: 0px;
+    margin-left: -800px;
+    transform: scale(-1, 1);
   }
 
   50% {
-    transform: scale(-1, 1);
-    margin-left: 800px;
+    margin-left: 0px;
   }
 
   51% {
-    transform: scale(1, 1);
-    margin-left: 800px;
+    margin-left: 0px;
   }
 
   72% {
-    margin-left: 0px;
+    margin-left: 800px;
+    transform: scale(-1, 1);
   }
 
   73% {
-    margin-left: 0px;
+    margin-left: 800px;
+    transform: scale(1, 1);
   }
 
   90% {
-    margin-left: -600px;
+    margin-left: 400px;
   }
 
   91% {
-    margin-left: -600px;
+    margin-left: 400px;
   }
 
   99% {
-    transform: scale(1, 1);
-    margin-left: -800px;
+
+    margin-left: 0px;
   }
 
   to {
-    margin-left: -800px;
-    transform: scale(-1, 1);
+    margin-left: 0px;
+
   }
 }
 
 .dragon_baby {
   flex-direction: row;
-  justify-content: end;
+  justify-content: flex-end;
   display: flex;
   align-items: flex-end;
   animation: moveBaby 1s ease-in-out 1s infinite;
@@ -173,4 +174,42 @@
   to {
     transform: rotate(0deg);
   }
+}
+
+.final_message, .lose_message, .lose_question{
+  align-content: space-between;
+  position: absolute;
+  margin-top: 55px;
+  
+  border-radius: 50px;
+  font-family: 'bonche-light';
+  font-weight: 200;
+  color:aliceblue;  
+  display: flex;
+  justify-content: center;
+  width: 1000px;
+  height: 480px;
+  padding: 50px 50px;
+}
+
+.final_message {
+  font-size: larger;
+  background-image: url('../../img/final.png');
+  background-position: 0px -5px;
+  background-repeat: no-repeat;
+}
+
+.lose_message {
+  font-size: xx-large;
+  padding-top: 150px;
+  background-color: rgb(51, 36, 90);
+}
+
+.button_reset{
+  width: 200px;
+  height: 50px;
+  background-color: darkslateblue;
+  border: 1px solid aliceblue;
+  margin-top: 466px;
+  position: absolute;
 }

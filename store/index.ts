@@ -9,6 +9,7 @@ import { aimTrainerRootReducer } from '../aim-trainer/reducers/root-reducer';
 import sapperReducer from '../sapper/store/sapperSlice';
 import tanksGameReducer from '../tanks/reducers/tanksGameReducer';
 import doodlerReducer from '../doodle-jump/reducer/doodleReducer';
+import tamagotchiSlice from '../tamagotchi/slices/slices';
 
 import user from './userSlice';
 
@@ -23,6 +24,7 @@ export const store = configureStore({
     sapper: sapperReducer,
     tanks: tanksGameReducer,
     doodler: doodlerReducer,
+    tamagotchi: tamagotchiSlice,
   },
   middleware(getDefaultMiddleware) {
     return getDefaultMiddleware({

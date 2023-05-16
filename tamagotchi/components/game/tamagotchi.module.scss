@@ -15,12 +15,12 @@
   background-color: #aaa2e5;
 }
 
-.points{
+.pointsColumn{
   margin-right: 50px;
   align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-end;
   border-radius: 50px;
   background-color: rgb(169, 255, 255);
   width: 100px;
@@ -28,11 +28,13 @@
   box-shadow: -10px 10px 30px 10px #746bac,
   inset 10px 10px 50px 5px #597176,
   inset 5px -5px 10px 5px #597176;
-  overflow: hidden;
+  // overflow: hidden;
 }
-.points p{
+
+.pointsColumn p{
   text-align: center;
   width: 100px;
+  height: 50px;
   font-family: 'bonche-light';
   font-weight: 600;
   font-size: xx-large;
@@ -40,6 +42,36 @@
   text-shadow: 0 0 3px #11262a;
   border-bottom: 5px groove #afd9e2;
   border-radius: 50%;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+.points {
+  align-content: flex-end;
+  position: absolute;
+  border-radius: 10px 10px 50px 50px;
+  display: flex;
+  flex-direction: row;
+  width: 100px;
+  height: 250px;
+  background-color: #3e6ac8;
+  box-shadow:
+  inset 10px 10px 50px 5px #363c67,
+  inset 5px -5px 10px 5px #232a43;
+  z-index: 1;
+}
+
+.points::before {
+  content: '';
+  margin-top: -15px;
+  position: relative;
+  display: flex;
+  border-radius: 50%;
+  height: 50px;
+  width: 500px;
+  box-shadow:
+  inset 5px -5px 3px 2px #c7dbff;
+  background-color: #addbff;
 }
 
 .health {

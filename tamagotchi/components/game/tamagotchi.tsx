@@ -1,39 +1,57 @@
-import allFoods, { getAskFoods } from '../food/food';
+import { useEffect, useState } from 'react';
+
+import { useAppSelector } from '../../../hooks';
+import { selectHealth, selectPoints, selectTimer, ready } from '../../slices/slices';
+import { AskFoods } from '../food/food';
+import Timer from '../timer/timer';
+import AllFoods from '../food/all-foods';
 import Dragon from '../dragon/dragon';
-// import foodsItems from '../food/foods-items';
 
 import heart from './heart';
 import classes from './tamagotchi.module.scss';
 
-const styleHeart = {
-  color: 'tomato',
-  healthPoints: 5,
+const Tamagotchi = () => {
+  const health = useAppSelector(selectHealth);
+  const points = useAppSelector(selectPoints);
+  const isReady = useAppSelector(ready);
+  // const timer = useAppSelector(selectTimer);
+  const [pointsState, setPointsState] = useState(points);
+
+  useEffect(() => {
+    setPointsState(points);
+  }, [points, isReady]);
+  const columnPointHeight = `${pointsState / 3 + 50}px`;
+  const styleHeart = {
+    color: 'tomato',
+    healthPoints: health,
+  };
+
+  return (
+    <div className={classes.tamagotchigame}>
+      <div className={classes.left_section}>
+        <div className={classes.pointsColumn}>
+          <p style={{ marginBottom: '150px' }}> 1500</p>
+          <p style={{ marginBottom: '150px' }}>900</p>
+          <p style={{ marginBottom: '110px' }}>300</p>
+          <div style={{ height: columnPointHeight }} className={classes.points} />
+        </div>
+        <div className={classes.time_health}>
+          <div className={classes.time}>{Timer(points, isReady)}</div>
+          <div className={classes.health}>{heart(styleHeart)}</div>
+        </div>
+      </div>
+      <div className={classes.right_section}>
+        <div className={classes.screen}>
+          <div className={classes.askFoods}>
+            <AskFoods />
+            {/* <ReadyToPlayPannel /> */}
+          </div>
+          {Dragon(points, health)}
+        </div>
+        <div className={classes.container}> {AllFoods()} </div>
+      </div>
+    </div>
+  );
 };
-const askFoods = getAskFoods([3, 24, 9]);
-
-// const foodAsk = () => allFoods;
-
-const Tamagotchi = () => (
-  <div className={classes.tamagotchigame}>
-    <div className={classes.left_section}>
-      <div className={classes.points}>
-        <p style={{ marginLeft: '0px' }}> 1500</p>
-        <p style={{ marginTop: '150px' }}>700</p>
-        <p>200</p>
-      </div>
-      <div className={classes.time_health}>
-        <div className={classes.time}>time</div>
-        <div className={classes.health}>{heart(styleHeart)}</div>
-      </div>
-    </div>
-    <div className={classes.right_section}>
-      <div className={classes.screen}>
-        <div className={classes.askFoods}>{askFoods}</div>
-        {Dragon(1000)}
-      </div>
-      <div className={classes.container}> {allFoods} </div>
-    </div>
-  </div>
-);
 
 export default Tamagotchi;

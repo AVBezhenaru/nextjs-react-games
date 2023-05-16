@@ -1,5 +1,5 @@
 const foodsItems = {
-  miniCake: '0px 0px',
+  miniCake: '1px 0px',
   grapefruit: '50px 0px',
   orange: '100px 0px',
   blueberry: '150px 0px',
