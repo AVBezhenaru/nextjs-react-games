@@ -21,8 +21,8 @@ export const initialTime = (points: number, ready: boolean) => {
 };
 
 const initialState: TamagotchiState = {
-  health: 1,
-  points: 1450,
+  health: 5,
+  points: 0,
   ready: false,
   askArr: [],
   timer: 'time',
