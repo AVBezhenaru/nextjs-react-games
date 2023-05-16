@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { useAppSelector } from '../../../hooks';
-import { selectHealth, selectPoints, selectTimer, ready } from '../../slices/slices';
+import { selectHealth, selectPoints, ready } from '../../slices/slices';
 import { AskFoods } from '../food/food';
 import Timer from '../timer/timer';
 import AllFoods from '../food/all-foods';
@@ -14,7 +14,6 @@ const Tamagotchi = () => {
   const health = useAppSelector(selectHealth);
   const points = useAppSelector(selectPoints);
   const isReady = useAppSelector(ready);
-  // const timer = useAppSelector(selectTimer);
   const [pointsState, setPointsState] = useState(points);
 
   useEffect(() => {
@@ -44,7 +43,6 @@ const Tamagotchi = () => {
         <div className={classes.screen}>
           <div className={classes.askFoods}>
             <AskFoods />
-            {/* <ReadyToPlayPannel /> */}
           </div>
           {Dragon(points, health)}
         </div>

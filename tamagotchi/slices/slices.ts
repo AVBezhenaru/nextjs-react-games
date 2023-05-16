@@ -21,8 +21,8 @@ export const initialTime = (points: number, ready: boolean) => {
 };
 
 const initialState: TamagotchiState = {
-  health: 5,
-  points: 0,
+  health: 1,
+  points: 1450,
   ready: false,
   askArr: [],
   timer: 'time',
@@ -41,7 +41,6 @@ export const tamagotchiSlice = createSlice({
       state.points += action.payload;
     },
     setReady: (state, action: PayloadAction<boolean>) => {
-      console.log('completed', state.ready);
       state.ready = action.payload;
       state.timer = initialTime(state.points, action.payload);
     },
@@ -50,8 +49,10 @@ export const tamagotchiSlice = createSlice({
     },
     reset: (state) => {
       state.health = 5;
-      state.points = 0;
+      if (state.points >= 1500) state.points = 0;
+      else state.points = -50;
       state.ready = false;
+      state.askArr = [];
     },
     setTimer: (state) => {
       if (typeof state.timer === 'number') {
@@ -59,12 +60,11 @@ export const tamagotchiSlice = createSlice({
         if (oldValue <= 0) {
           state.health -= 1;
           state.ready = false;
+          state.askArr = [];
+          state.points -= 50;
         }
         const newValue = oldValue - 1;
         state.timer = newValue;
-
-        // const newValue = oldValue > 0 ? oldValue - 1 : (state.health -= 1), (state.ready = false);
-        // state.timer = initialTime(state.points);
       }
     },
   },

@@ -1,22 +1,19 @@
 import { useEffect, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { setTimer, selectTimer, ready } from '../../slices/slices';
+import { setTimer, selectTimer, setReady } from '../../slices/slices';
 
 const Timer = (points: number, isReady: boolean) => {
-  // babyTime = 30s;
-  // childTime = 60s;
-  // adultTime = 100s;
-  // let timer: number | 'off';
-
   const dispatch = useAppDispatch();
-  // const isReady = useAppSelector(ready);
   const timeState = useAppSelector(selectTimer);
 
   const [time, setTime] = useState<number | 'time'>(timeState);
   const [intervalID, setIntervalID] = useState(0);
-  // const [readyState, setReadyState] = useState<boolean>(isReady);
-  // // const transformedTime = transformTime(time);
+  const [isEndTime, setEndTime] = useState(false);
+
+  useEffect(() => {
+    dispatch(setReady(false));
+  }, [isEndTime]);
 
   useEffect(() => {
     if (isReady && points < 300) setTime(30);
@@ -25,6 +22,7 @@ const Timer = (points: number, isReady: boolean) => {
   }, []);
 
   const onStartTimer = () => {
+    setEndTime(false);
     const interval = window.setInterval(() => {
       if (typeof time === 'number') setTime(time - 1);
       dispatch(setTimer());
@@ -32,14 +30,13 @@ const Timer = (points: number, isReady: boolean) => {
     setIntervalID(interval);
 
     if (time === 0 || !isReady) {
+      setEndTime(true);
       clearInterval(intervalID);
-      console.log('00000000000000');
     }
     return time;
   };
 
   const transformTime = (time: number | 'time') => {
-    console.log('timerrr', time);
     if (typeof time === 'number' && isReady) {
       const min = `${Math.trunc(time / 60)}`.padStart(2, '0');
       const sec = `${time - Number(min) * 60}`.padStart(2, '0');

@@ -1,0 +1,112 @@
+// .lobby{
+//   align-content: center;
+// }
+
+.rules {
+  // background-color: rgba($color: #000000, $alpha: 0.5);
+  margin-top: 90px;
+  width: 100%;
+  height: 600px;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.rulesTitle {
+  background-color: rgba($color: #6e59c0, $alpha: 0.9);
+  width: 1100px;
+  line-height: 200%;
+  height: 50px;
+  margin-top: 7px;
+  margin-left: 150px;
+  text-align: center;
+  color: white;
+}
+
+.rulesAnnotation {
+  margin-top: 30px;
+  background-color: #6e59c0;
+  border-radius: 40px;
+  padding: 30px;
+  width: 300px;
+  margin-left: -600px;
+}
+
+.clickToPlay {
+  background-color: #6e59c0;
+  border-radius: 40px;
+  padding: 30px;
+  margin-right: -530px;
+  width: 300px;
+  margin-top: 30px;
+}
+
+.rule1 {
+  background-color: darkslateblue;
+  border-radius: 40px;
+  padding: 30px;
+  margin-top: -50px;
+}
+
+.rule1::before {
+  color: #6e59c0;
+  font-size: xx-large;
+  text-align: center;
+  content: '?';
+  background-color: aliceblue;
+  position: absolute;
+  width: 300px;
+  margin-top: -135px;
+  margin-left: 110px;
+  height: 40px;
+  z-index: 5;
+}
+
+.rule2 {
+  background-color: darkslateblue;
+  border-radius: 40px;
+  padding: 30px;
+  margin-top: -133px;
+  margin-right: -800px;
+}
+
+.rule3 {
+  background-color: darkslateblue;
+  border-radius: 40px;
+  width: 350px;
+  padding: 30px;
+  margin-top: -145px;
+  margin-left: -490px;
+}
+
+.rule1pointer,.rule2pointer,.rule3pointer {
+  position: inherit;
+  font-size: 5em;
+  color: darkslateblue;
+}
+
+.rule1pointer {
+  margin-top: 130px;
+  margin-left: 160px;
+  transform: rotate(-90deg);
+}
+
+.rule2pointer {
+  margin-top: 505px;
+  margin-left: 600px;
+  transform: rotate(90deg);
+}
+
+.rule3pointer {
+  margin-top: 500px;
+  margin-left: -850px;
+  transform: rotate(135deg);
+}
+
+.eggContainer {
+  margin-left: 150px;
+  position: relative;
+  margin-top: -75px;
+  z-index: 5;
+}

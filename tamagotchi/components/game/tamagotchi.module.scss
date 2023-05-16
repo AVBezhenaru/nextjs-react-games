@@ -7,7 +7,7 @@
 }
 
 .tamagotchigame {
-  font-family: 'bonche-light';
+  font-family: "bonche-light", sans-serif;
   padding-top: 90px;
   padding-bottom: 5px;
   display: flex;
@@ -35,7 +35,7 @@
   text-align: center;
   width: 100px;
   height: 50px;
-  font-family: 'bonche-light';
+  font-family: "bonche-light", sans-serif;
   font-weight: 600;
   font-size: xx-large;
   color: #ccf6ff;
@@ -112,13 +112,13 @@
 }
 
 .time_health p{
-  font-family: 'bonche-light';
+  font-family: "bonche-light", sans-serif;;
   font-size: xx-large;
 }
 
 .time{
   margin-top: 20px;
-  font-family: 'bonche-light';
+  font-family: "bonche-light", sans-serif;
   font-weight:200;
 }
 
@@ -145,6 +145,7 @@
 
 .askFoods{
   background-color: aliceblue;
+  padding: 20px;
   justify-content: center;
   gap: 10px;
   align-items: center;
@@ -154,30 +155,6 @@
   box-shadow: 0px 0px 10px 10px aliceblue;
   margin-top: 70px;
   display: flex;
-}
-
-.askFoods::after{
-  content: '';
-  position: absolute;
-  border-radius: 50%;
-  box-shadow: 0px 0px 10px 10px aliceblue;
-  background-color: aliceblue;
-  height: 20px;
-  width: 100px;
-  margin-right:-200px;
-  margin-bottom:-120px ;
-}
-
-.askFoods::before{
-  content: '';
-  position: absolute;
-  border-radius: 50%;
-  box-shadow: 0px 0px 10px 10px aliceblue;
-  background-color: aliceblue;
-  height: 5px;
-  width: 30px;
-  margin-right:-100px;
-  margin-bottom:-160px;
 }
 
 .container{

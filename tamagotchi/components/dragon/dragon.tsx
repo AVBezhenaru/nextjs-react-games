@@ -5,7 +5,6 @@ import PetAdult from './pet_adult';
 import PetBaby from './pet_baby';
 import PetChild from './pet_child';
 import classes from './dragon.module.scss';
-// import { reset } from '../game/tamagotchi'
 
 const Dragon = (points: number, health: number) => {
   const dispatch = useAppDispatch();

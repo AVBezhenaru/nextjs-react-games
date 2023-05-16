@@ -61,7 +61,6 @@
   }
 
   99% {
-
     margin-left: 0px;
   }
 
@@ -176,13 +175,106 @@
   }
 }
 
+@keyframes moveLeftHalf {
+  from {
+    transform: rotate(0deg);
+  }
+
+  2%{
+    transform: rotate(-5deg);
+  }
+
+  25%{
+    transform: rotate(-45deg);
+  }
+
+  50% {
+    transform: rotate(-40deg);
+  }
+
+  to {    
+    transform: rotate(-80deg);
+  }
+}
+
+@keyframes moveRightHalf {
+  from {
+    transform: rotate(0deg);
+  }
+
+  2%{
+    transform: rotate(5deg);
+    
+  }
+
+  25%{
+    transform: rotate(45deg);
+  }
+
+  50% {
+    transform: rotate(40deg);
+  }
+
+  to {    
+    transform: rotate(80deg);
+  }
+}
+
+@keyframes moveEgg {
+  from {
+    transform: rotate(0deg);
+    margin-left: 0px;
+  }
+
+  25%{
+    transform: rotate(-6deg);
+    margin-left: -25px;
+  }
+
+  50% {
+    transform: rotate(6deg);
+    margin-left: 25px;
+  }
+
+  to {    
+    margin-bottom: 0px;
+    margin-left: 0px;
+  }
+}
+
+.egg {
+  margin-bottom: 1px;
+}
+
+.eggAnimate {
+  animation: moveEgg 3s ease-in-out 1s infinite;
+}
+
+.leftHalf {
+  margin-bottom: 1px;
+}
+
+.leftHalfAnimate {
+  transform-origin: 30% 80%;
+  animation: moveLeftHalf 1s ease-in-out 1s forwards;
+}
+
+.rightHalf {
+  margin-bottom: 1px;
+}
+
+.rightHalfAnimate {
+  transform-origin: 70% 80%;
+  animation: moveRightHalf 1s ease-in-out 1200ms forwards;
+}
+
 .final_message, .lose_message, .lose_question{
   align-content: space-between;
   position: absolute;
   margin-top: 55px;
   
   border-radius: 50px;
-  font-family: 'bonche-light';
+  font-family: "bonche-light", sans-serif;
   font-weight: 200;
   color:aliceblue;  
   display: flex;
@@ -199,10 +291,10 @@
   background-repeat: no-repeat;
 }
 
-.lose_message {
+.lose_message {  
   font-size: xx-large;
   padding-top: 150px;
-  background-color: rgb(51, 36, 90);
+  background-image: url('../../img/lose.png');
 }
 
 .button_reset{
