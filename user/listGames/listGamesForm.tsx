@@ -12,31 +12,41 @@ import checkersIcon from '../img/checkersIcon.png';
 import hangmanIcon from '../img/hangmanIcon.png';
 import aerohokkeyIcon from '../img/aerohokkeyIcon.png';
 import solitairIcon from '../img/solitairIcon.png';
+import memoryCards from '../img/memoryCards.png';
 import game2048Icon from '../img/2048Icon.png';
 import fruitNinjaIcon from '../img/fruitNinjaIcon.png';
 import sapperIcon from '../img/sapperIcon.png';
 import tanksIcon from '../img/tanksIcon.png';
 import doodler from '../img/doodler-guy.png';
+import aimTrainerIcon from '../img/aim-trainer.svg';
 import twoMinInSpaceIcon from '../img/twoMinInSpaceIcon.png';
 
 import { GameLink } from './GameLink';
 import { Games, Page, HeaderGames, ListGames } from './listGamesStyle';
 
+type GameLinkData = {
+  src: string;
+  title: string;
+  href?: string;
+};
+
 const ListGamesForm = () => {
   const path = 'games/';
 
-  const gameLinksArr = [
+  const gameLinksArr: GameLinkData[] = [
     { src: chessIcon.src, title: 'chess' },
     { src: checkersIcon.src, title: 'checkers' },
     { src: hangmanIcon.src, title: 'hangman' },
     { src: aerohokkeyIcon.src, title: 'airhockey' },
     { src: tetrisIcon.src, title: 'tetris' },
     { src: solitairIcon.src, title: 'solitaire' },
+    { src: memoryCards.src, title: 'memoryCards' },
     { src: game2048Icon.src, title: 'game2048' },
     { src: fruitNinjaIcon.src, title: 'fruitninja' },
     { src: sapperIcon.src, title: 'sapper' },
     { src: tanksIcon.src, title: 'tanks' },
     { src: doodler.src, title: 'doodle-jump' },
+    { src: aimTrainerIcon.src, title: 'aim trainer', href: 'aim-trainer' },
     { src: twoMinInSpaceIcon.src, title: '2min-in-space' },
   ];
   return (
@@ -54,7 +64,7 @@ const ListGamesForm = () => {
                     key={uuidv4()}
                     src={item.src}
                     title={item.title}
-                    href={`${path}${item.title}`}
+                    href={`${path}${item.href || item.title}`}
                   />
                 ))}
               </ListGames>
