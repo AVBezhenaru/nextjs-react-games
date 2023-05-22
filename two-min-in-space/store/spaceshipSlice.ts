@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { sinAndCos } from '../assests/sinAndCos';
 import { RootState } from '../../store';
+import { getCurrentDegreesRockets } from '../assests/getCurrentDegreesRockets';
 
 export const getSpaceshipState = (state: RootState) => state.spaceship;
 const spaceshipSlice = createSlice({
@@ -10,27 +11,27 @@ const spaceshipSlice = createSlice({
     widthSpaceship: 60,
     heightSpaceship: 60,
     background: [{ x: 0, y: 0 }],
-    asteroids: [{ x: 0, y: 0 }],
-    asteroidsWidth: 80,
-    asteroidsHeight: 80,
-    spaceshipXpos: 500,
-    spaceshipYpos: 600,
-    spaceshipSpeedX: 2,
-    spaceshipSpeedY: 2,
-    rotationXinRight: 0,
-    rotationYinRight: 0,
-    rotationXinLeft: 0,
-    rotationYinLeft: 0,
+    asteroids: [{ x: 200, y: 0, image: null, width: 80, height: 80 }],
+    rockets: [{ x: 200, y: 0 }],
+    spaceshipXpos: 600,
+    spaceshipYpos: 1000,
+    spaceshipSpeedX: 3,
+    spaceshipSpeedY: 3,
     currentDegrees: 0,
-    speed: 0.5,
-    delta: 1,
-    timestamp: 0,
+    currentDegreesRockets: 0,
+    speed: 3,
     speedAsteroids: 0.5,
-    stars: [{ x: 1, y: 2, opacity: 0.1 }],
-    speedStars: 0.5,
+    speedRockets: 3,
+    rocketsWidth: 40,
+    rocketsHeight: 60,
     gameOver: false,
     playAgain: false,
     mousePosition: { x: 0, y: 0 },
+    currentRocket: 0,
+    goaway: false,
+    timeGame: { min: 2, sec: 0 },
+    savePlayerResult: { min: 0, sec: 0 },
+    win: false,
   },
   reducers: {
     fly(state) {
@@ -38,13 +39,45 @@ const spaceshipSlice = createSlice({
       state.spaceshipYpos -= state.spaceshipSpeedY * sinAndCos(state.currentDegrees).cos;
       state.spaceshipXpos += state.spaceshipSpeedX * sinAndCos(state.currentDegrees).sin;
     },
+    hunt(state, action) {
+      if (!state.goaway) {
+        state.rockets[action.payload].x -=
+          state.speedRockets * sinAndCos(state.currentDegreesRockets).sin;
+        state.rockets[action.payload].y +=
+          state.speedRockets * sinAndCos(state.currentDegreesRockets).cos;
+        if (state.rockets[action.payload].y > state.spaceshipYpos) {
+          state.rockets[action.payload].y +=
+            state.speedRockets * sinAndCos(state.currentDegreesRockets).cos;
+          state.rockets[action.payload].x -=
+            state.speedRockets * sinAndCos(state.currentDegreesRockets).sin;
+        }
+      }
+      if (state.goaway) {
+        state.rockets[action.payload].x += state.speedRockets;
+        state.rockets[action.payload].y += state.speedRockets;
+      }
+    },
+    changeMotionVectorRockets(state) {
+      state.currentDegreesRockets = getCurrentDegreesRockets(
+        state.spaceshipXpos,
+        state.spaceshipYpos,
+        state.rockets[state.currentRocket],
+      );
+    },
+    goawayRocket(state) {
+      state.goaway = true;
+      const newRocket = { x: -50, y: -400 + state.spaceshipYpos };
+      state.rockets = [...state.rockets, newRocket];
+    },
+    goNewRocket(state) {
+      state.currentRocket += 1;
+      state.goaway = false;
+    },
     goLeft(state) {
       state.currentDegrees -= 5;
       if (state.currentDegrees === -360) {
         state.currentDegrees = 0;
       }
-      state.rotationXinRight = state.rotationXinLeft - 300 * sinAndCos(state.currentDegrees).cos;
-      state.rotationYinRight = state.rotationYinLeft - 300 * sinAndCos(state.currentDegrees).cos;
       state.spaceshipXpos += state.speed * sinAndCos(state.currentDegrees).sin;
     },
     goRight(state) {
@@ -53,16 +86,6 @@ const spaceshipSlice = createSlice({
         state.currentDegrees = 0;
       }
       state.spaceshipYpos -= state.speed * sinAndCos(state.currentDegrees).cos;
-    },
-    translateAndRotateRight(state) {
-      state.spaceshipXpos += state.widthSpaceship * 3;
-      state.spaceshipYpos += state.heightSpaceship;
-    },
-    setTimestamp(state) {
-      state.timestamp = Date.now();
-      if (state.timestamp !== 0) {
-        state.delta = Date.now() - state.timestamp;
-      }
     },
     addAsteroid(state, action) {
       state.asteroids = [...state.asteroids, action.payload.newAsteroid];
@@ -79,40 +102,42 @@ const spaceshipSlice = createSlice({
     gameOver(state) {
       state.gameOver = true;
     },
-    getMousePosition(state, action) {
-      state.mousePosition = action.payload;
-      if (
-        state.mousePosition.x >= window.innerWidth / 2 - 300 &&
-        state.mousePosition.x <= window.innerWidth / 2 + 300 &&
-        state.mousePosition.y >= window.innerHeight / 2 - 300 &&
-        state.mousePosition.y <= window.innerHeight / 2 + 300
-      ) {
-        state.gameOver = false;
-        state.playAgain = true;
+    dropTime(state) {
+      if (state.timeGame.min > 0) {
+        if (state.timeGame.sec > 0) {
+          // eslint-disable-next-line operator-assignment
+          state.timeGame.sec = state.timeGame.sec - 1;
+        } else if (state.timeGame.sec === 0) {
+          // eslint-disable-next-line operator-assignment
+          state.timeGame.min = state.timeGame.min - 1;
+          state.timeGame.sec = 59;
+        }
+      } else if (state.timeGame.min === 0) {
+        if (state.timeGame.sec > 0) {
+          // eslint-disable-next-line operator-assignment
+          state.timeGame.sec = state.timeGame.sec - 1;
+        } else if (state.timeGame.sec === 0) {
+          state.timeGame.min = 0;
+          state.timeGame.sec = 0;
+          state.win = true;
+        }
       }
     },
-    // addStar(state, action) {
-    //   state.stars = [...state.stars, action.payload.newStar];
-    // },
-    // goStar(state, action) {
-    //   state.stars[action.payload].y += state.speedAsteroids;
-    // },
-    // repeatStars(state) {
-    //   const newObj = { y: window.innerHeight-1 };
-    //   state.stars = [...state.stars.map((objStar) => Object.assign(newObj, objStar))];
-    // },
   },
 });
 export default spaceshipSlice.reducer;
 export const {
   goLeft,
   goRight,
-  setTimestamp,
   addAsteroid,
   goAsteroid,
   goBackground,
   addBackground,
   fly,
   gameOver,
-  getMousePosition,
+  hunt,
+  changeMotionVectorRockets,
+  goawayRocket,
+  dropTime,
+  goNewRocket,
 } = spaceshipSlice.actions;
