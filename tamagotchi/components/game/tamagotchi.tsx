@@ -19,7 +19,7 @@ const Tamagotchi = () => {
   useEffect(() => {
     setPointsState(points);
   }, [points, isReady]);
-  const columnPointHeight = `${pointsState / 3 + 50}px`;
+  const columnPointHeight = `${pointsState / 3 / 10.8 + 4.6}vh`;
   const styleHeart = {
     color: 'tomato',
     healthPoints: health,
@@ -29,9 +29,9 @@ const Tamagotchi = () => {
     <div className={classes.tamagotchigame}>
       <div className={classes.left_section}>
         <div className={classes.pointsColumn}>
-          <p style={{ marginBottom: '150px' }}> 1500</p>
-          <p style={{ marginBottom: '150px' }}>900</p>
-          <p style={{ marginBottom: '110px' }}>300</p>
+          <p style={{ marginBottom: '13.9vh' }}> 1500</p>
+          <p style={{ marginBottom: '13.9vh' }}>900</p>
+          <p style={{ marginBottom: '10.2vh' }}>300</p>
           <div style={{ height: columnPointHeight }} className={classes.points} />
         </div>
         <div className={classes.time_health}>

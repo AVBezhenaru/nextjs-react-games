@@ -7,6 +7,8 @@
 }
 
 .tamagotchigame {
+  width: 100vw;
+  height: 100vh;
   font-family: "bonche-light", sans-serif;
   padding-top: 90px;
   padding-bottom: 5px;
@@ -16,28 +18,28 @@
 }
 
 .pointsColumn{
-  margin-right: 50px;
+  margin-right: 2.6vw;
   align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   border-radius: 50px;
   background-color: rgb(169, 255, 255);
-  width: 100px;
-  height: 600px;
-  box-shadow: -10px 10px 30px 10px #746bac,
-  inset 10px 10px 50px 5px #597176,
-  inset 5px -5px 10px 5px #597176;
+  width: 5.2vw;
+  height: 64.5vh;
+  box-shadow: -1vh 1vh 3vh 1vh #746bac,
+  inset 1vh 1vh 5vh 0.5vh #597176,
+  inset 0.5vh -0.5vh 1vh 0.5vh #597176;
   // overflow: hidden;
 }
 
 .pointsColumn p{
   text-align: center;
-  width: 100px;
-  height: 50px;
+  width: 5.2vw;
+  height: 4.6vh;
   font-family: "bonche-light", sans-serif;
   font-weight: 600;
-  font-size: xx-large;
+  font-size: 3.5vh;
   color: #ccf6ff;
   text-shadow: 0 0 3px #11262a;
   border-bottom: 5px groove #afd9e2;
@@ -52,8 +54,8 @@
   border-radius: 10px 10px 50px 50px;
   display: flex;
   flex-direction: row;
-  width: 100px;
-  height: 250px;
+  width: 5.2vw;
+  height: 13vh;
   background-color: #3e6ac8;
   box-shadow:
   inset 10px 10px 50px 5px #363c67,
@@ -63,12 +65,12 @@
 
 .points::before {
   content: '';
-  margin-top: -15px;
+  margin-top: -1.4vh;
   position: relative;
   display: flex;
   border-radius: 50%;
-  height: 50px;
-  width: 500px;
+  height: 4.6vh;
+  width: 26vw;
   box-shadow:
   inset 5px -5px 3px 2px #c7dbff;
   background-color: #addbff;
@@ -79,16 +81,15 @@
   display: flex;
   font-size: xx-large;
   justify-content: center;
-  width: 100px;
-  height: 100px;
+  width: 5.2vw;
+  height: 9.3vh;
 }
 
 .time {
   display: flex;
-  font-size: xx-large;
   justify-content: center;
-  width: 100px;
-  height: 50px;
+  width: 5.2vw;
+  height: 4.6vh;
 }
 
 .left_section{
@@ -96,30 +97,32 @@
   flex-direction: column;
 }
 
+.heart{
+  display: flex;
+  justify-content: center;
+}
+
 .time_health {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  margin-top: 50px;
-  width: 100px;
-  height: 150px;
-  border-radius: 10px 0 0 10px;
-  box-shadow: 0px 0px 10px 5px rgb(90, 91, 146),
-  0px 0px 10px 7px rgb(172, 173, 229),
-  0px 0px 20px 10px #7d72cc,
-  0px 0px 0px 26px #61599d;
+  margin-top: 3vh;
+  width: 5.2vw;
+  height: 13.9vh;
+  border-radius: 10px 10px 10px 10px;
 }
 
 .time_health p{
-  font-family: "bonche-light", sans-serif;;
-  font-size: xx-large;
+  font-family: "bonche-light", sans-serif;  
+  font-size: 3.5vh;
 }
 
 .time{
-  margin-top: 20px;
+  margin-top: 1.5vh;
   font-family: "bonche-light", sans-serif;
-  font-weight:200;
+  font-size: 1.5vw;
+  font-weight: 200;
 }
 
 .right_section{
@@ -133,41 +136,42 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 1100px;
-  height: 600px;
+  width: 57.3vw;
+  height: 64.5vh;
   border-radius: 10px 10px 0 0;
-  box-shadow: 0px 0px 10px 5px rgb(90, 91, 146),
-  0px 0px 10px 7px rgb(172, 173, 229),
-  0px 0px 20px 10px #7d72cc,
-  0px 0px 0px 26px #61599d;
+  box-shadow: 0vh 0vh 0.9vh 0.5vh rgb(90, 91, 146),
+  0vh 0vh 0.9vh 0.7vh rgb(172, 173, 229),
+  0vh 0vh 1.8vh 0.9vh #7d72cc,
+  0vh 0vh 0vh 2.4vh #61599d;
   background-image: url('../../img/background-screen.png');
+  background-size: 57.3vw 64.5vh;
 }
 
 .askFoods{
   background-color: aliceblue;
-  padding: 20px;
+  padding: 0.7vh;
   justify-content: center;
-  gap: 10px;
+  gap: 0.5vw;
   align-items: center;
-  height: 80px;
-  border-radius: 40px;
-  min-width: 500px;
-  box-shadow: 0px 0px 10px 10px aliceblue;
-  margin-top: 70px;
+  height: 7.4vh;
+  border-radius: 3.7vh;
+  min-width: 26vw;
+  box-shadow: 0px 0px 2vh 2vh aliceblue;
+  margin-top: 7vh;
   display: flex;
 }
 
 .container{
-  margin-top: 50px;
-  margin-bottom: 30px;
+  margin-top: 4.6vh;
+  margin-bottom: 2.8vh;
   box-sizing: border-box;
   display: flex;
-  width: 1100px;
-  height: 150px;
+  width: 57.3vw;
+  height: 13.9vh;
   flex-wrap: wrap;
-  box-shadow: 0px 0px 10px 5px rgb(90, 91, 146),
-  0px 0px 10px 7px rgb(172, 173, 229),
-  0px 0px 20px 10px #7d72cc,
-  0px 0px 0px 26px #61599d;
-  border-radius: 0 0 10px 0;
+  box-shadow: 0vh 0vh 0.9vh 0.5vh rgb(90, 91, 146),
+  0vh 0vh 0.9vh 0.7vh rgb(172, 173, 229),
+  0vh 0vh 1.8vh 0.9vh #7d72cc,
+  0vh 0vh 0vh 2.4vh #61599d;
+  border-radius: 0 0 10px 10px;
 }

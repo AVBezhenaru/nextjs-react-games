@@ -9,63 +9,63 @@
 @keyframes moveDragon {
   from {
     
-    margin-left: 0px;
+    margin-left: 0vw;
   }
 
   1% {
-    margin-left: 0px;
+    margin-left: 0vw;
   }
 
   12% {
-    margin-left: -400px;
+    margin-left: -20.8vw;
   }
 
   13% {
-    margin-left: -400px;
+    margin-left: -20.8vw;
   }
 
   27% {
-    margin-left: -800px;
+    margin-left: -41.6vw;
     transform: scale(1, 1);
   }
 
   28% {
-    margin-left: -800px;
+    margin-left: -41.6vw;
     transform: scale(-1, 1);
   }
 
   50% {
-    margin-left: 0px;
+    margin-left: 0vw;
   }
 
   51% {
-    margin-left: 0px;
+    margin-left: 0vw;
   }
 
   72% {
-    margin-left: 800px;
+    margin-left: 41.6vw;
     transform: scale(-1, 1);
   }
 
   73% {
-    margin-left: 800px;
+    margin-left: 41.6vw;
     transform: scale(1, 1);
   }
 
   90% {
-    margin-left: 400px;
+    margin-left: 20.8vw;
   }
 
   91% {
-    margin-left: 400px;
+    margin-left: 20.8vw;
   }
 
   99% {
-    margin-left: 0px;
+    margin-left: 0vw;
   }
 
   to {
-    margin-left: 0px;
+    margin-left: 0vw;
 
   }
 }
@@ -81,7 +81,7 @@
 @keyframes moveBaby {
   from {
     transform: rotate(3deg);
-    margin-bottom: 0px;
+    margin-bottom: 0vh;
   }
 
   25%{
@@ -90,11 +90,11 @@
 
   50% {
     transform: rotate(3deg);
-    margin-bottom: 50px;
+    margin-bottom: 4.6vh;
   }
 
   to {    
-    margin-bottom: 0px;
+    margin-bottom: 0vh;
   }
 }
 
@@ -223,27 +223,27 @@
 @keyframes moveEgg {
   from {
     transform: rotate(0deg);
-    margin-left: 0px;
+    margin-left: 0vw;
   }
 
   25%{
     transform: rotate(-6deg);
-    margin-left: -25px;
+    margin-left: -1.3vh;
   }
 
   50% {
     transform: rotate(6deg);
-    margin-left: 25px;
+    margin-left: 1.3vh;
   }
 
   to {    
-    margin-bottom: 0px;
-    margin-left: 0px;
+    margin-bottom: 0vh;
+    margin-left: 0vw;
   }
 }
 
 .egg {
-  margin-bottom: 1px;
+  margin-bottom: 0vw;
 }
 
 .eggAnimate {
@@ -251,7 +251,7 @@
 }
 
 .leftHalf {
-  margin-bottom: 1px;
+  margin-bottom: 0vw;
 }
 
 .leftHalfAnimate {
@@ -260,7 +260,7 @@
 }
 
 .rightHalf {
-  margin-bottom: 1px;
+  margin-bottom: 0vh;
 }
 
 .rightHalfAnimate {
@@ -271,37 +271,37 @@
 .final_message, .lose_message, .lose_question{
   align-content: space-between;
   position: absolute;
-  margin-top: 55px;
-  
-  border-radius: 50px;
+  margin-top: 5vh;
   font-family: "bonche-light", sans-serif;
   font-weight: 200;
   color:aliceblue;  
   display: flex;
   justify-content: center;
-  width: 1000px;
-  height: 480px;
+  width: 52vw;
+  height: 44.4vh;
   padding: 50px 50px;
 }
 
 .final_message {
-  font-size: larger;
+  padding-top: 7vh;
+  font-size: 2vh;
   background-image: url('../../img/final.png');
-  background-position: 0px -5px;
+  background-size: 52vw;
+  background-position: 0vh -0.5vw;
   background-repeat: no-repeat;
 }
 
 .lose_message {  
-  font-size: xx-large;
-  padding-top: 150px;
+  font-size: 3.5vh;
+  padding-top: 13.9vh;
   background-image: url('../../img/lose.png');
 }
 
 .button_reset{
-  width: 200px;
-  height: 50px;
+  width: 10.4vw;
+  height: 4.6vh;
   background-color: darkslateblue;
   border: 1px solid aliceblue;
-  margin-top: 466px;
+  margin-top: 7vh;
   position: absolute;
 }

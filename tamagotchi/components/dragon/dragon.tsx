@@ -35,7 +35,7 @@ const Dragon = (points: number, health: number) => {
   return (
     <>
       <p className={classes.lose_message}> Питомец покинул вас в поисках пропитания. </p>
-      <p className={classes.lose_question} style={{ paddingTop: '380px' }}>
+      <p className={classes.lose_question} style={{ paddingTop: '35.2vh' }}>
         Попробовать еще раз?
       </p>
       <button className={classes.button_reset} type="button" onClick={finReset}>

@@ -19,8 +19,8 @@ const Egg = () => {
   return (
     <div className={isBorn.egg} onClick={() => setBorn(animateClassEgg)}>
       <svg
-        width="800px"
-        height="220px"
+        width="42.7vw"
+        height="20.4vh"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 98.15 131.68"
       >
@@ -366,7 +366,7 @@ const Egg = () => {
           </g>
         </g>
       </svg>
-    </div>
+    </div >
   );
 };
 

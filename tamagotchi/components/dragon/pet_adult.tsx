@@ -3,8 +3,8 @@ import classes from './dragon.module.scss';
 const PetAdult = () => (
   <div className={classes.dragon_set}>
     <svg
-      width="450px"
-      height="450px"
+      width="23.4wv"
+      height="41.6vh"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 464.92 471.57"
     >

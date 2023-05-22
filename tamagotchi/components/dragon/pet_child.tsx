@@ -2,7 +2,12 @@ import classes from './dragon.module.scss';
 
 const PetChild = () => (
   <div className={classes.dragon_set}>
-    <svg width="300px" height="300px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 167.3 229.29">
+    <svg
+      width="15.6vw"
+      height="27.8vh"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 167.3 229.29"
+    >
       <title>child</title>
       <g id="lay_2" data-name="lay 2">
         <g id="lay_1-2" data-name="lay 1">
