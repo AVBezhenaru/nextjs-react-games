@@ -1,11 +1,13 @@
+import { ReactNode } from 'react';
+
+export type SectionChildType = {
+  name: string;
+  body: ReactNode;
+};
+
 export type SectionType = {
   icon: string;
   name: string;
-  body: JSX.Element;
+  body: ReactNode;
   sectionChildren?: SectionChildType[];
-};
-
-export type SectionChildType = {
-  name:string;
-  body:JSX.Element
 };
