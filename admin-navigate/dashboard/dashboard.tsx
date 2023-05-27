@@ -28,8 +28,11 @@ const Dashboard = (props: { arr: SectionType[] }) => {
             key={child.name}
             className={slasses.section_child}
             onClick={() => activeChild(child.name)}
-            style={childStyle === child.name
-              ? { backgroundColor: '#4a5161', borderRadius: 50 } : undefined}
+            style={
+              childStyle === child.name
+                ? { backgroundColor: '#4a5161', borderRadius: 50 }
+                : undefined
+            }
           >
             {child.name}
           </li>
