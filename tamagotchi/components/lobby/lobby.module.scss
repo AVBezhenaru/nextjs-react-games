@@ -1,0 +1,123 @@
+.lobby{
+  width: 100vw;
+  font-size:  0.7vw;
+}
+
+.rules {
+  margin-top: 90px;
+  width: 100vw;
+  height: 5.6vh;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.rulesTitle {
+  background-color: rgba($color: #6e59c0, $alpha: 0.9);
+  width: 40vw;
+  border-radius: 10px;
+  line-height: 200%;
+  // height: 5vh;
+  min-height: 4vh;
+  max-height: 4vh;
+  margin-top: 0.6vh;
+  margin-left: 8.7vw;
+  text-align: center;
+  color: white;
+}
+
+.rulesAnnotation {
+  margin-top: 8vh;
+  background-color: #6e59c0;
+  border-radius: 3.5vh;
+  padding: 3vh;
+  width: 15.6vw;
+  min-height: 15vh;
+  max-height: 15vh;
+  margin-left: -31vw;
+}
+
+.clickToPlay {
+  background-color: #6e59c0;
+  border-radius: 3.5vh;
+  padding: 3vh;
+  margin-right: -27.6vw;
+  width: 15.6vw;
+  min-height: 13vh;
+  max-height: 13vh;
+  margin-top: 6vh;
+}
+
+.rule1 {
+  background-color: darkslateblue;
+  border-radius: 3.5vh;
+  padding: 3vh;
+  min-height: 8vh;
+  max-height: 8vh;
+  margin-top: -4.6vh;
+}
+
+.rule1::before {
+  color: #6e59c0;
+  font-size: 3vh;
+  text-align: center;
+  content: '?';
+  background-color: aliceblue;
+  position: absolute;
+  width: 15.6vw;
+  margin-top: -18vh;
+  margin-left: 3.5vw;
+  height: 6vh;
+  z-index: 5;
+}
+
+.rule2 {
+  background-color: darkslateblue;
+  border-radius: 3.5vh;
+  padding: 3vh;
+  min-height: 8vh;
+  max-height: 8vh;
+  margin-top: -12.3vh;
+  margin-right: -41.7vw;
+}
+
+.rule3 {
+  background-color: darkslateblue;
+  border-radius: 3.5vh;
+  width: 18.2vw;
+  padding: 3vh;
+  margin-top: -13.4vh;
+  margin-left: -25.5vw;
+}
+
+.rule1pointer,.rule2pointer,.rule3pointer {
+  position: inherit;
+  font-size: 6vh;
+  color: darkslateblue;
+}
+
+.rule1pointer {
+  margin-top: 19vh;
+  margin-left: 8.3vw;
+  transform: rotate(-90deg);
+}
+
+.rule2pointer {
+  margin-top: 57vh;
+  margin-left: 28vw;
+  transform: rotate(90deg);
+}
+
+.rule3pointer {
+  margin-top: 54vh;
+  margin-left: -43.5vw;
+  transform: rotate(135deg);
+}
+
+.eggContainer {
+  margin-left: 7.8vw;
+  position: relative;
+  margin-top: -5.9vh;
+  z-index: 5;
+}
