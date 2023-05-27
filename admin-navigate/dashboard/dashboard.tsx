@@ -10,9 +10,14 @@ const Dashboard = (props: { arr: SectionType[] }) => {
   const { arr } = props;
 
   const [pagestyle, setPagestyle] = useState('home');
+  const [childStyle, setChildStyle] = useState('');
 
   function activeHandler(name: string) {
     setPagestyle(name);
+    navigate(`admin/${name.split(' ').join('-')}`);
+  }
+  function activeChild(name: string) {
+    setChildStyle(name);
     navigate(`admin/${name.split(' ').join('-')}`);
   }
   const sections = arr.map((section: SectionType) => {
@@ -22,7 +27,9 @@ const Dashboard = (props: { arr: SectionType[] }) => {
           <li
             key={child.name}
             className={slasses.section_child}
-            onClick={() => navigate(`admin/${child.name.split(' ').join('-')}`)}
+            onClick={() => activeChild(child.name)}
+            style={childStyle === child.name
+              ? { backgroundColor: '#4a5161', borderRadius: 50 } : undefined}
           >
             {child.name}
           </li>
@@ -32,7 +39,7 @@ const Dashboard = (props: { arr: SectionType[] }) => {
             className={slasses.section_children}
             style={
               pagestyle === section.name
-                ? { height: 50 * section.sectionChildren.length }
+                ? { height: 57 * section.sectionChildren.length }
                 : undefined
             }
           >

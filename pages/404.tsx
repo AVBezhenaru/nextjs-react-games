@@ -15,7 +15,7 @@ function NotFoundPage() {
         fontSize: '20px',
         fontWeight: '400',
         marginTop: '30%',
-        textAlign: 'center'
+        textAlign: 'center',
       }}
     >
       <span>404 </span>
