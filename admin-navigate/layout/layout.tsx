@@ -11,7 +11,6 @@ import classes from './layout.module.scss';
 // add .tsx (named as your section`s name) in 'pages/admin' folder in obedience to 'admin.tsx'
 
 const Layout = () => {
-  console.log('gb');
   const routChildrenArr = sectionsArr.reduce(
     (accumulator, currentValue) =>
       currentValue.sectionChildren
@@ -35,7 +34,7 @@ const Layout = () => {
             {routChildrenArr.map((sectionChild: SectionChildType) => (
               <Route
                 key={sectionChild.name}
-                path={`/${sectionChild.name.split(' ').join('-')}`}
+                path={`/admin/${sectionChild.name.split(' ').join('-')}`}
                 element={sectionChild.body}
               />
             ))}
