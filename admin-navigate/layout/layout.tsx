@@ -8,7 +8,7 @@ import classes from './layout.module.scss';
 
 // add your section to 'sectionsArr' in obedience to type 'SectionType'
 // and add icon of your section to src/public/img/ named as your section
-// add .tsx (named as your section`s name) in 'pages' folder in obedience to 'admin.tsx'
+// add .tsx (named as your section`s name) in 'pages/admin' folder in obedience to 'admin.tsx'
 
 const Layout = () => {
   console.log('gb');

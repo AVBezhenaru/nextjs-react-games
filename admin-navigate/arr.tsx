@@ -22,7 +22,7 @@ export const sectionsArr: SectionType[] = [
     body: <p>usersusersusersusersusersusersusersusers</p>,
     sectionChildren: [
       { name: 'clever users', body: <div>cleveruserscleverusersusers</div> },
-      { name: 'big users', body: <div>bigusers</div> },
+      { name: 'big users', body: <p>bigusers</p> },
     ],
   },
   {
