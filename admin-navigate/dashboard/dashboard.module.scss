@@ -22,10 +22,6 @@
        url("../fonts/Roboto-Medium.woff") format("woff");
 }
 
-body{
-  margin: 0;
-}
-
 .dashbord {
   font-family: 'Roboto', sans-serif;
   min-height: 100vh;
@@ -85,6 +81,10 @@ body{
   text-transform: capitalize;
   border-radius: 0 25px 25px 0;
   cursor: pointer;
+}
+
+.section_name:active{
+background-color: #4a5161;
 }
 
 .section_child {

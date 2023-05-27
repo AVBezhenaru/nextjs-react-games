@@ -1,11 +1,17 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Dashboard from '../dashboard/dashboard';
+import { sectionsArr } from '../arr';
 import { SectionType, SectionChildType } from '../types';
 
-import './layout.scss';
+import classes from './layout.module.scss';
 
-const Layout = ({ sectionsArr }: { sectionsArr: SectionType[] }) => {
+// add your section to 'sectionsArr' in obedience to type 'SectionType'
+// and add icon of your section to src/public/img/ named as your section
+// add .tsx (named as your section`s name) in 'pages' folder in obedience to 'admin.tsx'
+
+const Layout = () => {
+  console.log('gb');
   const routChildrenArr = sectionsArr.reduce(
     (accumulator, currentValue) =>
       currentValue.sectionChildren
@@ -15,14 +21,14 @@ const Layout = ({ sectionsArr }: { sectionsArr: SectionType[] }) => {
   );
   return (
     <Router>
-      <div className="app">
+      <div className={classes.app}>
         <Dashboard arr={sectionsArr} />
-        <div className="page-body" style={{ marginLeft: 268 }}>
+        <div className={classes.pageBody} style={{ marginLeft: 268 }}>
           <Routes>
             {sectionsArr.map((section: SectionType) => (
               <Route
                 key={section.name}
-                path={`/${section.name.split(' ').join('-')}`}
+                path={`/admin/${section.name.split(' ').join('-')}`}
                 element={section.body}
               />
             ))}
