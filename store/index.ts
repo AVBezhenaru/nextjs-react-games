@@ -10,6 +10,7 @@ import { aimTrainerRootReducer } from '../aim-trainer/reducers/root-reducer';
 import sapperReducer from '../sapper/store/sapperSlice';
 import tanksGameReducer from '../tanks/reducers/tanksGameReducer';
 import doodlerReducer from '../doodle-jump/reducer/doodleReducer';
+import spaceshipSlice from '../two-min-in-space/store/spaceshipSlice';
 import tamagotchiSlice from '../tamagotchi/slices/slices';
 
 import user from './userSlice';
@@ -26,15 +27,16 @@ export const store = configureStore({
     sapper: sapperReducer,
     tanks: tanksGameReducer,
     doodler: doodlerReducer,
+    spaceship: spaceshipSlice,
     tamagotchi: tamagotchiSlice,
   },
   middleware(getDefaultMiddleware) {
     return getDefaultMiddleware({
       serializableCheck: false,
+      immutableCheck: false,
     });
   },
 });
-
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 
