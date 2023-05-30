@@ -9,7 +9,15 @@ function NotFoundPage() {
   }, [router]);
 
   return (
-    <div style={{ color: '#D65B88', fontSize: '20px', fontWeight: '400', marginTop: '30%' }}>
+    <div
+      style={{
+        color: '#D65B88',
+        fontSize: '20px',
+        fontWeight: '400',
+        marginTop: '30%',
+        textAlign: 'center',
+      }}
+    >
       <span>404 </span>
       <span> Page not found</span>
     </div>

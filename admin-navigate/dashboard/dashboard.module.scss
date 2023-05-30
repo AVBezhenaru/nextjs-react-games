@@ -1,0 +1,120 @@
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Roboto"),
+       url("../fonts/Roboto-Light.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-style: large;
+  font-weight: 500;
+  src: local("Roboto"),
+       url("../fonts/Roboto-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-style: larger;
+  font-weight: 600;
+  src: local("Roboto"),
+       url("../fonts/Roboto-Medium.woff") format("woff");
+}
+
+.dashbord {
+  font-family: 'Roboto', sans-serif;
+  min-height: 100vh;
+  position: fixed;
+  background-color: #383F51;
+  align-self: flex-start;
+  display: flex;
+  max-width: 268px;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+.dashbord_logo{
+  display: flex;
+  justify-content: flex-start;
+  padding: 20px;
+  align-items: center;
+  background-color: #4a5161;
+  box-sizing: border-box;
+  width: 268px;
+  height: 80px;
+}
+
+.dashbord_title {
+  font-weight: 100;
+  color: white;
+  padding: 10px 20px;
+  font-size: 0.7em;
+  margin-bottom: 10px;
+}
+
+.dashboard_section{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.dashboard_section ul{
+  margin: 0;
+}
+
+.section_name{
+  display: flex;
+  color: white;
+  gap: 15px;
+  padding-bottom: 12px;
+  padding-top: 12px;  
+  padding-left: 20px;
+  height: 50px;
+  width: 250px;
+  align-items: center;
+  box-sizing: border-box;
+  text-transform: capitalize;
+  border-radius: 0 25px 25px 0;
+  cursor: pointer;
+}
+
+.section_name:active{
+background-color: #4a5161;
+}
+
+.section_child {
+  text-transform: capitalize;
+  padding-bottom: 10px;
+  padding-top: 14px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: 10px;
+  margin-top: 5px;
+  color: white;
+  height: 50px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.section_child-active {
+  height: 80px;
+}
+
+.section_unwrap {
+  margin-right: 20px;
+  margin-left: auto;
+  transform: rotate(-135deg);
+  color: white;
+  transition: transform 400ms ease-in-out;
+}
+
+.section_children {
+  overflow: hidden;
+  height: 0;
+  transition: height 400ms ease-in-out;
+}
