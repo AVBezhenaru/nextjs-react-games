@@ -1,0 +1,41 @@
+.frog {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url('../../assets/images/frog.png');
+}
+
+.eyes {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  width: 10px;
+  height: 10px;
+  background-color: black;
+  border-radius: 50%;
+  transform: translateX(0);
+  transition: transform 0.5s ease-out;
+}
+
+.tongue {
+  position: absolute;
+  top: 40px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border-top: 20px solid transparent;
+  border-left: 20px solid #FF4136;
+  border-bottom: 20px solid transparent;
+  transform: translateX(0);
+  transition: transform 0.5s ease-out;
+}
+
+.shooting .eyes {
+  transform: translateX(30px);
+}
+
+.shooting .tongue {
+  transform: translateX(30px);
+}

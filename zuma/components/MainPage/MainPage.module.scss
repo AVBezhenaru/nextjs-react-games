@@ -1,0 +1,34 @@
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+.wrapper{
+  display: flex;
+
+  justify-content: center;
+  max-width: 1900px;
+  height: 970px;
+  margin: 0;
+
+  background-color: #000000;
+  background-image:url('../../assets/images/mainbackground.png');
+}
+.info{
+  margin-top: 8em;
+  margin-bottom: auto;
+  align-items: center;
+  display:flex;
+  font-size: 28px;
+  text:bold;
+  color: rgb(6, 243, 19);
+
+}
+.button{
+
+}
