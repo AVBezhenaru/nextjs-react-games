@@ -1,51 +1,65 @@
 .canvas {
-    position: absolute;
-    box-sizing: border-box;
-    outline: none;
-  }
-.wrapper{
-    position: relative;
+  position: absolute;
+  box-sizing: border-box;
+  outline: none;
 }
-.repeat{
-    position: absolute;
-    top: 200px;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    display: none;
-    width: 800px;
-    height:800px;
-    z-index: 1;
-    margin: 0 auto;
-    background-image: url('../../images/playagain.jpg');
-    background-repeat: no-repeat;
+.wrapper {
+  position: relative;
 }
-.timer{
-    position: absolute;
-    display: block;
-    bottom: 0;
-    margin: 0 auto;
-    width: 80px;
-    height: 80px;
-    z-index: 1;
-    font-size: 20px;
+.repeat {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  width: 800px;
+  height: 800px;
+  z-index: 1;
+  background-image: url('../../images/playagain.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
 }
-.end{
-    position: absolute;
-    top: 200px;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    display: none;
-    width: 688px;
-    height:645px;
-    z-index: 1;
-    margin: 0 auto;
-    background-image: url('../../images/win.jpg');
-    background-size: cover;
-    background-clip: border-box;
-    background-repeat: no-repeat;
-    cursor: pointer;
+.timer {
+  position: absolute;
+  display: block;
+  bottom: 0;
+  margin: 0 auto;
+  width: 80px;
+  height: 80px;
+  z-index: 1;
+  font-size: 20px;
+}
+.end {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  width: 800px;
+  height: 800px;
+  z-index: 1;
+  background-image: url('../../images/win.jpg');
+  background-size: cover;
+  background-clip: border-box;
+  background-repeat: no-repeat;
+  cursor: pointer;
 }
 
+.PopupButton {
+  position: fixed;
+  z-index: 2;
+  top: 95%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 270px;
+  height: 50px;
+  background-color: #1c1318;
+  font-family: PressStart2P-Regular;
+  border: 1px solid #fff;
+  color: #fff;
+  transition: box-shadow 0.5s ease-in-out;
+}
 
+.PopupButton:hover {
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
+}

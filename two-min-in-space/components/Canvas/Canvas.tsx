@@ -1,6 +1,7 @@
-import React, { FC, useEffect, useRef } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
+import Popup from '../Popup/Popup';
 import spaceship3 from '../../images/spaceships/Spaceship3.svg';
 import asteroid1 from '../../images/asteroids/asteroid1.png';
 import asteroid2 from '../../images/asteroids/asteroid2.png';
@@ -14,10 +15,12 @@ import {
   getSpaceshipState,
   goLeft,
   goRight,
+  goFaster,
+  goSlower,
   addAsteroid,
   goAsteroid,
-  goBackground,
-  addBackground,
+  // goBackground,
+  // addBackground,
   fly,
   gameOver,
   hunt,
@@ -25,6 +28,9 @@ import {
   goawayRocket,
   goNewRocket,
   dropTime,
+  setInitialSpeed,
+  resetGameState,
+  setScreenDimensions,
 } from '../../store/spaceshipSlice';
 import { inRad } from '../../assests/inRad';
 import { store } from '../../../store';
@@ -33,7 +39,11 @@ import { checkCollision } from '../../assests/checkCollision';
 
 import classes from './Canvas.module.css';
 
-const Canvas: FC = () => {
+type CanvasProps = {
+  onGoToStart: () => void;
+};
+
+const Canvas: FC<CanvasProps> = ({ onGoToStart }) => {
   const widthScreen = window.innerWidth;
   const heightScreen = window.innerHeight;
   const imageSpaceship: HTMLImageElement = new Image();
@@ -69,35 +79,51 @@ const Canvas: FC = () => {
   const playEnd = useRef<HTMLButtonElement | null>(null);
   const playAgain = useRef<HTMLButtonElement | null>(null);
   const dispatch = useDispatch();
+
+  dispatch(setScreenDimensions({ heightScreen, widthScreen }));
+
   const onKeyDown = (event: React.KeyboardEvent) => {
     if (event.code === 'KeyA') {
       dispatch(goLeft());
     } else if (event.code === 'KeyD') {
       dispatch(goRight());
+    } else if (event.code === 'KeyW') {
+      dispatch(goFaster());
+    } else if (event.code === 'KeyS') {
+      dispatch(goSlower());
     }
   };
+
+  const onKeyUp = (event: React.KeyboardEvent) => {
+    if (event.code === 'KeyW' || event.code === 'KeyS') {
+      dispatch(setInitialSpeed());
+    }
+  };
+
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [showButton, setShowButton] = useState(false);
+
   const animate = (context: CanvasRenderingContext2D) => {
     const state = store.getState();
     const stateSpaceship = getSpaceshipState(state);
+    // const { x: spaceshipXpos, y: spaceshipY } = stateSpaceship.spaceship
     dispatch(fly());
     dispatch(hunt(stateSpaceship.currentRocket));
     const timeString = `${stateSpaceship.timeGame.min} : ${stateSpaceship.timeGame.sec}`;
     context.fillStyle = 'rgba(0, 0, 0, 0.4)';
     context.fillRect(0, 0, widthScreen, heightScreen);
+    // прокрутка фона
+    // console.log(stateSpaceship);
     for (let i = 0; i < stateSpaceship.background.length; i++) {
-      context.drawImage(
-        space,
-        stateSpaceship.background[i].x,
-        stateSpaceship.background[i].y,
-        widthScreen,
-        heightScreen,
-      );
-      dispatch(goBackground(i));
-      if (stateSpaceship.background[i].y === 0) {
-        const repeatBackground = { x: 0, y: -heightScreen };
-        dispatch(addBackground({ repeatBackground }));
-      }
+      const item = stateSpaceship.background[i];
+      const x = (item.x - stateSpaceship.spaceshipXpos / 10) % widthScreen;
+      const y = (item.y - stateSpaceship.spaceshipYpos / 10) % heightScreen;
+      context.drawImage(space, x, y, widthScreen, heightScreen);
+      context.drawImage(space, x - widthScreen, y, widthScreen, heightScreen);
+      context.drawImage(space, x, y - heightScreen, widthScreen, heightScreen);
+      context.drawImage(space, x - widthScreen, y - heightScreen, widthScreen, heightScreen);
     }
+    // отображение астероидов на холсте, их движению и проверке столкновения с космическим кораблем
     for (let i = 0; i < stateSpaceship.asteroids.length; i++) {
       context.drawImage(
         stateSpaceship.asteroids[i].image || asteroid,
@@ -122,6 +148,7 @@ const Canvas: FC = () => {
         };
         dispatch(addAsteroid({ newAsteroid }));
       }
+
       if (
         checkCollision(
           stateSpaceship.spaceshipXpos,
@@ -146,6 +173,7 @@ const Canvas: FC = () => {
       stateSpaceship.rockets[stateSpaceship.currentRocket].x + stateSpaceship.rocketsWidth / 2,
       stateSpaceship.rockets[stateSpaceship.currentRocket].y + stateSpaceship.rocketsHeight / 2,
     );
+    // ??
     context.rotate(inRad(stateSpaceship.currentDegreesRockets));
     context.translate(
       -(stateSpaceship.rockets[stateSpaceship.currentRocket].x + stateSpaceship.rocketsWidth),
@@ -158,6 +186,10 @@ const Canvas: FC = () => {
       stateSpaceship.rocketsWidth,
       stateSpaceship.rocketsHeight,
     );
+
+    // проверяет наличие столкновения между двумя объектами на холсте,
+    // restore() восстанавливает последнее сохраненное состояние контекста,  save(), чтобы сохранить
+    // текущее состояние контекста рисования
     if (
       checkCollision(
         stateSpaceship.spaceshipXpos,
@@ -186,8 +218,8 @@ const Canvas: FC = () => {
     if (!stateSpaceship.gameOver) {
       context.drawImage(
         imageSpaceship,
-        stateSpaceship.spaceshipXpos,
-        stateSpaceship.spaceshipYpos,
+        stateSpaceship.spaceshipXpos - stateSpaceship.widthSpaceship / 2,
+        stateSpaceship.spaceshipYpos - stateSpaceship.heightSpaceship / 2,
         stateSpaceship.widthSpaceship,
         stateSpaceship.heightSpaceship,
       );
@@ -204,27 +236,56 @@ const Canvas: FC = () => {
       cancelAnimationFrame(window.requestAnimationFrame(() => animate(context)));
       context.restore();
       playAgain.current.style.display = 'block';
+      setShowButton(true);
     }
     if (stateSpaceship.win) {
       playEnd.current.style.display = 'block';
+      setShowButton(true);
     }
   };
-  const gameRepeat = () => {
-    location.reload();
+
+  const handleYesClick = () => {
+    setShowConfirm(false);
+    setShowButton(false);
+    dispatch(resetGameState());
+    playAgain.current.style.display = 'none';
+    playEnd.current.style.display = 'none';
   };
+
+  const handleNoClick = () => {
+    setShowConfirm(false);
+    setShowButton(false);
+    onGoToStart();
+    dispatch(resetGameState());
+  };
+
+  const handleOpenPopup = () => {
+    setShowConfirm(true);
+  };
+
   useEffect(() => {
     const context: CanvasRenderingContext2D | null = canvas.current.getContext('2d');
     canvas.current.focus();
     const timer = setInterval(() => {
-      dispatch(changeMotionVectorRockets());
       dispatch(dropTime());
     }, 1000);
-    const timerGoNewRocket = setInterval(() => {
-      dispatch(goNewRocket());
-    }, 20000);
+    const timerChangeMotion = setInterval(() => {
+      dispatch(changeMotionVectorRockets());
+    }, 1000);
+
+    const state = store.getState();
+    const stateSpaceship = getSpaceshipState(state);
+    const totalSeconds = stateSpaceship.timeGame.min * 60 + stateSpaceship.timeGame.sec;
+    console.log(totalSeconds);
+    const timerGoNewRocket = setInterval(
+      () => {
+        dispatch(goNewRocket());
+      },
+      totalSeconds < 30 ? 7000 : totalSeconds < 60 ? 5000 : 3000,
+    );
     const timerGoawayCurrenRocket = setInterval(() => {
       dispatch(goawayRocket());
-    }, 15000);
+    }, 6000);
     if (context) {
       window.requestAnimationFrame(() => animate(context));
     }
@@ -233,27 +294,40 @@ const Canvas: FC = () => {
       clearInterval(timer);
       clearInterval(timerGoNewRocket);
       clearInterval(timerGoawayCurrenRocket);
+      clearInterval(timerChangeMotion);
     };
-  }, []);
+  }, [handleYesClick, changeMotionVectorRockets]);
 
   return (
     <div className={classes.wrapper}>
       <button
         type="button"
-        aria-label="play again"
-        onClick={gameRepeat}
-        ref={playAgain}
         className={classes.repeat}
+        aria-label="play again"
+        // onClick={gameRepeat}
+        ref={playAgain}
       />
+      {showButton && (
+        <div>
+          <button type="button" className={classes.PopupButton} onClick={handleOpenPopup}>
+            Play again?
+          </button>
+          {showConfirm && (
+            <Popup title="Are you sure?" onYes={handleYesClick} onNo={handleNoClick} />
+          )}
+        </div>
+      )}
+
       <button
         type="button"
         aria-label="you win"
-        onClick={gameRepeat}
+        // onClick={gameRepeat}
         ref={playEnd}
         className={classes.end}
       />
       <canvas
         onKeyDown={onKeyDown}
+        onKeyUp={onKeyUp}
         ref={canvas}
         tabIndex={0}
         width={widthScreen}

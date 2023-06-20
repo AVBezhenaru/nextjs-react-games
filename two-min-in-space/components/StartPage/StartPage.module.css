@@ -1,0 +1,32 @@
+@font-face {
+  font-family: 'PressStart';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../../fonts/PressStart2P-Regular.woff2') format('woff2'),
+    url('../../fonts/PressStart2P-Regular.woff') format('woff');
+}
+
+.game {
+  width: 100%;
+  height: 100%;
+  background-image: url('../../images/background/baseBackground.jpg');
+  background-size: cover;
+  height: 100vh;
+}
+
+.startButton {
+  font-family: PressStart;
+  position: absolute;
+  top: 52%;
+  left: 200px;
+  padding: 15px;
+  border-radius: 5px;
+  opacity: 0.3;
+  color: #fff;
+  background-color: #000;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.startButton:hover {
+  opacity: 0.8;
+}
