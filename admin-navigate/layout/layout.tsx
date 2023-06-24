@@ -1,8 +1,8 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
-import Dashboard from '../dashboard/dashboard';
 import { sectionsArr } from '../arr';
-import { SectionType, SectionChildType } from '../types';
+import Dashboard from '../dashboard/dashboard';
+import { SectionChildType, SectionType } from '../types';
 
 import classes from './layout.module.scss';
 
@@ -22,6 +22,7 @@ const Layout = () => {
     <Router>
       <div className={classes.app}>
         <Dashboard arr={sectionsArr} />
+
         <div className={classes.pageBody} style={{ marginLeft: 268 }}>
           <Routes>
             {sectionsArr.map((section: SectionType) => (

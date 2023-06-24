@@ -1,4 +1,4 @@
-import Statistics from '../statisctics/components/Statistics/Statistics';
+import Statistics from '../statistics/components/Statistics/Statistics';
 
 import { SectionType } from './types';
 
@@ -15,7 +15,7 @@ export const sectionsArr: SectionType[] = [
   },
   {
     icon: 'img/games.svg',
-    name: 'Statistics',
+    name: 'statistics',
     body: <Statistics />,
   },
   {

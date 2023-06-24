@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { SectionType } from '../types';
 
@@ -7,9 +7,14 @@ import slasses from './dashboard.module.scss';
 
 const Dashboard = (props: { arr: SectionType[] }) => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const { arr } = props;
+  let adminPath = 'home';
+  if (arr.filter(({ name }) => name === pathname.replace('/admin/', '')).length > 0) {
+    adminPath = pathname.replace('/admin/', '');
+  }
 
-  const [pagestyle, setPagestyle] = useState('home');
+  const [pagestyle, setPagestyle] = useState(adminPath);
   const [childStyle, setChildStyle] = useState('');
 
   function activeHandler(name: string) {
