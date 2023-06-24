@@ -1,4 +1,5 @@
 import Statistics from '../statistics/components/Statistics/Statistics';
+import App from '../users/components/App/App';
 
 import { SectionType } from './types';
 
@@ -23,7 +24,7 @@ export const sectionsArr: SectionType[] = [
     name: 'users',
     body: <p>usersusersusersusersusersusersusersusers</p>,
     sectionChildren: [
-      { name: 'clever users', body: <div>cleveruserscleverusersusers</div> },
+      { name: 'clever users', body: <App /> },
       { name: 'big users', body: <p>bigusers</p> },
     ],
   },
