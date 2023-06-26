@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { SectionType } from '../types';
@@ -9,13 +9,29 @@ const Dashboard = (props: { arr: SectionType[] }) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { arr } = props;
-  let adminPath = 'home';
-  if (arr.filter(({ name }) => name === pathname.replace('/admin/', '')).length > 0) {
-    adminPath = pathname.replace('/admin/', '');
-  }
+  const pagePath = 'home';
+  const childPath = '';
+  const [pagestyle, setPagestyle] = useState(pagePath);
+  const [childStyle, setChildStyle] = useState(childPath);
 
-  const [pagestyle, setPagestyle] = useState(adminPath);
-  const [childStyle, setChildStyle] = useState('');
+  useEffect(() => {
+    arr.map((section) => {
+      const path = pathname.replace('/admin/', '').replaceAll('-', ' ');
+      if (section.name === path) {
+        setPagestyle(path);
+      }
+      if (section.sectionChildren?.find(({ name }) => name === path) !== undefined) {
+        setPagestyle(section.name);
+        setChildStyle(path);
+      }
+      return section;
+    });
+  }, []);
+
+  useEffect(() => {
+    console.log(childStyle);
+    console.log(pagestyle);
+  }, [pagestyle, childStyle]);
 
   function activeHandler(name: string) {
     setPagestyle(name);
