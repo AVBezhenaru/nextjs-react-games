@@ -1,3 +1,5 @@
+import { CalendarWrapper } from '../calendar/CalendarWrapper';
+
 import { SectionType } from './types';
 
 // example arr of sections data.
@@ -38,5 +40,10 @@ export const sectionsArr: SectionType[] = [
     icon: 'img/home.svg',
     name: 'gogogo',
     body: <p>gogogogogogogogogo</p>,
+  },
+  {
+    icon: 'img/calendar.svg',
+    name: 'calendar',
+    body: <CalendarWrapper />,
   },
 ];
