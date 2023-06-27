@@ -11,6 +11,7 @@ import spaceshipInFire from '../../images/spaceships/SpaceshipInFire.png';
 import playagain from '../../images/playagain.jpg';
 import rockets from '../../images/rocket/Rocket.png';
 import moonImg from '../../images/planets/moon.png';
+import SpaceshipState from '../../interfaces/SpaceshipState';
 import {
   getSpaceshipState,
   goLeft,
@@ -19,8 +20,6 @@ import {
   goSlower,
   addAsteroid,
   goAsteroid,
-  // goBackground,
-  // addBackground,
   fly,
   gameOver,
   hunt,
@@ -103,32 +102,42 @@ const Canvas: FC<CanvasProps> = ({ onGoToStart }) => {
   const [showConfirm, setShowConfirm] = useState(false);
   const [showButton, setShowButton] = useState(false);
 
-  const animate = (context: CanvasRenderingContext2D) => {
-    const state = store.getState();
-    const stateSpaceship = getSpaceshipState(state);
-    // const { x: spaceshipXpos, y: spaceshipY } = stateSpaceship.spaceship
-    dispatch(fly());
-    dispatch(hunt(stateSpaceship.currentRocket));
-    const timeString = `${stateSpaceship.timeGame.min} : ${stateSpaceship.timeGame.sec}`;
-    context.fillStyle = 'rgba(0, 0, 0, 0.4)';
-    context.fillRect(0, 0, widthScreen, heightScreen);
-    // прокрутка фона
-    // console.log(stateSpaceship);
+  function drawBackground(
+    context: CanvasRenderingContext2D,
+    space: HTMLImageElement,
+    widthScreen: number,
+    heightScreen: number,
+    stateSpaceship: SpaceshipState,
+  ) {
     for (let i = 0; i < stateSpaceship.background.length; i++) {
       const item = stateSpaceship.background[i];
-      const x = (item.x - stateSpaceship.spaceshipXpos / 10) % widthScreen;
-      const y = (item.y - stateSpaceship.spaceshipYpos / 10) % heightScreen;
-      context.drawImage(space, x, y, widthScreen, heightScreen);
-      context.drawImage(space, x - widthScreen, y, widthScreen, heightScreen);
-      context.drawImage(space, x, y - heightScreen, widthScreen, heightScreen);
-      context.drawImage(space, x - widthScreen, y - heightScreen, widthScreen, heightScreen);
+      let x = (item.x + stateSpaceship.spaceshipXpos) % widthScreen;
+      let y = (item.y - stateSpaceship.spaceshipYpos + heightScreen) % heightScreen;
+
+      if (x > 0) {
+        x -= widthScreen;
+      }
+      if (y > 0) {
+        y -= heightScreen;
+      }
+      for (let j = x; j < widthScreen; j += widthScreen) {
+        for (let k = y; k < heightScreen; k += heightScreen) {
+          context.drawImage(space, j, k, widthScreen, heightScreen);
+        }
+      }
     }
-    // отображение астероидов на холсте, их движению и проверке столкновения с космическим кораблем
+  }
+
+  function drawAsteroids(context: CanvasRenderingContext2D, stateSpaceship: SpaceshipState) {
     for (let i = 0; i < stateSpaceship.asteroids.length; i++) {
       context.drawImage(
         stateSpaceship.asteroids[i].image || asteroid,
-        stateSpaceship.asteroids[i].x,
-        stateSpaceship.asteroids[i].y,
+        stateSpaceship.asteroids[i].x +
+          stateSpaceship.spaceshipXpos +
+          stateSpaceship.spaceshipSpeedX,
+        stateSpaceship.asteroids[i].y -
+          stateSpaceship.spaceshipYpos -
+          stateSpaceship.spaceshipSpeedY,
         stateSpaceship.asteroids[i].width,
         stateSpaceship.asteroids[i].height,
       );
@@ -156,7 +165,7 @@ const Canvas: FC<CanvasProps> = ({ onGoToStart }) => {
           stateSpaceship.widthSpaceship,
           stateSpaceship.heightSpaceship,
           stateSpaceship.asteroids[i].x,
-          stateSpaceship.asteroids[i].y,
+          stateSpaceship.asteroids[i].y - stateSpaceship.spaceshipYpos,
           stateSpaceship.asteroids[i].width,
           stateSpaceship.asteroids[i].height,
         )
@@ -164,16 +173,22 @@ const Canvas: FC<CanvasProps> = ({ onGoToStart }) => {
         dispatch(gameOver());
       }
     }
+  }
+
+  function drawTime(context: CanvasRenderingContext2D, stateSpaceship: SpaceshipState) {
+    const minutes = stateSpaceship.timeGame.min.toString().padStart(2, '0');
+    const seconds = stateSpaceship.timeGame.sec.toString().padStart(2, '0');
+    const timeString = `${minutes}:${seconds}`;
     context.fillStyle = '#09E409';
     context.font = '48px roboto';
     context.fillText(timeString, widthScreen / 2 - 80, 80);
-    context.fill();
-    context.save();
+  }
+
+  function drawRocket(context: CanvasRenderingContext2D, stateSpaceship: SpaceshipState) {
     context.translate(
       stateSpaceship.rockets[stateSpaceship.currentRocket].x + stateSpaceship.rocketsWidth / 2,
       stateSpaceship.rockets[stateSpaceship.currentRocket].y + stateSpaceship.rocketsHeight / 2,
     );
-    // ??
     context.rotate(inRad(stateSpaceship.currentDegreesRockets));
     context.translate(
       -(stateSpaceship.rockets[stateSpaceship.currentRocket].x + stateSpaceship.rocketsWidth),
@@ -186,10 +201,6 @@ const Canvas: FC<CanvasProps> = ({ onGoToStart }) => {
       stateSpaceship.rocketsWidth,
       stateSpaceship.rocketsHeight,
     );
-
-    // проверяет наличие столкновения между двумя объектами на холсте,
-    // restore() восстанавливает последнее сохраненное состояние контекста,  save(), чтобы сохранить
-    // текущее состояние контекста рисования
     if (
       checkCollision(
         stateSpaceship.spaceshipXpos,
@@ -204,17 +215,43 @@ const Canvas: FC<CanvasProps> = ({ onGoToStart }) => {
     ) {
       dispatch(gameOver());
     }
-    context.restore();
+  }
+
+  function moveShip(
+    context: CanvasRenderingContext2D,
+    stateSpaceship: SpaceshipState,
+    widthScreen: number,
+    heightScreen: number,
+  ) {
+    context.translate(widthScreen / 2, heightScreen / 2);
+    context.rotate(-inRad(stateSpaceship.currentDegrees));
+    context.translate(
+      -stateSpaceship.spaceshipXpos - stateSpaceship.widthSpaceship / 2,
+      -stateSpaceship.spaceshipYpos - stateSpaceship.heightSpaceship / 2,
+    );
+  }
+
+  const animate = (context: CanvasRenderingContext2D) => {
+    const state = store.getState();
+    const stateSpaceship = getSpaceshipState(state);
+    dispatch(fly());
+    dispatch(hunt(stateSpaceship.currentRocket));
+
+    const widthScreen = context.canvas.width;
+    const heightScreen = context.canvas.height;
+
+    context.fillStyle = 'rgba(0, 0, 0, 0.4)';
+    context.fillRect(0, 0, widthScreen, heightScreen);
+    drawBackground(context, space, widthScreen, heightScreen, stateSpaceship);
+    drawAsteroids(context, stateSpaceship);
+    drawTime(context, stateSpaceship);
+
     context.save();
-    context.translate(
-      stateSpaceship.spaceshipXpos + stateSpaceship.widthSpaceship / 2,
-      stateSpaceship.spaceshipYpos + stateSpaceship.heightSpaceship / 2,
-    );
-    context.rotate(inRad(stateSpaceship.currentDegrees));
-    context.translate(
-      -(stateSpaceship.spaceshipXpos + stateSpaceship.widthSpaceship / 2),
-      -(stateSpaceship.spaceshipYpos + stateSpaceship.heightSpaceship / 2),
-    );
+    drawRocket(context, stateSpaceship);
+    context.restore();
+
+    context.save();
+    moveShip(context, stateSpaceship, widthScreen, heightScreen);
     if (!stateSpaceship.gameOver) {
       context.drawImage(
         imageSpaceship,
@@ -276,7 +313,6 @@ const Canvas: FC<CanvasProps> = ({ onGoToStart }) => {
     const state = store.getState();
     const stateSpaceship = getSpaceshipState(state);
     const totalSeconds = stateSpaceship.timeGame.min * 60 + stateSpaceship.timeGame.sec;
-    console.log(totalSeconds);
     const timerGoNewRocket = setInterval(
       () => {
         dispatch(goNewRocket());
@@ -300,13 +336,7 @@ const Canvas: FC<CanvasProps> = ({ onGoToStart }) => {
 
   return (
     <div className={classes.wrapper}>
-      <button
-        type="button"
-        className={classes.repeat}
-        aria-label="play again"
-        // onClick={gameRepeat}
-        ref={playAgain}
-      />
+      <button type="button" className={classes.repeat} aria-label="play again" ref={playAgain} />
       {showButton && (
         <div>
           <button type="button" className={classes.PopupButton} onClick={handleOpenPopup}>
@@ -318,13 +348,7 @@ const Canvas: FC<CanvasProps> = ({ onGoToStart }) => {
         </div>
       )}
 
-      <button
-        type="button"
-        aria-label="you win"
-        // onClick={gameRepeat}
-        ref={playEnd}
-        className={classes.end}
-      />
+      <button type="button" aria-label="you win" ref={playEnd} className={classes.end} />
       <canvas
         onKeyDown={onKeyDown}
         onKeyUp={onKeyUp}

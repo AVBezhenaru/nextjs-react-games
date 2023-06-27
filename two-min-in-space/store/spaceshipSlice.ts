@@ -2,10 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { sinAndCos } from '../assests/sinAndCos';
 import { RootState } from '../../store';
-import { getCurrentDegreesRockets } from '../assests/getCurrentDegreesRockets';
+import SpaceshipState from '../interfaces/SpaceshipState';
 
 export const getSpaceshipState = (state: RootState) => state.spaceship;
-const initialState = {
+const initialState: SpaceshipState = {
   widthSpaceship: 60,
   heightSpaceship: 60,
   background: [{ x: 0, y: 0 }],
@@ -13,8 +13,8 @@ const initialState = {
   rockets: [{ x: 500, y: 0 }],
   spaceshipXpos: 600,
   spaceshipYpos: 600,
-  spaceshipSpeedX: 1,
-  spaceshipSpeedY: 1,
+  spaceshipSpeedX: 2,
+  spaceshipSpeedY: 2,
   currentDegrees: 0,
   currentDegreesRockets: 0,
   speed: 3,
@@ -72,7 +72,6 @@ const spaceshipSlice = createSlice({
       if (min === 0 && sec === 30) {
         state.speedRockets = 5;
       }
-
       if (min === 1 && sec === 20) {
         state.speedRockets = 7;
       }
@@ -91,8 +90,6 @@ const spaceshipSlice = createSlice({
       if (min >= 1 && sec >= 20) {
         numRockets = 2;
       }
-
-      // добавляем ракеты на экран
       const newRockets = [];
       for (let i = 0; i < numRockets; i++) {
         const newRocket = {
@@ -100,7 +97,7 @@ const spaceshipSlice = createSlice({
           y: -400 + state.spaceshipYpos,
           spaceshipXpos: state.spaceshipXpos,
           spaceshipYpos: state.spaceshipYpos,
-          speed: state.speedRockets, // добавляем скорость ракеты
+          speed: state.speedRockets,
         };
         newRockets.push(newRocket);
       }
@@ -111,29 +108,12 @@ const spaceshipSlice = createSlice({
       if (state.currentDegrees === -360) {
         state.currentDegrees = 0;
       }
-      state.background.forEach((item) => {
-        item.x += state.speed * sinAndCos(state.currentDegrees).sin;
-        item.y += state.speed * sinAndCos(state.currentDegrees).cos;
-      });
-      state.asteroids.forEach((item) => {
-        item.x += state.speed * sinAndCos(state.currentDegrees).sin;
-      });
-      state.spaceshipXpos -= state.spaceshipSpeedX * sinAndCos(state.currentDegrees).sin;
     },
     goRight(state) {
       state.currentDegrees += 5;
       if (state.currentDegrees === 360) {
         state.currentDegrees = 0;
       }
-      const { sin, cos } = sinAndCos(state.currentDegrees);
-      state.background.forEach((item) => {
-        item.x -= state.speed * sin;
-        item.y -= state.speed * cos;
-      });
-      state.asteroids.forEach((item) => {
-        item.x -= state.speed * sin;
-      });
-      state.spaceshipXpos += state.spaceshipSpeedX * sin;
     },
     goFaster(state) {
       state.spaceshipSpeedY += 1;
