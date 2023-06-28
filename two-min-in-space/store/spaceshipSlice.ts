@@ -5,6 +5,7 @@ import { RootState } from '../../store';
 import SpaceshipState from '../interfaces/SpaceshipState';
 
 export const getSpaceshipState = (state: RootState) => state.spaceship;
+
 const initialState: SpaceshipState = {
   widthSpaceship: 60,
   heightSpaceship: 60,
