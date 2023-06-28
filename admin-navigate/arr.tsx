@@ -22,7 +22,7 @@ export const sectionsArr: SectionType[] = [
   {
     icon: 'img/users.svg',
     name: 'users',
-    body: <p>usersusersusersusersusersusersusersusers</p>,
+    body: false,
     sectionChildren: [
       { name: 'clever users', body: <App /> },
       { name: 'big users', body: <p>bigusers</p> },

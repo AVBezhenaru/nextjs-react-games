@@ -29,9 +29,16 @@ const Dashboard = (props: { arr: SectionType[] }) => {
   }, []);
 
   useEffect(() => {
-    console.log(childStyle);
-    console.log(pagestyle);
-  }, [pagestyle, childStyle]);
+    arr.forEach((section) => {
+      if (section.name === pagestyle) {
+        if (!section.body) {
+          const newPath = section.sectionChildren[0].name;
+          setChildStyle(newPath);
+          navigate(`admin/${newPath.split(' ').join('-')}`);
+        }
+      }
+    });
+  }, [pagestyle]);
 
   function activeHandler(name: string) {
     setPagestyle(name);
