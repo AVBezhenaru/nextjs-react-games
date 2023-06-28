@@ -1,0 +1,39 @@
+.foodicon{
+  background-image: url('../../img/food-sprite.png');
+  background-size: 28.6vw 27.6vh;
+  height: 4.6vh;
+  width: 2.6vw;
+  border: 1px solid #e3e3e3;
+  border-radius: 2px;
+  cursor: pointer;
+  background-color: aliceblue; 
+}
+
+@font-face {
+  font-family: 'bonche-light';
+  src: url('../../fonts/bonche-light-webfont.woff2') format('woff2'),
+       url('../../fonts/bonche-light-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.ready_pannel_text {
+  font-family: 'bonche-light';
+  font-weight: 200;
+  font-size: x-large;
+  color: black;
+  margin-top: -30px;
+}
+
+.ready_pannel_button {
+  font-size: 0.7vw;
+  font-family: 'bonche-light', sans-serif;
+  margin-left: -5vw;
+  font-weight: normal;
+  width: 10vw;
+  height: 2.8vh;
+  background-color: darkslateblue;
+  margin-top: -0.9vh;
+  position: absolute;
+  border-radius: 15px;
+}

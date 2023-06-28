@@ -1,0 +1,307 @@
+.dragon_set {
+  flex-direction: row;
+  justify-content: flex-end;
+  display: flex;
+  align-items: flex-end;
+  animation: moveDragon 26s ease-in-out 1s infinite;
+}
+
+@keyframes moveDragon {
+  from {
+    
+    margin-left: 0vw;
+  }
+
+  1% {
+    margin-left: 0vw;
+  }
+
+  12% {
+    margin-left: -20.8vw;
+  }
+
+  13% {
+    margin-left: -20.8vw;
+  }
+
+  27% {
+    margin-left: -41.6vw;
+    transform: scale(1, 1);
+  }
+
+  28% {
+    margin-left: -41.6vw;
+    transform: scale(-1, 1);
+  }
+
+  50% {
+    margin-left: 0vw;
+  }
+
+  51% {
+    margin-left: 0vw;
+  }
+
+  72% {
+    margin-left: 41.6vw;
+    transform: scale(-1, 1);
+  }
+
+  73% {
+    margin-left: 41.6vw;
+    transform: scale(1, 1);
+  }
+
+  90% {
+    margin-left: 20.8vw;
+  }
+
+  91% {
+    margin-left: 20.8vw;
+  }
+
+  99% {
+    margin-left: 0vw;
+  }
+
+  to {
+    margin-left: 0vw;
+
+  }
+}
+
+.dragon_baby {
+  flex-direction: row;
+  justify-content: flex-end;
+  display: flex;
+  align-items: flex-end;
+  animation: moveBaby 1s ease-in-out 1s infinite;
+}
+
+@keyframes moveBaby {
+  from {
+    transform: rotate(3deg);
+    margin-bottom: 0vh;
+  }
+
+  25%{
+    transform: rotate(-6deg);
+  }
+
+  50% {
+    transform: rotate(3deg);
+    margin-bottom: 4.6vh;
+  }
+
+  to {    
+    margin-bottom: 0vh;
+  }
+}
+
+.right_leg_child {
+  transform-origin: 30% 70%;
+  animation: moveLeg 3s ease-in-out infinite;
+}
+
+.left_leg_child {
+  transform-origin: 60% 70%;
+  animation: moveLeg 3s ease-in-out 1s infinite;
+}
+
+.left_arm_child {
+  transform-origin: 60% 50%;
+  animation: moveLeg 3s ease-in-out infinite;
+}
+
+.right_arm_child {
+  transform-origin: 60% 50%;
+  animation: moveLeg 3s ease-in-out 1s infinite;
+}
+
+.head_child {
+  transform-origin: 50% 55%;
+  animation: moveLeg 15s ease-in-out 1s infinite;
+}
+
+.right_leg {
+  transform-origin: 30% 70%;
+  animation: moveLeg 3s ease-in-out infinite;
+}
+
+.left_leg {
+  transform-origin: 30% 60%;
+  animation: moveLeg 3s ease-in-out 1s infinite;
+}
+
+.tail {
+  transform-origin: 30% 60%;
+  animation: moveLeg 5s ease-in-out 1s infinite;
+}
+
+.left_arm {
+  transform-origin: 30% 35%;
+  animation: moveLeg 7s ease-in-out infinite;
+}
+
+.right_arm {
+  transform-origin: 30% 35%;
+  animation: moveLeg 7s ease-in-out 2s infinite;
+}
+
+.head {
+  transform-origin: 30% 25%;
+  animation: moveLeg 15s ease-in-out 1s infinite;
+}
+
+@keyframes moveLeg {
+  from {
+    transform: rotate(0deg);
+  }
+
+  25%{
+    transform: rotate(-8deg);
+  }
+
+  50% {
+    transform: rotate(8deg);
+  }
+
+  75% {
+    transform: rotate(-8deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes moveLeftHalf {
+  from {
+    transform: rotate(0deg);
+  }
+
+  2%{
+    transform: rotate(-5deg);
+  }
+
+  25%{
+    transform: rotate(-45deg);
+  }
+
+  50% {
+    transform: rotate(-40deg);
+  }
+
+  to {    
+    transform: rotate(-80deg);
+  }
+}
+
+@keyframes moveRightHalf {
+  from {
+    transform: rotate(0deg);
+  }
+
+  2%{
+    transform: rotate(5deg);
+    
+  }
+
+  25%{
+    transform: rotate(45deg);
+  }
+
+  50% {
+    transform: rotate(40deg);
+  }
+
+  to {    
+    transform: rotate(80deg);
+  }
+}
+
+@keyframes moveEgg {
+  from {
+    transform: rotate(0deg);
+    margin-left: 0vw;
+  }
+
+  25%{
+    transform: rotate(-6deg);
+    margin-left: -1.3vh;
+  }
+
+  50% {
+    transform: rotate(6deg);
+    margin-left: 1.3vh;
+  }
+
+  to {    
+    margin-bottom: 0vh;
+    margin-left: 0vw;
+  }
+}
+
+.egg {
+  margin-bottom: 0vw;
+}
+
+.eggAnimate {
+  animation: moveEgg 3s ease-in-out 1s infinite;
+}
+
+.leftHalf {
+  margin-bottom: 0vw;
+}
+
+.leftHalfAnimate {
+  transform-origin: 30% 80%;
+  animation: moveLeftHalf 1s ease-in-out 1s forwards;
+}
+
+.rightHalf {
+  margin-bottom: 0vh;
+}
+
+.rightHalfAnimate {
+  transform-origin: 70% 80%;
+  animation: moveRightHalf 1s ease-in-out 1200ms forwards;
+}
+
+.final_message, .lose_message, .lose_question{
+  align-content: space-between;
+  position: absolute;
+  margin-top: 5vh;
+  font-family: "bonche-light", sans-serif;
+  font-weight: 200;
+  color:aliceblue;  
+  display: flex;
+  justify-content: center;
+  width: 52vw;
+  height: 44.4vh;
+  padding: 50px 50px;
+}
+
+.final_message {
+  padding-top: 7vh;
+  font-size: 2vh;
+  background-image: url('../../img/final.png');
+  background-size: 52vw;
+  background-position: 0vh -0.5vw;
+  background-repeat: no-repeat;
+}
+
+.lose_message {  
+  font-size: 3.5vh;
+  padding-top: 13.9vh;
+  background-image: url('../../img/lose.png');
+}
+
+.button_reset{
+  width: 10.4vw;
+  height: 4.6vh;
+  background-color: darkslateblue;
+  border: 1px solid aliceblue;
+  margin-top: 7vh;
+  position: absolute;
+}

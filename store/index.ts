@@ -11,6 +11,7 @@ import sapperReducer from '../sapper/store/sapperSlice';
 import tanksGameReducer from '../tanks/reducers/tanksGameReducer';
 import doodlerReducer from '../doodle-jump/reducer/doodleReducer';
 import spaceshipSlice from '../two-min-in-space/store/spaceshipSlice';
+import tamagotchiSlice from '../tamagotchi/slices/slices';
 
 import user from './userSlice';
 
@@ -27,6 +28,7 @@ export const store = configureStore({
     tanks: tanksGameReducer,
     doodler: doodlerReducer,
     spaceship: spaceshipSlice,
+    tamagotchi: tamagotchiSlice,
   },
   middleware(getDefaultMiddleware) {
     return getDefaultMiddleware({
