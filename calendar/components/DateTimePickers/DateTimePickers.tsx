@@ -1,8 +1,9 @@
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker, pickersLayoutClasses } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { makeStyles } from '@material-ui/core/styles';
+// import { makeStyles } from '@mui/material';
 import dayjs from 'dayjs';
+import { makeStyles } from '@mui/styles';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { setEventStartDate, setEventEndDate } from '../../store/slices/changeEventDetailsSlice';
