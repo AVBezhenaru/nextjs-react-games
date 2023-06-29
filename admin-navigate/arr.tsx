@@ -22,6 +22,7 @@ export const sectionsArr: SectionType[] = [
   {
     icon: 'img/users.svg',
     name: 'users',
+    // use "body: false" if u need empty root page with children
     body: false,
     sectionChildren: [
       { name: 'clever users', body: <App /> },
