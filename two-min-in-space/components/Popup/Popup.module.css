@@ -1,0 +1,67 @@
+@font-face {
+  font-family: 'PressStart2P-Regular';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../../fonts/PressStart2P-Regular.woff2') format('woff2'),
+    url('../../fonts/PressStart2P-Regular.woff') format('woff');
+}
+
+.popupOverlay {
+  position: fixed;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  width: 270px;
+  height: 70px;
+  font-family: PressStart2P-Regular;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+}
+
+.popup {
+  background: #fff;
+  color: black;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  width: 270px;
+  text-align: center;
+}
+
+.popupTitle {
+  font-size: 24px;
+  margin-top: 0;
+}
+
+.popupMessage {
+  font-size: 16px;
+}
+
+.popupButtons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.popupButton {
+  background: #2196f3;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+
+.popupButton:hover {
+  background: #0d8bf2;
+}
+
+.popupButtonYes {
+  background: #46b185;
+}
+
+.popupButtonNo {
+  background: #d12c39;
+}
