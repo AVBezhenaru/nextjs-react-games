@@ -1,8 +1,7 @@
-// import { useState } from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker, pickersLayoutClasses } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import dayjs from 'dayjs';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks';
@@ -40,9 +39,6 @@ export const DateTimePickers = () => {
       '& label.Mui-focused': {
         color: 'rgb(220, 53, 69)',
       },
-      // '& .MuiInput-underline:after': {
-      //   borderBottomColor: 'yellow',
-      // },
       '& .MuiOutlinedInput-root': {
         '& fieldset': {
           borderColor: 'grey',
