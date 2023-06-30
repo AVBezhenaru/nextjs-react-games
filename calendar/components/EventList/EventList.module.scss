@@ -1,0 +1,39 @@
+.right-part {
+  background-color: #4a5161;
+  width: 30%;
+  border-radius: 20px;
+  padding: 50px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border: 3px solid grey;
+}
+
+.list {
+  overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  width: 100%;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+}
+
+.part-title {
+  font-weight: 400;
+  margin-bottom: 30px;
+}
+
+.empty-title {
+  font-weight: 400;
+  text-align: center;
+  line-height: 35px;
+  margin-top: 150px;
+}
+
+.list {
+  height: 495px;
+  overflow-y: auto;
+}

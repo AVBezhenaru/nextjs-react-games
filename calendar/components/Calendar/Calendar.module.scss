@@ -1,0 +1,94 @@
+.authorizated {
+  width: 70%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+  padding: 50px;
+  background-color: #4a5161;
+  border-radius: 20px;
+  justify-content: space-between;
+  border: 3px solid grey;
+}
+
+.wrapper {
+  font-weight: 400;
+  font-size: 15px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  padding: 30px;
+  height: 100%;
+}
+.parts {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+}
+.title {
+  width: 100%;
+  text-align: center;
+  font-weight: 400;
+}
+
+.content {
+  background-color: #383f51;
+  width: 100%;
+  padding: 50px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  align-items: center;
+}
+
+.buttons {
+  color: #d65b88;
+  font-weight: 500;
+  font-size: 25px;
+
+  &:hover {
+    font-weight: 600;
+    color: rgb(220, 53, 69);
+  }
+}
+
+.sign-in-button {
+  width: 100%;
+}
+
+.login-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+.popup {
+  background-color: #383f51 !important;
+  color: white !important;
+  overflow-y: hidden !important;
+}
+
+.date {
+  width: 100%;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: center;
+  gap: 30px;
+}
+
+.styled-calendar-container {
+  min-height: 100px;
+  color: red;
+}
