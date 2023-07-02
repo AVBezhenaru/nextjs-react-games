@@ -1,0 +1,10 @@
+.buttons {
+  color: #d65b88;
+  font-weight: 500;
+  font-size: 25px;
+
+  &:hover {
+    font-weight: 600;
+    color: rgb(220, 53, 69);
+  }
+}

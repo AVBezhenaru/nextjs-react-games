@@ -1,3 +1,4 @@
+import { CalendarWrapper } from '../calendar/CalendarWrapper';
 import Statistics from '../statistics/components/Statistics/Statistics';
 import App from '../users/components/App/App';
 
@@ -42,5 +43,10 @@ export const sectionsArr: SectionType[] = [
     icon: 'img/home.svg',
     name: 'gogogo',
     body: <p>gogogogogogogogogo</p>,
+  },
+  {
+    icon: 'img/calendar.svg',
+    name: 'calendar',
+    body: <CalendarWrapper />,
   },
 ];

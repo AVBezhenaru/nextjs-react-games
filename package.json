@@ -11,8 +11,14 @@
     "test": "jest --watch"
   },
   "dependencies": {
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.13.6",
+    "@mui/styles": "^5.13.2",
+    "@mui/x-date-pickers": "^6.9.0",
     "@react-spring/web": "^9.6.1",
     "@reduxjs/toolkit": "^1.8.5",
+    "@supabase/auth-helpers-react": "^0.4.0",
+    "@supabase/supabase-js": "^2.26.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/geojson": "^7946.0.10",
     "@types/react-select": "^5.0.1",
@@ -21,6 +27,7 @@
     "axios": "^1.1.2",
     "classnames": "^2.3.2",
     "date-fns": "^2.29.3",
+    "dayjs": "^1.11.8",
     "file-loader": "^6.2.0",
     "leaflet": "^1.9.4",
     "lodash": "^4.17.21",
