@@ -7,7 +7,7 @@ export default class Entity {
 
   draw: (ctx: any) => void;
 
-  update: (deltaTime: any) => void;
+  update: (deltaTime?: any) => void;
 
   constructor() {
     this.pos = new Vec2(0, 0);

@@ -1,12 +1,12 @@
 export default class Compositor {
-  public layer: any[];
+  public layers: any[];
 
   constructor() {
-    this.layer = [];
+    this.layers = [];
   }
 
   draw(ctx: any) {
-    this.layer.forEach(layer => {
+    this.layers.forEach((layer) => {
       layer(ctx);
     });
   }

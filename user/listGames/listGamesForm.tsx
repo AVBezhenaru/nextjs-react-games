@@ -51,7 +51,7 @@ const ListGamesForm = () => {
     { src: aimTrainerIcon.src, title: 'aim trainer', href: 'aim-trainer' },
     { src: twoMinInSpaceIcon.src, title: '2min-in-space' },
     { src: tamagotchiIcon.src, title: 'tamagotchi', href: 'tamagotchi' },
-    { src: marioIcon.src, title: 'marioBros' },
+    { src: marioIcon.src, title: 'mario-bros' },
   ];
   return (
     <>
