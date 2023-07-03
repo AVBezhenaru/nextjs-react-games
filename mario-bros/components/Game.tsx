@@ -11,6 +11,7 @@ const deltas = {
   ArrowRight: { x: 1, y: 0 },
   ArrowLeft: { x: -1, y: 0 },
 };
+
 const Game = () => {
   const canvasRef = useRef(null);
   const requestRef = useRef();
