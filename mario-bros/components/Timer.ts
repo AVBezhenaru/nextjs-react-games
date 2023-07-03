@@ -1,4 +1,4 @@
-export default class Timer {
+class Timer {
   public updateProxy: (time: any) => void;
 
   constructor(deltaTime = 1 / 60) {
@@ -12,11 +12,11 @@ export default class Timer {
         this.update(deltaTime);
         accumulatedTime -= deltaTime;
       }
+
+      lastTime = time;
+
+      this.enqueue();
     };
-
-    lastTime = time;
-
-    this.enqueue();
   }
 
   enqueue() {
@@ -27,3 +27,5 @@ export default class Timer {
     this.enqueue();
   }
 }
+
+export default Timer;
