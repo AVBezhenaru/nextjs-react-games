@@ -9,6 +9,14 @@ import { SectionType } from './types';
 // name only lowerCase string!
 // path to your page will be generic by split(' ').join('-')!
 
+// to add menu item as page
+// navigate to pages folder and add
+// pageName.tsx, where pageName is name of your page
+// with content:
+// import AdminNavigate from '../dashboard';
+// const PageName = () => <AdminNavigate />;
+// export default PageName;
+
 export const sectionsArr: SectionType[] = [
   {
     icon: 'img/home.svg',
