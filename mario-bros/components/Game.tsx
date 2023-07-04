@@ -7,6 +7,7 @@ import { createMario } from './MarioEntity';
 import { loadBackgroundSprites } from './spriteSheets/LoadSprites';
 import { createBackgroundLayer, createSpriteLayer } from './Layers';
 import Timer from './Timer';
+import KeyboardState from "./KeyboardState";
 
 const Game = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -19,20 +20,21 @@ const Game = () => {
       ([sprites, firstLvl, mario]) => {
         const comp = new Compositor();
         const backgroundLayer = createBackgroundLayer(firstLvl.backgrounds, sprites);
-        // comp.layers.push(backgroundLayer);
+        comp.layers.push(backgroundLayer);
 
-        const gravity = 30;
-        mario.pos.set(64, 180);
-        mario.vel.set(200, -600);
+        const gravity = 500;
+        mario.pos.set(100, 100);
+        mario.vel.set(90, -210);
 
         const spriteLayer = createSpriteLayer(mario);
         comp.layers.push(spriteLayer);
 
         const timer = new Timer(1 / 30);
+
         timer.update = function update(deltaTime: any) {
-          comp.draw(ctx);
           mario.update(deltaTime);
-          mario.vel.y += gravity;
+          comp.draw(ctx);
+          mario.vel.y += gravity * deltaTime;
         };
 
         timer.start();

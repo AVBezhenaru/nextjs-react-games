@@ -9,7 +9,7 @@ export const createMario = () =>
       sprite.draw('idle', ctx, this.pos.x, this.pos.y);
     };
 
-    mario.update = function updateMario(deltaTime: any) {
+    mario.update = function updateMario(deltaTime) {
       mario.pos.x += mario.vel.x * deltaTime;
       mario.pos.y += mario.vel.y * deltaTime;
     };
