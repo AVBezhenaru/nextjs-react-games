@@ -54,3 +54,11 @@ export const InputBtn = styled.button`
     outline: none;
   }
 `;
+
+export const SpanErrorInput = styled.span`
+  display: block;
+  color: tomato;
+  font-size: 14px;
+  width: 140px;
+  margin: 5px auto;
+`;

@@ -1,6 +1,6 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { Form, Input, InputBtn } from './TopUpFormStyle';
+import { Form, Input, InputBtn, SpanErrorInput } from './TopUpFormStyle';
 
 export type Inputs = {
   amount: string;
@@ -11,10 +11,12 @@ export const TopUpForm = () => {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<Inputs>();
+    reset,
+  } = useForm<Inputs>({ mode: 'onBlur' });
 
   const onSubmit: SubmitHandler<Inputs> = (date) => {
     console.log(date);
+    reset();
   };
 
   return (
@@ -22,8 +24,22 @@ export const TopUpForm = () => {
       <Form onSubmit={handleSubmit(onSubmit)}>
         <label>
           <span style={{ fontSize: '14px' }}>Amount (AGC):</span>
-          <Input type="text" placeholder="Count AGC" {...register('amount')} />
-          {errors.amount && <p>{errors.amount.message}</p>}
+          <Input
+            type="number"
+            placeholder="Count AGC"
+            {...register('amount', {
+              required: 'Enter the amount to top up your balance.',
+              min: {
+                value: 1,
+                message: 'Minimum top up amount 1 AGC.',
+              },
+              max: {
+                value: 999,
+                message: 'Maximum amount of recharge 999 ACG',
+              },
+            })}
+          />
+          {errors.amount && <SpanErrorInput>{errors.amount.message}</SpanErrorInput>}
         </label>
         <InputBtn type="submit" value="Send">
           Send

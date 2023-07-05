@@ -1,6 +1,6 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { Form, Input, InputBtn } from './TransferAGCFormStyle';
+import { Form, Input, InputBtn, SpanErrorInput } from './TransferAGCFormStyle';
 
 export type Inputs = {
   amount: string;
@@ -12,10 +12,12 @@ export const TransferAGCForm = () => {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<Inputs>();
+    reset,
+  } = useForm<Inputs>({ mode: 'onBlur' });
 
   const onSubmit: SubmitHandler<Inputs> = (date) => {
     console.log(date);
+    reset();
   };
 
   return (
@@ -23,13 +25,33 @@ export const TransferAGCForm = () => {
       <Form onSubmit={handleSubmit(onSubmit)}>
         <label>
           <span style={{ fontSize: '14px' }}>Amount (AGC):</span>
-          <Input type="text" placeholder="Count AGC" {...register('amount')} />
-          {errors.amount && <p>{errors.amount.message}</p>}
+          <Input
+            type="text"
+            placeholder="Count AGC"
+            {...register('amount', {
+              required: 'Enter the amount to top up your balance.',
+              min: {
+                value: 1,
+                message: 'Minimum top up amount 1 AGC.',
+              },
+              max: {
+                value: 999,
+                message: 'Maximum amount of recharge 999 ACG',
+              },
+            })}
+          />
+          {errors.amount && <SpanErrorInput>{errors.amount.message}</SpanErrorInput>}
         </label>
         <label>
           <span style={{ fontSize: '14px' }}>Account to (id):</span>
-          <Input type="text" placeholder="id of account" {...register('toAccount')} />
-          {errors.toAccount && <p>{errors.toAccount.message}</p>}
+          <Input
+            type="text"
+            placeholder="id of account"
+            {...register('toAccount', {
+              required: 'Enter the amount to top up your balance.',
+            })}
+          />
+          {errors.toAccount && <SpanErrorInput>{errors.toAccount.message}</SpanErrorInput>}
         </label>
         <InputBtn type="submit" value="Send">
           Send
