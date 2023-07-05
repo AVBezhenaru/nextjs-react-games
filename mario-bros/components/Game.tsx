@@ -1,13 +1,13 @@
 import { useEffect, useRef } from 'react';
 
-import firstLvl from './levels/1-1.json';
 import styles from './game.module.scss';
 import Compositor from './Compositor';
 import { createMario } from './MarioEntity';
 import { loadBackgroundSprites } from './spriteSheets/LoadSprites';
 import { createBackgroundLayer, createSpriteLayer } from './Layers';
 import Timer from './Timer';
-import KeyboardState from "./KeyboardState";
+import KeyboardState from './KeyboardState';
+import { loadLevel } from "./levels/loadLevel";
 
 const Game = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -16,25 +16,34 @@ const Game = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
 
-    Promise.all([loadBackgroundSprites(), firstLvl, createMario()]).then(
-      ([sprites, firstLvl, mario]) => {
-        const comp = new Compositor();
-        const backgroundLayer = createBackgroundLayer(firstLvl.backgrounds, sprites);
-        comp.layers.push(backgroundLayer);
+    Promise.all([loadBackgroundSprites(), loadLevel, createMario()]).then(
+      ([sprites, loadLevel, mario]) => {
+        console.log(loadLevel);
 
-        const gravity = 500;
-        mario.pos.set(100, 100);
-        mario.vel.set(90, -210);
+        const gravity = 2;
+        mario.pos.set(150, 50);
+        mario.vel.set(50, -210);
 
-        const spriteLayer = createSpriteLayer(mario);
-        comp.layers.push(spriteLayer);
+        const SPACE = 32;
+        const input = new KeyboardState();
+        input.addMapping(SPACE, (keyState) => {
+          if (keyState) {
+            mario.jump.start();
+          } else {
+            mario.jump.cancel();
+          }
+          console.log(keyState);
+        });
+        input.listenTo(window);
+
+
 
         const timer = new Timer(1 / 30);
 
         timer.update = function update(deltaTime: any) {
           mario.update(deltaTime);
           comp.draw(ctx);
-          mario.vel.y += gravity * deltaTime;
+          mario.vel.y += gravity;
         };
 
         timer.start();
@@ -42,7 +51,7 @@ const Game = () => {
     );
   }, []);
   // width="960" height="400" base
-  return <canvas ref={canvasRef} className={styles.canvas} width="1200" height="500" />;
+  return <canvas ref={canvasRef} className={styles.canvas} width="800" height="640" />;
 };
 
 export { Game };

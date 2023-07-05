@@ -12,8 +12,8 @@ export const drawBackground = (bg: any, ctx: any, sprites: any) => {
 
 export const createBackgroundLayer = (backgrounds: any, sprites: any) => {
   const buffer = document.createElement('canvas');
-  buffer.width = 500;
-  buffer.height = 400;
+  buffer.width = 640;
+  buffer.height = 640;
 
   backgrounds.forEach((bg: any) => {
     drawBackground(bg, buffer.getContext('2d'), sprites);
