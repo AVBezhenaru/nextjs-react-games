@@ -1,5 +1,5 @@
-import Bank from '../../user/wallet/Wallet';
+import WalletForm from '../../user/wallet/WalletForm';
 
-const Wallet = () => <Bank />;
+const Wallet = () => <WalletForm />;
 
 export default Wallet;

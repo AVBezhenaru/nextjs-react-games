@@ -88,3 +88,11 @@ export const ContentCard = styled.div`
   flex-direction: column;
   gap: 15px;
 `;
+
+export const SpanTitle = styled.span`
+  font-size: 14px;
+`;
+
+export const SpanValue = styled.span`
+  font-size: 18px;
+`;
