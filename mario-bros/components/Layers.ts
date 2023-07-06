@@ -1,22 +1,14 @@
-export const drawBackground = (bg: any, ctx: any, sprites: any) => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  bg.ranges.forEach(([x1, x2, y1, y2]) => {
-    for (let x = x1; x < x2; ++x) {
-      for (let y = y1; y < y2; ++y) {
-        sprites.drawTile(bg.tile, ctx, x, y);
-      }
-    }
-  });
-};
-
-export const createBackgroundLayer = (backgrounds: any, sprites: any) => {
+export const createBackgroundLayer = (level: any, sprites: any) => {
   const buffer = document.createElement('canvas');
   buffer.width = 640;
   buffer.height = 640;
 
-  backgrounds.forEach((bg: any) => {
-    drawBackground(bg, buffer.getContext('2d'), sprites);
+  const ctx = buffer.getContext('2d');
+  console.log(level[0]);
+  level.tile.grid.forEach((col, x) => {
+    col.forEach((tile, y) => {
+      sprites.drawTile(tile.name, ctx, x, y);
+    });
   });
 
   return function drawBackgroundLayer(ctx: any) {
@@ -24,8 +16,10 @@ export const createBackgroundLayer = (backgrounds: any, sprites: any) => {
   };
 };
 
-export const createSpriteLayer = (entity: any) => {
+export const createSpriteLayer = (entities: any) => {
   return function drawSpriteLayer(ctx: any) {
-    entity.draw(ctx);
+    entities.forEach(entity => {
+      entity.draw(ctx);
+    });
   };
 };
