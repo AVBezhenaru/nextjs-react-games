@@ -1,6 +1,6 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { Form, Input, InputBtn, SpanErrorInput } from './TopUpFormStyle';
+import { Form, Input, InputBtn, SpanErrorInput, SpanTitle } from './TopUpFormStyle';
 
 export type Inputs = {
   amount: string;
@@ -23,7 +23,7 @@ export const TopUpForm = () => {
     <div>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <label>
-          <span style={{ fontSize: '14px' }}>Amount (AGC):</span>
+          <SpanTitle>Amount (AGC):</SpanTitle>
           <Input
             type="number"
             placeholder="Count AGC"

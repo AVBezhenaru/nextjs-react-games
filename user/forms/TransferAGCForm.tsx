@@ -1,6 +1,6 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { Form, Input, InputBtn, SpanErrorInput } from './TransferAGCFormStyle';
+import { Form, Input, InputBtn, SpanErrorInput, SpanTitle } from './TransferAGCFormStyle';
 
 export type Inputs = {
   amount: string;
@@ -24,7 +24,7 @@ export const TransferAGCForm = () => {
     <div>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <label>
-          <span style={{ fontSize: '14px' }}>Amount (AGC):</span>
+          <SpanTitle>Amount (AGC):</SpanTitle>
           <Input
             type="text"
             placeholder="Count AGC"
@@ -43,7 +43,7 @@ export const TransferAGCForm = () => {
           {errors.amount && <SpanErrorInput>{errors.amount.message}</SpanErrorInput>}
         </label>
         <label>
-          <span style={{ fontSize: '14px' }}>Account to (id):</span>
+          <SpanTitle>Account to (id):</SpanTitle>
           <Input
             type="text"
             placeholder="id of account"

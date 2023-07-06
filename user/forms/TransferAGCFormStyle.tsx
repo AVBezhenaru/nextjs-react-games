@@ -62,3 +62,7 @@ export const SpanErrorInput = styled.span`
   width: 140px;
   margin: 5px auto;
 `;
+
+export const SpanTitle = styled.span`
+  font-size: 14px;
+`;
