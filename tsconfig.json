@@ -26,6 +26,6 @@
     "src/store/userSlice",
     "src/store/userSlice",
     "tanks/observer/Observer.ts"
-  ],
+, "snake/components/Snake/Models/food.js", "snake/components/Snake/Models/point.js", "snake/components/Snake/Models/snake.js"  ],
   "exclude": ["node_modules"]
 }
