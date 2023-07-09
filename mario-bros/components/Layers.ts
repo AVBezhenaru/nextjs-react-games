@@ -1,25 +1,48 @@
-export const createBackgroundLayer = (level: any, sprites: any) => {
+export function createBackgroundLayer(level, sprites) {
   const buffer = document.createElement('canvas');
   buffer.width = 640;
   buffer.height = 640;
 
-  const ctx = buffer.getContext('2d');
-  console.log(level[0]);
-  level.tile.grid.forEach((col, x) => {
-    col.forEach((tile, y) => {
-      sprites.drawTile(tile.name, ctx, x, y);
-    });
+  const context = buffer.getContext('2d');
+
+  level.tiles.forEach((tile, x, y) => {
+    sprites.drawTile(tile.name, context, x, y);
   });
 
-  return function drawBackgroundLayer(ctx: any) {
-    ctx.drawImage(buffer, 0, 0);
+  return function drawBackgroundLayer(context) {
+    context.drawImage(buffer, 0, 0);
   };
-};
+}
 
-export const createSpriteLayer = (entities: any) => {
-  return function drawSpriteLayer(ctx: any) {
+export function createSpriteLayer(entities) {
+  return function drawSpriteLayer(context) {
     entities.forEach(entity => {
-      entity.draw(ctx);
+      entity.draw(context);
     });
   };
-};
+}
+
+export function createCollisionLayer(level) {
+  const resolvedTiles = [];
+
+  const tileResolver = level.tileCollider.tiles;
+  const tileSize = tileResolver.tileSize;
+
+  const getByIndexOriginal = tileResolver.getByIndex;
+  tileResolver.getByIndex = function getByIndexFake(x, y) {
+    resolvedTiles.push({ x, y });
+    return getByIndexOriginal.call(tileResolver, x, y);
+  };
+
+  return function drawCollision(context) {
+    console.log(123);
+    context.strokeStyle = 'blue';
+    resolvedTiles.forEach(({ x, y }) => {
+      context.beginPath();
+      context.rect(x * tileSize, y * tileSize, tileSize, tileSize);
+      context.stroke();
+    });
+
+    resolvedTiles.length = 0;
+  };
+}

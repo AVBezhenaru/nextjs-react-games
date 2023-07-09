@@ -1,15 +1,4 @@
-// const matrix = new Matrix();
-//
-// matrix.set(5, 4, {name: 'ground'});
-// const tile = matrix.get(mario.pos.x * MARIO_TILES_SIZE, mario.pos.y * MARIO_TILES_SIZE);
-//
-// if (tile === 'ground') {
-//   moveMario();
-// }
-
 export class Matrix {
-  public grid: any[];
-
   constructor() {
     this.grid = [];
   }

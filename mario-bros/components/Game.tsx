@@ -5,6 +5,7 @@ import { createMario } from './MarioEntity';
 import Timer from './Timer';
 import KeyboardState from './KeyboardState';
 import { loadLevel } from './levels/loadLevel';
+import { createCollisionLayer } from "./Layers";
 
 const Game = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -18,6 +19,7 @@ const Game = () => {
 
       const gravity = 2;
       mario.pos.set(64, 64);
+      createCollisionLayer(loadLevel);
       // mario.vel.set(50, -210);
 
       loadLevel.entities.add(mario);
@@ -30,9 +32,17 @@ const Game = () => {
         } else {
           mario.jump.cancel();
         }
-        console.log(keyState);
       });
       input.listenTo(window);
+
+      ['mousedown', 'mousemove'].forEach(eventName => {
+        canvas.addEventListener(eventName, event => {
+          if (event.buttons === 1) {
+            mario.vel.set(0, 0);
+            mario.pos.set(event.offsetX, event.offsetY);
+          }
+        });
+      });
 
       const timer = new Timer(1 / 30);
 
