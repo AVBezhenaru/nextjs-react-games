@@ -6,6 +6,7 @@ import Timer from './Timer';
 import KeyboardState from './KeyboardState';
 import { loadLevel } from './levels/loadLevel';
 import { createCollisionLayer } from "./Layers";
+import { setupKeyboard } from "./setupKeyboard";
 
 const Game = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -15,7 +16,6 @@ const Game = () => {
     const ctx = canvas.getContext('2d');
 
     Promise.all([createMario(), loadLevel()]).then(([mario, loadLevel]) => {
-      console.log(loadLevel);
 
       const gravity = 2;
       mario.pos.set(64, 64);
@@ -24,15 +24,8 @@ const Game = () => {
 
       loadLevel.entities.add(mario);
 
-      const SPACE = 32;
-      const input = new KeyboardState();
-      input.addMapping(SPACE, (keyState) => {
-        if (keyState) {
-          mario.jump.start();
-        } else {
-          mario.jump.cancel();
-        }
-      });
+      const input = setupKeyboard(mario);
+
       input.listenTo(window);
 
       ['mousedown', 'mousemove'].forEach(eventName => {
