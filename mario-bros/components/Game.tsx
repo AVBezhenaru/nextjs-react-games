@@ -3,10 +3,11 @@ import { useEffect, useRef } from 'react';
 import styles from './game.module.scss';
 import { createMario } from './MarioEntity';
 import Timer from './Timer';
-import KeyboardState from './KeyboardState';
 import { loadLevel } from './levels/loadLevel';
-import { createCollisionLayer } from "./Layers";
-import { setupKeyboard } from "./setupKeyboard";
+import { createCollisionLayer } from './Layers';
+import { setupKeyboard } from './setupKeyboard';
+import Camera from './Camera';
+import { setupMouseControl } from './Debug';
 
 const Game = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -16,8 +17,7 @@ const Game = () => {
     const ctx = canvas.getContext('2d');
 
     Promise.all([createMario(), loadLevel()]).then(([mario, loadLevel]) => {
-
-      const gravity = 2;
+      const camera = new Camera();
       mario.pos.set(64, 64);
       createCollisionLayer(loadLevel);
       // mario.vel.set(50, -210);
@@ -25,24 +25,14 @@ const Game = () => {
       loadLevel.entities.add(mario);
 
       const input = setupKeyboard(mario);
-
       input.listenTo(window);
-
-      ['mousedown', 'mousemove'].forEach(eventName => {
-        canvas.addEventListener(eventName, event => {
-          if (event.buttons === 1) {
-            mario.vel.set(0, 0);
-            mario.pos.set(event.offsetX, event.offsetY);
-          }
-        });
-      });
+      setupMouseControl(canvas, mario, camera);
 
       const timer = new Timer(1 / 30);
 
       timer.update = function update(deltaTime: any) {
         loadLevel.update(deltaTime);
-        loadLevel.comp.draw(ctx);
-        mario.vel.y += gravity;
+        loadLevel.comp.draw(ctx, camera);
       };
 
       timer.start();
