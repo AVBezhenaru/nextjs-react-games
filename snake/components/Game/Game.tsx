@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, KeyboardEvent } from 'react';
+import React, { useRef, useState, useEffect, KeyboardEvent, EventListener } from 'react';
 
 import { useInterval } from '../../hooks/useInterval';
 import {
@@ -29,8 +29,8 @@ const App: React.FC = () => {
   const [showStartButton, setShowStartButton] = useState<boolean>(true);
 
   const scoreCounter = useRef<number>(0);
-  const [dir, setDir] = useState<[number, number]>([1, 0]);
-  const lastDir = useRef<[number, number]>([1, 0]);
+  const [dir, setDir] = useState<number[]>([1, 0]);
+  const lastDir = useRef<number[]>([1, 0]);
   const [speed, setSpeed] = useState<number>(0);
   const [bombSpawnTime, setBombSpawnTime] = useState<number | null>(null);
   const [appleSpeed, setAppleSpeed] = useState<number | null>(null);
@@ -64,8 +64,8 @@ const App: React.FC = () => {
     setShowStartButton(true);
   };
 
-  // changing snake direction
-  const moveSnake = ({ key }: KeyboardEvent) => {
+  const moveSnake: EventListener = (event: Event) => {
+    const { key } = event as unknown as KeyboardEvent;
     switch (key) {
       case 'ArrowUp':
         if (lastDir.current[1] !== 0) break;
@@ -88,7 +88,14 @@ const App: React.FC = () => {
     }
   };
 
-  // generating new entity (apple or bomb) in empty place on canvas
+  const checkDeadlyEntitiesCollision = (piece: number[]) => {
+    const deadlyEntities: number[][] = [...snake, ...bomb];
+    for (const segment of deadlyEntities) {
+      if (piece[0] === segment[0] && piece[1] === segment[1]) return true;
+    }
+    return false;
+  };
+
   const generateOnEmptyField = () => {
     const entityGenerator = () => {
       const randomEntity: number[] = [
@@ -105,32 +112,20 @@ const App: React.FC = () => {
     return newEntity;
   };
 
-  // collision for walls
   const checkWallCollision = (piece: number[]) => {
     if (piece[0] >= CANVAS_SIZE[0] || piece[0] < 0 || piece[1] >= CANVAS_SIZE[1] || piece[1] < 0)
       return true;
     return false;
   };
 
-  // checking collision for all hostile objects (snake and bombs)
-  const checkDeadlyEntitiesCollision = (piece: number[]) => {
-    const deadlyEntities: number[][] = [...snake, ...bomb];
-    for (const segment of deadlyEntities) {
-      if (piece[0] === segment[0] && piece[1] === segment[1]) return true;
-    }
-    return false;
-  };
-
-  // checking collision for snakeHead and apple, and generating new apple in empty field
   const checkAppleCollision = (newSnake: number[][]) => {
     if (newSnake[0][0] === apple[0] && newSnake[0][1] === apple[1]) {
       const newApple = generateOnEmptyField();
 
-      // adding speed when snake surpasses LEVEL_MULTIPLIER
       if (snake.length % LEVEL_MULTIPLIER === 0) {
         setSpeed(1.25 * speed);
       }
-      // updating score
+
       scoreCounter.current += 10;
       setApple(newApple);
       return true;
@@ -138,7 +133,6 @@ const App: React.FC = () => {
     return false;
   };
 
-  // one 'tick' in the game
   const gameLoop = (time: number) => {
     if (speed === null) return;
     requestRef.current = requestAnimationFrame(gameLoop);
