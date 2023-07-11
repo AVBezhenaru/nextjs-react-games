@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, KeyboardEvent, EventListener } from 'react';
+import React, { useRef, useState, useEffect, KeyboardEvent } from 'react';
 
 import { useInterval } from '../../hooks/useInterval';
 import {
@@ -64,7 +64,7 @@ const App: React.FC = () => {
     setShowStartButton(true);
   };
 
-  const moveSnake: EventListener = (event: Event) => {
+  const moveSnake = (event: Event) => {
     const { key } = event as unknown as KeyboardEvent;
     switch (key) {
       case 'ArrowUp':
