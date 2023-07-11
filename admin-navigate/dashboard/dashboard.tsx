@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { SectionType } from '../types';
 
@@ -7,10 +7,38 @@ import slasses from './dashboard.module.scss';
 
 const Dashboard = (props: { arr: SectionType[] }) => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const { arr } = props;
+  const pagePath = 'home';
+  const childPath = '';
+  const [pagestyle, setPagestyle] = useState(pagePath);
+  const [childStyle, setChildStyle] = useState(childPath);
 
-  const [pagestyle, setPagestyle] = useState('home');
-  const [childStyle, setChildStyle] = useState('');
+  useEffect(() => {
+    arr.map((section) => {
+      const path = pathname.replace('/admin/', '').replaceAll('-', ' ');
+      if (section.name === path) {
+        setPagestyle(path);
+      }
+      if (section.sectionChildren?.find(({ name }) => name === path) !== undefined) {
+        setPagestyle(section.name);
+        setChildStyle(path);
+      }
+      return section;
+    });
+  }, []);
+
+  useEffect(() => {
+    arr.forEach((section) => {
+      if (section.name === pagestyle) {
+        if (!section.body) {
+          const newPath = section.sectionChildren[0].name;
+          setChildStyle(newPath);
+          navigate(`admin/${newPath.split(' ').join('-')}`);
+        }
+      }
+    });
+  }, [pagestyle]);
 
   function activeHandler(name: string) {
     setPagestyle(name);

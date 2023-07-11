@@ -8,6 +8,6 @@ export type SectionChildType = {
 export type SectionType = {
   icon: string;
   name: string;
-  body: ReactNode;
+  body: ReactNode | false;
   sectionChildren?: SectionChildType[];
 };
