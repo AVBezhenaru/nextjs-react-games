@@ -15,8 +15,8 @@ export const TransferAGCForm = () => {
     reset,
   } = useForm<Inputs>({ mode: 'onBlur' });
 
-  const onSubmit: SubmitHandler<Inputs> = (date) => {
-    console.log(date);
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data); // данные из формы - сумма перевода и айди кошелька куда преводить {amount: string, toAccount: string}
     reset();
   };
 
