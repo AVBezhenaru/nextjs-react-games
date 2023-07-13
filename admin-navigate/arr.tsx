@@ -1,4 +1,6 @@
 import { CalendarWrapper } from '../calendar/CalendarWrapper';
+import Statistics from '../statistics/components/Statistics/Statistics';
+import App from '../users/components/App/App';
 
 import { SectionType } from './types';
 
@@ -6,6 +8,14 @@ import { SectionType } from './types';
 // images from public folder.
 // name only lowerCase string!
 // path to your page will be generic by split(' ').join('-')!
+
+// to add menu item as page
+// navigate to pages folder and add
+// pageName.tsx, where pageName is name of your page
+// with content:
+// import AdminNavigate from '../dashboard';
+// const PageName = () => <AdminNavigate />;
+// export default PageName;
 
 export const sectionsArr: SectionType[] = [
   {
@@ -15,15 +25,16 @@ export const sectionsArr: SectionType[] = [
   },
   {
     icon: 'img/games.svg',
-    name: 'aiaiaia',
-    body: <p>aaaaaiaa</p>,
+    name: 'statistics',
+    body: <Statistics />,
   },
   {
     icon: 'img/users.svg',
     name: 'users',
-    body: <p>usersusersusersusersusersusersusersusers</p>,
+    // use "body: false" if u need empty root page with children
+    body: false,
     sectionChildren: [
-      { name: 'clever users', body: <div>cleveruserscleverusersusers</div> },
+      { name: 'clever users', body: <App /> },
       { name: 'big users', body: <p>bigusers</p> },
     ],
   },
