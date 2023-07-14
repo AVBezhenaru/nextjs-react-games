@@ -1,6 +1,6 @@
 import loadImage from '../levels/loadLevel';
-import tilesImage from '../../assets/imgSprites/tiles.png';
-import marioImage from '../../assets/imgSprites/mario_and_items.png';
+import tilesImage from '../../assets/imgSprites/newtiles.png';
+import marioImage from '../../assets/imgSprites/characters.gif';
 
 import SpriteSheets from './SpriteSheets';
 
