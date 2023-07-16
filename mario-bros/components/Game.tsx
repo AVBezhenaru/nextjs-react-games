@@ -4,7 +4,7 @@ import styles from './game.module.scss';
 import { createMario } from './MarioEntity';
 import Timer from './Timer';
 import { loadLevel } from './levels/loadLevel';
-import { createCollisionLayer } from './Layers';
+import { createCameraLayer, createCollisionLayer } from "./Layers";
 import { setupKeyboard } from './setupKeyboard';
 import Camera from './Camera';
 import { setupMouseControl } from './Debug';
@@ -19,7 +19,8 @@ const Game = () => {
     Promise.all([createMario(), loadLevel()]).then(([mario, loadLevel]) => {
       const camera = new Camera();
       mario.pos.set(64, 64);
-      createCollisionLayer(loadLevel);
+
+      loadLevel.comp.layers.push(createCollisionLayer(loadLevel), createCameraLayer(camera));
       // mario.vel.set(50, -210);
 
       loadLevel.entities.add(mario);
