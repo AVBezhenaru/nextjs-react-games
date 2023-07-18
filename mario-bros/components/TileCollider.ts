@@ -1,11 +1,11 @@
-import TileResolver from "./TileResolver";
+import TileResolver from './TileResolver';
 export default class TileCollider {
   constructor(tileMatrix) {
     this.tiles = new TileResolver(tileMatrix);
   }
 
   checkX(entity) {
-    let x;
+    let x: number;
     if (entity.vel.x > 0) {
       x = entity.pos.x + entity.size.x;
     } else if (entity.vel.x < 0) {

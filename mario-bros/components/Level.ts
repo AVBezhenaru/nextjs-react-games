@@ -1,9 +1,17 @@
-import Compositor from './Compositor';
 import { Matrix } from './Vec2';
-import TileCollider from "./TileCollider";
+import Compositor from './Compositor';
+import TileCollider from './TileCollider';
 
 export default class Level {
-  private gravity: any;
+  private readonly gravity: number;
+
+  private readonly comp: Compositor;
+
+  private readonly entities: Set<any>;
+
+  private readonly tiles: Matrix;
+
+  private readonly tileCollider: TileCollider;
 
   constructor() {
     this.gravity = 2000;

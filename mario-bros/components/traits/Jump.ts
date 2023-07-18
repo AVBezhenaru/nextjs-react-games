@@ -1,6 +1,12 @@
 import { Trait } from '../Entity';
 
 export default class Jump extends Trait {
+  private readonly duration: number;
+
+  private engageTime: number;
+
+  private readonly velocity: number;
+
   constructor() {
     super('jump');
 

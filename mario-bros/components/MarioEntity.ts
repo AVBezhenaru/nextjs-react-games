@@ -1,6 +1,5 @@
-import Entity from './Entity';
 import { loadMarioSprites } from './spriteSheets/LoadSprites';
-import Velocity from './traits/Velocity';
+import Entity from './Entity';
 import Jump from './traits/Jump';
 import Go from './traits/Go';
 
@@ -11,7 +10,14 @@ export const createMario = () =>
 
     mario.addTrait(new Go());
     mario.addTrait(new Jump());
-    // mario.addTrait(new Velocity());
+
+    function routeFrame(mario) {
+      if (mario.go.distance > 0) {
+        return mario.go.distance;
+      }
+
+      return mario;
+    }
 
     mario.draw = function drawMario(ctx: any) {
       sprite.draw('idle', ctx, 0, 0);

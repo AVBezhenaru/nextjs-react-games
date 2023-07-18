@@ -1,14 +1,14 @@
+import Level from '../Level';
 import { createBackgroundLayer, createSpriteLayer } from '../Layers';
+import { loadBackgroundSprites } from '../spriteSheets/LoadSprites';
 
 import firstLvl from './1-1.json';
-import { loadBackgroundSprites } from '../spriteSheets/LoadSprites';
-import Level from '../Level';
 
-export default function loadImage(url: any) {
+export default function loadImage(url: string) {
   return new Promise((resolve) => {
     const image = new Image();
     image.addEventListener('load', () => {
-      setTimeout(resolve, 1000, image);
+      setTimeout(resolve, 2000, image);
     });
     image.src = url.src;
   });

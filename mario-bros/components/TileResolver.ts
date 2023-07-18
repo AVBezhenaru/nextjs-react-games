@@ -33,7 +33,7 @@ export default class TileResolver {
         y1,
         y2,
         x1,
-        x2
+        x2,
       };
     }
   }

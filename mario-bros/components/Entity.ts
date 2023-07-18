@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/named
 import Vec2 from './Vec2';
 
 export class Trait {
