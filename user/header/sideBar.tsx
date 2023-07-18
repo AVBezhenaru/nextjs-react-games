@@ -31,6 +31,11 @@ const SideBar = () => {
             Friends
           </Li>
         </StyledLink>
+        <StyledLink href={`${path}/wallet`} passHref>
+          <Li pathname="wallet" active={router.pathname}>
+            Wallet
+          </Li>
+        </StyledLink>
         <LiHeader>Main</LiHeader>
         <Li>News</Li>
         <Li>Store</Li>

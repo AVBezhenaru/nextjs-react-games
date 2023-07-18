@@ -1,0 +1,40 @@
+.animation {
+  width: auto;
+  max-width: 250px;
+  height: auto;
+  position: fixed;
+  top: 5px;
+  right: 38%;
+  padding: 15px;
+  font-size: 18px;
+  border-radius: 10px;
+  border: 3px solid #d65b88;
+  color: white;
+  display: flex;
+  align-items: center;
+
+  background-color: #4a5161;
+  font-weight: 500;
+
+  &:hover {
+    border: 3px solid rgb(220, 53, 69);
+    .animation-text {
+      color: #d65b88;
+    }
+  }
+}
+
+.animation-text {
+  width: 100%;
+  text-align: center;
+}
+
+.close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+
+  &:hover {
+    color: rgb(220, 53, 69);
+  }
+}

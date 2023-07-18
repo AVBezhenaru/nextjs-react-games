@@ -1,0 +1,20 @@
+.Charts {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.topProducts {
+  width: 550px;
+  height: 350px;
+
+  @media (max-width: 1500px) {
+    width: 500px;
+  }
+}
+
+.Map {
+  width: 100%;
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import AdminNavigate from '../admin-navigate/index';
+import AdminNavigate from '../../admin-navigate/index';
 
 const Admin = () => <AdminNavigate />;
 
