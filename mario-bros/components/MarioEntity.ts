@@ -11,14 +11,6 @@ export const createMario = () =>
     mario.addTrait(new Go());
     mario.addTrait(new Jump());
 
-    function routeFrame(mario) {
-      if (mario.go.distance > 0) {
-        return mario.go.distance;
-      }
-
-      return mario;
-    }
-
     mario.draw = function drawMario(ctx: any) {
       sprite.draw('idle', ctx, 0, 0);
     };

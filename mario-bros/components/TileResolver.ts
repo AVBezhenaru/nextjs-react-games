@@ -1,14 +1,18 @@
 export default class TileResolver {
-  constructor(matrix, tileSize = 16) {
+  private tileSize: number;
+
+  private matrix: any;
+
+  constructor(matrix: any, tileSize = 16) {
     this.matrix = matrix;
     this.tileSize = tileSize;
   }
 
-  toIndex(pos) {
+  toIndex(pos: number) {
     return Math.floor(pos / this.tileSize);
   }
 
-  toIndexRange(pos1, pos2) {
+  toIndexRange(pos1: number, pos2: number) {
     const pMax = Math.ceil(pos2 / this.tileSize) * this.tileSize;
     const range = [];
     let pos = pos1;
@@ -19,7 +23,7 @@ export default class TileResolver {
     return range;
   }
 
-  getByIndex(indexX, indexY) {
+  getByIndex(indexX: number, indexY: number) {
     const tile = this.matrix.get(indexX, indexY);
 
     if (tile) {
@@ -38,14 +42,14 @@ export default class TileResolver {
     }
   }
 
-  searchByPosition(posX, posY) {
+  searchByPosition(posX: number, posY: number) {
     return this.getByIndex(this.toIndex(posX), this.toIndex(posY));
   }
 
-  searchByRange(x1, x2, y1, y2) {
-    const matches = [];
-    this.toIndexRange(x1, x2).forEach(indexX => {
-      this.toIndexRange(y1, y2).forEach(indexY => {
+  searchByRange(x1: number, x2: number, y1: number, y2: number) {
+    const matches: any = [];
+    this.toIndexRange(x1, x2).forEach((indexX: number) => {
+      this.toIndexRange(y1, y2).forEach((indexY: number) => {
         const match = this.getByIndex(indexX, indexY);
 
         if (match) matches.push(match);

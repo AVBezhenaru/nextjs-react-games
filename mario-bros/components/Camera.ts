@@ -1,7 +1,7 @@
 import Vec2 from './Vec2';
 
 export default class Camera {
-  private pos: Vec2;
+  pos: Vec2;
 
   private size: Vec2;
 

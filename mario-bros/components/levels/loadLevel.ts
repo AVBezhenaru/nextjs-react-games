@@ -4,7 +4,7 @@ import { loadBackgroundSprites } from '../spriteSheets/LoadSprites';
 
 import firstLvl from './1-1.json';
 
-export default function loadImage(url: string) {
+export default function loadImage(url: any) {
   return new Promise((resolve) => {
     const image = new Image();
     image.addEventListener('load', () => {
@@ -14,8 +14,8 @@ export default function loadImage(url: string) {
   });
 }
 
-function createTiles(level, backgrounds) {
-  function applyRange(background, xStart, xLen, yStart, yLen) {
+function createTiles(level: any, backgrounds: any) {
+  function applyRange(background: any, xStart: number, xLen: number, yStart: number, yLen: number) {
     const xEnd = xStart + xLen;
     const yEnd = yStart + yLen;
     for (let x = xStart; x < xEnd; ++x) {
@@ -27,8 +27,8 @@ function createTiles(level, backgrounds) {
     }
   }
 
-  backgrounds.forEach(background => {
-    background.ranges.forEach((range) => {
+  backgrounds.forEach((background: any) => {
+    background.ranges.forEach((range: number[]) => {
       if (range.length === 4) {
         const [xStart, xLen, yStart, yLen] = range;
         applyRange(background, xStart, xLen, yStart, yLen);

@@ -5,15 +5,15 @@ export class Matrix {
     this.grid = [];
   }
 
-  forEach(callback) {
+  forEach(callback: any) {
     this.grid.forEach((column, x) => {
-      column.forEach((value, y) => {
+      column.forEach((value: number, y: number) => {
         callback(value, x, y);
       });
     });
   }
 
-  get(x, y) {
+  get(x: number, y: number) {
     const col = this.grid[x];
     if (col) {
       return col[y];
@@ -21,7 +21,7 @@ export class Matrix {
     return undefined;
   }
 
-  set(x, y, value) {
+  set(x: number, y: number, value: number) {
     if (!this.grid[x]) {
       this.grid[x] = [];
     }

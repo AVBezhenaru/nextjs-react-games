@@ -1,11 +1,15 @@
 import TileResolver from './TileResolver';
+import { Matrix } from './Vec2';
+
 export default class TileCollider {
-  constructor(tileMatrix) {
+  private tiles: TileResolver;
+
+  constructor(tileMatrix: Matrix) {
     this.tiles = new TileResolver(tileMatrix);
   }
 
-  checkX(entity) {
-    let x: number;
+  checkX(entity: any) {
+    let x;
     if (entity.vel.x > 0) {
       x = entity.pos.x + entity.size.x;
     } else if (entity.vel.x < 0) {
@@ -19,7 +23,7 @@ export default class TileCollider {
       entity.pos.y + entity.size.y,
     );
 
-    matches.forEach(match => {
+    matches.forEach((match: any) => {
       if (!match) return;
 
       if (match.tile.name !== 'ground') return;
@@ -38,7 +42,7 @@ export default class TileCollider {
     });
   }
 
-  checkY(entity) {
+  checkY(entity: any) {
     let y;
     if (entity.vel.y > 0) {
       y = entity.pos.y + entity.size.y;
@@ -46,13 +50,9 @@ export default class TileCollider {
       y = entity.pos.y;
     } else return;
 
-    const matches = this.tiles.searchByRange(
-      entity.pos.x,
-      entity.pos.x + entity.size.x,
-      y, y
-    );
+    const matches = this.tiles.searchByRange(entity.pos.x, entity.pos.x + entity.size.x, y, y);
 
-    matches.forEach(match => {
+    matches.forEach((match: any) => {
       if (!match) return;
 
       if (match.tile.name !== 'ground') return;
@@ -71,7 +71,7 @@ export default class TileCollider {
     });
   }
 
-  test(entity) {
+  test(entity: object) {
     this.checkY(entity);
   }
 }

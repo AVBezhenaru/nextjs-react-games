@@ -1,7 +1,7 @@
 class Timer {
-  public updateProxy: (time: any) => void;
+  public updateProxy: (time: number) => void;
 
-  public update: (deltaTime: any) => void;
+  public update: (deltaTime: number) => void;
 
   constructor(deltaTime = 1 / 60) {
     let accumulatedTime = 0;

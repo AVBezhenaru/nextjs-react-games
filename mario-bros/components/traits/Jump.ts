@@ -24,7 +24,9 @@ export default class Jump extends Trait {
     this.engageTime = 0;
   }
 
-  update(entity, deltaTime) {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  update(entity: any, deltaTime: number) {
     if (this.engageTime > 0) {
       entity.vel.y = -this.velocity;
       this.engageTime -= deltaTime;

@@ -5,9 +5,9 @@ import TileCollider from './TileCollider';
 export default class Level {
   private readonly gravity: number;
 
-  private readonly comp: Compositor;
+  public comp: Compositor;
 
-  private readonly entities: Set<any>;
+  public entities: Set<any>;
 
   private readonly tiles: Matrix;
 
@@ -21,8 +21,8 @@ export default class Level {
     this.tileCollider = new TileCollider(this.tiles);
   }
 
-  update(deltaTime) {
-    this.entities.forEach(entity => {
+  update(deltaTime: number) {
+    this.entities.forEach((entity) => {
       entity.update(deltaTime);
 
       entity.pos.x += entity.vel.x * deltaTime;
