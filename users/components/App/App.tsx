@@ -10,16 +10,16 @@ import Users from '../Users/Users';
 const Index = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [arrayUsers, setArrayUsers] = useState<IUsers[]>([
-    { name: 'Salse', date: '1241141', title: '1', amount: 'Amount', status: false },
-    { name: 'Names2', date: '1241355', title: '2', amount: 'Amount', status: true },
-    { name: 'Names3', date: '1241113', title: '3', amount: 'Amount', status: false },
-    { name: 'aим', date: '12413131', title: '4', amount: 'Amount', status: true },
-    { name: 'Жора', date: '124122', title: '12', amount: 'Amount', status: false },
-    { name: 'Сайлас', date: '12423421', title: '11', amount: 'Amount', status: false },
-    { name: 'Games7', date: '124124214', title: '113', amount: 'Amount', status: true },
-    { name: 'Lames8', date: '12413231', title: '15', amount: 'Amount', status: true },
-    { name: 'Ffames9', date: '124122233', title: '167', amount: 'Amount', status: true },
-    { name: 'Bames10', date: '124122', title: '16', amount: 'Amount', status: false },
+    { name: 'Salse', date: '1241141', title: '1', amount: '10', status: false },
+    { name: 'Names2', date: '1241355', title: '2', amount: '5', status: true },
+    { name: 'Names3', date: '1241113', title: '3', amount: '1', status: false },
+    { name: 'aим', date: '12413131', title: '4', amount: '3', status: true },
+    { name: 'Жора', date: '124122', title: '12', amount: '15', status: false },
+    { name: 'Сайлас', date: '12423421', title: '11', amount: '0', status: false },
+    { name: 'Games7', date: '124124214', title: '113', amount: '2', status: true },
+    { name: 'Lames8', date: '12413231', title: '15', amount: '9', status: true },
+    { name: 'Ffames9', date: '124122233', title: '167', amount: '0', status: true },
+    { name: 'Bames10', date: '124122', title: '16', amount: '5', status: false },
   ]);
   const [current, setCurrent] = useState<number>(1);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
