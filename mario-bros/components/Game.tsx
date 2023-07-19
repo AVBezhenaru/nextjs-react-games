@@ -17,7 +17,7 @@ const Game = () => {
 
     Promise.all([createMario(), loadLevel()]).then(([mario, loadLevel]) => {
       const camera = new Camera();
-      mario.pos.set(69, 69);
+      mario.pos.set(80, 186);
 
       // uncomment this for debugging
       // loadLevel.comp.layers.push(createCollisionLayer(loadLevel), createCameraLayer(camera));

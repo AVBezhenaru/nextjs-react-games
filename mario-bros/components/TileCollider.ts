@@ -10,18 +10,16 @@ export default class TileCollider {
 
   checkX(entity: any) {
     let x;
+
     if (entity.vel.x > 0) {
       x = entity.pos.x + entity.size.x;
     } else if (entity.vel.x < 0) {
       x = entity.pos.x;
-    } else return;
+    } else {
+      return;
+    }
 
-    const matches = this.tiles.searchByRange(
-      entity.pos.x,
-      entity.pos.x + entity.size.x,
-      entity.pos.y,
-      entity.pos.y + entity.size.y,
-    );
+    const matches = this.tiles.searchByRange(x, x, entity.pos.y, entity.pos.y + entity.size.y);
 
     matches.forEach((match: any) => {
       if (!match) return;
@@ -48,13 +46,13 @@ export default class TileCollider {
       y = entity.pos.y + entity.size.y;
     } else if (entity.vel.y < 0) {
       y = entity.pos.y;
-    } else return;
+    } else {
+      return;
+    }
 
     const matches = this.tiles.searchByRange(entity.pos.x, entity.pos.x + entity.size.x, y, y);
 
     matches.forEach((match: any) => {
-      if (!match) return;
-
       if (match.tile.name !== 'ground') return;
 
       if (entity.vel.y > 0) {
@@ -69,9 +67,5 @@ export default class TileCollider {
         }
       }
     });
-  }
-
-  test(entity: object) {
-    this.checkY(entity);
   }
 }

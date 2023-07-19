@@ -8,7 +8,7 @@ export default function loadImage(url: any) {
   return new Promise((resolve) => {
     const image = new Image();
     image.addEventListener('load', () => {
-      setTimeout(resolve, 2000, image);
+      setTimeout(resolve, 100, image);
     });
     image.src = url.src;
   });
