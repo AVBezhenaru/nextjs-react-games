@@ -13,6 +13,7 @@ import chessIcon from '../img/chessIcon.png';
 import doodler from '../img/doodler-guy.png';
 import fruitNinjaIcon from '../img/fruitNinjaIcon.png';
 import hangmanIcon from '../img/hangmanIcon.png';
+import marioIcon from '../img/marioIcon.png';
 import memoryCards from '../img/memoryCards.png';
 import sapperIcon from '../img/sapperIcon.png';
 import snake from '../img/snake.png';
@@ -54,6 +55,7 @@ const ListGamesForm = () => {
     { src: tamagotchiIcon.src, title: 'tamagotchi', href: 'tamagotchi' },
     { src: wordleIcon.src, title: 'wordle', href: 'wordle' },
     { src: snake.src, title: 'snake', href: 'snake' },
+    { src: marioIcon.src, title: 'mario-bros' },
   ];
   return (
     <>
