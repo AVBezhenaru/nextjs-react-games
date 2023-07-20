@@ -1,0 +1,11 @@
+.correct {
+    background-color: $game-success !important;
+}
+
+.misplaced {
+    background-color: $game-warn !important;
+}
+
+.incorrect {
+    background-color: $game-error !important;
+}

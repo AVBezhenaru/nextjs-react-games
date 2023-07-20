@@ -1,0 +1,31 @@
+@import './index';
+
+
+.wordRow {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    .charBox {
+        box-sizing: border-box;
+        text-align: center;
+        line-height: 70px;
+        font-size: 60px;
+        color: $app-text-color;
+        text-transform: uppercase;
+        width: 70px;
+        height: 70px;
+        outline: none;
+        background-color: $game-cell-color;
+        border: none;
+        margin-left: 5px;
+        border-radius: 4px;
+        display: inline-block;
+    }
+
+    .focused {
+        box-shadow: 0px 0px 0px 2px $game-cell-focus-color inset;
+    }
+}
