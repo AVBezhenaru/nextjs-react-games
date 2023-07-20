@@ -1,0 +1,13 @@
+
+  .canvas {
+    background-image: url('../../assets/gameboard.png');
+    image-rendering: -moz-crisp-edges;          /* Firefox                        */
+    image-rendering: -o-crisp-edges;            /* Opera                          */
+    image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
+    image-rendering: pixelated; /* Chrome */
+    background-size: cover;
+    border: 2px solid black;
+    min-width: 400px;
+    margin: 15px 15px;
+    box-shadow: 0 0 15px black;
+  }

@@ -15,6 +15,7 @@ import fruitNinjaIcon from '../img/fruitNinjaIcon.png';
 import hangmanIcon from '../img/hangmanIcon.png';
 import memoryCards from '../img/memoryCards.png';
 import sapperIcon from '../img/sapperIcon.png';
+import snake from '../img/snake.png';
 import solitairIcon from '../img/solitairIcon.png';
 import tamagotchiIcon from '../img/tamagotchiIcon.svg';
 import tanksIcon from '../img/tanksIcon.png';
@@ -52,6 +53,7 @@ const ListGamesForm = () => {
     { src: twoMinInSpaceIcon.src, title: '2min-in-space' },
     { src: tamagotchiIcon.src, title: 'tamagotchi', href: 'tamagotchi' },
     { src: wordleIcon.src, title: 'wordle', href: 'wordle' },
+    { src: snake.src, title: 'snake', href: 'snake' },
   ];
   return (
     <>
