@@ -1,7 +1,6 @@
 'use client';
 
-import { Button } from 'antd';
-import useNotification from 'antd/es/notification/useNotification';
+import { Button, notification } from 'antd';
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -21,12 +20,12 @@ import EndScreen from './end-screen';
 import WordRow from './word-row';
 
 const getWord = async (lang = 'ru', length = [5, 6]) => {
-  const response = await fetch(`/api/word?lang=${lang}&len=${length[0]}-${length[1]}`);
+  const response = await fetch(`/api/wordle/words?lang=${lang}&len=${length[0]}-${length[1]}`);
   return response.json();
 };
 
-const checkWord = async (word: string) => {
-  const response = await fetch(`http://localhost:3000/api/word?checkWord=${word}`);
+const checkWord = async (word: string, lang = 'ru') => {
+  const response = await fetch(`/api/wordle/words?checkWord=${word}&lang=${lang}`);
   return response.json();
 };
 
@@ -36,7 +35,7 @@ const GameScene = () => {
   );
   const { focusedInput } = useSelector((state: RootState) => state.animationSlice);
   const dispatch = useDispatch<AppDispatch>();
-  const [notification, contextHolder] = useNotification();
+  const [api, contextHolder] = notification.useNotification();
   const { winState } = useSelector((state: RootState) => state.wordleSlice);
   // useEffect(() => {
   //     startGame()
@@ -90,7 +89,7 @@ const GameScene = () => {
     setWaitingServer(true);
     checkWord(currentRef?.value as string).then(({ exists }) => {
       if (!exists) {
-        notification.open({
+        api.open({
           message: 'Такого слова нет!',
           description: 'Введите существующее слово, например ОКЕАН.',
           duration: 2,

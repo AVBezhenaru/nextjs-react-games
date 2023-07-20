@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { setAnimationDone, setCheckingLetters } from '../store/animationSlice';
 import { AppDispatch, RootState } from '../store/store';
+import letterStatus from '../styles/letter-status.module.scss';
 import classes from '../styles/word-row.module.scss';
 
 const LetterBox: React.FC<{
@@ -43,7 +44,11 @@ const LetterBox: React.FC<{
 
   useEffect(() => {
     if (correctLetters.flat().join('') === '' && scope.current.classList.length > 0) {
-      scope.current.classList.remove('correct', 'incorrect', 'misplaced');
+      scope.current.classList.remove(
+        letterStatus.correct,
+        letterStatus.incorrect,
+        letterStatus.misplaced,
+      );
     }
   }, [correctLetters]);
 

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setAnimationDone } from '../store/animationSlice';
 import { AppDispatch, RootState } from '../store/store';
 import classes from '../styles/keyboard.module.scss';
+import letterStatus from '../styles/letter-status.module.scss';
 
 const KeyboardKey: React.FC<{ letter: string; handleClick: (letter: string) => void }> = ({
   letter,
@@ -30,7 +31,11 @@ const KeyboardKey: React.FC<{ letter: string; handleClick: (letter: string) => v
 
   useEffect(() => {
     if (JSON.stringify(keyboardMarkers) === JSON.stringify({})) {
-      scope.current.classList.remove('correct', 'incorrect', 'misplaced');
+      scope.current.classList.remove(
+        letterStatus.correct,
+        letterStatus.incorrect,
+        letterStatus.misplaced,
+      );
     }
   }, [keyboardMarkers]);
 

@@ -8,15 +8,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 import { setLang, setLength, setNumOfAttempts } from '../store/wordleSlice';
 import classes from '../styles/overlay.module.scss';
+import classNames from '../styles/wordle.module.scss';
 
 import Keyboard from './keyboard';
 
 const Overlay: React.FC<{ children: React.JSX.Element }> = ({ children }) => {
   const dispatch = useDispatch();
-  const { settings } = useSelector((state: RootState) => state.wordleSlice);
+  const { lang, numOfAttempts, wordLength } = useSelector(
+    (state: RootState) => state.wordleSlice.settings,
+  );
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   return (
-    <main>
+    <main className={classNames.main}>
       <Button
         shape="circle"
         icon={<SettingOutlined />}
@@ -33,7 +36,7 @@ const Overlay: React.FC<{ children: React.JSX.Element }> = ({ children }) => {
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <span className={classes.settingsLabel}>Select Language:</span>
           <Select
-            defaultValue={settings.lang}
+            defaultValue={lang}
             options={[
               { value: 'RU', label: 'RU' },
               { value: 'EN', label: 'EN', disabled: true },
@@ -48,7 +51,7 @@ const Overlay: React.FC<{ children: React.JSX.Element }> = ({ children }) => {
           <div style={{ width: '70%', display: 'inline-block' }}>
             <Slider
               range
-              defaultValue={settings.wordLength as [number, number]}
+              defaultValue={wordLength as [number, number]}
               min={4}
               max={24}
               onAfterChange={(value: [number, number]) => {
@@ -61,7 +64,7 @@ const Overlay: React.FC<{ children: React.JSX.Element }> = ({ children }) => {
           <span className={classes.settingsLabel}>Select number of attempts:</span>
           <div style={{ width: '70%', display: 'inline-block' }}>
             <Slider
-              defaultValue={settings.numOfAttempts}
+              defaultValue={numOfAttempts}
               min={4}
               max={10}
               onAfterChange={(value: number) => {

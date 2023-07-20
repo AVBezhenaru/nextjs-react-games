@@ -6,10 +6,12 @@ $game-success: #69a046;
 $game-warn: #e2b332;
 $game-error: #e78a8a;
 $key-background-color: #ababac;
-@import './letter-status.scss';
+@import './letter-status.module.scss';
 
-body.bodyClass {
+.main {
   margin: 0;
+  padding-top: 45px;
+  height: 100%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;

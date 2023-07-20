@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import classes from '../styles/letter-status.module.scss';
+
 interface WordleState {
   challengeWord: string;
   challengeWordArr: string[];
@@ -66,14 +68,14 @@ const wordleSlice = createSlice({
           foundIndex = chars.indexOf(guessChar, index);
         }
         if (index === foundIndex) {
-          guesses[index] = 'correct';
-          state.keyboardMarkers[guessChar] = 'correct';
+          guesses[index] = classes.correct;
+          state.keyboardMarkers[guessChar] = classes.correct;
         } else if (foundIndex === -1) {
-          guesses[index] = 'incorrect';
-          state.keyboardMarkers[guessChar] = 'incorrect';
+          guesses[index] = classes.incorrect;
+          state.keyboardMarkers[guessChar] = classes.incorrect;
         } else {
-          guesses[index] = 'misplaced';
-          state.keyboardMarkers[guessChar] = 'misplaced';
+          guesses[index] = classes.misplaced;
+          state.keyboardMarkers[guessChar] = classes.misplaced;
         }
       });
     },
