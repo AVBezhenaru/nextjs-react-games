@@ -22,6 +22,7 @@ import aimTrainerIcon from '../img/aim-trainer.svg';
 import twoMinInSpaceIcon from '../img/twoMinInSpaceIcon.png';
 import tamagotchiIcon from '../img/tamagotchiIcon.svg';
 import snake from '../img/snake.png';
+import marioIcon from '../img/marioIcon.png';
 
 import { GameLink } from './GameLink';
 import { Games, Page, HeaderGames, ListGames } from './listGamesStyle';
@@ -52,6 +53,7 @@ const ListGamesForm = () => {
     { src: twoMinInSpaceIcon.src, title: '2min-in-space' },
     { src: tamagotchiIcon.src, title: 'tamagotchi', href: 'tamagotchi' },
     { src: snake.src, title: 'snake', href: 'snake' },
+    { src: marioIcon.src, title: 'mario-bros' },
   ];
   return (
     <>
