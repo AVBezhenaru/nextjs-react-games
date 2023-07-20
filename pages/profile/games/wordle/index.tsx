@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 
-import Home from '../../../../wordly/app/page';
+import Home from '../../../../wordle/app/page';
 
 const Index: NextPage = () => <Home />;
 
