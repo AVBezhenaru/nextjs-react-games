@@ -1,29 +1,32 @@
-import React from 'react';
 import { withRouter } from 'next/router';
+import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
+import { FooterBar } from '../footer/footer';
 import Header from '../header/header';
 import SideBar from '../header/sideBar';
-import { FooterBar } from '../footer/footer';
-import { DivPage, Section } from '../profile/profileStyle';
-import tetrisIcon from '../img/tetrisIcon.png';
-import chessIcon from '../img/chessIcon.png';
-import checkersIcon from '../img/checkersIcon.png';
-import hangmanIcon from '../img/hangmanIcon.png';
-import aerohokkeyIcon from '../img/aerohokkeyIcon.png';
-import solitairIcon from '../img/solitairIcon.png';
-import memoryCards from '../img/memoryCards.png';
 import game2048Icon from '../img/2048Icon.png';
-import fruitNinjaIcon from '../img/fruitNinjaIcon.png';
-import sapperIcon from '../img/sapperIcon.png';
-import tanksIcon from '../img/tanksIcon.png';
-import doodler from '../img/doodler-guy.png';
+import aerohokkeyIcon from '../img/aerohokkeyIcon.png';
 import aimTrainerIcon from '../img/aim-trainer.svg';
-import twoMinInSpaceIcon from '../img/twoMinInSpaceIcon.png';
+import checkersIcon from '../img/checkersIcon.png';
+import chessIcon from '../img/chessIcon.png';
+import doodler from '../img/doodler-guy.png';
+import fruitNinjaIcon from '../img/fruitNinjaIcon.png';
+import hangmanIcon from '../img/hangmanIcon.png';
+import marioIcon from '../img/marioIcon.png';
+import memoryCards from '../img/memoryCards.png';
+import sapperIcon from '../img/sapperIcon.png';
+import snake from '../img/snake.png';
+import solitairIcon from '../img/solitairIcon.png';
 import tamagotchiIcon from '../img/tamagotchiIcon.svg';
+import tanksIcon from '../img/tanksIcon.png';
+import tetrisIcon from '../img/tetrisIcon.png';
+import twoMinInSpaceIcon from '../img/twoMinInSpaceIcon.png';
+import wordleIcon from '../img/wordleIcon.png';
+import { DivPage, Section } from '../profile/profileStyle';
 
 import { GameLink } from './GameLink';
-import { Games, Page, HeaderGames, ListGames } from './listGamesStyle';
+import { Games, HeaderGames, ListGames, Page } from './listGamesStyle';
 
 type GameLinkData = {
   src: string;
@@ -50,6 +53,9 @@ const ListGamesForm = () => {
     { src: aimTrainerIcon.src, title: 'aim trainer', href: 'aim-trainer' },
     { src: twoMinInSpaceIcon.src, title: '2min-in-space' },
     { src: tamagotchiIcon.src, title: 'tamagotchi', href: 'tamagotchi' },
+    { src: wordleIcon.src, title: 'wordle', href: 'wordle' },
+    { src: snake.src, title: 'snake', href: 'snake' },
+    { src: marioIcon.src, title: 'mario-bros' },
   ];
   return (
     <>
