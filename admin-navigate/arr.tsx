@@ -1,4 +1,5 @@
 import { CalendarWrapper } from '../calendar/CalendarWrapper';
+import { CurrencyPanel } from '../currency/CurrencyPanel';
 import Statistics from '../statistics/components/Statistics/Statistics';
 import App from '../users/components/App/App';
 
@@ -56,5 +57,10 @@ export const sectionsArr: SectionType[] = [
     icon: 'img/calendar.svg',
     name: 'calendar',
     body: <CalendarWrapper />,
+  },
+  {
+    icon: 'img/currency.svg',
+    name: 'currency',
+    body: <CurrencyPanel />,
   },
 ];

@@ -13,12 +13,14 @@ import doodlerReducer from '../doodle-jump/reducer/doodleReducer';
 import spaceshipSlice from '../two-min-in-space/store/spaceshipSlice';
 import tamagotchiSlice from '../tamagotchi/slices/slices';
 import { calendarReducers } from '../calendar/store/slices';
+import users from '../currency/store/usersArraySlice';
 
 import user from './userSlice';
 
 export const store = configureStore({
   reducer: {
     user,
+    users,
     hangman: hangmanReducer,
     rootSlice: DataSlice,
     memoryCards: memorySlice,
