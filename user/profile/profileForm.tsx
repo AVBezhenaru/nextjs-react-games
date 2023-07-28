@@ -10,6 +10,7 @@ import Header from '../header/header';
 import SideBar from '../header/sideBar';
 import { FooterBar } from '../footer/footer';
 import { Li, Ul } from '../header/sideBarStyle';
+import ProfileTabs from '../tabs/tabs';
 
 import {
   AddComments,
@@ -89,13 +90,14 @@ const ProfileForm = () => {
                   )}
                 </ImgBack>
               </DivImgBack>
-              <DivProfileNav>
+              {/* <DivProfileNav>
                 <Button children="Overview" />
                 <Button children="Info" />
                 <Button children="Activity" />
                 <Button children="Friends" />
                 <Button children="Group" />
-              </DivProfileNav>
+              </DivProfileNav> */}
+              <ProfileTabs />
               <DivComments>
                 <AddComments>
                   <P>Leave a comments</P>
