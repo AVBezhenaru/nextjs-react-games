@@ -37,7 +37,7 @@ export const CanvasContainer = styled.canvas`
 `;
 export const LeftGatesDiv = styled.div`
   position: absolute;
-  top: 28%;
+  top: 30%;
   left: 0px;
   width: 150px;
   height: 300px;
@@ -48,7 +48,7 @@ export const LeftGatesDiv = styled.div`
 `;
 export const RightGatesDiv = styled.div`
   position: absolute;
-  top: 28%;
+  top: 30%;
   right: 0px;
   width: 150px;
   height: 300px;

@@ -1,7 +1,9 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { useState, useEffect, useRef } from 'react';
 
+import { GameEndDialog } from '../GameEndDialog/GameEndDialog';
 import { IStick } from '../../types/Sticks';
 
 import {
@@ -35,13 +37,21 @@ export const Board = () => {
   const [heightBoard] = useState(723);
   const [centerX] = useState(widthBoard / 2);
 
-  const [titleStatus, setTitleStatus] = useState(false);
-  const [gameStatus, setGameStatus] = useState(false);
+  const [titleStatus] = useState(false);
+  const [gameStatus, setGameStatus] = useState(true);
   const [gameOverStatus] = useState(false);
+  let requestID: number | null = null;
+  const [mouseLeftScore, setMouseLeftScore] = useState(0);
+  const [mouseRightScore, setMouseRightScore] = useState(0);
+  const washerRadius = 28;
+  const mouseRadius = 40;
 
   const [washer] = useState({
     x: widthBoard / 2,
     y: heightBoard / 2,
+    washerSpeed: 10,
+    speedX: 0,
+    speedY: 0,
     dx: 5,
     dy: 5,
   });
@@ -66,12 +76,12 @@ export const Board = () => {
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-  const handleTitleGame = () => {
-    setGameStatus(true);
-  };
-  const handleTitle = () => {
-    setTitleStatus(!titleStatus);
-  };
+  // const handleTitleGame = () => {
+  //   setGameStatus(true);
+  // };
+  // const handleTitle = () => {
+  //   setTitleStatus(!titleStatus);
+  // };
 
   const animate = () => {
     const ctx = canvasRef.current?.getContext('2d');
@@ -82,7 +92,7 @@ export const Board = () => {
     const washerInitialPosition = (x: number, y: number) => {
       ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
       ctx?.beginPath();
-      ctx?.arc(x, y, widthBoard * 0.04, 0, (Math.PI / 180) * 360);
+      ctx?.arc(x, y, washerRadius, 0, (Math.PI / 180) * 360);
       ctx!.fillStyle = 'black';
       ctx!.shadowBlur = 5;
       ctx!.shadowColor = 'black';
@@ -93,7 +103,7 @@ export const Board = () => {
 
     const stickLeftInitialPosition = (x: number, y: number) => {
       ctx?.beginPath();
-      ctx?.arc(x, y, 80, 0, (Math.PI / 180) * 360);
+      ctx?.arc(x, y, mouseRadius, 0, (Math.PI / 180) * 360);
       ctx!.fillStyle = 'blue';
       ctx!.shadowColor = 'black';
       ctx?.closePath();
@@ -103,7 +113,7 @@ export const Board = () => {
 
     const stickRightInitialPosition = (x: number, y: number) => {
       ctx?.beginPath();
-      ctx?.arc(x, y, 80, 0, (Math.PI / 180) * 360);
+      ctx?.arc(x, y, mouseRadius, 0, (Math.PI / 180) * 360);
       ctx!.fillStyle = 'red';
       ctx!.shadowColor = 'black';
       ctx!.shadowBlur = 1;
@@ -117,40 +127,51 @@ export const Board = () => {
 
   const mousemoveHandler = (event: MouseEvent) => {
     const rect = canvasRef.current?.getBoundingClientRect();
-    if (
-      event.clientX - rect!.left < centerX - 80 &&
-      event.clientY - rect!.top > 80 &&
-      event.clientX - rect!.left > 80 &&
-      event.clientY - rect!.top < heightBoard - 80
-    ) {
-      mouseLeft.x = event.clientX - rect!.left;
-      mouseLeft.y = event.clientY - rect!.top;
 
-      mouseLeft.dx = mouseLeft.x - mouseLeft.prevX;
-      mouseLeft.dy = mouseLeft.y - mouseLeft.prevY;
+    const relativeX = event.clientX - rect!.left;
+    const relativeY = event.clientY - rect!.top;
 
-      mouseLeft.prevX = mouseLeft.x;
-      mouseLeft.prevY = mouseLeft.y;
-    } else if (
-      event.clientX - rect!.left > centerX + 80 &&
-      event.clientY - rect!.top < heightBoard - 80 &&
-      event.clientY - rect!.top > 80 &&
-      event.clientX - rect!.left < widthBoard - 80
-    ) {
-      mouseRight.x = event.clientX - rect!.left;
-      mouseRight.y = event.clientY - rect!.top;
-
-      mouseRight.dx = mouseRight.x - mouseRight.prevX;
-      mouseRight.dy = mouseRight.y - mouseRight.prevY;
-
-      mouseRight.prevX = mouseRight.x;
-      mouseRight.prevY = mouseRight.y;
+    if (relativeX > centerX && relativeX < widthBoard - mouseRadius) {
+      mouseRight.x = relativeX;
+    }
+    if (relativeY > mouseRadius && relativeY < heightBoard - mouseRadius) {
+      mouseRight.y = relativeY;
     }
   };
 
   const update = () => {
-    washer.x += washer.dx;
-    washer.y += washer.dy;
+    // условие отскакивания шайбы от верхней и нижней стенок
+    if (
+      washer.y + washer.speedY > heightBoard - washerRadius ||
+      washer.y + washer.speedY < washerRadius
+    ) {
+      washer.speedY *= -1;
+    }
+
+    // условие отскакивания шайбы от стенок справа и слева и логика достижения цели
+    if (washer.y > heightBoard * 0.31 && washer.y < heightBoard * 0.69) {
+      if (washer.x + washer.speedX > widthBoard + washerRadius) {
+        washer.x = widthBoard / 2 - 200;
+        washer.y = heightBoard / 2;
+        washer.speedX = 0;
+        washer.speedY = 0;
+        mouseRight.score += 1;
+        setMouseRightScore(mouseRight.score);
+      } else if (washer.x + washer.speedX < 0) {
+        washer.x = widthBoard / 2 + 200;
+        washer.y = heightBoard / 2;
+        washer.speedX = 0;
+        washer.speedY = 0;
+        mouseLeft.score += 1;
+        setMouseLeftScore(mouseLeft.score);
+      }
+    } else if (washer.x + washer.speedX > widthBoard - washerRadius) {
+      washer.x = widthBoard - washerRadius;
+      washer.speedX *= -1;
+    } else if (washer.x + washer.speedX < washerRadius) {
+      washer.x = washerRadius;
+      washer.speedX *= -1;
+    }
 
     const a = Math.abs(washer.x - mouseLeft.x);
     const b = Math.abs(washer.y - mouseLeft.y);
@@ -160,37 +181,100 @@ export const Board = () => {
     const b2 = Math.abs(washer.y - mouseRight.y);
     const c2 = Math.sqrt(a2 ** 2 + b2 ** 2);
 
-    if (washer.x + widthBoard * 0.04 > widthBoard || washer.x - widthBoard * 0.04 < 0) {
-      washer.dx *= -1;
-      if (washer.x > 0 && washer.x < 150 && washer.y > 200 && washer.y < 470) {
-        mouseLeft.score += 1;
-        washer.x *= -2;
-        washer.x = centerX;
+    // удар по шайбе для правой колотушки
+    if (c2 < mouseRadius + washerRadius) {
+      let dx = washer.x - mouseRight.x;
+      let dy = washer.y - mouseRight.y;
+      dx /= 25;
+      dy /= 25;
+      washer.speedX = dx * washer.washerSpeed;
+      washer.speedY = dy * washer.washerSpeed;
+    }
+
+    // удар по шайбе для левой колотушки
+    if (c < mouseRadius + washerRadius) {
+      let cdx = washer.x - mouseLeft.x;
+      let cdy = washer.y - mouseLeft.y;
+      cdx /= 25;
+      cdy /= 25;
+      washer.speedX = cdx * washer.washerSpeed;
+      washer.speedY = cdy * washer.washerSpeed;
+    }
+
+    washer.x += washer.speedX;
+    washer.y += washer.speedY;
+
+    washer.speedX *= 0.99;
+    washer.speedY *= 0.99;
+
+    // левая колотушка
+    let stepY = 6;
+    const stepXToWasher = 7;
+    const stepXBack = 5;
+    const indWasher = 100;
+
+    // логика по х
+    if (Math.abs(washer.speedX) + Math.abs(washer.speedY) < 18 && washer.x <= widthBoard / 2) {
+      if (washer.x - washerRadius > mouseLeft.x) {
+        mouseLeft.x += stepXToWasher;
+      } else {
+        mouseLeft.x -= stepXToWasher;
       }
-      if (
-        washer.x > widthBoard - 150 &&
-        washer.x < widthBoard &&
-        washer.y > 180 &&
-        washer.y < 470
-      ) {
-        mouseRight.score += 1;
-        washer.x *= 2;
-        washer.x = centerX;
-        washer.dx += -0.1;
-      }
+    } else if (mouseLeft.x > 50) {
+      mouseLeft.x -= stepXBack;
     }
-    if (washer.y + widthBoard * 0.04 > heightBoard || washer.y - widthBoard * 0.04 < 0) {
-      washer.dy *= -1;
+
+    // если шайба находится позади левой колотушки, она перемещается в сторону.
+    if (
+      washer.x < mouseLeft.x &&
+      washer.y > mouseLeft.y - washerRadius &&
+      washer.y < mouseLeft.y + washerRadius
+    ) {
+      stepY = -7;
     }
-    if (c < widthBoard * 0.04 + widthBoard * 0.05) {
-      mouseLeft.dx === 0 ? (washer.dx *= -1) : (washer.dx += mouseLeft.dx * 0.5);
-      mouseLeft.dy === 0 ? (washer.dy *= -1) : (washer.dy += mouseLeft.dy * 0.5);
+
+    // предотвращение коллизий левой колотушки и шайбы
+    if (washer.x < indWasher && (washer.y > heightBoard - indWasher || washer.y < indWasher)) {
+      stepY = -7;
     }
-    if (c2 < widthBoard * 0.04 + widthBoard * 0.05) {
-      mouseRight.dx === 0 ? (washer.dx *= -1) : (washer.dx -= mouseRight.dx * 0.1);
-      mouseRight.dy === 0 ? (washer.dy *= -1) : (washer.dy -= mouseRight.dy * 0.1);
+
+    // логика по у
+    if (mouseLeft.y < washer.y) {
+      mouseLeft.y += stepY;
     }
-    requestAnimationFrame(update);
+    if (mouseLeft.y > washer.y) {
+      mouseLeft.y -= stepY;
+    }
+
+    // проверка что левая колотушка на поле
+    if (mouseLeft.x < 50) {
+      mouseLeft.x = 50;
+    }
+    if (mouseLeft.y < 50) {
+      mouseLeft.y = 50;
+    }
+    if (mouseLeft.y > 680) {
+      mouseLeft.y = 680;
+    }
+
+    // проверка что шайба на поле
+    if (washer.y < washerRadius) {
+      washer.y = washerRadius;
+    }
+    if (washer.y > heightBoard - washerRadius) {
+      washer.y = heightBoard - washerRadius;
+    }
+
+    start();
+  };
+
+  const start = () => {
+    requestID = requestAnimationFrame(update);
+    if (mouseLeft.score === 7 || mouseRight.score === 7) {
+      cancelAnimationFrame(requestID);
+      requestID = null;
+      setGameStatus(false);
+    }
   };
 
   const listener = () => {
@@ -199,25 +283,27 @@ export const Board = () => {
 
   useEffect(() => {
     listener();
-    requestAnimationFrame(animate);
+    animate();
   }, [mouseLeft.x, mouseLeft.y, mouseRight.x, mouseRight.y]);
 
-  useEffect(() => {
-    const timer = setInterval(handleTitle, 1000);
-    if (mouseLeft.prevX || mouseRight.prevX) {
-      handleTitleGame();
-      return () => clearInterval(timer);
-    }
-  }, [titleStatus]);
+  // useEffect(() => {
+  //   const timer = setInterval(handleTitle, 1000);
+  //   if (mouseLeft.prevX || mouseRight.prevX) {
+  //     handleTitleGame();
+  //     return () => clearInterval(timer);
+  //   }
+  // }, [titleStatus]);
 
   useEffect(() => {
-    requestAnimationFrame(update);
+    update();
   }, []);
 
   return (
     <GameWrapperDiv>
+      {!gameStatus && <GameEndDialog left={mouseLeftScore} />}
       <GameWrapperTitleP titleStatus={titleStatus} gameStatus={gameStatus}>
-        {gameStatus ? 'GAME TIME!' : 'Hover over the club to control the trajectory of movement'}
+        {/* {gameStatus ? 'GAME TIME!' : 'Hover over the club to control the trajectory of movement'} */}
+        {gameStatus ? 'GAME TIME!' : 'GAME END'}
       </GameWrapperTitleP>
       <GameOverP gameOverStatus={gameOverStatus}>GAME OVER</GameOverP>
       <BoardContainerDiv>
@@ -242,10 +328,10 @@ export const Board = () => {
       </BoardContainerDiv>
       <BoardScoreDiv>
         <BoardScoreLeftDiv>
-          <ScoreLeftSpan>{mouseLeft.score}</ScoreLeftSpan>
+          <ScoreLeftSpan>{mouseLeftScore}</ScoreLeftSpan>
         </BoardScoreLeftDiv>
         <BoardScoreRightDiv>
-          <ScoreRightSpan>{mouseRight.score}</ScoreRightSpan>
+          <ScoreRightSpan>{mouseRightScore}</ScoreRightSpan>
         </BoardScoreRightDiv>
       </BoardScoreDiv>
     </GameWrapperDiv>

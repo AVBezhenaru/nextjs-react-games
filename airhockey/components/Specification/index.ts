@@ -1,14 +1,15 @@
 import styled from 'styled-components';
 
 export const Li = styled.li`
-  list-style-type: decimal; 
-`
+  list-style-type: decimal;
+`;
 
 export const SpecificationWrapper = styled.div`
   position: relative;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   padding-top: 50px;
   width: 100%;
   height: 100%;
@@ -30,6 +31,7 @@ export const SpecificationWrapperBox = styled.div`
   justify-content: center;
   font-size: 20px;
   font-weight: normal;
+  margin-bottom: 1rem;
 `;
 
 export const SpecificationTitleH1 = styled.h1`
