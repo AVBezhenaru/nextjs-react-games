@@ -51,11 +51,16 @@ const RegistrationForm = () => {
       username: date.username,
       email: date.email,
       password: date.password,
+      address: '',
+      phone: '',
+      birthdate: '',
+      gender: '',
     };
     console.log('user :', user);
     clearErrors();
     dispatch(updateList([user]));
-    cookies.user = user;
+    setCookies('user', user);
+    // cookies.user = user;
     router.push('/profile');
   };
 
