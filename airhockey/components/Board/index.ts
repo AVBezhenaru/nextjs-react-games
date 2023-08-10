@@ -188,6 +188,7 @@ export const ScoreLeftSpan = styled.span`
   letter-spacing: 1px;
   border: 4px solid #41423e;
   border-radius: 5px;
+  color: white;
 `;
 export const BoardScoreRightDiv = styled.div`
   display: flex;
@@ -206,6 +207,7 @@ export const ScoreRightSpan = styled.span`
   letter-spacing: 1px;
   border: 4px solid #41423e;
   border-radius: 5px;
+  color: white;
 `;
 export const GameOverP = styled.p<{ gameOverStatus: boolean }>`
   display: ${(props) => (props.gameOverStatus ? 'block' : 'none')};
