@@ -12,17 +12,13 @@ import {
   BoardContainerDiv,
   LeftGatesDiv,
   RightGatesDiv,
-  WrapperCirclesLeftDiv,
-  WrapperCirclesLeftUpperSpan,
-  WrapperCirclesLeftLowerSpan,
+  WrapperCirclesDiv,
+  WrapperCirclesSpan,
   LineLeftCenterSpan,
   BoardCircleCenterDiv,
   BoardCircleCenterInnerDiv,
   BoardCircleCenterInnerDotDiv,
   LineRightCenterSpan,
-  WrapperCirclesRightDiv,
-  WrapperCirclesRightUpperSpan,
-  WrapperCirclesRightLowerSpan,
   BoardScoreDiv,
   BoardScoreLeftDiv,
   BoardScoreRightDiv,
@@ -33,8 +29,11 @@ import {
 } from './index';
 
 export const Board = () => {
-  const [widthBoard] = useState(1414);
-  const [heightBoard] = useState(723);
+  const boardContainerWidth = innerWidth * 0.7 + 26 > 1440 ? 1440 : innerWidth * 0.7 + 26;
+  const boardContainerHeight =
+    (innerWidth * 0.72 + 26) / 2 > 750 ? 750 : (innerWidth * 0.72 + 26) / 2;
+  const [widthBoard] = useState(boardContainerWidth > 1414 ? 1414 : boardContainerWidth - 26);
+  const [heightBoard] = useState(boardContainerHeight > 723 ? 723 : boardContainerHeight - 26);
   const [centerX] = useState(widthBoard / 2);
 
   const [titleStatus] = useState(false);
@@ -43,8 +42,8 @@ export const Board = () => {
   let requestID: number | null = null;
   const [mouseLeftScore, setMouseLeftScore] = useState(0);
   const [mouseRightScore, setMouseRightScore] = useState(0);
-  const washerRadius = 28;
-  const mouseRadius = 40;
+  const washerRadius = widthBoard * 0.02;
+  const mouseRadius = widthBoard * 0.03;
 
   const [washer] = useState({
     x: widthBoard / 2,
@@ -56,7 +55,7 @@ export const Board = () => {
     dy: 5,
   });
   const [mouseLeft] = useState<IStick>({
-    x: widthBoard / 4,
+    x: widthBoard / 6,
     y: heightBoard / 2,
     prevX: 1,
     prevY: 1,
@@ -65,7 +64,7 @@ export const Board = () => {
     score: 0,
   });
   const [mouseRight] = useState<IStick>({
-    x: widthBoard / 1.35,
+    x: widthBoard / 1.2,
     y: heightBoard / 2,
     prevX: 10,
     prevY: 10,
@@ -75,13 +74,6 @@ export const Board = () => {
   });
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-
-  // const handleTitleGame = () => {
-  //   setGameStatus(true);
-  // };
-  // const handleTitle = () => {
-  //   setTitleStatus(!titleStatus);
-  // };
 
   const animate = () => {
     const ctx = canvasRef.current?.getContext('2d');
@@ -151,14 +143,14 @@ export const Board = () => {
     // условие отскакивания шайбы от стенок справа и слева и логика достижения цели
     if (washer.y > heightBoard * 0.31 && washer.y < heightBoard * 0.69) {
       if (washer.x + washer.speedX > widthBoard + washerRadius) {
-        washer.x = widthBoard / 2 - 200;
+        washer.x = widthBoard / 2 - widthBoard * 0.14;
         washer.y = heightBoard / 2;
         washer.speedX = 0;
         washer.speedY = 0;
         mouseRight.score += 1;
         setMouseRightScore(mouseRight.score);
       } else if (washer.x + washer.speedX < 0) {
-        washer.x = widthBoard / 2 + 200;
+        washer.x = widthBoard / 2 + widthBoard * 0.14;
         washer.y = heightBoard / 2;
         washer.speedX = 0;
         washer.speedY = 0;
@@ -208,9 +200,9 @@ export const Board = () => {
     washer.speedY *= 0.99;
 
     // левая колотушка
-    let stepY = 6;
-    const stepXToWasher = 7;
-    const stepXBack = 5;
+    let stepY = widthBoard > 1000 ? 6 : 3;
+    const stepXToWasher = widthBoard > 1000 ? 7 : 3;
+    const stepXBack = widthBoard > 1000 ? 5 : 3;
     const indWasher = 100;
 
     // логика по х
@@ -220,7 +212,7 @@ export const Board = () => {
       } else {
         mouseLeft.x -= stepXToWasher;
       }
-    } else if (mouseLeft.x > 50) {
+    } else if (mouseLeft.x > widthBoard / 28) {
       mouseLeft.x -= stepXBack;
     }
 
@@ -230,12 +222,12 @@ export const Board = () => {
       washer.y > mouseLeft.y - washerRadius &&
       washer.y < mouseLeft.y + washerRadius
     ) {
-      stepY = -7;
+      stepY = widthBoard > 1000 ? -7 : -3;
     }
 
     // предотвращение коллизий левой колотушки и шайбы
     if (washer.x < indWasher && (washer.y > heightBoard - indWasher || washer.y < indWasher)) {
-      stepY = -7;
+      stepY = widthBoard > 1000 ? -7 : -3;
     }
 
     // логика по у
@@ -247,14 +239,14 @@ export const Board = () => {
     }
 
     // проверка что левая колотушка на поле
-    if (mouseLeft.x < 50) {
-      mouseLeft.x = 50;
+    if (mouseLeft.x < widthBoard / 28) {
+      mouseLeft.x = widthBoard / 28;
     }
-    if (mouseLeft.y < 50) {
-      mouseLeft.y = 50;
+    if (mouseLeft.y < heightBoard / 14) {
+      mouseLeft.y = heightBoard / 14;
     }
-    if (mouseLeft.y > 680) {
-      mouseLeft.y = 680;
+    if (mouseLeft.y > heightBoard - heightBoard / 14) {
+      mouseLeft.y = heightBoard - heightBoard / 14;
     }
 
     // проверка что шайба на поле
@@ -286,14 +278,6 @@ export const Board = () => {
     animate();
   }, [mouseLeft.x, mouseLeft.y, mouseRight.x, mouseRight.y]);
 
-  // useEffect(() => {
-  //   const timer = setInterval(handleTitle, 1000);
-  //   if (mouseLeft.prevX || mouseRight.prevX) {
-  //     handleTitleGame();
-  //     return () => clearInterval(timer);
-  //   }
-  // }, [titleStatus]);
-
   useEffect(() => {
     update();
   }, []);
@@ -302,28 +286,27 @@ export const Board = () => {
     <GameWrapperDiv>
       {!gameStatus && <GameEndDialog left={mouseLeftScore} />}
       <GameWrapperTitleP titleStatus={titleStatus} gameStatus={gameStatus}>
-        {/* {gameStatus ? 'GAME TIME!' : 'Hover over the club to control the trajectory of movement'} */}
         {gameStatus ? 'GAME TIME!' : 'GAME END'}
       </GameWrapperTitleP>
       <GameOverP gameOverStatus={gameOverStatus}>GAME OVER</GameOverP>
-      <BoardContainerDiv>
-        <LeftGatesDiv />
-        <WrapperCirclesLeftDiv>
-          <WrapperCirclesLeftUpperSpan />
-          <WrapperCirclesLeftLowerSpan />
-        </WrapperCirclesLeftDiv>
+      <BoardContainerDiv width={`${boardContainerWidth}px`} height={`${boardContainerHeight}px`}>
+        <LeftGatesDiv width={`${mouseRadius * 3.472}px`} heightNumber={mouseRadius * 3.472 * 2} />
+        <WrapperCirclesDiv>
+          <WrapperCirclesSpan width={`${mouseRadius * 2}px`} />
+          <WrapperCirclesSpan width={`${mouseRadius * 2}px`} />
+        </WrapperCirclesDiv>
         <LineLeftCenterSpan />
-        <BoardCircleCenterDiv>
-          <BoardCircleCenterInnerDiv>
+        <BoardCircleCenterDiv width={`${mouseRadius * 3.472}px`}>
+          <BoardCircleCenterInnerDiv width={`${mouseRadius * 3.472 - 10}px`}>
             <BoardCircleCenterInnerDotDiv />
           </BoardCircleCenterInnerDiv>
         </BoardCircleCenterDiv>
         <LineRightCenterSpan />
-        <WrapperCirclesRightDiv>
-          <WrapperCirclesRightUpperSpan />
-          <WrapperCirclesRightLowerSpan />
-        </WrapperCirclesRightDiv>
-        <RightGatesDiv />
+        <WrapperCirclesDiv>
+          <WrapperCirclesSpan width={`${mouseRadius * 2}px`} />
+          <WrapperCirclesSpan width={`${mouseRadius * 2}px`} />
+        </WrapperCirclesDiv>
+        <RightGatesDiv width={`${mouseRadius * 3.472}px`} heightNumber={mouseRadius * 3.472 * 2} />
         <CanvasContainer ref={canvasRef} width={`${widthBoard}px`} height={`${heightBoard}px`} />
       </BoardContainerDiv>
       <BoardScoreDiv>
