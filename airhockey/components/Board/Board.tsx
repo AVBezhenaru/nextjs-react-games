@@ -29,12 +29,19 @@ import {
 } from './index';
 
 export const Board = () => {
-  const boardContainerWidth = innerWidth * 0.7 + 26 > 1440 ? 1440 : innerWidth * 0.7 + 26;
-  const boardContainerHeight =
-    (innerWidth * 0.72 + 26) / 2 > 750 ? 750 : (innerWidth * 0.72 + 26) / 2;
-  const [widthBoard] = useState(boardContainerWidth > 1414 ? 1414 : boardContainerWidth - 26);
-  const [heightBoard] = useState(boardContainerHeight > 723 ? 723 : boardContainerHeight - 26);
-  const [centerX] = useState(widthBoard / 2);
+  let oldInnerWidth = innerWidth;
+  const [boardContainerWidth, setBoardContainerWidth] = useState(
+    innerWidth * 0.7 + 26 > 1440 ? 1440 : innerWidth * 0.7 + 26,
+  );
+  const [boardContainerHeight, setBoardContainerHeight] = useState(
+    (innerWidth * 0.72 + 26) / 2 > 750 ? 750 : (innerWidth * 0.72 + 26) / 2,
+  );
+  const [widthBoard, setWidthBoard] = useState(
+    boardContainerWidth > 1414 ? 1414 : boardContainerWidth - 26,
+  );
+  const [heightBoard, setHeightBoard] = useState(
+    boardContainerHeight > 723 ? 723 : boardContainerHeight - 26,
+  );
 
   const [titleStatus] = useState(false);
   const [gameStatus, setGameStatus] = useState(true);
@@ -118,6 +125,13 @@ export const Board = () => {
   };
 
   const mousemoveHandler = (event: MouseEvent) => {
+    const boardContainerWidth = innerWidth * 0.7 + 26 > 1440 ? 1440 : innerWidth * 0.7 + 26;
+    const widthBoard = boardContainerWidth > 1414 ? 1414 : boardContainerWidth - 26;
+    const centerX = widthBoard / 2;
+    const boardContainerHeight =
+      (innerWidth * 0.72 + 26) / 2 > 750 ? 750 : (innerWidth * 0.72 + 26) / 2;
+    const heightBoard = boardContainerHeight > 723 ? 723 : boardContainerHeight - 26;
+    const mouseRadius = widthBoard * 0.03;
     const rect = canvasRef.current?.getBoundingClientRect();
 
     const relativeX = event.clientX - rect!.left;
@@ -132,6 +146,14 @@ export const Board = () => {
   };
 
   const update = () => {
+    const boardContainerWidth = innerWidth * 0.7 + 26 > 1440 ? 1440 : innerWidth * 0.7 + 26;
+    const boardContainerHeight =
+      (innerWidth * 0.72 + 26) / 2 > 750 ? 750 : (innerWidth * 0.72 + 26) / 2;
+    const widthBoard = boardContainerWidth > 1414 ? 1414 : boardContainerWidth - 26;
+    const heightBoard = boardContainerHeight > 723 ? 723 : boardContainerHeight - 26;
+    const washerRadius = widthBoard * 0.02;
+    const mouseRadius = widthBoard * 0.03;
+
     // условие отскакивания шайбы от верхней и нижней стенок
     if (
       washer.y + washer.speedY > heightBoard - washerRadius ||
@@ -281,6 +303,22 @@ export const Board = () => {
   useEffect(() => {
     update();
   }, []);
+
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      if (Math.abs(oldInnerWidth - innerWidth) < 30) return;
+      oldInnerWidth = innerWidth;
+      setBoardContainerWidth(innerWidth * 0.7 + 26 > 1440 ? 1440 : innerWidth * 0.7 + 26);
+      setBoardContainerHeight(
+        (innerWidth * 0.72 + 26) / 2 > 750 ? 750 : (innerWidth * 0.72 + 26) / 2,
+      );
+    });
+  }, [innerWidth]);
+
+  useEffect(() => {
+    setWidthBoard(boardContainerWidth > 1414 ? 1414 : boardContainerWidth - 26);
+    setHeightBoard(boardContainerHeight > 723 ? 723 : boardContainerHeight - 26);
+  }, [boardContainerWidth, boardContainerHeight]);
 
   return (
     <GameWrapperDiv>
