@@ -1,5 +1,8 @@
 /* eslint-disable prettier/prettier */
+import Link from 'next/link';
+
 import Line from '../Line/Line';
+import { ButtonPlay } from '../Buttons/index';
 
 import {
   SpecificationWrapper,
@@ -43,5 +46,8 @@ export const Specification = () => (
         ))}
       </RulesWrapper>
     </SpecificationWrapperBox>
+    <Link href='.'>
+      <ButtonPlay>back</ButtonPlay>
+    </Link>
   </SpecificationWrapper>
 );

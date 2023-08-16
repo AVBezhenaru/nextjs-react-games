@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+interface WidthHeigthProps {
+  width: string;
+  height?: string;
+  heightNumber?: number;
+}
+
 export const GameWrapperDiv = styled.div`
   display: flex;
   justify-content: flex-start;
@@ -7,7 +13,7 @@ export const GameWrapperDiv = styled.div`
   flex-direction: column;
   padding-top: 30px;
   width: 100%;
-  height: 969px;
+  min-height: 100%;
   background: linear-gradient(to bottom right, #000, #512934);
 `;
 export const GameWrapperTitleP = styled.p<{ titleStatus: boolean; gameStatus: boolean }>`
@@ -17,13 +23,13 @@ export const GameWrapperTitleP = styled.p<{ titleStatus: boolean; gameStatus: bo
   margin-bottom: 10px;
   transition: 1s;
 `;
-export const BoardContainerDiv = styled.div`
+export const BoardContainerDiv = styled.div<WidthHeigthProps>`
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 1440px;
-  height: 750px;
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
   border-radius: 50px;
   border: 13px solid rgb(58 57 57);
   background-color: #efecf9;
@@ -35,71 +41,44 @@ export const CanvasContainer = styled.canvas`
   height: ${(props) => props.height};
   border-radius: 35px;
 `;
-export const LeftGatesDiv = styled.div`
+export const LeftGatesDiv = styled.div<WidthHeigthProps>`
   position: absolute;
-  top: 28%;
+  top: 30%;
   left: 0px;
-  width: 150px;
-  height: 300px;
+  width: ${({ width }) => width};
+  height: ${({ heightNumber }) => `${heightNumber}px`};
   border-top-right-radius: 100%;
   border-bottom-right-radius: 100%;
-  border: 10px dashed #7c7c9d;
+  border: ${({ heightNumber }) =>
+    heightNumber < 165 ? '5px dashed #7c7c9d' : '10px dashed #7c7c9d'};
   border-left: 0px solid rgb(58 57 57);
 `;
-export const RightGatesDiv = styled.div`
+export const RightGatesDiv = styled.div<WidthHeigthProps>`
   position: absolute;
-  top: 28%;
+  top: 30%;
   right: 0px;
-  width: 150px;
-  height: 300px;
+  width: ${({ width }) => width};
+  height: ${({ heightNumber }) => `${heightNumber}px`};
   border-top-left-radius: 100%;
   border-bottom-left-radius: 100%;
-  border: 10px dashed #7c7c9d;
+  border: ${({ heightNumber }) =>
+    heightNumber < 165 ? '5px dashed #7c7c9d' : '10px dashed #7c7c9d'};
   border-right: 0px solid rgb(58 57 57);
 `;
-export const WrapperCirclesLeftDiv = styled.div`
+export const WrapperCirclesDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
   flex-direction: column;
   height: 100%;
   max-width: 572px;
-  width: 100%;
+  // width: 100%;
+  flex-grow: 1;
 `;
-export const WrapperCirclesRightDiv = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  flex-direction: column;
-  height: 100%;
-  max-width: 572px;
-  width: 100%;
-`;
-export const WrapperCirclesLeftUpperSpan = styled.span`
+export const WrapperCirclesSpan = styled.span<WidthHeigthProps>`
   display: inline-block;
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  border: 2px solid rgb(248, 159, 159);
-`;
-export const WrapperCirclesRightUpperSpan = styled.span`
-  display: inline-block;
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  border: 2px solid rgb(248, 159, 159);
-`;
-export const WrapperCirclesLeftLowerSpan = styled.span`
-  display: inline-block;
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  border: 2px solid rgb(248, 159, 159);
-`;
-export const WrapperCirclesRightLowerSpan = styled.span`
-  display: inline-block;
-  width: 90px;
-  height: 90px;
+  width: ${({ width }) => width};
+  height: ${({ width }) => width};
   border-radius: 50%;
   border: 2px solid rgb(248, 159, 159);
 `;
@@ -119,11 +98,11 @@ export const LineRightCenterSpan = styled.span`
   height: 100%;
   background-color: rgb(196 196 233);
 `;
-export const BoardCircleCenterDiv = styled.div`
-  width: 150px;
-  height: 150px;
+export const BoardCircleCenterDiv = styled.div<WidthHeigthProps>`
+  width: ${({ width }) => width};
+  height: ${({ width }) => width};
   border-radius: 50%;
-  border: 4px solid rgb(209, 128, 128);
+  border: 3px solid rgb(209, 128, 128);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -142,12 +121,12 @@ export const BoardCircleCenterDiv = styled.div`
     bottom: 0;
   }
 `;
-export const BoardCircleCenterInnerDiv = styled.div`
+export const BoardCircleCenterInnerDiv = styled.div<WidthHeigthProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 140px;
-  height: 140px;
+  width: ${({ width }) => width};
+  height: ${({ width }) => width};
   border-radius: 50%;
   border: 2px solid rgb(209, 128, 128);
 `;
