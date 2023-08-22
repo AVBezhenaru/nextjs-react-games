@@ -14,6 +14,8 @@ import {
   getSpaceshipState,
   goLeft,
   goRight,
+  speedNormal,
+  speedPlus,
   addAsteroid,
   goAsteroid,
   goBackground,
@@ -70,10 +72,30 @@ const Canvas: FC = () => {
   const playAgain = useRef<HTMLButtonElement | null>(null);
   const dispatch = useDispatch();
   const onKeyDown = (event: React.KeyboardEvent) => {
-    if (event.code === 'KeyA') {
-      dispatch(goLeft());
-    } else if (event.code === 'KeyD') {
-      dispatch(goRight());
+    // if (event.code === 'KeyA') {
+    //   dispatch(goLeft());
+    // } else if (event.code === 'KeyD') {
+    //   dispatch(goRight());
+    // }
+    switch (event.code) {
+      case 'KeyA': {
+        dispatch(goLeft());
+        break;
+      }
+      case 'KeyD': {
+        dispatch(goRight());
+        break;
+      }
+      case 'KeyW': {
+        dispatch(speedPlus());
+      }
+    }
+  };
+  const onKeyUp = (event: React.KeyboardEvent) => {
+    switch (event.code) {
+      case 'KeyW':
+        dispatch(speedNormal());
+        break;
     }
   };
   const animate = (context: CanvasRenderingContext2D) => {
@@ -137,8 +159,8 @@ const Canvas: FC = () => {
         dispatch(gameOver());
       }
     }
-    context.fillStyle = '#09E409';
-    context.font = '48px roboto';
+    context.fillStyle = '#fa3a7d';
+    context.font = '52px roboto';
     context.fillText(timeString, widthScreen / 2 - 80, 80);
     context.fill();
     context.save();
@@ -254,6 +276,7 @@ const Canvas: FC = () => {
       />
       <canvas
         onKeyDown={onKeyDown}
+        onKeyUp={onKeyUp}
         ref={canvas}
         tabIndex={0}
         width={widthScreen}

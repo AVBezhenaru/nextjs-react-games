@@ -15,13 +15,13 @@ const spaceshipSlice = createSlice({
     rockets: [{ x: 200, y: 0 }],
     spaceshipXpos: 600,
     spaceshipYpos: 1000,
-    spaceshipSpeedX: 3,
-    spaceshipSpeedY: 3,
+    spaceshipSpeedX: 5,
+    spaceshipSpeedY: 5,
     currentDegrees: 0,
     currentDegreesRockets: 0,
     speed: 3,
     speedAsteroids: 0.5,
-    speedRockets: 3,
+    speedRockets: 4.5,
     rocketsWidth: 40,
     rocketsHeight: 60,
     gameOver: false,
@@ -74,18 +74,26 @@ const spaceshipSlice = createSlice({
       state.goaway = false;
     },
     goLeft(state) {
-      state.currentDegrees -= 5;
+      state.currentDegrees -= 10;
       if (state.currentDegrees === -360) {
         state.currentDegrees = 0;
       }
-      state.spaceshipXpos += state.speed * sinAndCos(state.currentDegrees).sin;
+      state.spaceshipXpos += sinAndCos(state.currentDegrees).sin;
     },
     goRight(state) {
-      state.currentDegrees += 5;
+      state.currentDegrees += 10;
       if (state.currentDegrees === 360) {
         state.currentDegrees = 0;
       }
-      state.spaceshipYpos -= state.speed * sinAndCos(state.currentDegrees).cos;
+      state.spaceshipYpos -= sinAndCos(state.currentDegrees).cos;
+    },
+    speedNormal(state) {
+      state.spaceshipSpeedX = 5;
+      state.spaceshipSpeedY = 5;
+    },
+    speedPlus(state) {
+      state.spaceshipSpeedX = 9;
+      state.spaceshipSpeedY = 9;
     },
     addAsteroid(state, action) {
       state.asteroids = [...state.asteroids, action.payload.newAsteroid];
@@ -129,6 +137,8 @@ export default spaceshipSlice.reducer;
 export const {
   goLeft,
   goRight,
+  speedNormal,
+  speedPlus,
   addAsteroid,
   goAsteroid,
   goBackground,
